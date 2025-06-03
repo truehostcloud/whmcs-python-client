@@ -4,14 +4,14 @@ All URIs are relative to *https://your-whmcs-instance.com/includes*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**api_post**](DefaultApi.md#api_post) | **POST** /api.php | WHMCS API endpoint
+[**api_post**](DefaultApi.md#api_post) | **POST** /api.php | Execute WHMCS API action
 
 # **api_post**
 > WHMCSSuccessResponse api_post()
 
-WHMCS API endpoint
+Execute WHMCS API action
 
-Main WHMCS API endpoint that accepts various actions based on the 'action' parameter. Each action has its own schema with specific required and optional fields. 
+Executes a WHMCS API action. The specific action is determined by the 'action' field in the request body. Different actions have different required and optional parameters.  Authentication credentials (username/password or API key) must be included in every request. 
 
 ### Example
 ```python
@@ -25,7 +25,7 @@ from pprint import pprint
 api_instance = whmcs_client.DefaultApi()
 
 try:
-    # WHMCS API endpoint
+    # Execute WHMCS API action
     api_response = api_instance.api_post()
     pprint(api_response)
 except ApiException as e:

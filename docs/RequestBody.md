@@ -1,4 +1,4 @@
-# ApiPhpBody
+# RequestBody
 
 ## Properties
 Name | Type | Description | Notes

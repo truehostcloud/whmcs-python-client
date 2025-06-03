@@ -3,7 +3,7 @@
 """
     WHMCS API
 
-    OpenAPI specification for the WHMCS API endpoints.  This specification uses discriminators to properly handle polymorphic request/response schemas. The 'action' field serves as the discriminator property to differentiate between different request and response types (AddClient, UpdateClient, AddOrder).   # noqa: E501
+    Python client for the WHMCS API.  WHMCS (Web Host Manager Complete Solution) provides a single API endpoint that handles multiple operations through different 'action' parameters. This client supports various WHMCS operations for managing clients, orders, and other resources.  Authentication is handled through username/password or API credentials. All requests are sent as form-encoded data to the /api.php endpoint.   # noqa: E501
 
     OpenAPI spec version: 1.0.0
     
@@ -33,9 +33,9 @@ class DefaultApi(object):
         self.api_client = api_client
 
     def api_post(self, **kwargs):  # noqa: E501
-        """WHMCS API endpoint  # noqa: E501
+        """Execute WHMCS API action  # noqa: E501
 
-        Main WHMCS API endpoint that accepts various actions based on the 'action' parameter. Each action has its own schema with specific required and optional fields.   # noqa: E501
+        Executes a WHMCS API action. The specific action is determined by the 'action' field in the request body. Different actions have different required and optional parameters.  Authentication credentials (username/password or API key) must be included in every request.   # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
         >>> thread = api.api_post(async_req=True)
@@ -54,9 +54,9 @@ class DefaultApi(object):
             return data
 
     def api_post_with_http_info(self, **kwargs):  # noqa: E501
-        """WHMCS API endpoint  # noqa: E501
+        """Execute WHMCS API action  # noqa: E501
 
-        Main WHMCS API endpoint that accepts various actions based on the 'action' parameter. Each action has its own schema with specific required and optional fields.   # noqa: E501
+        Executes a WHMCS API action. The specific action is determined by the 'action' field in the request body. Different actions have different required and optional parameters.  Authentication credentials (username/password or API key) must be included in every request.   # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
         >>> thread = api.api_post_with_http_info(async_req=True)

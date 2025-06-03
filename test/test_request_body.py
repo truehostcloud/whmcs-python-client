@@ -15,12 +15,12 @@ from __future__ import absolute_import
 import unittest
 
 import whmcs_client
-from whmcs_client.models.add_order_response import AddOrderResponse  # noqa: E501
+from whmcs_client.models.request_body import RequestBody  # noqa: E501
 from whmcs_client.rest import ApiException
 
 
-class TestAddOrderResponse(unittest.TestCase):
-    """AddOrderResponse unit test stubs"""
+class TestRequestBody(unittest.TestCase):
+    """RequestBody unit test stubs"""
 
     def setUp(self):
         pass
@@ -28,10 +28,10 @@ class TestAddOrderResponse(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def testAddOrderResponse(self):
-        """Test AddOrderResponse"""
+    def testRequestBody(self):
+        """Test RequestBody"""
         # FIXME: construct object with mandatory attributes with example values
-        # model = whmcs_client.models.add_order_response.AddOrderResponse()  # noqa: E501
+        # model = whmcs_client.models.request_body.RequestBody()  # noqa: E501
         pass
 
 

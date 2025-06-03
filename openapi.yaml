@@ -3,11 +3,14 @@ info:
   title: WHMCS API
   version: 1.0.0
   description: |
-    OpenAPI specification for the WHMCS API endpoints.
+    Python client for the WHMCS API.
     
-    This specification uses discriminators to properly handle polymorphic request/response schemas.
-    The 'action' field serves as the discriminator property to differentiate between different
-    request and response types (AddClient, UpdateClient, AddOrder).
+    WHMCS (Web Host Manager Complete Solution) provides a single API endpoint that handles
+    multiple operations through different 'action' parameters. This client supports various
+    WHMCS operations for managing clients, orders, and other resources.
+    
+    Authentication is handled through username/password or API credentials.
+    All requests are sent as form-encoded data to the /api.php endpoint.
 
 servers:
   - url: https://your-whmcs-instance.com/includes
@@ -16,26 +19,19 @@ servers:
 paths:
   /api.php:
     post:
-      summary: WHMCS API endpoint
+      summary: Execute WHMCS API action
       description: |
-        Main WHMCS API endpoint that accepts various actions based on the 'action' parameter.
-        Each action has its own schema with specific required and optional fields.
+        Executes a WHMCS API action. The specific action is determined by the 'action' field
+        in the request body. Different actions have different required and optional parameters.
+        
+        Authentication credentials (username/password or API key) must be included in every request.
       operationId: api_post
       requestBody:
         required: true
         content:
           application/x-www-form-urlencoded:
             schema:
-              oneOf:
-                - $ref: '#/components/schemas/AddClientRequest'
-                - $ref: '#/components/schemas/UpdateClientRequest'
-                - $ref: '#/components/schemas/AddOrderRequest'
-              discriminator:
-                propertyName: action
-                mapping:
-                  AddClient: '#/components/schemas/AddClientRequest'
-                  UpdateClient: '#/components/schemas/AddClientRequest'
-                  AddOrder: '#/components/schemas/AddOrderRequest'
+              $ref: '#/components/schemas/RequestBody'
       responses:
         '200':
           description: Successful response
@@ -644,3 +640,15 @@ components:
           type: string
           description: Error message describing what went wrong
           example: "Authentication Failed"
+
+    RequestBody:
+      oneOf:
+        - $ref: '#/components/schemas/AddClientRequest'
+        - $ref: '#/components/schemas/UpdateClientRequest'
+        - $ref: '#/components/schemas/AddOrderRequest'
+      discriminator:
+        propertyName: action
+        mapping:
+          AddClient: '#/components/schemas/AddClientRequest'
+          UpdateClient: '#/components/schemas/UpdateClientRequest'
+          AddOrder: '#/components/schemas/AddOrderRequest'
