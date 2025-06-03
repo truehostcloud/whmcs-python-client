@@ -1,10 +1,33 @@
 # AddClientResponse
 
+
 ## Properties
+
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**action** | **str** | Always &#x27;AddClient&#x27; for AddClient responses | [optional] 
+**result** | **str** | The result of the operation | 
+**action** | **str** | Always &#39;AddClient&#39; for AddClient responses | 
+**warnings** | **List[str]** | Any warning messages | [optional] 
+**message** | **str** | Success or error message | [optional] 
 **clientid** | **str** | The ID of the newly created client | [optional] 
 
+## Example
+
+```python
+from whmcs_client.models.add_client_response import AddClientResponse
+
+# TODO update the JSON string below
+json = "{}"
+# create an instance of AddClientResponse from a JSON string
+add_client_response_instance = AddClientResponse.from_json(json)
+# print the JSON string representation of the object
+print(AddClientResponse.to_json())
+
+# convert the object into a dict
+add_client_response_dict = add_client_response_instance.to_dict()
+# create an instance of AddClientResponse from a dict
+add_client_response_from_dict = AddClientResponse.from_dict(add_client_response_dict)
+```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+
 
