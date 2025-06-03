@@ -28,9 +28,6 @@ class WHMCSBaseRequest(object):
                             and the value is json key in definition.
     """
     swagger_types = {
-        'action': 'str',
-        'identifier': 'str',
-        'secret': 'str',
         'username': 'str',
         'password': 'str',
         'accesskey': 'str',
@@ -38,115 +35,31 @@ class WHMCSBaseRequest(object):
     }
 
     attribute_map = {
-        'action': 'action',
-        'identifier': 'identifier',
-        'secret': 'secret',
         'username': 'username',
         'password': 'password',
         'accesskey': 'accesskey',
         'responsetype': 'responsetype'
     }
 
-    def __init__(self, action=None, identifier=None, secret=None, username=None, password=None, accesskey=None, responsetype='json'):  # noqa: E501
+    def __init__(self, username=None, password=None, accesskey=None, responsetype='json'):  # noqa: E501
         """WHMCSBaseRequest - a model defined in Swagger"""  # noqa: E501
-        self._action = None
-        self._identifier = None
-        self._secret = None
         self._username = None
         self._password = None
         self._accesskey = None
         self._responsetype = None
         self.discriminator = None
-        self.action = action
-        if identifier is not None:
-            self.identifier = identifier
-        if secret is not None:
-            self.secret = secret
-        if username is not None:
-            self.username = username
-        if password is not None:
-            self.password = password
+        self.username = username
+        self.password = password
         if accesskey is not None:
             self.accesskey = accesskey
         if responsetype is not None:
             self.responsetype = responsetype
 
     @property
-    def action(self):
-        """Gets the action of this WHMCSBaseRequest.  # noqa: E501
-
-        The WHMCS API action to perform  # noqa: E501
-
-        :return: The action of this WHMCSBaseRequest.  # noqa: E501
-        :rtype: str
-        """
-        return self._action
-
-    @action.setter
-    def action(self, action):
-        """Sets the action of this WHMCSBaseRequest.
-
-        The WHMCS API action to perform  # noqa: E501
-
-        :param action: The action of this WHMCSBaseRequest.  # noqa: E501
-        :type: str
-        """
-        if action is None:
-            raise ValueError("Invalid value for `action`, must not be `None`")  # noqa: E501
-
-        self._action = action
-
-    @property
-    def identifier(self):
-        """Gets the identifier of this WHMCSBaseRequest.  # noqa: E501
-
-        API Identifier (alternative to username/password)  # noqa: E501
-
-        :return: The identifier of this WHMCSBaseRequest.  # noqa: E501
-        :rtype: str
-        """
-        return self._identifier
-
-    @identifier.setter
-    def identifier(self, identifier):
-        """Sets the identifier of this WHMCSBaseRequest.
-
-        API Identifier (alternative to username/password)  # noqa: E501
-
-        :param identifier: The identifier of this WHMCSBaseRequest.  # noqa: E501
-        :type: str
-        """
-
-        self._identifier = identifier
-
-    @property
-    def secret(self):
-        """Gets the secret of this WHMCSBaseRequest.  # noqa: E501
-
-        API Secret (alternative to username/password)  # noqa: E501
-
-        :return: The secret of this WHMCSBaseRequest.  # noqa: E501
-        :rtype: str
-        """
-        return self._secret
-
-    @secret.setter
-    def secret(self, secret):
-        """Sets the secret of this WHMCSBaseRequest.
-
-        API Secret (alternative to username/password)  # noqa: E501
-
-        :param secret: The secret of this WHMCSBaseRequest.  # noqa: E501
-        :type: str
-        """
-
-        self._secret = secret
-
-    @property
     def username(self):
         """Gets the username of this WHMCSBaseRequest.  # noqa: E501
 
-        Admin username (alternative to identifier/secret)  # noqa: E501
+        Admin username/API identifier  # noqa: E501
 
         :return: The username of this WHMCSBaseRequest.  # noqa: E501
         :rtype: str
@@ -157,11 +70,13 @@ class WHMCSBaseRequest(object):
     def username(self, username):
         """Sets the username of this WHMCSBaseRequest.
 
-        Admin username (alternative to identifier/secret)  # noqa: E501
+        Admin username/API identifier  # noqa: E501
 
         :param username: The username of this WHMCSBaseRequest.  # noqa: E501
         :type: str
         """
+        if username is None:
+            raise ValueError("Invalid value for `username`, must not be `None`")  # noqa: E501
 
         self._username = username
 
@@ -169,7 +84,7 @@ class WHMCSBaseRequest(object):
     def password(self):
         """Gets the password of this WHMCSBaseRequest.  # noqa: E501
 
-        Admin password (alternative to identifier/secret)  # noqa: E501
+        Admin password/API secret  # noqa: E501
 
         :return: The password of this WHMCSBaseRequest.  # noqa: E501
         :rtype: str
@@ -180,11 +95,13 @@ class WHMCSBaseRequest(object):
     def password(self, password):
         """Sets the password of this WHMCSBaseRequest.
 
-        Admin password (alternative to identifier/secret)  # noqa: E501
+        Admin password/API secret  # noqa: E501
 
         :param password: The password of this WHMCSBaseRequest.  # noqa: E501
         :type: str
         """
+        if password is None:
+            raise ValueError("Invalid value for `password`, must not be `None`")  # noqa: E501
 
         self._password = password
 
@@ -192,7 +109,7 @@ class WHMCSBaseRequest(object):
     def accesskey(self):
         """Gets the accesskey of this WHMCSBaseRequest.  # noqa: E501
 
-        Optional API access key for additional security  # noqa: E501
+        Optional API access key  # noqa: E501
 
         :return: The accesskey of this WHMCSBaseRequest.  # noqa: E501
         :rtype: str
@@ -203,7 +120,7 @@ class WHMCSBaseRequest(object):
     def accesskey(self, accesskey):
         """Sets the accesskey of this WHMCSBaseRequest.
 
-        Optional API access key for additional security  # noqa: E501
+        Optional API access key  # noqa: E501
 
         :param accesskey: The accesskey of this WHMCSBaseRequest.  # noqa: E501
         :type: str

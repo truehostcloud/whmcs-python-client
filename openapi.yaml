@@ -85,27 +85,18 @@ components:
     WHMCSBaseRequest:
       type: object
       required:
-        - action
+        - username
+        - password
       properties:
-        action:
-          type: string
-          description: The WHMCS API action to perform
-        identifier:
-          type: string
-          description: API Identifier (alternative to username/password)
-        secret:
-          type: string
-          description: API Secret (alternative to username/password)
         username:
           type: string
-          description: Admin username (alternative to identifier/secret)
-
+          description: Admin username/API identifier
         password:
           type: string
-          description: Admin password (alternative to identifier/secret)
+          description: Admin password/API secret
         accesskey:
           type: string
-          description: Optional API access key for additional security
+          description: Optional API access key
         responsetype:
           type: string
           enum: [json, xml]
