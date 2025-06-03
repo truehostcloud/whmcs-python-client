@@ -1,0 +1,12 @@
+{
+  "packageName": "whmcs_client",
+  "projectName": "whmcs-api-client",
+  "packageVersion": "1.0.0",
+  "packageUrl": "https://github.com/truehostcloud/whmcs-python-client",
+  "packageCompany": "Truehost",
+  "packageAuthor": "William Mwai",
+  "packageEmail": "william@cloudoon.com",
+  "packageDescription": "Python client for WHMCS API",
+  "generateSourceCodeOnly": false,
+  "packageKeywords": ["whmcs", "api", "client", "billing", "hosting"]
+}

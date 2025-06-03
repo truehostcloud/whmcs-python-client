@@ -1,0 +1,46 @@
+# UpdateClientRequest
+
+## Properties
+Name | Type | Description | Notes
+------------ | ------------- | ------------- | -------------
+**action** | **str** | Must be &#x27;UpdateClient&#x27; | 
+**clientid** | **int** | The ID of the client to update | [optional] 
+**clientemail** | **str** | The email address of the client to update | [optional] 
+**firstname** | **str** | First name of the client | [optional] 
+**lastname** | **str** | Last name of the client | [optional] 
+**companyname** | **str** | Company name | [optional] 
+**email** | **str** | Email address of the client | [optional] 
+**address1** | **str** | Address line 1 | [optional] 
+**address2** | **str** | Address line 2 | [optional] 
+**city** | **str** | City | [optional] 
+**state** | **str** | State | [optional] 
+**postcode** | **str** | Postal code | [optional] 
+**country** | **str** | 2 character ISO country code | [optional] 
+**phonenumber** | **str** | Phone number | [optional] 
+**tax_id** | **str** | Client&#x27;s tax ID | [optional] 
+**currency** | **int** | Currency ID | [optional] 
+**groupid** | **int** | Client group ID | [optional] 
+**customfields** | **str** | Base64 encoded serialized array of custom field values | [optional] 
+**language** | **str** | Default language setting | [optional] 
+**clientip** | **str** | IP address of the user | [optional] 
+**notes** | **str** | Admin only notes | [optional] 
+**status** | **str** | The status (e.g., Active) | [optional] 
+**paymentmethod** | **str** | The default payment method | [optional] 
+**email_preferences_general** | **bool** | Receive general emails | [optional] 
+**email_preferences_product** | **bool** | Receive product emails | [optional] 
+**email_preferences_domain** | **bool** | Receive domain emails | [optional] 
+**email_preferences_invoice** | **bool** | Receive invoice emails | [optional] 
+**email_preferences_support** | **bool** | Receive support emails | [optional] 
+**email_preferences_affiliate** | **bool** | Receive affiliate emails | [optional] 
+**marketingoptin** | **bool** | Opt-in to marketing emails | [optional] 
+**clearcreditcard** | **bool** | Clear stored credit card details | [optional] 
+**skipvalidation** | **bool** | Ignore required field validation | [optional] 
+**latefeeoveride** | **bool** | Override Late Fees setting | [optional] 
+**overideduenotices** | **bool** | Override Overdue Notices setting | [optional] 
+**taxexempt** | **bool** | Exempt from tax collections | [optional] 
+**separateinvoices** | **bool** | Group items into one invoice | [optional] 
+**disableautocc** | **bool** | Enable/disable automatic credit card processing | [optional] 
+**overrideautoclose** | **bool** | Enable/disable automatic account closure | [optional] 
+
+[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+
