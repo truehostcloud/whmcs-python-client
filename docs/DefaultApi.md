@@ -15,8 +15,6 @@ Execute WHMCS API action
 Executes a WHMCS API action. The specific action is determined by the 'action' field
 in the request body. Different actions have different required and optional parameters.
 
-Authentication credentials (username/password or API key) must be included in every request.
-
 
 ### Example
 

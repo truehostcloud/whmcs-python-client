@@ -23,15 +23,22 @@ paths:
       description: |
         Executes a WHMCS API action. The specific action is determined by the 'action' field
         in the request body. Different actions have different required and optional parameters.
-        
-        Authentication credentials (username/password or API key) must be included in every request.
       operationId: api_post
       requestBody:
         required: true
         content:
           application/x-www-form-urlencoded:
             schema:
-              $ref: '#/components/schemas/RequestBody'
+              oneOf:
+                - $ref: '#/components/schemas/AddClientRequest'
+                - $ref: '#/components/schemas/UpdateClientRequest'
+                - $ref: '#/components/schemas/AddOrderRequest'
+              discriminator:
+                propertyName: action
+                mapping:
+                  AddClient: '#/components/schemas/AddClientRequest'
+                  UpdateClient: '#/components/schemas/UpdateClientRequest'
+                  AddOrder: '#/components/schemas/AddOrderRequest'
       responses:
         '200':
           description: Successful response
@@ -568,22 +575,12 @@ components:
         - $ref: '#/components/schemas/AddClientResponse'
         - $ref: '#/components/schemas/UpdateClientResponse'
         - $ref: '#/components/schemas/AddOrderResponse'
-      discriminator:
-        propertyName: action
-        mapping:
-          AddClient: '#/components/schemas/AddClientResponse'
-          UpdateClient: '#/components/schemas/UpdateClientResponse'
-          AddOrder: '#/components/schemas/AddOrderResponse'
 
     AddClientResponse:
       allOf:
         - $ref: '#/components/schemas/WHMCSBaseResponse'
         - type: object
           properties:
-            action:
-              type: string
-              enum: [AddClient]
-              description: Always 'AddClient' for AddClient responses
             clientid:
               type: string
               description: The ID of the newly created client
@@ -593,10 +590,6 @@ components:
         - $ref: '#/components/schemas/WHMCSBaseResponse'
         - type: object
           properties:
-            action:
-              type: string
-              enum: [UpdateClient]
-              description: Always 'UpdateClient' for UpdateClient responses
             clientid:
               type: string
               description: The ID of the updated client
@@ -606,10 +599,6 @@ components:
         - $ref: '#/components/schemas/WHMCSBaseResponse'
         - type: object
           properties:
-            action:
-              type: string
-              enum: [AddOrder]
-              description: Always 'AddOrder' for AddOrder responses
             orderid:
               type: string
               description: The Order ID for the created order
@@ -640,15 +629,3 @@ components:
           type: string
           description: Error message describing what went wrong
           example: "Authentication Failed"
-
-    RequestBody:
-      oneOf:
-        - $ref: '#/components/schemas/AddClientRequest'
-        - $ref: '#/components/schemas/UpdateClientRequest'
-        - $ref: '#/components/schemas/AddOrderRequest'
-      discriminator:
-        propertyName: action
-        mapping:
-          AddClient: '#/components/schemas/AddClientRequest'
-          UpdateClient: '#/components/schemas/UpdateClientRequest'
-          AddOrder: '#/components/schemas/AddOrderRequest'

@@ -36,7 +36,7 @@ class TestWHMCSSuccessResponse(unittest.TestCase):
         if include_optional:
             return WHMCSSuccessResponse(
                 result = 'success',
-                action = 'AddOrder',
+                action = '',
                 warnings = [
                     ''
                     ],
@@ -51,7 +51,7 @@ class TestWHMCSSuccessResponse(unittest.TestCase):
         else:
             return WHMCSSuccessResponse(
                 result = 'success',
-                action = 'AddOrder',
+                action = '',
         )
         """
 

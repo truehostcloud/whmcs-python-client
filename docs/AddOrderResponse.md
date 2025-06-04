@@ -6,7 +6,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **result** | **str** | The result of the operation | 
-**action** | **str** | Always &#39;AddOrder&#39; for AddOrder responses | 
+**action** | **str** | The action that was performed | 
 **warnings** | **List[str]** | Any warning messages | [optional] 
 **message** | **str** | Success or error message | [optional] 
 **orderid** | **str** | The Order ID for the created order | [optional] 

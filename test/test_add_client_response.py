@@ -36,7 +36,7 @@ class TestAddClientResponse(unittest.TestCase):
         if include_optional:
             return AddClientResponse(
                 result = 'success',
-                action = 'AddClient',
+                action = '',
                 warnings = [
                     ''
                     ],
@@ -46,7 +46,7 @@ class TestAddClientResponse(unittest.TestCase):
         else:
             return AddClientResponse(
                 result = 'success',
-                action = 'AddClient',
+                action = '',
         )
         """
 

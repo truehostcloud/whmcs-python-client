@@ -36,7 +36,7 @@ class TestAddOrderResponse(unittest.TestCase):
         if include_optional:
             return AddOrderResponse(
                 result = 'success',
-                action = 'AddOrder',
+                action = '',
                 warnings = [
                     ''
                     ],
@@ -50,7 +50,7 @@ class TestAddOrderResponse(unittest.TestCase):
         else:
             return AddOrderResponse(
                 result = 'success',
-                action = 'AddOrder',
+                action = '',
         )
         """
 

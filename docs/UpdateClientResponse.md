@@ -6,7 +6,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **result** | **str** | The result of the operation | 
-**action** | **str** | Always &#39;UpdateClient&#39; for UpdateClient responses | 
+**action** | **str** | The action that was performed | 
 **warnings** | **List[str]** | Any warning messages | [optional] 
 **message** | **str** | Success or error message | [optional] 
 **clientid** | **str** | The ID of the updated client | [optional] 

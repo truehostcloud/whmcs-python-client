@@ -27,7 +27,7 @@ class UpdateClientResponse(BaseModel):
     UpdateClientResponse
     """ # noqa: E501
     result: StrictStr = Field(description="The result of the operation")
-    action: StrictStr = Field(description="Always 'UpdateClient' for UpdateClient responses")
+    action: StrictStr = Field(description="The action that was performed")
     warnings: Optional[List[StrictStr]] = Field(default=None, description="Any warning messages")
     message: Optional[StrictStr] = Field(default=None, description="Success or error message")
     clientid: Optional[StrictStr] = Field(default=None, description="The ID of the updated client")
@@ -38,13 +38,6 @@ class UpdateClientResponse(BaseModel):
         """Validates the enum"""
         if value not in set(['success', 'error']):
             raise ValueError("must be one of enum values ('success', 'error')")
-        return value
-
-    @field_validator('action')
-    def action_validate_enum(cls, value):
-        """Validates the enum"""
-        if value not in set(['UpdateClient']):
-            raise ValueError("must be one of enum values ('UpdateClient')")
         return value
 
     model_config = ConfigDict(
