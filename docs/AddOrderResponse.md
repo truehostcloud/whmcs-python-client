@@ -7,11 +7,11 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **result** | **str** |  | [optional] 
 **message** | **str** | Response message | [optional] 
-**orderid** | **int** | The ID of the newly created order | [optional] 
-**productids** | **List[int]** | Array of product IDs that were created | [optional] 
-**addonids** | **List[int]** | Array of addon IDs that were created | [optional] 
-**domainids** | **List[int]** | Array of domain IDs that were created | [optional] 
-**invoiceid** | **int** | The invoice ID if an invoice was generated | [optional] 
+**orderid** | **str** | The ID of the newly created order | [optional] 
+**productids** | **List[str]** | Array of product IDs that were created | [optional] 
+**addonids** | **List[str]** | Array of addon IDs that were created | [optional] 
+**domainids** | **List[str]** | Array of domain IDs that were created | [optional] 
+**invoiceid** | **str** | The invoice ID if an invoice was generated | [optional] 
 
 ## Example
 

@@ -17,7 +17,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr, field_validator
+from pydantic import BaseModel, ConfigDict, Field, StrictStr, field_validator
 from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
@@ -28,11 +28,11 @@ class AddOrderResponse(BaseModel):
     """ # noqa: E501
     result: Optional[StrictStr] = None
     message: Optional[StrictStr] = Field(default=None, description="Response message")
-    orderid: Optional[StrictInt] = Field(default=None, description="The ID of the newly created order")
-    productids: Optional[List[StrictInt]] = Field(default=None, description="Array of product IDs that were created")
-    addonids: Optional[List[StrictInt]] = Field(default=None, description="Array of addon IDs that were created")
-    domainids: Optional[List[StrictInt]] = Field(default=None, description="Array of domain IDs that were created")
-    invoiceid: Optional[StrictInt] = Field(default=None, description="The invoice ID if an invoice was generated")
+    orderid: Optional[StrictStr] = Field(default=None, description="The ID of the newly created order")
+    productids: Optional[List[StrictStr]] = Field(default=None, description="Array of product IDs that were created")
+    addonids: Optional[List[StrictStr]] = Field(default=None, description="Array of addon IDs that were created")
+    domainids: Optional[List[StrictStr]] = Field(default=None, description="Array of domain IDs that were created")
+    invoiceid: Optional[StrictStr] = Field(default=None, description="The invoice ID if an invoice was generated")
     __properties: ClassVar[List[str]] = ["result", "message", "orderid", "productids", "addonids", "domainids", "invoiceid"]
 
     @field_validator('result')

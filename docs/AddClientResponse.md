@@ -7,7 +7,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **result** | **str** |  | [optional] 
 **message** | **str** | Response message | [optional] 
-**clientid** | **int** | The ID of the newly created client | [optional] 
+**clientid** | **str** | The ID of the newly created client | [optional] 
 **owner_user_id** | **int** | The ID of the user that owns the client | [optional] 
 
 ## Example

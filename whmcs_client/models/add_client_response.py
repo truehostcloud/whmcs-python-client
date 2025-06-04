@@ -28,7 +28,7 @@ class AddClientResponse(BaseModel):
     """ # noqa: E501
     result: Optional[StrictStr] = None
     message: Optional[StrictStr] = Field(default=None, description="Response message")
-    clientid: Optional[StrictInt] = Field(default=None, description="The ID of the newly created client")
+    clientid: Optional[StrictStr] = Field(default=None, description="The ID of the newly created client")
     owner_user_id: Optional[StrictInt] = Field(default=None, description="The ID of the user that owns the client")
     __properties: ClassVar[List[str]] = ["result", "message", "clientid", "owner_user_id"]
 

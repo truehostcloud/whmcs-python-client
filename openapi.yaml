@@ -552,7 +552,7 @@ components:
         - type: object
           properties:
             clientid:
-              type: integer
+              type: string
               description: The ID of the newly created client
             owner_user_id:
               type: integer
@@ -564,7 +564,7 @@ components:
         - type: object
           properties:
             clientid:
-              type: integer
+              type: string
               description: The ID of the updated client
 
     AddOrderResponse:
@@ -573,25 +573,25 @@ components:
         - type: object
           properties:
             orderid:
-              type: integer
+              type: string
               description: The ID of the newly created order
             productids:
               type: array
               items:
-                type: integer
+                type: string
               description: Array of product IDs that were created
             addonids:
               type: array
               items:
-                type: integer
+                type: string
               description: Array of addon IDs that were created
             domainids:
               type: array
               items:
-                type: integer
+                type: string
               description: Array of domain IDs that were created
             invoiceid:
-              type: integer
+              type: string
               description: The invoice ID if an invoice was generated
 
   responses:
