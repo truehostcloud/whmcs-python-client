@@ -1,0 +1,631 @@
+openapi: 3.0.3
+info:
+  title: WHMCS API
+  version: 1.0.0
+  description: |
+    Python client for the WHMCS API.
+    
+    WHMCS (Web Host Manager Complete Solution) provides a single API endpoint that handles
+    multiple operations through different 'action' parameters. This client supports various
+    WHMCS operations for managing clients, orders, and other resources.
+    
+    Authentication is handled through username/password or API credentials.
+    All requests are sent as form-encoded data to the /api.php endpoint.
+
+servers:
+  - url: https://your-whmcs-instance.com/includes
+    description: WHMCS API server
+
+paths:
+  /api.php:
+    post:
+      summary: Execute WHMCS API action
+      description: |
+        Executes a WHMCS API action. The specific action is determined by the 'action' field
+        in the request body. Different actions have different required and optional parameters.
+      operationId: api_post
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              oneOf:
+                - $ref: '#/components/schemas/AddClientRequest'
+                - $ref: '#/components/schemas/UpdateClientRequest'
+                - $ref: '#/components/schemas/AddOrderRequest'
+              discriminator:
+                propertyName: action
+                mapping:
+                  AddClient: '#/components/schemas/AddClientRequest'
+                  UpdateClient: '#/components/schemas/UpdateClientRequest'
+                  AddOrder: '#/components/schemas/AddOrderRequest'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WHMCSSuccessResponse'
+        '400':
+          description: Bad request - Invalid parameters or malformed request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WHMCSErrorResponse'
+        '401':
+          description: Authentication failed
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WHMCSErrorResponse'
+        '403':
+          description: Access denied - Insufficient permissions
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WHMCSErrorResponse'
+        '404':
+          description: Resource not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WHMCSErrorResponse'
+        '422':
+          description: Validation error - Required fields missing or invalid
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WHMCSErrorResponse'
+        '429':
+          description: Rate limit exceeded
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WHMCSErrorResponse'
+
+components:
+  schemas:
+    WHMCSBaseRequest:
+      type: object
+      required:
+        - username
+        - password
+      properties:
+        username:
+          type: string
+          description: Admin username/API identifier
+        password:
+          type: string
+          description: Admin password/API secret
+        accesskey:
+          type: string
+          description: Optional API access key
+        responsetype:
+          type: string
+          enum: [json, xml]
+          default: json
+          description: Response format
+
+    AddClientRequest:
+      allOf:
+        - $ref: '#/components/schemas/WHMCSBaseRequest'
+        - type: object
+          required:
+            - action
+            - firstname
+            - lastname
+            - email
+            - address1
+            - city
+            - state
+            - postcode
+            - country
+            - phonenumber
+          properties:
+            action:
+              type: string
+              enum: [AddClient]
+              description: Must be 'AddClient'
+            owner_user_id:
+              type: integer
+              description: The ID of the user that should own the client
+            firstname:
+              type: string
+              description: First name of the client
+            lastname:
+              type: string
+              description: Last name of the client
+            companyname:
+              type: string
+              description: Company name
+            email:
+              type: string
+              format: email
+              description: Email address of the client
+            address1:
+              type: string
+              description: Address line 1
+            address2:
+              type: string
+              description: Address line 2
+            city:
+              type: string
+              description: City
+            state:
+              type: string
+              description: State
+            postcode:
+              type: string
+              description: Postal code
+            country:
+              type: string
+              description: 2 character ISO country code
+            phonenumber:
+              type: string
+              description: Phone number
+            tax_id:
+              type: string
+              description: Client's tax ID
+            password2:
+              type: string
+              description: Password for the new user account
+            securityqid:
+              type: integer
+              description: Security question ID
+            securityqans:
+              type: string
+              description: Security question answer
+            currency:
+              type: integer
+              description: Currency ID
+            groupid:
+              type: integer
+              description: Client group ID
+            customfields:
+              type: string
+              description: Base64 encoded serialized array of custom field values
+            language:
+              type: string
+              description: Default language setting
+            clientip:
+              type: string
+              description: Originating IP address
+            notes:
+              type: string
+              description: Admin only notes
+            marketingoptin:
+              type: boolean
+              description: Opt-in to marketing emails
+            noemail:
+              type: boolean
+              description: Do not send welcome email
+            skipvalidation:
+              type: boolean
+              description: Do not enforce required fields
+
+    UpdateClientRequest:
+      allOf:
+        - $ref: '#/components/schemas/WHMCSBaseRequest'
+        - type: object
+          required:
+            - action
+          properties:
+            action:
+              type: string
+              enum: [UpdateClient]
+              description: Must be 'UpdateClient'
+            clientid:
+              type: integer
+              description: The ID of the client to update
+            clientemail:
+              type: string
+              format: email
+              description: The email address of the client to update
+            firstname:
+              type: string
+              description: First name of the client
+            lastname:
+              type: string
+              description: Last name of the client
+            companyname:
+              type: string
+              description: Company name
+            email:
+              type: string
+              format: email
+              description: Email address of the client
+            address1:
+              type: string
+              description: Address line 1
+            address2:
+              type: string
+              description: Address line 2
+            city:
+              type: string
+              description: City
+            state:
+              type: string
+              description: State
+            postcode:
+              type: string
+              description: Postal code
+            country:
+              type: string
+              description: 2 character ISO country code
+            phonenumber:
+              type: string
+              description: Phone number
+            tax_id:
+              type: string
+              description: Client's tax ID
+            currency:
+              type: integer
+              description: Currency ID
+            groupid:
+              type: integer
+              description: Client group ID
+            customfields:
+              type: string
+              description: Base64 encoded serialized array of custom field values
+            language:
+              type: string
+              description: Default language setting
+            clientip:
+              type: string
+              description: IP address of the user
+            notes:
+              type: string
+              description: Admin only notes
+            status:
+              type: string
+              description: The status (e.g., Active)
+            paymentmethod:
+              type: string
+              description: The default payment method
+            email_preferences_general:
+              type: boolean
+              description: Receive general emails
+            email_preferences_product:
+              type: boolean
+              description: Receive product emails
+            email_preferences_domain:
+              type: boolean
+              description: Receive domain emails
+            email_preferences_invoice:
+              type: boolean
+              description: Receive invoice emails
+            email_preferences_support:
+              type: boolean
+              description: Receive support emails
+            email_preferences_affiliate:
+              type: boolean
+              description: Receive affiliate emails
+            marketingoptin:
+              type: boolean
+              description: Opt-in to marketing emails
+            clearcreditcard:
+              type: boolean
+              description: Clear stored credit card details
+            skipvalidation:
+              type: boolean
+              description: Ignore required field validation
+            latefeeoveride:
+              type: boolean
+              description: Override Late Fees setting
+            overideduenotices:
+              type: boolean
+              description: Override Overdue Notices setting
+            taxexempt:
+              type: boolean
+              description: Exempt from tax collections
+            separateinvoices:
+              type: boolean
+              description: Group items into one invoice
+            disableautocc:
+              type: boolean
+              description: Enable/disable automatic credit card processing
+            overrideautoclose:
+              type: boolean
+              description: Enable/disable automatic account closure
+
+    AddOrderRequest:
+      allOf:
+        - $ref: '#/components/schemas/WHMCSBaseRequest'
+        - type: object
+          required:
+            - action
+            - clientid
+            - paymentmethod
+          properties:
+            action:
+              type: string
+              enum: [AddOrder]
+              description: Must be 'AddOrder'
+            clientid:
+              type: integer
+              description: The ID of the client to add the order for
+            paymentmethod:
+              type: string
+              description: The payment method for the order in the system format (e.g., paypal, mailin)
+            pid:
+              type: array
+              items:
+                type: integer
+              description: Array of product IDs to add to the order
+            qty:
+              type: array
+              items:
+                type: integer
+              description: Array of product quantities
+            domain:
+              type: array
+              items:
+                type: string
+              description: Array of domain names associated with the products/domains
+            billingcycle:
+              type: array
+              items:
+                type: string
+                enum: [monthly, quarterly, semiannually, annually, biennially, triennially]
+              description: Array of billing cycles for the products
+            domaintype:
+              type: array
+              items:
+                type: string
+                enum: [register, transfer]
+              description: For domain registrations, array of register or transfer values
+            regperiod:
+              type: array
+              items:
+                type: integer
+                minimum: 1
+                maximum: 10
+              description: For domain registrations, the registration periods for the domains
+            idnlanguage:
+              type: array
+              items:
+                type: string
+              description: For IDN domain registrations, the language codes for the domains
+            eppcode:
+              type: array
+              items:
+                type: string
+              description: For domain transfers, the EPP codes for the domains being transferred
+            nameserver1:
+              type: string
+              description: The first nameserver to apply to all domains in the order
+            nameserver2:
+              type: string
+              description: The second nameserver to apply to all domains in the order
+            nameserver3:
+              type: string
+              description: The third nameserver to apply to all domains in the order
+            nameserver4:
+              type: string
+              description: The fourth nameserver to apply to all domains in the order
+            nameserver5:
+              type: string
+              description: The fifth nameserver to apply to all domains in the order
+            customfields:
+              type: array
+              items:
+                type: string
+              description: Array of base64 encoded serialized array of product custom field values
+            configoptions:
+              type: array
+              items:
+                type: string
+              description: Array of base64 encoded serialized array of product configurable options values
+            priceoverride:
+              type: array
+              items:
+                type: number
+                format: float
+              description: Override the price of the product being ordered
+            promocode:
+              type: string
+              description: The promotion code to apply to the order
+            promooverride:
+              type: boolean
+              description: Should the promotion apply to the order even without matching promotional products
+            affid:
+              type: integer
+              description: The affiliate ID to associate with the order
+            noinvoice:
+              type: boolean
+              description: Set to true to suppress the invoice generating for the whole order
+            noinvoiceemail:
+              type: boolean
+              description: Set to true to suppress the Invoice Created email being sent for the order
+            noemail:
+              type: boolean
+              description: Set to true to suppress the Order Confirmation email being sent
+            addons:
+              type: array
+              items:
+                type: string
+              description: Array of comma separated lists of addons to create on order with the products
+            addonsqty:
+              type: array
+              items:
+                type: string
+              description: Array of comma-separated lists of quantities for addons associated with products
+            hostname:
+              type: array
+              items:
+                type: string
+              description: Array of hostnames for VPS/Dedicated Server orders
+            ns1prefix:
+              type: array
+              items:
+                type: string
+              description: Array of first nameserver prefixes for VPS/Dedicated servers (e.g., ns1 in ns1.hostname.com)
+            ns2prefix:
+              type: array
+              items:
+                type: string
+              description: Array of second nameserver prefixes for VPS/Dedicated servers (e.g., ns2 in ns2.hostname.com)
+            rootpw:
+              type: array
+              items:
+                type: string
+              description: Array of desired root passwords for VPS/Dedicated servers
+            contactid:
+              type: integer
+              description: The ID of the contact, associated with the client, that should apply to all domains in the order
+            dnsmanagement:
+              type: array
+              items:
+                type: boolean
+              description: Add DNS Management to the Domain Order
+            domainfields:
+              type: array
+              items:
+                type: string
+              description: Array of base64 encoded serialized array of TLD Specific Field Values
+            emailforwarding:
+              type: array
+              items:
+                type: boolean
+              description: Add Email Forwarding to the Domain Order
+            idprotection:
+              type: array
+              items:
+                type: boolean
+              description: Add ID Protection to the Domain Order
+            domainpriceoverride:
+              type: array
+              items:
+                type: number
+                format: float
+              description: Override the price of the registration price on the domain being ordered
+            domainrenewoverride:
+              type: array
+              items:
+                type: number
+                format: float
+              description: Override the price of the renewal price on the domain being ordered
+            domainrenewals:
+              type: object
+              additionalProperties:
+                type: integer
+              description: A name -> value object of domainName -> renewalPeriod renewals to add an order for
+            clientip:
+              type: string
+              description: The IP address to associate with the order
+            addonid:
+              type: integer
+              description: The Addon ID for an Addon Only Order
+            addonidqty:
+              type: integer
+              description: The quantity of addons in an addon-only order
+            serviceid:
+              type: integer
+              description: The service ID for the addon only order
+            addonids:
+              type: array
+              items:
+                type: integer
+              description: Array of addon IDs for an Addon Only Order
+            addonidsqty:
+              type: array
+              items:
+                type: integer
+              description: Array of quantities for an addon-only order
+            serviceids:
+              type: array
+              items:
+                type: integer
+              description: Array of service IDs to associate the addons for an Addon Only order
+            servicerenewals:
+              type: array
+              items:
+                type: integer
+              description: Array of service IDs to be on-demand renewed
+            addonrenewals:
+              type: array
+              items:
+                type: integer
+              description: Array of service addon IDs to be on-demand renewed
+
+    WHMCSBaseResponse:
+      type: object
+      required:
+        - result
+        - action
+      properties:
+        result:
+          type: string
+          enum: [success, error]
+          description: The result of the operation
+        action:
+          type: string
+          description: The action that was performed
+        warnings:
+          type: array
+          items:
+            type: string
+          description: Any warning messages
+        message:
+          type: string
+          description: Success or error message
+
+    WHMCSSuccessResponse:
+      oneOf:
+        - $ref: '#/components/schemas/AddClientResponse'
+        - $ref: '#/components/schemas/UpdateClientResponse'
+        - $ref: '#/components/schemas/AddOrderResponse'
+
+    AddClientResponse:
+      allOf:
+        - $ref: '#/components/schemas/WHMCSBaseResponse'
+        - type: object
+          properties:
+            clientid:
+              type: string
+              description: The ID of the newly created client
+
+    UpdateClientResponse:
+      allOf:
+        - $ref: '#/components/schemas/WHMCSBaseResponse'
+        - type: object
+          properties:
+            clientid:
+              type: string
+              description: The ID of the updated client
+
+    AddOrderResponse:
+      allOf:
+        - $ref: '#/components/schemas/WHMCSBaseResponse'
+        - type: object
+          properties:
+            orderid:
+              type: string
+              description: The Order ID for the created order
+            serviceids:
+              type: string
+              description: The Service ID(s) created by the order
+            addonids:
+              type: string
+              description: The Addon ID(s) created by the order
+            domainids:
+              type: string
+              description: The Domain ID(s) created by the order
+            invoiceid:
+              type: integer
+              description: The Invoice ID created for the order
+
+    WHMCSErrorResponse:
+      type: object
+      required:
+        - result
+        - message
+      properties:
+        result:
+          type: string
+          enum: [error]
+          description: Always 'error' for error responses
+        message:
+          type: string
+          description: Error message describing what went wrong
+          example: "Authentication Failed"
