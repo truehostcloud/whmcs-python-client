@@ -8,5 +8,6 @@
   "packageEmail": "william@cloudoon.com",
   "packageDescription": "Python client for WHMCS API",
   "generateSourceCodeOnly": false,
-  "packageKeywords": ["whmcs", "api", "client", "billing", "hosting"]
+  "packageKeywords": ["whmcs", "api", "client", "billing", "hosting"],
+  "skipFormModel": false
 }
