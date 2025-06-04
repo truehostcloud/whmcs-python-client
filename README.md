@@ -74,7 +74,6 @@ with whmcs_client.ApiClient(configuration) as api_client:
     api_instance = whmcs_client.DefaultApi(api_client)
     username = 'username_example' # str | Admin username/API identifier
     password = 'password_example' # str | Admin password/API secret
-    action = AddClient # str | Must be 'AddClient' (default to AddClient)
     firstname = 'firstname_example' # str | First name of the client
     lastname = 'lastname_example' # str | Last name of the client
     email = 'email_example' # str | Email address of the client
@@ -105,7 +104,7 @@ with whmcs_client.ApiClient(configuration) as api_client:
 
     try:
         # Add a new client
-        api_response = api_instance.add_client(username, password, action, firstname, lastname, email, address1, city, state, postcode, country, phonenumber, accesskey=accesskey, responsetype=responsetype, owner_user_id=owner_user_id, companyname=companyname, address2=address2, tax_id=tax_id, password2=password2, securityqid=securityqid, securityqans=securityqans, currency=currency, groupid=groupid, customfields=customfields, language=language, clientip=clientip, notes=notes, marketingoptin=marketingoptin, noemail=noemail, skipvalidation=skipvalidation)
+        api_response = api_instance.add_client(username, password, firstname, lastname, email, address1, city, state, postcode, country, phonenumber, accesskey=accesskey, responsetype=responsetype, owner_user_id=owner_user_id, companyname=companyname, address2=address2, tax_id=tax_id, password2=password2, securityqid=securityqid, securityqans=securityqans, currency=currency, groupid=groupid, customfields=customfields, language=language, clientip=clientip, notes=notes, marketingoptin=marketingoptin, noemail=noemail, skipvalidation=skipvalidation)
         print("The response of DefaultApi->add_client:\n")
         pprint(api_response)
     except ApiException as e:
@@ -119,9 +118,9 @@ All URIs are relative to *https://your-whmcs-instance.com/includes*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
-*DefaultApi* | [**add_client**](docs/DefaultApi.md#add_client) | **POST** /AddClient | Add a new client
-*DefaultApi* | [**add_order**](docs/DefaultApi.md#add_order) | **POST** /AddOrder | Create a new order
-*DefaultApi* | [**update_client**](docs/DefaultApi.md#update_client) | **POST** /UpdateClient | Update client details
+*DefaultApi* | [**add_client**](docs/DefaultApi.md#add_client) | **POST** /api.php?action&#x3D;AddClient | Add a new client
+*DefaultApi* | [**add_order**](docs/DefaultApi.md#add_order) | **POST** /api.php?action&#x3D;AddOrder | Create a new order
+*DefaultApi* | [**update_client**](docs/DefaultApi.md#update_client) | **POST** /api.php?action&#x3D;UpdateClient | Update client details
 
 
 ## Documentation For Models

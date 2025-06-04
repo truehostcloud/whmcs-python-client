@@ -14,7 +14,7 @@ servers:
     description: WHMCS API server
 
 paths:
-  /AddClient:
+  /api.php?action=AddClient:
     post:
       summary: Add a new client
       description: Creates a new client account in WHMCS
@@ -37,7 +37,7 @@ paths:
         default:
           $ref: '#/components/responses/Error'
 
-  /UpdateClient:
+  /api.php?action=UpdateClient:
     post:
       summary: Update client details
       description: Modifies an existing client's information
@@ -60,7 +60,7 @@ paths:
         default:
           $ref: '#/components/responses/Error'
 
-  /AddOrder:
+  /api.php?action=AddOrder:
     post:
       summary: Create a new order
       description: Places a new order for products/services
@@ -109,7 +109,6 @@ components:
     AddClientRequest:
       type: object
       required:
-        - action
         - firstname
         - lastname
         - email
@@ -120,11 +119,6 @@ components:
         - country
         - phonenumber
       properties:
-        action:
-          type: string
-          enum: [AddClient]
-          default: AddClient
-          description: Must be 'AddClient'
         owner_user_id:
           type: integer
           description: The ID of the user that should own the client
@@ -204,13 +198,8 @@ components:
     UpdateClientRequest:
       type: object
       required:
-        - action
+        - clientid
       properties:
-        action:
-          type: string
-          enum: [UpdateClient]
-          default: UpdateClient
-          description: Must be 'UpdateClient'
         clientid:
           type: integer
           description: The ID of the client to update
@@ -329,15 +318,9 @@ components:
     AddOrderRequest:
       type: object
       required:
-        - action
         - clientid
         - paymentmethod
       properties:
-        action:
-          type: string
-          enum: [AddOrder]
-          default: AddOrder
-          description: Must be 'AddOrder'
         clientid:
           type: integer
           description: The ID of the client to add the order for

@@ -46,7 +46,6 @@ class DefaultApi:
         self,
         username: Annotated[StrictStr, Field(description="Admin username/API identifier")],
         password: Annotated[StrictStr, Field(description="Admin password/API secret")],
-        action: Annotated[StrictStr, Field(description="Must be 'AddClient'")],
         firstname: Annotated[StrictStr, Field(description="First name of the client")],
         lastname: Annotated[StrictStr, Field(description="Last name of the client")],
         email: Annotated[StrictStr, Field(description="Email address of the client")],
@@ -95,8 +94,6 @@ class DefaultApi:
         :type username: str
         :param password: Admin password/API secret (required)
         :type password: str
-        :param action: Must be 'AddClient' (required)
-        :type action: str
         :param firstname: First name of the client (required)
         :type firstname: str
         :param lastname: Last name of the client (required)
@@ -176,7 +173,6 @@ class DefaultApi:
         _param = self._add_client_serialize(
             username=username,
             password=password,
-            action=action,
             firstname=firstname,
             lastname=lastname,
             email=email,
@@ -229,7 +225,6 @@ class DefaultApi:
         self,
         username: Annotated[StrictStr, Field(description="Admin username/API identifier")],
         password: Annotated[StrictStr, Field(description="Admin password/API secret")],
-        action: Annotated[StrictStr, Field(description="Must be 'AddClient'")],
         firstname: Annotated[StrictStr, Field(description="First name of the client")],
         lastname: Annotated[StrictStr, Field(description="Last name of the client")],
         email: Annotated[StrictStr, Field(description="Email address of the client")],
@@ -278,8 +273,6 @@ class DefaultApi:
         :type username: str
         :param password: Admin password/API secret (required)
         :type password: str
-        :param action: Must be 'AddClient' (required)
-        :type action: str
         :param firstname: First name of the client (required)
         :type firstname: str
         :param lastname: Last name of the client (required)
@@ -359,7 +352,6 @@ class DefaultApi:
         _param = self._add_client_serialize(
             username=username,
             password=password,
-            action=action,
             firstname=firstname,
             lastname=lastname,
             email=email,
@@ -412,7 +404,6 @@ class DefaultApi:
         self,
         username: Annotated[StrictStr, Field(description="Admin username/API identifier")],
         password: Annotated[StrictStr, Field(description="Admin password/API secret")],
-        action: Annotated[StrictStr, Field(description="Must be 'AddClient'")],
         firstname: Annotated[StrictStr, Field(description="First name of the client")],
         lastname: Annotated[StrictStr, Field(description="Last name of the client")],
         email: Annotated[StrictStr, Field(description="Email address of the client")],
@@ -461,8 +452,6 @@ class DefaultApi:
         :type username: str
         :param password: Admin password/API secret (required)
         :type password: str
-        :param action: Must be 'AddClient' (required)
-        :type action: str
         :param firstname: First name of the client (required)
         :type firstname: str
         :param lastname: Last name of the client (required)
@@ -542,7 +531,6 @@ class DefaultApi:
         _param = self._add_client_serialize(
             username=username,
             password=password,
-            action=action,
             firstname=firstname,
             lastname=lastname,
             email=email,
@@ -590,7 +578,6 @@ class DefaultApi:
         self,
         username,
         password,
-        action,
         firstname,
         lastname,
         email,
@@ -650,8 +637,6 @@ class DefaultApi:
             _form_params.append(('accesskey', accesskey))
         if responsetype is not None:
             _form_params.append(('responsetype', responsetype))
-        if action is not None:
-            _form_params.append(('action', action))
         if owner_user_id is not None:
             _form_params.append(('owner_user_id', owner_user_id))
         if firstname is not None:
@@ -733,7 +718,7 @@ class DefaultApi:
 
         return self.api_client.param_serialize(
             method='POST',
-            resource_path='/AddClient',
+            resource_path='/api.php?action=AddClient',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -754,7 +739,6 @@ class DefaultApi:
         self,
         username: Annotated[StrictStr, Field(description="Admin username/API identifier")],
         password: Annotated[StrictStr, Field(description="Admin password/API secret")],
-        action: Annotated[StrictStr, Field(description="Must be 'AddOrder'")],
         clientid: Annotated[StrictInt, Field(description="The ID of the client to add the order for")],
         paymentmethod: Annotated[StrictStr, Field(description="The payment method for the order in the system format (e.g., paypal, mailin)")],
         accesskey: Annotated[Optional[StrictStr], Field(description="Optional API access key")] = None,
@@ -823,8 +807,6 @@ class DefaultApi:
         :type username: str
         :param password: Admin password/API secret (required)
         :type password: str
-        :param action: Must be 'AddOrder' (required)
-        :type action: str
         :param clientid: The ID of the client to add the order for (required)
         :type clientid: int
         :param paymentmethod: The payment method for the order in the system format (e.g., paypal, mailin) (required)
@@ -944,7 +926,6 @@ class DefaultApi:
         _param = self._add_order_serialize(
             username=username,
             password=password,
-            action=action,
             clientid=clientid,
             paymentmethod=paymentmethod,
             accesskey=accesskey,
@@ -1017,7 +998,6 @@ class DefaultApi:
         self,
         username: Annotated[StrictStr, Field(description="Admin username/API identifier")],
         password: Annotated[StrictStr, Field(description="Admin password/API secret")],
-        action: Annotated[StrictStr, Field(description="Must be 'AddOrder'")],
         clientid: Annotated[StrictInt, Field(description="The ID of the client to add the order for")],
         paymentmethod: Annotated[StrictStr, Field(description="The payment method for the order in the system format (e.g., paypal, mailin)")],
         accesskey: Annotated[Optional[StrictStr], Field(description="Optional API access key")] = None,
@@ -1086,8 +1066,6 @@ class DefaultApi:
         :type username: str
         :param password: Admin password/API secret (required)
         :type password: str
-        :param action: Must be 'AddOrder' (required)
-        :type action: str
         :param clientid: The ID of the client to add the order for (required)
         :type clientid: int
         :param paymentmethod: The payment method for the order in the system format (e.g., paypal, mailin) (required)
@@ -1207,7 +1185,6 @@ class DefaultApi:
         _param = self._add_order_serialize(
             username=username,
             password=password,
-            action=action,
             clientid=clientid,
             paymentmethod=paymentmethod,
             accesskey=accesskey,
@@ -1280,7 +1257,6 @@ class DefaultApi:
         self,
         username: Annotated[StrictStr, Field(description="Admin username/API identifier")],
         password: Annotated[StrictStr, Field(description="Admin password/API secret")],
-        action: Annotated[StrictStr, Field(description="Must be 'AddOrder'")],
         clientid: Annotated[StrictInt, Field(description="The ID of the client to add the order for")],
         paymentmethod: Annotated[StrictStr, Field(description="The payment method for the order in the system format (e.g., paypal, mailin)")],
         accesskey: Annotated[Optional[StrictStr], Field(description="Optional API access key")] = None,
@@ -1349,8 +1325,6 @@ class DefaultApi:
         :type username: str
         :param password: Admin password/API secret (required)
         :type password: str
-        :param action: Must be 'AddOrder' (required)
-        :type action: str
         :param clientid: The ID of the client to add the order for (required)
         :type clientid: int
         :param paymentmethod: The payment method for the order in the system format (e.g., paypal, mailin) (required)
@@ -1470,7 +1444,6 @@ class DefaultApi:
         _param = self._add_order_serialize(
             username=username,
             password=password,
-            action=action,
             clientid=clientid,
             paymentmethod=paymentmethod,
             accesskey=accesskey,
@@ -1538,7 +1511,6 @@ class DefaultApi:
         self,
         username,
         password,
-        action,
         clientid,
         paymentmethod,
         accesskey,
@@ -1645,8 +1617,6 @@ class DefaultApi:
             _form_params.append(('accesskey', accesskey))
         if responsetype is not None:
             _form_params.append(('responsetype', responsetype))
-        if action is not None:
-            _form_params.append(('action', action))
         if clientid is not None:
             _form_params.append(('clientid', clientid))
         if clientemail is not None:
@@ -1768,7 +1738,7 @@ class DefaultApi:
 
         return self.api_client.param_serialize(
             method='POST',
-            resource_path='/AddOrder',
+            resource_path='/api.php?action=AddOrder',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -1789,10 +1759,9 @@ class DefaultApi:
         self,
         username: Annotated[StrictStr, Field(description="Admin username/API identifier")],
         password: Annotated[StrictStr, Field(description="Admin password/API secret")],
-        action: Annotated[StrictStr, Field(description="Must be 'UpdateClient'")],
+        clientid: Annotated[StrictInt, Field(description="The ID of the client to update")],
         accesskey: Annotated[Optional[StrictStr], Field(description="Optional API access key")] = None,
         responsetype: Annotated[Optional[StrictStr], Field(description="Response format")] = None,
-        clientid: Annotated[Optional[StrictInt], Field(description="The ID of the client to update")] = None,
         clientemail: Annotated[Optional[StrictStr], Field(description="The email address of the client to update")] = None,
         firstname: Annotated[Optional[StrictStr], Field(description="First name of the client")] = None,
         lastname: Annotated[Optional[StrictStr], Field(description="Last name of the client")] = None,
@@ -1851,14 +1820,12 @@ class DefaultApi:
         :type username: str
         :param password: Admin password/API secret (required)
         :type password: str
-        :param action: Must be 'UpdateClient' (required)
-        :type action: str
+        :param clientid: The ID of the client to update (required)
+        :type clientid: int
         :param accesskey: Optional API access key
         :type accesskey: str
         :param responsetype: Response format
         :type responsetype: str
-        :param clientid: The ID of the client to update
-        :type clientid: int
         :param clientemail: The email address of the client to update
         :type clientemail: str
         :param firstname: First name of the client
@@ -1958,10 +1925,9 @@ class DefaultApi:
         _param = self._update_client_serialize(
             username=username,
             password=password,
-            action=action,
+            clientid=clientid,
             accesskey=accesskey,
             responsetype=responsetype,
-            clientid=clientid,
             clientemail=clientemail,
             firstname=firstname,
             lastname=lastname,
@@ -2024,10 +1990,9 @@ class DefaultApi:
         self,
         username: Annotated[StrictStr, Field(description="Admin username/API identifier")],
         password: Annotated[StrictStr, Field(description="Admin password/API secret")],
-        action: Annotated[StrictStr, Field(description="Must be 'UpdateClient'")],
+        clientid: Annotated[StrictInt, Field(description="The ID of the client to update")],
         accesskey: Annotated[Optional[StrictStr], Field(description="Optional API access key")] = None,
         responsetype: Annotated[Optional[StrictStr], Field(description="Response format")] = None,
-        clientid: Annotated[Optional[StrictInt], Field(description="The ID of the client to update")] = None,
         clientemail: Annotated[Optional[StrictStr], Field(description="The email address of the client to update")] = None,
         firstname: Annotated[Optional[StrictStr], Field(description="First name of the client")] = None,
         lastname: Annotated[Optional[StrictStr], Field(description="Last name of the client")] = None,
@@ -2086,14 +2051,12 @@ class DefaultApi:
         :type username: str
         :param password: Admin password/API secret (required)
         :type password: str
-        :param action: Must be 'UpdateClient' (required)
-        :type action: str
+        :param clientid: The ID of the client to update (required)
+        :type clientid: int
         :param accesskey: Optional API access key
         :type accesskey: str
         :param responsetype: Response format
         :type responsetype: str
-        :param clientid: The ID of the client to update
-        :type clientid: int
         :param clientemail: The email address of the client to update
         :type clientemail: str
         :param firstname: First name of the client
@@ -2193,10 +2156,9 @@ class DefaultApi:
         _param = self._update_client_serialize(
             username=username,
             password=password,
-            action=action,
+            clientid=clientid,
             accesskey=accesskey,
             responsetype=responsetype,
-            clientid=clientid,
             clientemail=clientemail,
             firstname=firstname,
             lastname=lastname,
@@ -2259,10 +2221,9 @@ class DefaultApi:
         self,
         username: Annotated[StrictStr, Field(description="Admin username/API identifier")],
         password: Annotated[StrictStr, Field(description="Admin password/API secret")],
-        action: Annotated[StrictStr, Field(description="Must be 'UpdateClient'")],
+        clientid: Annotated[StrictInt, Field(description="The ID of the client to update")],
         accesskey: Annotated[Optional[StrictStr], Field(description="Optional API access key")] = None,
         responsetype: Annotated[Optional[StrictStr], Field(description="Response format")] = None,
-        clientid: Annotated[Optional[StrictInt], Field(description="The ID of the client to update")] = None,
         clientemail: Annotated[Optional[StrictStr], Field(description="The email address of the client to update")] = None,
         firstname: Annotated[Optional[StrictStr], Field(description="First name of the client")] = None,
         lastname: Annotated[Optional[StrictStr], Field(description="Last name of the client")] = None,
@@ -2321,14 +2282,12 @@ class DefaultApi:
         :type username: str
         :param password: Admin password/API secret (required)
         :type password: str
-        :param action: Must be 'UpdateClient' (required)
-        :type action: str
+        :param clientid: The ID of the client to update (required)
+        :type clientid: int
         :param accesskey: Optional API access key
         :type accesskey: str
         :param responsetype: Response format
         :type responsetype: str
-        :param clientid: The ID of the client to update
-        :type clientid: int
         :param clientemail: The email address of the client to update
         :type clientemail: str
         :param firstname: First name of the client
@@ -2428,10 +2387,9 @@ class DefaultApi:
         _param = self._update_client_serialize(
             username=username,
             password=password,
-            action=action,
+            clientid=clientid,
             accesskey=accesskey,
             responsetype=responsetype,
-            clientid=clientid,
             clientemail=clientemail,
             firstname=firstname,
             lastname=lastname,
@@ -2489,10 +2447,9 @@ class DefaultApi:
         self,
         username,
         password,
-        action,
+        clientid,
         accesskey,
         responsetype,
-        clientid,
         clientemail,
         firstname,
         lastname,
@@ -2562,8 +2519,6 @@ class DefaultApi:
             _form_params.append(('accesskey', accesskey))
         if responsetype is not None:
             _form_params.append(('responsetype', responsetype))
-        if action is not None:
-            _form_params.append(('action', action))
         if clientid is not None:
             _form_params.append(('clientid', clientid))
         if clientemail is not None:
@@ -2671,7 +2626,7 @@ class DefaultApi:
 
         return self.api_client.param_serialize(
             method='POST',
-            resource_path='/UpdateClient',
+            resource_path='/api.php?action=UpdateClient',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,

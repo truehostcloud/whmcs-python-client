@@ -4,13 +4,13 @@ All URIs are relative to *https://your-whmcs-instance.com/includes*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**add_client**](DefaultApi.md#add_client) | **POST** /AddClient | Add a new client
-[**add_order**](DefaultApi.md#add_order) | **POST** /AddOrder | Create a new order
-[**update_client**](DefaultApi.md#update_client) | **POST** /UpdateClient | Update client details
+[**add_client**](DefaultApi.md#add_client) | **POST** /api.php?action&#x3D;AddClient | Add a new client
+[**add_order**](DefaultApi.md#add_order) | **POST** /api.php?action&#x3D;AddOrder | Create a new order
+[**update_client**](DefaultApi.md#update_client) | **POST** /api.php?action&#x3D;UpdateClient | Update client details
 
 
 # **add_client**
-> AddClientResponse add_client(username, password, action, firstname, lastname, email, address1, city, state, postcode, country, phonenumber, accesskey=accesskey, responsetype=responsetype, owner_user_id=owner_user_id, companyname=companyname, address2=address2, tax_id=tax_id, password2=password2, securityqid=securityqid, securityqans=securityqans, currency=currency, groupid=groupid, customfields=customfields, language=language, clientip=clientip, notes=notes, marketingoptin=marketingoptin, noemail=noemail, skipvalidation=skipvalidation)
+> AddClientResponse add_client(username, password, firstname, lastname, email, address1, city, state, postcode, country, phonenumber, accesskey=accesskey, responsetype=responsetype, owner_user_id=owner_user_id, companyname=companyname, address2=address2, tax_id=tax_id, password2=password2, securityqid=securityqid, securityqans=securityqans, currency=currency, groupid=groupid, customfields=customfields, language=language, clientip=clientip, notes=notes, marketingoptin=marketingoptin, noemail=noemail, skipvalidation=skipvalidation)
 
 Add a new client
 
@@ -38,7 +38,6 @@ with whmcs_client.ApiClient(configuration) as api_client:
     api_instance = whmcs_client.DefaultApi(api_client)
     username = 'username_example' # str | Admin username/API identifier
     password = 'password_example' # str | Admin password/API secret
-    action = AddClient # str | Must be 'AddClient' (default to AddClient)
     firstname = 'firstname_example' # str | First name of the client
     lastname = 'lastname_example' # str | Last name of the client
     email = 'email_example' # str | Email address of the client
@@ -69,7 +68,7 @@ with whmcs_client.ApiClient(configuration) as api_client:
 
     try:
         # Add a new client
-        api_response = api_instance.add_client(username, password, action, firstname, lastname, email, address1, city, state, postcode, country, phonenumber, accesskey=accesskey, responsetype=responsetype, owner_user_id=owner_user_id, companyname=companyname, address2=address2, tax_id=tax_id, password2=password2, securityqid=securityqid, securityqans=securityqans, currency=currency, groupid=groupid, customfields=customfields, language=language, clientip=clientip, notes=notes, marketingoptin=marketingoptin, noemail=noemail, skipvalidation=skipvalidation)
+        api_response = api_instance.add_client(username, password, firstname, lastname, email, address1, city, state, postcode, country, phonenumber, accesskey=accesskey, responsetype=responsetype, owner_user_id=owner_user_id, companyname=companyname, address2=address2, tax_id=tax_id, password2=password2, securityqid=securityqid, securityqans=securityqans, currency=currency, groupid=groupid, customfields=customfields, language=language, clientip=clientip, notes=notes, marketingoptin=marketingoptin, noemail=noemail, skipvalidation=skipvalidation)
         print("The response of DefaultApi->add_client:\n")
         pprint(api_response)
     except Exception as e:
@@ -85,7 +84,6 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **username** | **str**| Admin username/API identifier | 
  **password** | **str**| Admin password/API secret | 
- **action** | **str**| Must be &#39;AddClient&#39; | [default to AddClient]
  **firstname** | **str**| First name of the client | 
  **lastname** | **str**| Last name of the client | 
  **email** | **str**| Email address of the client | 
@@ -137,7 +135,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **add_order**
-> AddOrderResponse add_order(username, password, action, clientid, paymentmethod, accesskey=accesskey, responsetype=responsetype, clientemail=clientemail, pid=pid, qty=qty, domain=domain, billingcycle=billingcycle, domaintype=domaintype, regperiod=regperiod, idnlanguage=idnlanguage, eppcode=eppcode, nameserver1=nameserver1, nameserver2=nameserver2, nameserver3=nameserver3, nameserver4=nameserver4, nameserver5=nameserver5, configoptions=configoptions, priceoverride=priceoverride, promocode=promocode, promooverride=promooverride, affid=affid, noinvoice=noinvoice, noinvoiceemail=noinvoiceemail, addons=addons, addonsqty=addonsqty, hostname=hostname, ns1prefix=ns1prefix, ns2prefix=ns2prefix, rootpw=rootpw, contactid=contactid, dnsmanagement=dnsmanagement, domainfields=domainfields, emailforwarding=emailforwarding, idprotection=idprotection, domainpriceoverride=domainpriceoverride, domainrenewoverride=domainrenewoverride, domainrenewals=domainrenewals, addonid=addonid, addonidqty=addonidqty, serviceid=serviceid, addonids=addonids, addonidsqty=addonidsqty, serviceids=serviceids, servicerenewals=servicerenewals, addonrenewals=addonrenewals)
+> AddOrderResponse add_order(username, password, clientid, paymentmethod, accesskey=accesskey, responsetype=responsetype, clientemail=clientemail, pid=pid, qty=qty, domain=domain, billingcycle=billingcycle, domaintype=domaintype, regperiod=regperiod, idnlanguage=idnlanguage, eppcode=eppcode, nameserver1=nameserver1, nameserver2=nameserver2, nameserver3=nameserver3, nameserver4=nameserver4, nameserver5=nameserver5, configoptions=configoptions, priceoverride=priceoverride, promocode=promocode, promooverride=promooverride, affid=affid, noinvoice=noinvoice, noinvoiceemail=noinvoiceemail, addons=addons, addonsqty=addonsqty, hostname=hostname, ns1prefix=ns1prefix, ns2prefix=ns2prefix, rootpw=rootpw, contactid=contactid, dnsmanagement=dnsmanagement, domainfields=domainfields, emailforwarding=emailforwarding, idprotection=idprotection, domainpriceoverride=domainpriceoverride, domainrenewoverride=domainrenewoverride, domainrenewals=domainrenewals, addonid=addonid, addonidqty=addonidqty, serviceid=serviceid, addonids=addonids, addonidsqty=addonidsqty, serviceids=serviceids, servicerenewals=servicerenewals, addonrenewals=addonrenewals)
 
 Create a new order
 
@@ -165,7 +163,6 @@ with whmcs_client.ApiClient(configuration) as api_client:
     api_instance = whmcs_client.DefaultApi(api_client)
     username = 'username_example' # str | Admin username/API identifier
     password = 'password_example' # str | Admin password/API secret
-    action = AddOrder # str | Must be 'AddOrder' (default to AddOrder)
     clientid = 56 # int | The ID of the client to add the order for
     paymentmethod = 'paymentmethod_example' # str | The payment method for the order in the system format (e.g., paypal, mailin)
     accesskey = 'accesskey_example' # str | Optional API access key (optional)
@@ -216,7 +213,7 @@ with whmcs_client.ApiClient(configuration) as api_client:
 
     try:
         # Create a new order
-        api_response = api_instance.add_order(username, password, action, clientid, paymentmethod, accesskey=accesskey, responsetype=responsetype, clientemail=clientemail, pid=pid, qty=qty, domain=domain, billingcycle=billingcycle, domaintype=domaintype, regperiod=regperiod, idnlanguage=idnlanguage, eppcode=eppcode, nameserver1=nameserver1, nameserver2=nameserver2, nameserver3=nameserver3, nameserver4=nameserver4, nameserver5=nameserver5, configoptions=configoptions, priceoverride=priceoverride, promocode=promocode, promooverride=promooverride, affid=affid, noinvoice=noinvoice, noinvoiceemail=noinvoiceemail, addons=addons, addonsqty=addonsqty, hostname=hostname, ns1prefix=ns1prefix, ns2prefix=ns2prefix, rootpw=rootpw, contactid=contactid, dnsmanagement=dnsmanagement, domainfields=domainfields, emailforwarding=emailforwarding, idprotection=idprotection, domainpriceoverride=domainpriceoverride, domainrenewoverride=domainrenewoverride, domainrenewals=domainrenewals, addonid=addonid, addonidqty=addonidqty, serviceid=serviceid, addonids=addonids, addonidsqty=addonidsqty, serviceids=serviceids, servicerenewals=servicerenewals, addonrenewals=addonrenewals)
+        api_response = api_instance.add_order(username, password, clientid, paymentmethod, accesskey=accesskey, responsetype=responsetype, clientemail=clientemail, pid=pid, qty=qty, domain=domain, billingcycle=billingcycle, domaintype=domaintype, regperiod=regperiod, idnlanguage=idnlanguage, eppcode=eppcode, nameserver1=nameserver1, nameserver2=nameserver2, nameserver3=nameserver3, nameserver4=nameserver4, nameserver5=nameserver5, configoptions=configoptions, priceoverride=priceoverride, promocode=promocode, promooverride=promooverride, affid=affid, noinvoice=noinvoice, noinvoiceemail=noinvoiceemail, addons=addons, addonsqty=addonsqty, hostname=hostname, ns1prefix=ns1prefix, ns2prefix=ns2prefix, rootpw=rootpw, contactid=contactid, dnsmanagement=dnsmanagement, domainfields=domainfields, emailforwarding=emailforwarding, idprotection=idprotection, domainpriceoverride=domainpriceoverride, domainrenewoverride=domainrenewoverride, domainrenewals=domainrenewals, addonid=addonid, addonidqty=addonidqty, serviceid=serviceid, addonids=addonids, addonidsqty=addonidsqty, serviceids=serviceids, servicerenewals=servicerenewals, addonrenewals=addonrenewals)
         print("The response of DefaultApi->add_order:\n")
         pprint(api_response)
     except Exception as e:
@@ -232,7 +229,6 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **username** | **str**| Admin username/API identifier | 
  **password** | **str**| Admin password/API secret | 
- **action** | **str**| Must be &#39;AddOrder&#39; | [default to AddOrder]
  **clientid** | **int**| The ID of the client to add the order for | 
  **paymentmethod** | **str**| The payment method for the order in the system format (e.g., paypal, mailin) | 
  **accesskey** | **str**| Optional API access key | [optional] 
@@ -304,7 +300,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **update_client**
-> UpdateClientResponse update_client(username, password, action, accesskey=accesskey, responsetype=responsetype, clientid=clientid, clientemail=clientemail, firstname=firstname, lastname=lastname, companyname=companyname, email=email, address1=address1, address2=address2, city=city, state=state, postcode=postcode, country=country, phonenumber=phonenumber, tax_id=tax_id, password2=password2, securityqid=securityqid, securityqans=securityqans, currency=currency, groupid=groupid, customfields=customfields, language=language, clientip=clientip, notes=notes, status=status, paymentmethod=paymentmethod, email_preferences_general=email_preferences_general, email_preferences_product=email_preferences_product, email_preferences_domain=email_preferences_domain, email_preferences_invoice=email_preferences_invoice, email_preferences_support=email_preferences_support, email_preferences_affiliate=email_preferences_affiliate, clearcreditcard=clearcreditcard, latefeeoveride=latefeeoveride, overideduenotices=overideduenotices, taxexempt=taxexempt, separateinvoices=separateinvoices, disableautocc=disableautocc, overrideautoclose=overrideautoclose)
+> UpdateClientResponse update_client(username, password, clientid, accesskey=accesskey, responsetype=responsetype, clientemail=clientemail, firstname=firstname, lastname=lastname, companyname=companyname, email=email, address1=address1, address2=address2, city=city, state=state, postcode=postcode, country=country, phonenumber=phonenumber, tax_id=tax_id, password2=password2, securityqid=securityqid, securityqans=securityqans, currency=currency, groupid=groupid, customfields=customfields, language=language, clientip=clientip, notes=notes, status=status, paymentmethod=paymentmethod, email_preferences_general=email_preferences_general, email_preferences_product=email_preferences_product, email_preferences_domain=email_preferences_domain, email_preferences_invoice=email_preferences_invoice, email_preferences_support=email_preferences_support, email_preferences_affiliate=email_preferences_affiliate, clearcreditcard=clearcreditcard, latefeeoveride=latefeeoveride, overideduenotices=overideduenotices, taxexempt=taxexempt, separateinvoices=separateinvoices, disableautocc=disableautocc, overrideautoclose=overrideautoclose)
 
 Update client details
 
@@ -332,10 +328,9 @@ with whmcs_client.ApiClient(configuration) as api_client:
     api_instance = whmcs_client.DefaultApi(api_client)
     username = 'username_example' # str | Admin username/API identifier
     password = 'password_example' # str | Admin password/API secret
-    action = UpdateClient # str | Must be 'UpdateClient' (default to UpdateClient)
+    clientid = 56 # int | The ID of the client to update
     accesskey = 'accesskey_example' # str | Optional API access key (optional)
     responsetype = json # str | Response format (optional) (default to json)
-    clientid = 56 # int | The ID of the client to update (optional)
     clientemail = 'clientemail_example' # str | The email address of the client to update (optional)
     firstname = 'firstname_example' # str | First name of the client (optional)
     lastname = 'lastname_example' # str | Last name of the client (optional)
@@ -376,7 +371,7 @@ with whmcs_client.ApiClient(configuration) as api_client:
 
     try:
         # Update client details
-        api_response = api_instance.update_client(username, password, action, accesskey=accesskey, responsetype=responsetype, clientid=clientid, clientemail=clientemail, firstname=firstname, lastname=lastname, companyname=companyname, email=email, address1=address1, address2=address2, city=city, state=state, postcode=postcode, country=country, phonenumber=phonenumber, tax_id=tax_id, password2=password2, securityqid=securityqid, securityqans=securityqans, currency=currency, groupid=groupid, customfields=customfields, language=language, clientip=clientip, notes=notes, status=status, paymentmethod=paymentmethod, email_preferences_general=email_preferences_general, email_preferences_product=email_preferences_product, email_preferences_domain=email_preferences_domain, email_preferences_invoice=email_preferences_invoice, email_preferences_support=email_preferences_support, email_preferences_affiliate=email_preferences_affiliate, clearcreditcard=clearcreditcard, latefeeoveride=latefeeoveride, overideduenotices=overideduenotices, taxexempt=taxexempt, separateinvoices=separateinvoices, disableautocc=disableautocc, overrideautoclose=overrideautoclose)
+        api_response = api_instance.update_client(username, password, clientid, accesskey=accesskey, responsetype=responsetype, clientemail=clientemail, firstname=firstname, lastname=lastname, companyname=companyname, email=email, address1=address1, address2=address2, city=city, state=state, postcode=postcode, country=country, phonenumber=phonenumber, tax_id=tax_id, password2=password2, securityqid=securityqid, securityqans=securityqans, currency=currency, groupid=groupid, customfields=customfields, language=language, clientip=clientip, notes=notes, status=status, paymentmethod=paymentmethod, email_preferences_general=email_preferences_general, email_preferences_product=email_preferences_product, email_preferences_domain=email_preferences_domain, email_preferences_invoice=email_preferences_invoice, email_preferences_support=email_preferences_support, email_preferences_affiliate=email_preferences_affiliate, clearcreditcard=clearcreditcard, latefeeoveride=latefeeoveride, overideduenotices=overideduenotices, taxexempt=taxexempt, separateinvoices=separateinvoices, disableautocc=disableautocc, overrideautoclose=overrideautoclose)
         print("The response of DefaultApi->update_client:\n")
         pprint(api_response)
     except Exception as e:
@@ -392,10 +387,9 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **username** | **str**| Admin username/API identifier | 
  **password** | **str**| Admin password/API secret | 
- **action** | **str**| Must be &#39;UpdateClient&#39; | [default to UpdateClient]
+ **clientid** | **int**| The ID of the client to update | 
  **accesskey** | **str**| Optional API access key | [optional] 
  **responsetype** | **str**| Response format | [optional] [default to json]
- **clientid** | **int**| The ID of the client to update | [optional] 
  **clientemail** | **str**| The email address of the client to update | [optional] 
  **firstname** | **str**| First name of the client | [optional] 
  **lastname** | **str**| Last name of the client | [optional] 
