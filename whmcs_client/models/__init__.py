@@ -14,9 +14,14 @@
 
 
 # import models into model package
+from whmcs_client.models.add_client_request import AddClientRequest
 from whmcs_client.models.add_client_response import AddClientResponse
+from whmcs_client.models.add_order_request import AddOrderRequest
 from whmcs_client.models.add_order_response import AddOrderResponse
+from whmcs_client.models.api_post_request import ApiPostRequest
+from whmcs_client.models.update_client_request import UpdateClientRequest
 from whmcs_client.models.update_client_response import UpdateClientResponse
+from whmcs_client.models.whmcs_base_request import WHMCSBaseRequest
 from whmcs_client.models.whmcs_base_response import WHMCSBaseResponse
 from whmcs_client.models.whmcs_error_response import WHMCSErrorResponse
 from whmcs_client.models.whmcs_success_response import WHMCSSuccessResponse

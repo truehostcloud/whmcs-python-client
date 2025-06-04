@@ -8,7 +8,7 @@ Method | HTTP request | Description
 
 
 # **api_post**
-> WHMCSSuccessResponse api_post(username=username, password=password, accesskey=accesskey, responsetype=responsetype, action=action, owner_user_id=owner_user_id, firstname=firstname, lastname=lastname, companyname=companyname, email=email, address1=address1, address2=address2, city=city, state=state, postcode=postcode, country=country, phonenumber=phonenumber, tax_id=tax_id, password2=password2, securityqid=securityqid, securityqans=securityqans, currency=currency, groupid=groupid, customfields=customfields, language=language, clientip=clientip, notes=notes, marketingoptin=marketingoptin, noemail=noemail, skipvalidation=skipvalidation, clientid=clientid, clientemail=clientemail, status=status, paymentmethod=paymentmethod, email_preferences_general=email_preferences_general, email_preferences_product=email_preferences_product, email_preferences_domain=email_preferences_domain, email_preferences_invoice=email_preferences_invoice, email_preferences_support=email_preferences_support, email_preferences_affiliate=email_preferences_affiliate, clearcreditcard=clearcreditcard, latefeeoveride=latefeeoveride, overideduenotices=overideduenotices, taxexempt=taxexempt, separateinvoices=separateinvoices, disableautocc=disableautocc, overrideautoclose=overrideautoclose, pid=pid, qty=qty, domain=domain, billingcycle=billingcycle, domaintype=domaintype, regperiod=regperiod, idnlanguage=idnlanguage, eppcode=eppcode, nameserver1=nameserver1, nameserver2=nameserver2, nameserver3=nameserver3, nameserver4=nameserver4, nameserver5=nameserver5, configoptions=configoptions, priceoverride=priceoverride, promocode=promocode, promooverride=promooverride, affid=affid, noinvoice=noinvoice, noinvoiceemail=noinvoiceemail, addons=addons, addonsqty=addonsqty, hostname=hostname, ns1prefix=ns1prefix, ns2prefix=ns2prefix, rootpw=rootpw, contactid=contactid, dnsmanagement=dnsmanagement, domainfields=domainfields, emailforwarding=emailforwarding, idprotection=idprotection, domainpriceoverride=domainpriceoverride, domainrenewoverride=domainrenewoverride, domainrenewals=domainrenewals, addonid=addonid, addonidqty=addonidqty, serviceid=serviceid, addonids=addonids, addonidsqty=addonidsqty, serviceids=serviceids, servicerenewals=servicerenewals, addonrenewals=addonrenewals)
+> WHMCSSuccessResponse api_post(api_post_request)
 
 Execute WHMCS API action
 
@@ -21,6 +21,7 @@ in the request body. Different actions have different required and optional para
 
 ```python
 import whmcs_client
+from whmcs_client.models.api_post_request import ApiPostRequest
 from whmcs_client.models.whmcs_success_response import WHMCSSuccessResponse
 from whmcs_client.rest import ApiException
 from pprint import pprint
@@ -36,99 +37,11 @@ configuration = whmcs_client.Configuration(
 with whmcs_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = whmcs_client.DefaultApi(api_client)
-    username = 'username_example' # str | Admin username/API identifier (optional)
-    password = 'password_example' # str | Admin password/API secret (optional)
-    accesskey = 'accesskey_example' # str | Optional API access key (optional)
-    responsetype = json # str | Response format (optional) (default to json)
-    action = 'action_example' # str | Must be 'AddOrder' (optional)
-    owner_user_id = 56 # int | The ID of the user that should own the client (optional)
-    firstname = 'firstname_example' # str | First name of the client (optional)
-    lastname = 'lastname_example' # str | Last name of the client (optional)
-    companyname = 'companyname_example' # str | Company name (optional)
-    email = 'email_example' # str | Email address of the client (optional)
-    address1 = 'address1_example' # str | Address line 1 (optional)
-    address2 = 'address2_example' # str | Address line 2 (optional)
-    city = 'city_example' # str | City (optional)
-    state = 'state_example' # str | State (optional)
-    postcode = 'postcode_example' # str | Postal code (optional)
-    country = 'country_example' # str | 2 character ISO country code (optional)
-    phonenumber = 'phonenumber_example' # str | Phone number (optional)
-    tax_id = 'tax_id_example' # str | Client's tax ID (optional)
-    password2 = 'password2_example' # str | Password for the new user account (optional)
-    securityqid = 56 # int | Security question ID (optional)
-    securityqans = 'securityqans_example' # str | Security question answer (optional)
-    currency = 56 # int | Currency ID (optional)
-    groupid = 56 # int | Client group ID (optional)
-    customfields = ['customfields_example'] # List[str] | Array of base64 encoded serialized array of product custom field values (optional)
-    language = 'language_example' # str | Default language setting (optional)
-    clientip = 'clientip_example' # str | The IP address to associate with the order (optional)
-    notes = 'notes_example' # str | Admin only notes (optional)
-    marketingoptin = True # bool | Opt-in to marketing emails (optional)
-    noemail = True # bool | Set to true to suppress the Order Confirmation email being sent (optional)
-    skipvalidation = True # bool | Ignore required field validation (optional)
-    clientid = 56 # int | The ID of the client to add the order for (optional)
-    clientemail = 'clientemail_example' # str | The email address of the client to update (optional)
-    status = 'status_example' # str | The status (e.g., Active) (optional)
-    paymentmethod = 'paymentmethod_example' # str | The payment method for the order in the system format (e.g., paypal, mailin) (optional)
-    email_preferences_general = True # bool | Receive general emails (optional)
-    email_preferences_product = True # bool | Receive product emails (optional)
-    email_preferences_domain = True # bool | Receive domain emails (optional)
-    email_preferences_invoice = True # bool | Receive invoice emails (optional)
-    email_preferences_support = True # bool | Receive support emails (optional)
-    email_preferences_affiliate = True # bool | Receive affiliate emails (optional)
-    clearcreditcard = True # bool | Clear stored credit card details (optional)
-    latefeeoveride = True # bool | Override Late Fees setting (optional)
-    overideduenotices = True # bool | Override Overdue Notices setting (optional)
-    taxexempt = True # bool | Exempt from tax collections (optional)
-    separateinvoices = True # bool | Group items into one invoice (optional)
-    disableautocc = True # bool | Enable/disable automatic credit card processing (optional)
-    overrideautoclose = True # bool | Enable/disable automatic account closure (optional)
-    pid = [56] # List[int] | Array of product IDs to add to the order (optional)
-    qty = [56] # List[int] | Array of product quantities (optional)
-    domain = ['domain_example'] # List[str] | Array of domain names associated with the products/domains (optional)
-    billingcycle = ['billingcycle_example'] # List[str] | Array of billing cycles for the products (optional)
-    domaintype = ['domaintype_example'] # List[str] | For domain registrations, array of register or transfer values (optional)
-    regperiod = [56] # List[int] | For domain registrations, the registration periods for the domains (optional)
-    idnlanguage = ['idnlanguage_example'] # List[str] | For IDN domain registrations, the language codes for the domains (optional)
-    eppcode = ['eppcode_example'] # List[str] | For domain transfers, the EPP codes for the domains being transferred (optional)
-    nameserver1 = 'nameserver1_example' # str | The first nameserver to apply to all domains in the order (optional)
-    nameserver2 = 'nameserver2_example' # str | The second nameserver to apply to all domains in the order (optional)
-    nameserver3 = 'nameserver3_example' # str | The third nameserver to apply to all domains in the order (optional)
-    nameserver4 = 'nameserver4_example' # str | The fourth nameserver to apply to all domains in the order (optional)
-    nameserver5 = 'nameserver5_example' # str | The fifth nameserver to apply to all domains in the order (optional)
-    configoptions = ['configoptions_example'] # List[str] | Array of base64 encoded serialized array of product configurable options values (optional)
-    priceoverride = [3.4] # List[float] | Override the price of the product being ordered (optional)
-    promocode = 'promocode_example' # str | The promotion code to apply to the order (optional)
-    promooverride = True # bool | Should the promotion apply to the order even without matching promotional products (optional)
-    affid = 56 # int | The affiliate ID to associate with the order (optional)
-    noinvoice = True # bool | Set to true to suppress the invoice generating for the whole order (optional)
-    noinvoiceemail = True # bool | Set to true to suppress the Invoice Created email being sent for the order (optional)
-    addons = ['addons_example'] # List[str] | Array of comma separated lists of addons to create on order with the products (optional)
-    addonsqty = ['addonsqty_example'] # List[str] | Array of comma-separated lists of quantities for addons associated with products (optional)
-    hostname = ['hostname_example'] # List[str] | Array of hostnames for VPS/Dedicated Server orders (optional)
-    ns1prefix = ['ns1prefix_example'] # List[str] | Array of first nameserver prefixes for VPS/Dedicated servers (e.g., ns1 in ns1.hostname.com) (optional)
-    ns2prefix = ['ns2prefix_example'] # List[str] | Array of second nameserver prefixes for VPS/Dedicated servers (e.g., ns2 in ns2.hostname.com) (optional)
-    rootpw = ['rootpw_example'] # List[str] | Array of desired root passwords for VPS/Dedicated servers (optional)
-    contactid = 56 # int | The ID of the contact, associated with the client, that should apply to all domains in the order (optional)
-    dnsmanagement = [True] # List[bool] | Add DNS Management to the Domain Order (optional)
-    domainfields = ['domainfields_example'] # List[str] | Array of base64 encoded serialized array of TLD Specific Field Values (optional)
-    emailforwarding = [True] # List[bool] | Add Email Forwarding to the Domain Order (optional)
-    idprotection = [True] # List[bool] | Add ID Protection to the Domain Order (optional)
-    domainpriceoverride = [3.4] # List[float] | Override the price of the registration price on the domain being ordered (optional)
-    domainrenewoverride = [3.4] # List[float] | Override the price of the renewal price on the domain being ordered (optional)
-    domainrenewals = None # Dict[str, int] | A name -> value object of domainName -> renewalPeriod renewals to add an order for (optional)
-    addonid = 56 # int | The Addon ID for an Addon Only Order (optional)
-    addonidqty = 56 # int | The quantity of addons in an addon-only order (optional)
-    serviceid = 56 # int | The service ID for the addon only order (optional)
-    addonids = [56] # List[int] | Array of addon IDs for an Addon Only Order (optional)
-    addonidsqty = [56] # List[int] | Array of quantities for an addon-only order (optional)
-    serviceids = [56] # List[int] | Array of service IDs to associate the addons for an Addon Only order (optional)
-    servicerenewals = [56] # List[int] | Array of service IDs to be on-demand renewed (optional)
-    addonrenewals = [56] # List[int] | Array of service addon IDs to be on-demand renewed (optional)
+    api_post_request = whmcs_client.ApiPostRequest() # ApiPostRequest | 
 
     try:
         # Execute WHMCS API action
-        api_response = api_instance.api_post(username=username, password=password, accesskey=accesskey, responsetype=responsetype, action=action, owner_user_id=owner_user_id, firstname=firstname, lastname=lastname, companyname=companyname, email=email, address1=address1, address2=address2, city=city, state=state, postcode=postcode, country=country, phonenumber=phonenumber, tax_id=tax_id, password2=password2, securityqid=securityqid, securityqans=securityqans, currency=currency, groupid=groupid, customfields=customfields, language=language, clientip=clientip, notes=notes, marketingoptin=marketingoptin, noemail=noemail, skipvalidation=skipvalidation, clientid=clientid, clientemail=clientemail, status=status, paymentmethod=paymentmethod, email_preferences_general=email_preferences_general, email_preferences_product=email_preferences_product, email_preferences_domain=email_preferences_domain, email_preferences_invoice=email_preferences_invoice, email_preferences_support=email_preferences_support, email_preferences_affiliate=email_preferences_affiliate, clearcreditcard=clearcreditcard, latefeeoveride=latefeeoveride, overideduenotices=overideduenotices, taxexempt=taxexempt, separateinvoices=separateinvoices, disableautocc=disableautocc, overrideautoclose=overrideautoclose, pid=pid, qty=qty, domain=domain, billingcycle=billingcycle, domaintype=domaintype, regperiod=regperiod, idnlanguage=idnlanguage, eppcode=eppcode, nameserver1=nameserver1, nameserver2=nameserver2, nameserver3=nameserver3, nameserver4=nameserver4, nameserver5=nameserver5, configoptions=configoptions, priceoverride=priceoverride, promocode=promocode, promooverride=promooverride, affid=affid, noinvoice=noinvoice, noinvoiceemail=noinvoiceemail, addons=addons, addonsqty=addonsqty, hostname=hostname, ns1prefix=ns1prefix, ns2prefix=ns2prefix, rootpw=rootpw, contactid=contactid, dnsmanagement=dnsmanagement, domainfields=domainfields, emailforwarding=emailforwarding, idprotection=idprotection, domainpriceoverride=domainpriceoverride, domainrenewoverride=domainrenewoverride, domainrenewals=domainrenewals, addonid=addonid, addonidqty=addonidqty, serviceid=serviceid, addonids=addonids, addonidsqty=addonidsqty, serviceids=serviceids, servicerenewals=servicerenewals, addonrenewals=addonrenewals)
+        api_response = api_instance.api_post(api_post_request)
         print("The response of DefaultApi->api_post:\n")
         pprint(api_response)
     except Exception as e:
@@ -142,95 +55,7 @@ with whmcs_client.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **username** | **str**| Admin username/API identifier | [optional] 
- **password** | **str**| Admin password/API secret | [optional] 
- **accesskey** | **str**| Optional API access key | [optional] 
- **responsetype** | **str**| Response format | [optional] [default to json]
- **action** | **str**| Must be &#39;AddOrder&#39; | [optional] 
- **owner_user_id** | **int**| The ID of the user that should own the client | [optional] 
- **firstname** | **str**| First name of the client | [optional] 
- **lastname** | **str**| Last name of the client | [optional] 
- **companyname** | **str**| Company name | [optional] 
- **email** | **str**| Email address of the client | [optional] 
- **address1** | **str**| Address line 1 | [optional] 
- **address2** | **str**| Address line 2 | [optional] 
- **city** | **str**| City | [optional] 
- **state** | **str**| State | [optional] 
- **postcode** | **str**| Postal code | [optional] 
- **country** | **str**| 2 character ISO country code | [optional] 
- **phonenumber** | **str**| Phone number | [optional] 
- **tax_id** | **str**| Client&#39;s tax ID | [optional] 
- **password2** | **str**| Password for the new user account | [optional] 
- **securityqid** | **int**| Security question ID | [optional] 
- **securityqans** | **str**| Security question answer | [optional] 
- **currency** | **int**| Currency ID | [optional] 
- **groupid** | **int**| Client group ID | [optional] 
- **customfields** | [**List[str]**](str.md)| Array of base64 encoded serialized array of product custom field values | [optional] 
- **language** | **str**| Default language setting | [optional] 
- **clientip** | **str**| The IP address to associate with the order | [optional] 
- **notes** | **str**| Admin only notes | [optional] 
- **marketingoptin** | **bool**| Opt-in to marketing emails | [optional] 
- **noemail** | **bool**| Set to true to suppress the Order Confirmation email being sent | [optional] 
- **skipvalidation** | **bool**| Ignore required field validation | [optional] 
- **clientid** | **int**| The ID of the client to add the order for | [optional] 
- **clientemail** | **str**| The email address of the client to update | [optional] 
- **status** | **str**| The status (e.g., Active) | [optional] 
- **paymentmethod** | **str**| The payment method for the order in the system format (e.g., paypal, mailin) | [optional] 
- **email_preferences_general** | **bool**| Receive general emails | [optional] 
- **email_preferences_product** | **bool**| Receive product emails | [optional] 
- **email_preferences_domain** | **bool**| Receive domain emails | [optional] 
- **email_preferences_invoice** | **bool**| Receive invoice emails | [optional] 
- **email_preferences_support** | **bool**| Receive support emails | [optional] 
- **email_preferences_affiliate** | **bool**| Receive affiliate emails | [optional] 
- **clearcreditcard** | **bool**| Clear stored credit card details | [optional] 
- **latefeeoveride** | **bool**| Override Late Fees setting | [optional] 
- **overideduenotices** | **bool**| Override Overdue Notices setting | [optional] 
- **taxexempt** | **bool**| Exempt from tax collections | [optional] 
- **separateinvoices** | **bool**| Group items into one invoice | [optional] 
- **disableautocc** | **bool**| Enable/disable automatic credit card processing | [optional] 
- **overrideautoclose** | **bool**| Enable/disable automatic account closure | [optional] 
- **pid** | [**List[int]**](int.md)| Array of product IDs to add to the order | [optional] 
- **qty** | [**List[int]**](int.md)| Array of product quantities | [optional] 
- **domain** | [**List[str]**](str.md)| Array of domain names associated with the products/domains | [optional] 
- **billingcycle** | [**List[str]**](str.md)| Array of billing cycles for the products | [optional] 
- **domaintype** | [**List[str]**](str.md)| For domain registrations, array of register or transfer values | [optional] 
- **regperiod** | [**List[int]**](int.md)| For domain registrations, the registration periods for the domains | [optional] 
- **idnlanguage** | [**List[str]**](str.md)| For IDN domain registrations, the language codes for the domains | [optional] 
- **eppcode** | [**List[str]**](str.md)| For domain transfers, the EPP codes for the domains being transferred | [optional] 
- **nameserver1** | **str**| The first nameserver to apply to all domains in the order | [optional] 
- **nameserver2** | **str**| The second nameserver to apply to all domains in the order | [optional] 
- **nameserver3** | **str**| The third nameserver to apply to all domains in the order | [optional] 
- **nameserver4** | **str**| The fourth nameserver to apply to all domains in the order | [optional] 
- **nameserver5** | **str**| The fifth nameserver to apply to all domains in the order | [optional] 
- **configoptions** | [**List[str]**](str.md)| Array of base64 encoded serialized array of product configurable options values | [optional] 
- **priceoverride** | [**List[float]**](float.md)| Override the price of the product being ordered | [optional] 
- **promocode** | **str**| The promotion code to apply to the order | [optional] 
- **promooverride** | **bool**| Should the promotion apply to the order even without matching promotional products | [optional] 
- **affid** | **int**| The affiliate ID to associate with the order | [optional] 
- **noinvoice** | **bool**| Set to true to suppress the invoice generating for the whole order | [optional] 
- **noinvoiceemail** | **bool**| Set to true to suppress the Invoice Created email being sent for the order | [optional] 
- **addons** | [**List[str]**](str.md)| Array of comma separated lists of addons to create on order with the products | [optional] 
- **addonsqty** | [**List[str]**](str.md)| Array of comma-separated lists of quantities for addons associated with products | [optional] 
- **hostname** | [**List[str]**](str.md)| Array of hostnames for VPS/Dedicated Server orders | [optional] 
- **ns1prefix** | [**List[str]**](str.md)| Array of first nameserver prefixes for VPS/Dedicated servers (e.g., ns1 in ns1.hostname.com) | [optional] 
- **ns2prefix** | [**List[str]**](str.md)| Array of second nameserver prefixes for VPS/Dedicated servers (e.g., ns2 in ns2.hostname.com) | [optional] 
- **rootpw** | [**List[str]**](str.md)| Array of desired root passwords for VPS/Dedicated servers | [optional] 
- **contactid** | **int**| The ID of the contact, associated with the client, that should apply to all domains in the order | [optional] 
- **dnsmanagement** | [**List[bool]**](bool.md)| Add DNS Management to the Domain Order | [optional] 
- **domainfields** | [**List[str]**](str.md)| Array of base64 encoded serialized array of TLD Specific Field Values | [optional] 
- **emailforwarding** | [**List[bool]**](bool.md)| Add Email Forwarding to the Domain Order | [optional] 
- **idprotection** | [**List[bool]**](bool.md)| Add ID Protection to the Domain Order | [optional] 
- **domainpriceoverride** | [**List[float]**](float.md)| Override the price of the registration price on the domain being ordered | [optional] 
- **domainrenewoverride** | [**List[float]**](float.md)| Override the price of the renewal price on the domain being ordered | [optional] 
- **domainrenewals** | [**Dict[str, int]**](Dict.md)| A name -&gt; value object of domainName -&gt; renewalPeriod renewals to add an order for | [optional] 
- **addonid** | **int**| The Addon ID for an Addon Only Order | [optional] 
- **addonidqty** | **int**| The quantity of addons in an addon-only order | [optional] 
- **serviceid** | **int**| The service ID for the addon only order | [optional] 
- **addonids** | [**List[int]**](int.md)| Array of addon IDs for an Addon Only Order | [optional] 
- **addonidsqty** | [**List[int]**](int.md)| Array of quantities for an addon-only order | [optional] 
- **serviceids** | [**List[int]**](int.md)| Array of service IDs to associate the addons for an Addon Only order | [optional] 
- **servicerenewals** | [**List[int]**](int.md)| Array of service IDs to be on-demand renewed | [optional] 
- **addonrenewals** | [**List[int]**](int.md)| Array of service addon IDs to be on-demand renewed | [optional] 
+ **api_post_request** | [**ApiPostRequest**](ApiPostRequest.md)|  | 
 
 ### Return type
 
@@ -242,7 +67,7 @@ No authorization required
 
 ### HTTP request headers
 
- - **Content-Type**: application/x-www-form-urlencoded
+ - **Content-Type**: application/json
  - **Accept**: application/json
 
 ### HTTP response details
