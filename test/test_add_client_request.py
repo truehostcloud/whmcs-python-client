@@ -15,12 +15,12 @@ from __future__ import absolute_import
 import unittest
 
 import whmcs_client
-from whmcs_client.models.whmcs_success_response import WHMCSSuccessResponse  # noqa: E501
+from whmcs_client.models.add_client_request import AddClientRequest  # noqa: E501
 from whmcs_client.rest import ApiException
 
 
-class TestWHMCSSuccessResponse(unittest.TestCase):
-    """WHMCSSuccessResponse unit test stubs"""
+class TestAddClientRequest(unittest.TestCase):
+    """AddClientRequest unit test stubs"""
 
     def setUp(self):
         pass
@@ -28,10 +28,10 @@ class TestWHMCSSuccessResponse(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def testWHMCSSuccessResponse(self):
-        """Test WHMCSSuccessResponse"""
+    def testAddClientRequest(self):
+        """Test AddClientRequest"""
         # FIXME: construct object with mandatory attributes with example values
-        # model = whmcs_client.models.whmcs_success_response.WHMCSSuccessResponse()  # noqa: E501
+        # model = whmcs_client.models.add_client_request.AddClientRequest()  # noqa: E501
         pass
 
 
