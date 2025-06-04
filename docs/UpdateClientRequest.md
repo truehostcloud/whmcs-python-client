@@ -1,15 +1,9 @@
 # UpdateClientRequest
 
-
 ## Properties
-
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**username** | **str** | Admin username/API identifier | 
-**password** | **str** | Admin password/API secret | 
-**accesskey** | **str** | Optional API access key | [optional] 
-**responsetype** | **str** | Response format | [optional] [default to 'json']
-**action** | **str** | Must be &#39;UpdateClient&#39; | 
+**action** | **str** | Must be &#x27;UpdateClient&#x27; | 
 **clientid** | **int** | The ID of the client to update | [optional] 
 **clientemail** | **str** | The email address of the client to update | [optional] 
 **firstname** | **str** | First name of the client | [optional] 
@@ -23,7 +17,7 @@ Name | Type | Description | Notes
 **postcode** | **str** | Postal code | [optional] 
 **country** | **str** | 2 character ISO country code | [optional] 
 **phonenumber** | **str** | Phone number | [optional] 
-**tax_id** | **str** | Client&#39;s tax ID | [optional] 
+**tax_id** | **str** | Client&#x27;s tax ID | [optional] 
 **currency** | **int** | Currency ID | [optional] 
 **groupid** | **int** | Client group ID | [optional] 
 **customfields** | **str** | Base64 encoded serialized array of custom field values | [optional] 
@@ -48,23 +42,5 @@ Name | Type | Description | Notes
 **disableautocc** | **bool** | Enable/disable automatic credit card processing | [optional] 
 **overrideautoclose** | **bool** | Enable/disable automatic account closure | [optional] 
 
-## Example
-
-```python
-from whmcs_client.models.update_client_request import UpdateClientRequest
-
-# TODO update the JSON string below
-json = "{}"
-# create an instance of UpdateClientRequest from a JSON string
-update_client_request_instance = UpdateClientRequest.from_json(json)
-# print the JSON string representation of the object
-print(UpdateClientRequest.to_json())
-
-# convert the object into a dict
-update_client_request_dict = update_client_request_instance.to_dict()
-# create an instance of UpdateClientRequest from a dict
-update_client_request_from_dict = UpdateClientRequest.from_dict(update_client_request_dict)
-```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
-
 
