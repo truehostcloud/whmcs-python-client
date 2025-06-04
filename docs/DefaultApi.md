@@ -6,6 +6,7 @@ Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**add_client**](DefaultApi.md#add_client) | **POST** /api.php?action&#x3D;AddClient | Add a new client
 [**add_order**](DefaultApi.md#add_order) | **POST** /api.php?action&#x3D;AddOrder | Create a new order
+[**get_clients**](DefaultApi.md#get_clients) | **POST** /api.php?action&#x3D;GetClients | Get clients
 [**update_client**](DefaultApi.md#update_client) | **POST** /api.php?action&#x3D;UpdateClient | Update client details
 
 
@@ -295,6 +296,93 @@ No authorization required
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Order created successfully |  -  |
+**0** | Error response |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **get_clients**
+> GetClientsResponse get_clients(username, password, accesskey=accesskey, responsetype=responsetype, limitstart=limitstart, limitnum=limitnum, sorting=sorting, status=status, search=search, orderby=orderby)
+
+Get clients
+
+Obtain the clients that match passed criteria
+
+### Example
+
+
+```python
+import whmcs_client
+from whmcs_client.models.get_clients_response import GetClientsResponse
+from whmcs_client.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://your-whmcs-instance.com/includes
+# See configuration.py for a list of all supported configuration parameters.
+configuration = whmcs_client.Configuration(
+    host = "https://your-whmcs-instance.com/includes"
+)
+
+
+# Enter a context with an instance of the API client
+with whmcs_client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = whmcs_client.DefaultApi(api_client)
+    username = 'username_example' # str | Admin username/API identifier
+    password = 'password_example' # str | Admin password/API secret
+    accesskey = 'accesskey_example' # str | Optional API access key (optional)
+    responsetype = json # str | Response format (optional) (default to json)
+    limitstart = 0 # int | The offset for the returned log data (optional) (default to 0)
+    limitnum = 25 # int | The number of records to return (optional) (default to 25)
+    sorting = ASC # str | The direction to sort the results. ASC or DESC. (optional) (default to ASC)
+    status = 'status_example' # str | Optional desired Client Status. 'Active', 'Inactive', or 'Closed'. (optional)
+    search = 'search_example' # str | The search term to look for at the start of email, firstname, lastname, fullname or companyname (optional)
+    orderby = 'orderby_example' # str | The column to order by. id, firstname, lastname, companyname, email, groupid, datecreated, status (optional)
+
+    try:
+        # Get clients
+        api_response = api_instance.get_clients(username, password, accesskey=accesskey, responsetype=responsetype, limitstart=limitstart, limitnum=limitnum, sorting=sorting, status=status, search=search, orderby=orderby)
+        print("The response of DefaultApi->get_clients:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling DefaultApi->get_clients: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **username** | **str**| Admin username/API identifier | 
+ **password** | **str**| Admin password/API secret | 
+ **accesskey** | **str**| Optional API access key | [optional] 
+ **responsetype** | **str**| Response format | [optional] [default to json]
+ **limitstart** | **int**| The offset for the returned log data | [optional] [default to 0]
+ **limitnum** | **int**| The number of records to return | [optional] [default to 25]
+ **sorting** | **str**| The direction to sort the results. ASC or DESC. | [optional] [default to ASC]
+ **status** | **str**| Optional desired Client Status. &#39;Active&#39;, &#39;Inactive&#39;, or &#39;Closed&#39;. | [optional] 
+ **search** | **str**| The search term to look for at the start of email, firstname, lastname, fullname or companyname | [optional] 
+ **orderby** | **str**| The column to order by. id, firstname, lastname, companyname, email, groupid, datecreated, status | [optional] 
+
+### Return type
+
+[**GetClientsResponse**](GetClientsResponse.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: application/x-www-form-urlencoded
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Clients retrieved successfully |  -  |
 **0** | Error response |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)

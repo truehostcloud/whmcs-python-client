@@ -5,7 +5,10 @@
 README.md
 docs/AddClientResponse.md
 docs/AddOrderResponse.md
+docs/ClientInfo.md
 docs/DefaultApi.md
+docs/GetClientsResponse.md
+docs/GetClientsResponseAllOfClients.md
 docs/UpdateClientResponse.md
 docs/WHMCSBaseResponse.md
 docs/WHMCSErrorResponse.md
@@ -28,6 +31,9 @@ whmcs_client/exceptions.py
 whmcs_client/models/__init__.py
 whmcs_client/models/add_client_response.py
 whmcs_client/models/add_order_response.py
+whmcs_client/models/client_info.py
+whmcs_client/models/get_clients_response.py
+whmcs_client/models/get_clients_response_all_of_clients.py
 whmcs_client/models/update_client_response.py
 whmcs_client/models/whmcs_base_response.py
 whmcs_client/models/whmcs_error_response.py

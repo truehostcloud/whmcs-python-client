@@ -83,6 +83,29 @@ paths:
         default:
           $ref: '#/components/responses/Error'
 
+  /api.php?action=GetClients:
+    post:
+      summary: Get clients
+      description: Obtain the clients that match passed criteria
+      operationId: getClients
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              allOf:
+                - $ref: '#/components/schemas/WHMCSBaseRequest'
+                - $ref: '#/components/schemas/GetClientsRequest'
+      responses:
+        '200':
+          description: Clients retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetClientsResponse'
+        default:
+          $ref: '#/components/responses/Error'
+
 components:
   schemas:
     WHMCSBaseRequest:
@@ -518,6 +541,34 @@ components:
             type: integer
           description: Array of service addon IDs to be on-demand renewed
 
+    GetClientsRequest:
+      type: object
+      properties:
+        limitstart:
+          type: integer
+          description: The offset for the returned log data
+          default: 0
+        limitnum:
+          type: integer
+          description: The number of records to return
+          default: 25
+        sorting:
+          type: string
+          enum: [ASC, DESC]
+          default: ASC
+          description: The direction to sort the results. ASC or DESC.
+        status:
+          type: string
+          enum: [Active, Inactive, Closed]
+          description: Optional desired Client Status. 'Active', 'Inactive', or 'Closed'.
+        search:
+          type: string
+          description: The search term to look for at the start of email, firstname, lastname, fullname or companyname
+        orderby:
+          type: string
+          enum: [id, firstname, lastname, companyname, email, groupid, datecreated, status]
+          description: The column to order by. id, firstname, lastname, companyname, email, groupid, datecreated, status
+
     WHMCSBaseResponse:
       type: object
       properties:
@@ -593,6 +644,58 @@ components:
             invoiceid:
               type: string
               description: The invoice ID if an invoice was generated
+
+    GetClientsResponse:
+      allOf:
+        - $ref: '#/components/schemas/WHMCSSuccessResponse'
+        - type: object
+          properties:
+            totalresults:
+              type: integer
+              description: The total number of results available
+            startnumber:
+              type: integer
+              description: The starting number for the returned results
+            numreturned:
+              type: integer
+              description: The number of results returned
+            clients:
+              type: object
+              properties:
+                client:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/ClientInfo'
+                  description: Array of client information
+
+    ClientInfo:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: The client ID
+        firstname:
+          type: string
+          description: The client's first name
+        lastname:
+          type: string
+          description: The client's last name
+        companyname:
+          type: string
+          description: The client's company name
+        email:
+          type: string
+          description: The client's email address
+        datecreated:
+          type: string
+          format: date
+          description: The date the client was created
+        groupid:
+          type: integer
+          description: The client's group ID
+        status:
+          type: string
+          description: The client's status (Active, Inactive, Closed)
 
   responses:
     Error:
