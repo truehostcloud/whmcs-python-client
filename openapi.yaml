@@ -106,6 +106,27 @@ paths:
         default:
           $ref: '#/components/responses/Error'
 
+  /api.php?action=GetCurrencies:
+    post:
+      summary: Get currencies
+      description: Obtain the currencies configured in the system
+      operationId: getCurrencies
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/WHMCSBaseRequest'
+      responses:
+        '200':
+          description: Currencies retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetCurrenciesResponse'
+        default:
+          $ref: '#/components/responses/Error'
+
 components:
   schemas:
     WHMCSBaseRequest:
@@ -668,6 +689,23 @@ components:
                     $ref: '#/components/schemas/ClientInfo'
                   description: Array of client information
 
+    GetCurrenciesResponse:
+      allOf:
+        - $ref: '#/components/schemas/WHMCSSuccessResponse'
+        - type: object
+          properties:
+            totalresults:
+              type: integer
+              description: The total number of currencies available
+            currencies:
+              type: object
+              properties:
+                currency:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/CurrencyInfo'
+                  description: Array of currency information
+
     ClientInfo:
       type: object
       properties:
@@ -696,6 +734,28 @@ components:
         status:
           type: string
           description: The client's status (Active, Inactive, Closed)
+
+    CurrencyInfo:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: The currency ID
+        code:
+          type: string
+          description: The currency code (e.g., USD, EUR, GBP)
+        prefix:
+          type: string
+          description: The currency prefix symbol (e.g., $, €, £)
+        suffix:
+          type: string
+          description: The currency suffix (e.g., " USD")
+        format:
+          type: integer
+          description: The currency format setting
+        rate:
+          type: string
+          description: The currency exchange rate
 
   responses:
     Error:

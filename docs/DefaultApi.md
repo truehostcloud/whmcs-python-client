@@ -7,6 +7,7 @@ Method | HTTP request | Description
 [**add_client**](DefaultApi.md#add_client) | **POST** /api.php?action&#x3D;AddClient | Add a new client
 [**add_order**](DefaultApi.md#add_order) | **POST** /api.php?action&#x3D;AddOrder | Create a new order
 [**get_clients**](DefaultApi.md#get_clients) | **POST** /api.php?action&#x3D;GetClients | Get clients
+[**get_currencies**](DefaultApi.md#get_currencies) | **POST** /api.php?action&#x3D;GetCurrencies | Get currencies
 [**update_client**](DefaultApi.md#update_client) | **POST** /api.php?action&#x3D;UpdateClient | Update client details
 
 
@@ -383,6 +384,81 @@ No authorization required
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Clients retrieved successfully |  -  |
+**0** | Error response |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **get_currencies**
+> GetCurrenciesResponse get_currencies(username, password, accesskey=accesskey, responsetype=responsetype)
+
+Get currencies
+
+Obtain the currencies configured in the system
+
+### Example
+
+
+```python
+import whmcs_client
+from whmcs_client.models.get_currencies_response import GetCurrenciesResponse
+from whmcs_client.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://your-whmcs-instance.com/includes
+# See configuration.py for a list of all supported configuration parameters.
+configuration = whmcs_client.Configuration(
+    host = "https://your-whmcs-instance.com/includes"
+)
+
+
+# Enter a context with an instance of the API client
+with whmcs_client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = whmcs_client.DefaultApi(api_client)
+    username = 'username_example' # str | Admin username/API identifier
+    password = 'password_example' # str | Admin password/API secret
+    accesskey = 'accesskey_example' # str | Optional API access key (optional)
+    responsetype = json # str | Response format (optional) (default to json)
+
+    try:
+        # Get currencies
+        api_response = api_instance.get_currencies(username, password, accesskey=accesskey, responsetype=responsetype)
+        print("The response of DefaultApi->get_currencies:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling DefaultApi->get_currencies: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **username** | **str**| Admin username/API identifier | 
+ **password** | **str**| Admin password/API secret | 
+ **accesskey** | **str**| Optional API access key | [optional] 
+ **responsetype** | **str**| Response format | [optional] [default to json]
+
+### Return type
+
+[**GetCurrenciesResponse**](GetCurrenciesResponse.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: application/x-www-form-urlencoded
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Currencies retrieved successfully |  -  |
 **0** | Error response |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
