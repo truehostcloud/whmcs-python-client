@@ -20,9 +20,11 @@ from pydantic import Field, StrictBool, StrictFloat, StrictInt, StrictStr, field
 from typing import Dict, List, Optional, Union
 from typing_extensions import Annotated
 from whmcs_client.models.add_client_response import AddClientResponse
+from whmcs_client.models.add_order_request_clientid import AddOrderRequestClientid
 from whmcs_client.models.add_order_response import AddOrderResponse
 from whmcs_client.models.get_clients_response import GetClientsResponse
 from whmcs_client.models.get_currencies_response import GetCurrenciesResponse
+from whmcs_client.models.update_client_request_clientid import UpdateClientRequestClientid
 from whmcs_client.models.update_client_response import UpdateClientResponse
 
 from whmcs_client.api_client import ApiClient, RequestSerialized
@@ -741,7 +743,7 @@ class DefaultApi:
         self,
         username: Annotated[StrictStr, Field(description="Admin username/API identifier")],
         password: Annotated[StrictStr, Field(description="Admin password/API secret")],
-        clientid: Annotated[StrictInt, Field(description="The ID of the client to add the order for")],
+        clientid: AddOrderRequestClientid,
         paymentmethod: Annotated[StrictStr, Field(description="The payment method for the order in the system format (e.g., paypal, mailin)")],
         accesskey: Annotated[Optional[StrictStr], Field(description="Optional API access key")] = None,
         responsetype: Annotated[Optional[StrictStr], Field(description="Response format")] = None,
@@ -809,8 +811,8 @@ class DefaultApi:
         :type username: str
         :param password: Admin password/API secret (required)
         :type password: str
-        :param clientid: The ID of the client to add the order for (required)
-        :type clientid: int
+        :param clientid: (required)
+        :type clientid: AddOrderRequestClientid
         :param paymentmethod: The payment method for the order in the system format (e.g., paypal, mailin) (required)
         :type paymentmethod: str
         :param accesskey: Optional API access key
@@ -1000,7 +1002,7 @@ class DefaultApi:
         self,
         username: Annotated[StrictStr, Field(description="Admin username/API identifier")],
         password: Annotated[StrictStr, Field(description="Admin password/API secret")],
-        clientid: Annotated[StrictInt, Field(description="The ID of the client to add the order for")],
+        clientid: AddOrderRequestClientid,
         paymentmethod: Annotated[StrictStr, Field(description="The payment method for the order in the system format (e.g., paypal, mailin)")],
         accesskey: Annotated[Optional[StrictStr], Field(description="Optional API access key")] = None,
         responsetype: Annotated[Optional[StrictStr], Field(description="Response format")] = None,
@@ -1068,8 +1070,8 @@ class DefaultApi:
         :type username: str
         :param password: Admin password/API secret (required)
         :type password: str
-        :param clientid: The ID of the client to add the order for (required)
-        :type clientid: int
+        :param clientid: (required)
+        :type clientid: AddOrderRequestClientid
         :param paymentmethod: The payment method for the order in the system format (e.g., paypal, mailin) (required)
         :type paymentmethod: str
         :param accesskey: Optional API access key
@@ -1259,7 +1261,7 @@ class DefaultApi:
         self,
         username: Annotated[StrictStr, Field(description="Admin username/API identifier")],
         password: Annotated[StrictStr, Field(description="Admin password/API secret")],
-        clientid: Annotated[StrictInt, Field(description="The ID of the client to add the order for")],
+        clientid: AddOrderRequestClientid,
         paymentmethod: Annotated[StrictStr, Field(description="The payment method for the order in the system format (e.g., paypal, mailin)")],
         accesskey: Annotated[Optional[StrictStr], Field(description="Optional API access key")] = None,
         responsetype: Annotated[Optional[StrictStr], Field(description="Response format")] = None,
@@ -1327,8 +1329,8 @@ class DefaultApi:
         :type username: str
         :param password: Admin password/API secret (required)
         :type password: str
-        :param clientid: The ID of the client to add the order for (required)
-        :type clientid: int
+        :param clientid: (required)
+        :type clientid: AddOrderRequestClientid
         :param paymentmethod: The payment method for the order in the system format (e.g., paypal, mailin) (required)
         :type paymentmethod: str
         :param accesskey: Optional API access key
@@ -2487,7 +2489,7 @@ class DefaultApi:
         self,
         username: Annotated[StrictStr, Field(description="Admin username/API identifier")],
         password: Annotated[StrictStr, Field(description="Admin password/API secret")],
-        clientid: Annotated[StrictInt, Field(description="The ID of the client to update")],
+        clientid: UpdateClientRequestClientid,
         accesskey: Annotated[Optional[StrictStr], Field(description="Optional API access key")] = None,
         responsetype: Annotated[Optional[StrictStr], Field(description="Response format")] = None,
         clientemail: Annotated[Optional[StrictStr], Field(description="The email address of the client to update")] = None,
@@ -2548,8 +2550,8 @@ class DefaultApi:
         :type username: str
         :param password: Admin password/API secret (required)
         :type password: str
-        :param clientid: The ID of the client to update (required)
-        :type clientid: int
+        :param clientid: (required)
+        :type clientid: UpdateClientRequestClientid
         :param accesskey: Optional API access key
         :type accesskey: str
         :param responsetype: Response format
@@ -2718,7 +2720,7 @@ class DefaultApi:
         self,
         username: Annotated[StrictStr, Field(description="Admin username/API identifier")],
         password: Annotated[StrictStr, Field(description="Admin password/API secret")],
-        clientid: Annotated[StrictInt, Field(description="The ID of the client to update")],
+        clientid: UpdateClientRequestClientid,
         accesskey: Annotated[Optional[StrictStr], Field(description="Optional API access key")] = None,
         responsetype: Annotated[Optional[StrictStr], Field(description="Response format")] = None,
         clientemail: Annotated[Optional[StrictStr], Field(description="The email address of the client to update")] = None,
@@ -2779,8 +2781,8 @@ class DefaultApi:
         :type username: str
         :param password: Admin password/API secret (required)
         :type password: str
-        :param clientid: The ID of the client to update (required)
-        :type clientid: int
+        :param clientid: (required)
+        :type clientid: UpdateClientRequestClientid
         :param accesskey: Optional API access key
         :type accesskey: str
         :param responsetype: Response format
@@ -2949,7 +2951,7 @@ class DefaultApi:
         self,
         username: Annotated[StrictStr, Field(description="Admin username/API identifier")],
         password: Annotated[StrictStr, Field(description="Admin password/API secret")],
-        clientid: Annotated[StrictInt, Field(description="The ID of the client to update")],
+        clientid: UpdateClientRequestClientid,
         accesskey: Annotated[Optional[StrictStr], Field(description="Optional API access key")] = None,
         responsetype: Annotated[Optional[StrictStr], Field(description="Response format")] = None,
         clientemail: Annotated[Optional[StrictStr], Field(description="The email address of the client to update")] = None,
@@ -3010,8 +3012,8 @@ class DefaultApi:
         :type username: str
         :param password: Admin password/API secret (required)
         :type password: str
-        :param clientid: The ID of the client to update (required)
-        :type clientid: int
+        :param clientid: (required)
+        :type clientid: UpdateClientRequestClientid
         :param accesskey: Optional API access key
         :type accesskey: str
         :param responsetype: Response format
