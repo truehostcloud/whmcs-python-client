@@ -28,7 +28,7 @@ class AddClientResponse(BaseModel):
     """ # noqa: E501
     result: Optional[StrictStr] = None
     message: Optional[StrictStr] = Field(default=None, description="Response message")
-    clientid: Optional[Any] = Field(default=None, description="The ID of the newly created client")
+    clientid: Optional[StrictInt] = Field(default=None, description="The ID of the newly created client")
     owner_user_id: Optional[StrictInt] = Field(default=None, description="The ID of the user that owns the client")
     __properties: ClassVar[List[str]] = ["result", "message", "clientid", "owner_user_id"]
 
@@ -81,11 +81,6 @@ class AddClientResponse(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
-        # set to None if clientid (nullable) is None
-        # and model_fields_set contains the field
-        if self.clientid is None and "clientid" in self.model_fields_set:
-            _dict['clientid'] = None
-
         return _dict
 
     @classmethod

@@ -7,7 +7,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **result** | **str** |  | [optional] 
 **message** | **str** | Response message | [optional] 
-**clientid** | **object** | The ID of the updated client | [optional] 
+**clientid** | **int** | The ID of the updated client | [optional] 
 
 ## Example
 

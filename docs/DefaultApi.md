@@ -165,7 +165,7 @@ with whmcs_client.ApiClient(configuration) as api_client:
     api_instance = whmcs_client.DefaultApi(api_client)
     username = 'username_example' # str | Admin username/API identifier
     password = 'password_example' # str | Admin password/API secret
-    clientid = None # object | The ID of the client to add the order for
+    clientid = 56 # int | The ID of the client to add the order for
     paymentmethod = 'paymentmethod_example' # str | The payment method for the order in the system format (e.g., paypal, mailin)
     accesskey = 'accesskey_example' # str | Optional API access key (optional)
     responsetype = json # str | Response format (optional) (default to json)
@@ -231,7 +231,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **username** | **str**| Admin username/API identifier | 
  **password** | **str**| Admin password/API secret | 
- **clientid** | [**object**](object.md)| The ID of the client to add the order for | 
+ **clientid** | **int**| The ID of the client to add the order for | 
  **paymentmethod** | **str**| The payment method for the order in the system format (e.g., paypal, mailin) | 
  **accesskey** | **str**| Optional API access key | [optional] 
  **responsetype** | **str**| Response format | [optional] [default to json]
@@ -492,7 +492,7 @@ with whmcs_client.ApiClient(configuration) as api_client:
     api_instance = whmcs_client.DefaultApi(api_client)
     username = 'username_example' # str | Admin username/API identifier
     password = 'password_example' # str | Admin password/API secret
-    clientid = None # object | The ID of the client to update
+    clientid = 56 # int | The ID of the client to update
     accesskey = 'accesskey_example' # str | Optional API access key (optional)
     responsetype = json # str | Response format (optional) (default to json)
     clientemail = 'clientemail_example' # str | The email address of the client to update (optional)
@@ -551,7 +551,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **username** | **str**| Admin username/API identifier | 
  **password** | **str**| Admin password/API secret | 
- **clientid** | [**object**](object.md)| The ID of the client to update | 
+ **clientid** | **int**| The ID of the client to update | 
  **accesskey** | **str**| Optional API access key | [optional] 
  **responsetype** | **str**| Response format | [optional] [default to json]
  **clientemail** | **str**| The email address of the client to update | [optional] 

@@ -17,7 +17,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictStr, field_validator
+from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr, field_validator
 from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
@@ -28,7 +28,7 @@ class UpdateClientResponse(BaseModel):
     """ # noqa: E501
     result: Optional[StrictStr] = None
     message: Optional[StrictStr] = Field(default=None, description="Response message")
-    clientid: Optional[Any] = Field(default=None, description="The ID of the updated client")
+    clientid: Optional[StrictInt] = Field(default=None, description="The ID of the updated client")
     __properties: ClassVar[List[str]] = ["result", "message", "clientid"]
 
     @field_validator('result')
@@ -80,11 +80,6 @@ class UpdateClientResponse(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
-        # set to None if clientid (nullable) is None
-        # and model_fields_set contains the field
-        if self.clientid is None and "clientid" in self.model_fields_set:
-            _dict['clientid'] = None
-
         return _dict
 
     @classmethod
