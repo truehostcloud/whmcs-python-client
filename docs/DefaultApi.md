@@ -148,7 +148,6 @@ Places a new order for products/services
 
 ```python
 import whmcs_client
-from whmcs_client.models.add_order_request_clientid import AddOrderRequestClientid
 from whmcs_client.models.add_order_response import AddOrderResponse
 from whmcs_client.rest import ApiException
 from pprint import pprint
@@ -166,7 +165,7 @@ with whmcs_client.ApiClient(configuration) as api_client:
     api_instance = whmcs_client.DefaultApi(api_client)
     username = 'username_example' # str | Admin username/API identifier
     password = 'password_example' # str | Admin password/API secret
-    clientid = whmcs_client.AddOrderRequestClientid() # AddOrderRequestClientid | 
+    clientid = None # object | The ID of the client to add the order for
     paymentmethod = 'paymentmethod_example' # str | The payment method for the order in the system format (e.g., paypal, mailin)
     accesskey = 'accesskey_example' # str | Optional API access key (optional)
     responsetype = json # str | Response format (optional) (default to json)
@@ -232,7 +231,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **username** | **str**| Admin username/API identifier | 
  **password** | **str**| Admin password/API secret | 
- **clientid** | [**AddOrderRequestClientid**](AddOrderRequestClientid.md)|  | 
+ **clientid** | [**object**](object.md)| The ID of the client to add the order for | 
  **paymentmethod** | **str**| The payment method for the order in the system format (e.g., paypal, mailin) | 
  **accesskey** | **str**| Optional API access key | [optional] 
  **responsetype** | **str**| Response format | [optional] [default to json]
@@ -476,7 +475,6 @@ Modifies an existing client's information
 
 ```python
 import whmcs_client
-from whmcs_client.models.update_client_request_clientid import UpdateClientRequestClientid
 from whmcs_client.models.update_client_response import UpdateClientResponse
 from whmcs_client.rest import ApiException
 from pprint import pprint
@@ -494,7 +492,7 @@ with whmcs_client.ApiClient(configuration) as api_client:
     api_instance = whmcs_client.DefaultApi(api_client)
     username = 'username_example' # str | Admin username/API identifier
     password = 'password_example' # str | Admin password/API secret
-    clientid = whmcs_client.UpdateClientRequestClientid() # UpdateClientRequestClientid | 
+    clientid = None # object | The ID of the client to update
     accesskey = 'accesskey_example' # str | Optional API access key (optional)
     responsetype = json # str | Response format (optional) (default to json)
     clientemail = 'clientemail_example' # str | The email address of the client to update (optional)
@@ -553,7 +551,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **username** | **str**| Admin username/API identifier | 
  **password** | **str**| Admin password/API secret | 
- **clientid** | [**UpdateClientRequestClientid**](UpdateClientRequestClientid.md)|  | 
+ **clientid** | [**object**](object.md)| The ID of the client to update | 
  **accesskey** | **str**| Optional API access key | [optional] 
  **responsetype** | **str**| Response format | [optional] [default to json]
  **clientemail** | **str**| The email address of the client to update | [optional] 
