@@ -15,8 +15,6 @@
 
 # import models into model package
 from whmcs_client.models.add_client_response import AddClientResponse
-from whmcs_client.models.add_client_response_all_of_clientid import AddClientResponseAllOfClientid
-from whmcs_client.models.add_order_request_clientid import AddOrderRequestClientid
 from whmcs_client.models.add_order_response import AddOrderResponse
 from whmcs_client.models.client_info import ClientInfo
 from whmcs_client.models.currency_info import CurrencyInfo
@@ -24,9 +22,7 @@ from whmcs_client.models.get_clients_response import GetClientsResponse
 from whmcs_client.models.get_clients_response_all_of_clients import GetClientsResponseAllOfClients
 from whmcs_client.models.get_currencies_response import GetCurrenciesResponse
 from whmcs_client.models.get_currencies_response_all_of_currencies import GetCurrenciesResponseAllOfCurrencies
-from whmcs_client.models.update_client_request_clientid import UpdateClientRequestClientid
 from whmcs_client.models.update_client_response import UpdateClientResponse
-from whmcs_client.models.update_client_response_all_of_clientid import UpdateClientResponseAllOfClientid
 from whmcs_client.models.whmcs_base_response import WHMCSBaseResponse
 from whmcs_client.models.whmcs_error_response import WHMCSErrorResponse
 from whmcs_client.models.whmcs_success_response import WHMCSSuccessResponse

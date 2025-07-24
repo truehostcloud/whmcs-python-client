@@ -7,7 +7,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **result** | **str** |  | [optional] 
 **message** | **str** | Response message | [optional] 
-**clientid** | [**UpdateClientResponseAllOfClientid**](UpdateClientResponseAllOfClientid.md) |  | [optional] 
+**clientid** | **str** | The ID of the updated client | [optional] 
 
 ## Example
 

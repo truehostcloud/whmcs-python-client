@@ -4,8 +4,6 @@
 .travis.yml
 README.md
 docs/AddClientResponse.md
-docs/AddClientResponseAllOfClientid.md
-docs/AddOrderRequestClientid.md
 docs/AddOrderResponse.md
 docs/ClientInfo.md
 docs/CurrencyInfo.md
@@ -14,9 +12,7 @@ docs/GetClientsResponse.md
 docs/GetClientsResponseAllOfClients.md
 docs/GetCurrenciesResponse.md
 docs/GetCurrenciesResponseAllOfCurrencies.md
-docs/UpdateClientRequestClientid.md
 docs/UpdateClientResponse.md
-docs/UpdateClientResponseAllOfClientid.md
 docs/WHMCSBaseResponse.md
 docs/WHMCSErrorResponse.md
 docs/WHMCSSuccessResponse.md
@@ -37,8 +33,6 @@ whmcs_client/configuration.py
 whmcs_client/exceptions.py
 whmcs_client/models/__init__.py
 whmcs_client/models/add_client_response.py
-whmcs_client/models/add_client_response_all_of_clientid.py
-whmcs_client/models/add_order_request_clientid.py
 whmcs_client/models/add_order_response.py
 whmcs_client/models/client_info.py
 whmcs_client/models/currency_info.py
@@ -46,9 +40,7 @@ whmcs_client/models/get_clients_response.py
 whmcs_client/models/get_clients_response_all_of_clients.py
 whmcs_client/models/get_currencies_response.py
 whmcs_client/models/get_currencies_response_all_of_currencies.py
-whmcs_client/models/update_client_request_clientid.py
 whmcs_client/models/update_client_response.py
-whmcs_client/models/update_client_response_all_of_clientid.py
 whmcs_client/models/whmcs_base_response.py
 whmcs_client/models/whmcs_error_response.py
 whmcs_client/models/whmcs_success_response.py

@@ -19,7 +19,6 @@ import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictStr, field_validator
 from typing import Any, ClassVar, Dict, List, Optional
-from whmcs_client.models.update_client_response_all_of_clientid import UpdateClientResponseAllOfClientid
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -29,7 +28,7 @@ class UpdateClientResponse(BaseModel):
     """ # noqa: E501
     result: Optional[StrictStr] = None
     message: Optional[StrictStr] = Field(default=None, description="Response message")
-    clientid: Optional[UpdateClientResponseAllOfClientid] = None
+    clientid: Optional[StrictStr] = Field(default=None, description="The ID of the updated client")
     __properties: ClassVar[List[str]] = ["result", "message", "clientid"]
 
     @field_validator('result')
@@ -81,9 +80,6 @@ class UpdateClientResponse(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
-        # override the default output from pydantic by calling `to_dict()` of clientid
-        if self.clientid:
-            _dict['clientid'] = self.clientid.to_dict()
         return _dict
 
     @classmethod
@@ -98,7 +94,7 @@ class UpdateClientResponse(BaseModel):
         _obj = cls.model_validate({
             "result": obj.get("result"),
             "message": obj.get("message"),
-            "clientid": UpdateClientResponseAllOfClientid.from_dict(obj["clientid"]) if obj.get("clientid") is not None else None
+            "clientid": obj.get("clientid")
         })
         return _obj
 
