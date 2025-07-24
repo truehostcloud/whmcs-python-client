@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "whmcs_client"
-version = "1.0.12"
+version = "1.0.13"
 description = "WHMCS API"
 authors = ["OpenAPI Generator Community <team@openapitools.org>"]
 license = "NoLicense"

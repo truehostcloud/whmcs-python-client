@@ -246,7 +246,6 @@ components:
       properties:
         clientid:
           type: integer
-          format: int64
           description: The ID of the client to update
         clientemail:
           type: string
@@ -368,7 +367,6 @@ components:
       properties:
         clientid:
           type: integer
-          format: int64
           description: The ID of the client to add the order for
         clientemail:
           type: string
@@ -627,7 +625,6 @@ components:
           properties:
             clientid:
               type: integer
-              format: int64
               description: The ID of the newly created client
             owner_user_id:
               type: integer
@@ -639,8 +636,7 @@ components:
         - type: object
           properties:
             clientid:
-              type: integer
-              format: int64
+              type: string
               description: The ID of the updated client
 
     AddOrderResponse:
