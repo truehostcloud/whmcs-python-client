@@ -19,6 +19,7 @@ import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr, field_validator
 from typing import Any, ClassVar, Dict, List, Optional
+from whmcs_client.models.add_client_response_all_of_clientid import AddClientResponseAllOfClientid
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -28,7 +29,7 @@ class AddClientResponse(BaseModel):
     """ # noqa: E501
     result: Optional[StrictStr] = None
     message: Optional[StrictStr] = Field(default=None, description="Response message")
-    clientid: Optional[Any] = Field(default=None, description="The ID of the newly created client")
+    clientid: Optional[AddClientResponseAllOfClientid] = None
     owner_user_id: Optional[StrictInt] = Field(default=None, description="The ID of the user that owns the client")
     __properties: ClassVar[List[str]] = ["result", "message", "clientid", "owner_user_id"]
 
@@ -81,11 +82,9 @@ class AddClientResponse(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
-        # set to None if clientid (nullable) is None
-        # and model_fields_set contains the field
-        if self.clientid is None and "clientid" in self.model_fields_set:
-            _dict['clientid'] = None
-
+        # override the default output from pydantic by calling `to_dict()` of clientid
+        if self.clientid:
+            _dict['clientid'] = self.clientid.to_dict()
         return _dict
 
     @classmethod
@@ -100,7 +99,7 @@ class AddClientResponse(BaseModel):
         _obj = cls.model_validate({
             "result": obj.get("result"),
             "message": obj.get("message"),
-            "clientid": obj.get("clientid"),
+            "clientid": AddClientResponseAllOfClientid.from_dict(obj["clientid"]) if obj.get("clientid") is not None else None,
             "owner_user_id": obj.get("owner_user_id")
         })
         return _obj

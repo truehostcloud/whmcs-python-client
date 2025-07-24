@@ -128,6 +128,8 @@ Class | Method | HTTP request | Description
 ## Documentation For Models
 
  - [AddClientResponse](docs/AddClientResponse.md)
+ - [AddClientResponseAllOfClientid](docs/AddClientResponseAllOfClientid.md)
+ - [AddOrderRequestClientid](docs/AddOrderRequestClientid.md)
  - [AddOrderResponse](docs/AddOrderResponse.md)
  - [ClientInfo](docs/ClientInfo.md)
  - [CurrencyInfo](docs/CurrencyInfo.md)
@@ -135,7 +137,9 @@ Class | Method | HTTP request | Description
  - [GetClientsResponseAllOfClients](docs/GetClientsResponseAllOfClients.md)
  - [GetCurrenciesResponse](docs/GetCurrenciesResponse.md)
  - [GetCurrenciesResponseAllOfCurrencies](docs/GetCurrenciesResponseAllOfCurrencies.md)
+ - [UpdateClientRequestClientid](docs/UpdateClientRequestClientid.md)
  - [UpdateClientResponse](docs/UpdateClientResponse.md)
+ - [UpdateClientResponseAllOfClientid](docs/UpdateClientResponseAllOfClientid.md)
  - [WHMCSBaseResponse](docs/WHMCSBaseResponse.md)
  - [WHMCSErrorResponse](docs/WHMCSErrorResponse.md)
  - [WHMCSSuccessResponse](docs/WHMCSSuccessResponse.md)

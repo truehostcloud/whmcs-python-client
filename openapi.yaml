@@ -245,7 +245,9 @@ components:
         - clientid
       properties:
         clientid:
-          type: [string, integer]
+          anyOf:
+            - type: integer
+            - type: string
           description: The ID of the client to update
         clientemail:
           type: string
@@ -366,7 +368,9 @@ components:
         - paymentmethod
       properties:
         clientid:
-          type: [string, integer]
+          anyOf:
+            - type: integer
+            - type: string
           description: The ID of the client to add the order for
         clientemail:
           type: string
@@ -624,7 +628,9 @@ components:
         - type: object
           properties:
             clientid:
-              type: [string, integer]
+              anyOf:
+                - type: integer
+                - type: string
               description: The ID of the newly created client
             owner_user_id:
               type: integer
@@ -636,7 +642,9 @@ components:
         - type: object
           properties:
             clientid:
-              type: string
+              anyOf:
+                - type: integer
+                - type: string
               description: The ID of the updated client
 
     AddOrderResponse:
