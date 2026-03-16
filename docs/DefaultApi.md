@@ -7,7 +7,10 @@ Method | HTTP request | Description
 [**add_client**](DefaultApi.md#add_client) | **POST** /api.php?action&#x3D;AddClient | Add a new client
 [**add_order**](DefaultApi.md#add_order) | **POST** /api.php?action&#x3D;AddOrder | Create a new order
 [**get_clients**](DefaultApi.md#get_clients) | **POST** /api.php?action&#x3D;GetClients | Get clients
+[**get_clients_details**](DefaultApi.md#get_clients_details) | **POST** /api.php?action&#x3D;GetClientsDetails | Get client details
+[**get_clients_products**](DefaultApi.md#get_clients_products) | **POST** /api.php?action&#x3D;GetClientsProducts | Get client products
 [**get_currencies**](DefaultApi.md#get_currencies) | **POST** /api.php?action&#x3D;GetCurrencies | Get currencies
+[**get_invoices**](DefaultApi.md#get_invoices) | **POST** /api.php?action&#x3D;GetInvoices | Get invoices
 [**update_client**](DefaultApi.md#update_client) | **POST** /api.php?action&#x3D;UpdateClient | Update client details
 
 
@@ -388,6 +391,176 @@ No authorization required
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
+# **get_clients_details**
+> GetClientsDetailsResponse get_clients_details(username, password, accesskey=accesskey, responsetype=responsetype, clientid=clientid, email=email, stats=stats)
+
+Get client details
+
+Obtain detailed information for a specific client
+
+### Example
+
+
+```python
+import whmcs_client
+from whmcs_client.models.get_clients_details_response import GetClientsDetailsResponse
+from whmcs_client.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://your-whmcs-instance.com/includes
+# See configuration.py for a list of all supported configuration parameters.
+configuration = whmcs_client.Configuration(
+    host = "https://your-whmcs-instance.com/includes"
+)
+
+
+# Enter a context with an instance of the API client
+with whmcs_client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = whmcs_client.DefaultApi(api_client)
+    username = 'username_example' # str | Admin username/API identifier
+    password = 'password_example' # str | Admin password/API secret
+    accesskey = 'accesskey_example' # str | Optional API access key (optional)
+    responsetype = json # str | Response format (optional) (default to json)
+    clientid = 56 # int | The client id to obtain the details for (optional)
+    email = 'email_example' # str | The email address of the client to search for (optional)
+    stats = True # bool | Also return additional client statistics (optional)
+
+    try:
+        # Get client details
+        api_response = api_instance.get_clients_details(username, password, accesskey=accesskey, responsetype=responsetype, clientid=clientid, email=email, stats=stats)
+        print("The response of DefaultApi->get_clients_details:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling DefaultApi->get_clients_details: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **username** | **str**| Admin username/API identifier | 
+ **password** | **str**| Admin password/API secret | 
+ **accesskey** | **str**| Optional API access key | [optional] 
+ **responsetype** | **str**| Response format | [optional] [default to json]
+ **clientid** | **int**| The client id to obtain the details for | [optional] 
+ **email** | **str**| The email address of the client to search for | [optional] 
+ **stats** | **bool**| Also return additional client statistics | [optional] 
+
+### Return type
+
+[**GetClientsDetailsResponse**](GetClientsDetailsResponse.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: application/x-www-form-urlencoded
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Client details retrieved successfully |  -  |
+**0** | Error response |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **get_clients_products**
+> GetClientsProductsResponse get_clients_products(username, password, accesskey=accesskey, responsetype=responsetype, limitstart=limitstart, limitnum=limitnum, clientid=clientid, serviceid=serviceid, pid=pid, domain=domain, username2=username2)
+
+Get client products
+
+Obtain a list of client purchased products matching the criteria
+
+### Example
+
+
+```python
+import whmcs_client
+from whmcs_client.models.get_clients_products_response import GetClientsProductsResponse
+from whmcs_client.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://your-whmcs-instance.com/includes
+# See configuration.py for a list of all supported configuration parameters.
+configuration = whmcs_client.Configuration(
+    host = "https://your-whmcs-instance.com/includes"
+)
+
+
+# Enter a context with an instance of the API client
+with whmcs_client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = whmcs_client.DefaultApi(api_client)
+    username = 'username_example' # str | Admin username/API identifier
+    password = 'password_example' # str | Admin password/API secret
+    accesskey = 'accesskey_example' # str | Optional API access key (optional)
+    responsetype = json # str | Response format (optional) (default to json)
+    limitstart = 0 # int | The offset for the returned product data (optional) (default to 0)
+    limitnum = 25 # int | The number of records to return (optional) (default to 25)
+    clientid = 56 # int | The client id to obtain the details for (optional)
+    serviceid = 56 # int | The specific service id to obtain the details for (optional)
+    pid = 56 # int | The specific product id to obtain the details for (optional)
+    domain = 'domain_example' # str | The specific domain to obtain the service details for (optional)
+    username2 = 'username2_example' # str | The specific username to obtain the details for (optional)
+
+    try:
+        # Get client products
+        api_response = api_instance.get_clients_products(username, password, accesskey=accesskey, responsetype=responsetype, limitstart=limitstart, limitnum=limitnum, clientid=clientid, serviceid=serviceid, pid=pid, domain=domain, username2=username2)
+        print("The response of DefaultApi->get_clients_products:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling DefaultApi->get_clients_products: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **username** | **str**| Admin username/API identifier | 
+ **password** | **str**| Admin password/API secret | 
+ **accesskey** | **str**| Optional API access key | [optional] 
+ **responsetype** | **str**| Response format | [optional] [default to json]
+ **limitstart** | **int**| The offset for the returned product data | [optional] [default to 0]
+ **limitnum** | **int**| The number of records to return | [optional] [default to 25]
+ **clientid** | **int**| The client id to obtain the details for | [optional] 
+ **serviceid** | **int**| The specific service id to obtain the details for | [optional] 
+ **pid** | **int**| The specific product id to obtain the details for | [optional] 
+ **domain** | **str**| The specific domain to obtain the service details for | [optional] 
+ **username2** | **str**| The specific username to obtain the details for | [optional] 
+
+### Return type
+
+[**GetClientsProductsResponse**](GetClientsProductsResponse.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: application/x-www-form-urlencoded
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Client products retrieved successfully |  -  |
+**0** | Error response |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
 # **get_currencies**
 > GetCurrenciesResponse get_currencies(username, password, accesskey=accesskey, responsetype=responsetype)
 
@@ -459,6 +632,93 @@ No authorization required
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Currencies retrieved successfully |  -  |
+**0** | Error response |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **get_invoices**
+> GetInvoicesResponse get_invoices(username, password, accesskey=accesskey, responsetype=responsetype, limitstart=limitstart, limitnum=limitnum, userid=userid, status=status, orderby=orderby, order=order)
+
+Get invoices
+
+Retrieve a list of invoices matching the provided criteria
+
+### Example
+
+
+```python
+import whmcs_client
+from whmcs_client.models.get_invoices_response import GetInvoicesResponse
+from whmcs_client.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://your-whmcs-instance.com/includes
+# See configuration.py for a list of all supported configuration parameters.
+configuration = whmcs_client.Configuration(
+    host = "https://your-whmcs-instance.com/includes"
+)
+
+
+# Enter a context with an instance of the API client
+with whmcs_client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = whmcs_client.DefaultApi(api_client)
+    username = 'username_example' # str | Admin username/API identifier
+    password = 'password_example' # str | Admin password/API secret
+    accesskey = 'accesskey_example' # str | Optional API access key (optional)
+    responsetype = json # str | Response format (optional) (default to json)
+    limitstart = 0 # int | The offset for the returned invoice data (optional) (default to 0)
+    limitnum = 25 # int | The number of records to return (optional) (default to 25)
+    userid = 56 # int | Find invoices for a specific client id (optional)
+    status = 'status_example' # str | Find invoices for a specific status, including Overdue (optional)
+    orderby = 'orderby_example' # str | The field to sort results by (optional)
+    order = 'order_example' # str | Sort direction for the invoice results (optional)
+
+    try:
+        # Get invoices
+        api_response = api_instance.get_invoices(username, password, accesskey=accesskey, responsetype=responsetype, limitstart=limitstart, limitnum=limitnum, userid=userid, status=status, orderby=orderby, order=order)
+        print("The response of DefaultApi->get_invoices:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling DefaultApi->get_invoices: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **username** | **str**| Admin username/API identifier | 
+ **password** | **str**| Admin password/API secret | 
+ **accesskey** | **str**| Optional API access key | [optional] 
+ **responsetype** | **str**| Response format | [optional] [default to json]
+ **limitstart** | **int**| The offset for the returned invoice data | [optional] [default to 0]
+ **limitnum** | **int**| The number of records to return | [optional] [default to 25]
+ **userid** | **int**| Find invoices for a specific client id | [optional] 
+ **status** | **str**| Find invoices for a specific status, including Overdue | [optional] 
+ **orderby** | **str**| The field to sort results by | [optional] 
+ **order** | **str**| Sort direction for the invoice results | [optional] 
+
+### Return type
+
+[**GetInvoicesResponse**](GetInvoicesResponse.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: application/x-www-form-urlencoded
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Invoices retrieved successfully |  -  |
 **0** | Error response |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)

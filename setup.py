@@ -1,5 +1,3 @@
-# coding: utf-8
-
 """
     WHMCS API
 
@@ -21,12 +19,12 @@ from setuptools import setup, find_packages  # noqa: H301
 # prerequisite: setuptools
 # http://pypi.python.org/pypi/setuptools
 NAME = "whmcs-api-client"
-VERSION = "1.0.13"
+VERSION = "1.0.14"
 PYTHON_REQUIRES = ">= 3.9"
 REQUIRES = [
     "urllib3 >= 2.1.0, < 3.0.0",
     "python-dateutil >= 2.8.2",
-    "pydantic >= 2",
+    "pydantic >= 2.11",
     "typing-extensions >= 4.7.1",
 ]
 

@@ -12,17 +12,47 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-
 # import models into model package
 from whmcs_client.models.add_client_response import AddClientResponse
 from whmcs_client.models.add_order_response import AddOrderResponse
+from whmcs_client.models.client_details_info import ClientDetailsInfo
+from whmcs_client.models.client_details_info_allow_single_sign_on import ClientDetailsInfoAllowSingleSignOn
+from whmcs_client.models.client_details_info_customfields import ClientDetailsInfoCustomfields
+from whmcs_client.models.client_details_stats import ClientDetailsStats
 from whmcs_client.models.client_info import ClientInfo
 from whmcs_client.models.currency_info import CurrencyInfo
+from whmcs_client.models.custom_field_value import CustomFieldValue
+from whmcs_client.models.custom_field_value_id import CustomFieldValueId
+from whmcs_client.models.email_preferences import EmailPreferences
+from whmcs_client.models.get_clients_details_response import GetClientsDetailsResponse
+from whmcs_client.models.get_clients_products_response import GetClientsProductsResponse
+from whmcs_client.models.get_clients_products_response_all_of_clientid import GetClientsProductsResponseAllOfClientid
+from whmcs_client.models.get_clients_products_response_all_of_pid import GetClientsProductsResponseAllOfPid
+from whmcs_client.models.get_clients_products_response_all_of_serviceid import GetClientsProductsResponseAllOfServiceid
 from whmcs_client.models.get_clients_response import GetClientsResponse
 from whmcs_client.models.get_clients_response_all_of_clients import GetClientsResponseAllOfClients
 from whmcs_client.models.get_currencies_response import GetCurrenciesResponse
 from whmcs_client.models.get_currencies_response_all_of_currencies import GetCurrenciesResponseAllOfCurrencies
+from whmcs_client.models.get_invoices_response import GetInvoicesResponse
+from whmcs_client.models.invoice_collection import InvoiceCollection
+from whmcs_client.models.invoice_collection_invoice import InvoiceCollectionInvoice
+from whmcs_client.models.invoice_info import InvoiceInfo
+from whmcs_client.models.invoice_info_paymethodid import InvoiceInfoPaymethodid
+from whmcs_client.models.product_collection import ProductCollection
+from whmcs_client.models.product_collection_product import ProductCollectionProduct
+from whmcs_client.models.product_info import ProductInfo
+from whmcs_client.models.product_info_clientid import ProductInfoClientid
+from whmcs_client.models.product_info_id import ProductInfoId
+from whmcs_client.models.product_info_orderid import ProductInfoOrderid
+from whmcs_client.models.product_info_pid import ProductInfoPid
+from whmcs_client.models.product_info_promoid import ProductInfoPromoid
+from whmcs_client.models.product_info_qty import ProductInfoQty
+from whmcs_client.models.product_info_serverid import ProductInfoServerid
 from whmcs_client.models.update_client_response import UpdateClientResponse
+from whmcs_client.models.user_collection import UserCollection
+from whmcs_client.models.user_collection_user import UserCollectionUser
+from whmcs_client.models.user_info import UserInfo
 from whmcs_client.models.whmcs_base_response import WHMCSBaseResponse
 from whmcs_client.models.whmcs_error_response import WHMCSErrorResponse
 from whmcs_client.models.whmcs_success_response import WHMCSSuccessResponse
+
