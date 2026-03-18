@@ -874,29 +874,22 @@ components:
         - type: object
           properties:
             clientid:
-              oneOf:
-                - type: integer
-                - type: string
+              type: string
               description: The specific client id searched for
             serviceid:
-              oneOf:
-                - type: integer
-                - type: string
+              type: string
               nullable: true
               description: The specific service id searched for
             pid:
-              oneOf:
-                - type: integer
-                - type: string
+              type: string
               nullable: true
               description: The specific product id searched for
             domain:
-              oneOf:
-                - type: string
+              type: string
               nullable: true
               description: The specific domain searched for
             totalresults:
-              type: integer
+              type: string
               description: The total number of results available
             startnumber:
               type: integer
@@ -927,8 +920,7 @@ components:
           description: The client's email address
         datecreated:
           type: string
-          format: date
-          description: The date the client was created
+          description: The date the client was created (YYYY-MM-DD, may be 0000-00-00)
         groupid:
           type: integer
           description: The client's group ID
@@ -949,6 +941,7 @@ components:
 
     InvoiceInfo:
       type: object
+      additionalProperties: true
       properties:
         id:
           type: integer
@@ -958,388 +951,71 @@ components:
           description: The client ID linked to the invoice
         firstname:
           type: string
-          description: The client first name
         lastname:
           type: string
-          description: The client last name
         companyname:
           type: string
-          description: The client company name
         invoicenum:
           type: string
-          description: The invoice number
         date:
           type: string
-          format: date
-          description: The invoice date
+          description: The invoice date (YYYY-MM-DD, may be 0000-00-00)
         duedate:
           type: string
-          format: date
-          description: The invoice due date
+          description: The invoice due date (YYYY-MM-DD, may be 0000-00-00)
         datepaid:
           type: string
-          description: The invoice paid timestamp
         last_capture_attempt:
           type: string
-          description: The last payment capture attempt timestamp
         date_refunded:
           type: string
-          description: The invoice refund timestamp
         date_cancelled:
           type: string
-          description: The invoice cancellation timestamp
         subtotal:
           type: string
-          description: The invoice subtotal amount
         credit:
           type: string
-          description: The invoice credit amount
         tax:
           type: string
-          description: The invoice tax amount
         tax2:
           type: string
-          description: The invoice secondary tax amount
         total:
           type: string
-          description: The invoice total amount
         taxrate:
           type: string
-          description: The invoice tax rate
         taxrate2:
           type: string
-          description: The invoice secondary tax rate
         status:
           type: string
-          description: The invoice status
         paymentmethod:
           type: string
-          description: The invoice payment method
-        paymethodid:
-          oneOf:
-            - type: integer
-            - type: string
-          nullable: true
-          description: The invoice pay method ID
         notes:
           type: string
-          description: Invoice notes
         created_at:
           type: string
-          description: The invoice creation timestamp
         updated_at:
           type: string
-          description: The invoice update timestamp
         currencycode:
           type: string
-          description: The invoice currency code
         currencyprefix:
           type: string
-          description: The invoice currency prefix
         currencysuffix:
           type: string
-          description: The invoice currency suffix
 
     ClientDetailsInfo:
       type: object
       additionalProperties: true
       properties:
-        client_id:
-          type: integer
-          description: The client ID
-        owner_user_id:
-          type: integer
-          description: The owning user ID
-        userid:
-          type: integer
-          description: The client ID alias
-        id:
-          type: integer
-          description: The client ID
-        uuid:
-          type: string
-          description: The client UUID
-        firstname:
-          type: string
-          description: The client first name
-        lastname:
-          type: string
-          description: The client last name
-        fullname:
-          type: string
-          description: The client full name
-        companyname:
-          type: string
-          description: The client company name
         email:
           type: string
           description: The client email address
-        address1:
-          type: string
-          description: Address line 1
-        address2:
-          type: string
-          description: Address line 2
-        city:
-          type: string
-          description: City
-        fullstate:
-          type: string
-          description: Full state name
-        state:
-          type: string
-          description: State code or value
-        postcode:
-          type: string
-          description: Post code
-        countrycode:
-          type: string
-          description: Country code
-        country:
-          type: string
-          description: Country
         phonenumber:
           type: string
           description: Phone number
-        tax_id:
-          type: string
-          description: Tax ID
-        email_preferences:
-          $ref: '#/components/schemas/EmailPreferences'
-        statecode:
-          type: string
-          description: State code
-        countryname:
-          type: string
-          description: Country name
-        phonecc:
-          type: string
-          description: Phone country code
-        phonenumberformatted:
-          type: string
-          description: Formatted phone number
-        telephoneNumber:
-          type: string
-          description: Alternate formatted phone number
-        billingcid:
-          type: integer
-          description: Billing contact ID
-        notes:
-          type: string
-          description: Admin notes
-        currency:
-          type: integer
-          description: Currency ID
-        defaultgateway:
-          type: string
-          description: Default gateway
-        groupid:
-          type: integer
-          description: Group ID
-        status:
-          type: string
-          description: Client status
-        credit:
-          type: string
-          description: Credit balance
-        taxexempt:
-          type: boolean
-          description: Whether the client is tax exempt
-        latefeeoveride:
-          type: boolean
-          description: Whether late fees are overridden
-        overideduenotices:
-          type: boolean
-          description: Whether due notices are overridden
-        separateinvoices:
-          type: boolean
-          description: Whether invoices are separated
-        disableautocc:
-          type: boolean
-          description: Whether auto credit card processing is disabled
-        emailoptout:
-          type: boolean
-          description: Whether the client has opted out of emails
-        marketing_emails_opt_in:
-          type: boolean
-          description: Whether the client has opted in to marketing emails
-        overrideautoclose:
-          type: boolean
-          description: Whether auto close is overridden
-        allowSingleSignOn:
-          oneOf:
-            - type: integer
-            - type: boolean
-          description: Whether single sign-on is allowed
-        email_verified:
-          type: boolean
-          description: Whether the email is verified
-        language:
-          type: string
-          description: Preferred language
-        isOptedInToMarketingEmails:
-          type: boolean
-          description: Alternate marketing opt-in flag
-        lastlogin:
-          type: string
-          description: Last login summary
-        currency_code:
-          type: string
-          description: Currency code
-        customfields:
-          oneOf:
-            - type: array
-              items:
-                $ref: '#/components/schemas/CustomFieldValue'
-            - type: object
-              additionalProperties: true
-          description: Custom field values
-        users:
-          $ref: '#/components/schemas/UserCollection'
-
-    EmailPreferences:
-      type: object
-      additionalProperties: true
-      properties:
-        general:
-          type: string
-        invoice:
-          type: string
-        support:
-          type: string
-        product:
-          type: string
-        domain:
-          type: string
-        affiliate:
-          type: string
-
-    CustomFieldValue:
-      type: object
-      additionalProperties: true
-      properties:
-        id:
-          oneOf:
-            - type: integer
-            - type: string
-          description: Custom field ID
-        value:
-          type: string
-          description: Custom field value
-
-    UserCollection:
-      type: object
-      properties:
-        user:
-          oneOf:
-            - type: array
-              items:
-                $ref: '#/components/schemas/UserInfo'
-            - $ref: '#/components/schemas/UserInfo'
-          description: Array of user information or a single user object
-
-    UserInfo:
-      type: object
-      properties:
-        id:
-          type: integer
-          description: The user ID
-        name:
-          type: string
-          description: The user name
-        email:
-          type: string
-          description: The user email
-        is_owner:
-          type: boolean
-          description: Whether the user is the account owner
 
     ClientDetailsStats:
       type: object
       additionalProperties: true
-      properties:
-        numdueinvoices:
-          type: integer
-        dueinvoicesbalance:
-          type: string
-        incredit:
-          type: boolean
-        creditbalance:
-          type: string
-        grossRevenue:
-          type: string
-        expenses:
-          type: string
-        income:
-          type: string
-        numoverdueinvoices:
-          type: integer
-        overdueinvoicesbalance:
-          type: string
-        numDraftInvoices:
-          type: integer
-        draftInvoicesBalance:
-          type: string
-        numunpaidinvoices:
-          type: integer
-        unpaidinvoicesamount:
-          type: string
-        numpaidinvoices:
-          type: integer
-        paidinvoicesamount:
-          type: string
-        numcancelledinvoices:
-          type: integer
-        cancelledinvoicesamount:
-          type: string
-        numrefundedinvoices:
-          type: integer
-        refundedinvoicesamount:
-          type: string
-        numcollectionsinvoices:
-          type: integer
-        collectionsinvoicesamount:
-          type: string
-        numpaymentpendinginvoices:
-          type: integer
-        paymentpendinginvoicesamount:
-          type: string
-        productsnumactivehosting:
-          type: integer
-        productsnumhosting:
-          type: integer
-        productsnumactivereseller:
-          type: integer
-        productsnumreseller:
-          type: integer
-        productsnumactiveservers:
-          type: integer
-        productsnumservers:
-          type: integer
-        productsnumactiveother:
-          type: integer
-        productsnumother:
-          type: integer
-        productsnumactive:
-          type: integer
-        productsnumtotal:
-          type: integer
-        numactivedomains:
-          type: integer
-        numdomains:
-          type: integer
-        numacceptedquotes:
-          type: integer
-        numquotes:
-          type: integer
-        numtickets:
-          type: integer
-        numactivetickets:
-          type: integer
-        numaffiliatesignups:
-          type: integer
-        isAffiliate:
-          type: boolean
 
     ProductCollection:
       type: object
@@ -1357,37 +1033,26 @@ components:
       additionalProperties: true
       properties:
         id:
-          oneOf:
-            - type: integer
-            - type: string
+          type: string
           description: The service ID
         qty:
-          oneOf:
-            - type: integer
-            - type: string
+          type: string
           description: The service quantity
         clientid:
-          oneOf:
-            - type: integer
-            - type: string
+          type: string
           description: The client ID
         orderid:
-          oneOf:
-            - type: integer
-            - type: string
+          type: string
           description: The order ID
         ordernumber:
           type: string
           description: The order number
         pid:
-          oneOf:
-            - type: integer
-            - type: string
+          type: string
           description: The product ID
         regdate:
           type: string
-          format: date
-          description: The registration date
+          description: The registration date (YYYY-MM-DD, may be 0000-00-00)
         name:
           type: string
           description: The product name
@@ -1407,9 +1072,7 @@ components:
           type: string
           description: The dedicated IP address
         serverid:
-          oneOf:
-            - type: integer
-            - type: string
+          type: string
           description: The server ID
         servername:
           type: string
@@ -1440,8 +1103,7 @@ components:
           description: The billing cycle
         nextduedate:
           type: string
-          format: date
-          description: The next due date
+          description: The next due date (YYYY-MM-DD, may be 0000-00-00)
         status:
           type: string
           description: The service status
@@ -1455,9 +1117,7 @@ components:
           type: string
           description: The subscription ID
         promoid:
-          oneOf:
-            - type: integer
-            - type: string
+          type: string
           description: The promotion ID
         overideautosuspend:
           type: string

@@ -14,7 +14,7 @@
 """  # noqa: E501
 
 
-__version__ = "1.0.14"
+__version__ = "1.0.15"
 
 # Define package exports
 __all__ = [
@@ -31,19 +31,10 @@ __all__ = [
     "AddClientResponse",
     "AddOrderResponse",
     "ClientDetailsInfo",
-    "ClientDetailsInfoAllowSingleSignOn",
-    "ClientDetailsInfoCustomfields",
-    "ClientDetailsStats",
     "ClientInfo",
     "CurrencyInfo",
-    "CustomFieldValue",
-    "CustomFieldValueId",
-    "EmailPreferences",
     "GetClientsDetailsResponse",
     "GetClientsProductsResponse",
-    "GetClientsProductsResponseAllOfClientid",
-    "GetClientsProductsResponseAllOfPid",
-    "GetClientsProductsResponseAllOfServiceid",
     "GetClientsResponse",
     "GetClientsResponseAllOfClients",
     "GetCurrenciesResponse",
@@ -52,21 +43,10 @@ __all__ = [
     "InvoiceCollection",
     "InvoiceCollectionInvoice",
     "InvoiceInfo",
-    "InvoiceInfoPaymethodid",
     "ProductCollection",
     "ProductCollectionProduct",
     "ProductInfo",
-    "ProductInfoClientid",
-    "ProductInfoId",
-    "ProductInfoOrderid",
-    "ProductInfoPid",
-    "ProductInfoPromoid",
-    "ProductInfoQty",
-    "ProductInfoServerid",
     "UpdateClientResponse",
-    "UserCollection",
-    "UserCollectionUser",
-    "UserInfo",
     "WHMCSBaseResponse",
     "WHMCSErrorResponse",
     "WHMCSSuccessResponse",
@@ -90,19 +70,10 @@ from whmcs_client.exceptions import ApiException as ApiException
 from whmcs_client.models.add_client_response import AddClientResponse as AddClientResponse
 from whmcs_client.models.add_order_response import AddOrderResponse as AddOrderResponse
 from whmcs_client.models.client_details_info import ClientDetailsInfo as ClientDetailsInfo
-from whmcs_client.models.client_details_info_allow_single_sign_on import ClientDetailsInfoAllowSingleSignOn as ClientDetailsInfoAllowSingleSignOn
-from whmcs_client.models.client_details_info_customfields import ClientDetailsInfoCustomfields as ClientDetailsInfoCustomfields
-from whmcs_client.models.client_details_stats import ClientDetailsStats as ClientDetailsStats
 from whmcs_client.models.client_info import ClientInfo as ClientInfo
 from whmcs_client.models.currency_info import CurrencyInfo as CurrencyInfo
-from whmcs_client.models.custom_field_value import CustomFieldValue as CustomFieldValue
-from whmcs_client.models.custom_field_value_id import CustomFieldValueId as CustomFieldValueId
-from whmcs_client.models.email_preferences import EmailPreferences as EmailPreferences
 from whmcs_client.models.get_clients_details_response import GetClientsDetailsResponse as GetClientsDetailsResponse
 from whmcs_client.models.get_clients_products_response import GetClientsProductsResponse as GetClientsProductsResponse
-from whmcs_client.models.get_clients_products_response_all_of_clientid import GetClientsProductsResponseAllOfClientid as GetClientsProductsResponseAllOfClientid
-from whmcs_client.models.get_clients_products_response_all_of_pid import GetClientsProductsResponseAllOfPid as GetClientsProductsResponseAllOfPid
-from whmcs_client.models.get_clients_products_response_all_of_serviceid import GetClientsProductsResponseAllOfServiceid as GetClientsProductsResponseAllOfServiceid
 from whmcs_client.models.get_clients_response import GetClientsResponse as GetClientsResponse
 from whmcs_client.models.get_clients_response_all_of_clients import GetClientsResponseAllOfClients as GetClientsResponseAllOfClients
 from whmcs_client.models.get_currencies_response import GetCurrenciesResponse as GetCurrenciesResponse
@@ -111,21 +82,10 @@ from whmcs_client.models.get_invoices_response import GetInvoicesResponse as Get
 from whmcs_client.models.invoice_collection import InvoiceCollection as InvoiceCollection
 from whmcs_client.models.invoice_collection_invoice import InvoiceCollectionInvoice as InvoiceCollectionInvoice
 from whmcs_client.models.invoice_info import InvoiceInfo as InvoiceInfo
-from whmcs_client.models.invoice_info_paymethodid import InvoiceInfoPaymethodid as InvoiceInfoPaymethodid
 from whmcs_client.models.product_collection import ProductCollection as ProductCollection
 from whmcs_client.models.product_collection_product import ProductCollectionProduct as ProductCollectionProduct
 from whmcs_client.models.product_info import ProductInfo as ProductInfo
-from whmcs_client.models.product_info_clientid import ProductInfoClientid as ProductInfoClientid
-from whmcs_client.models.product_info_id import ProductInfoId as ProductInfoId
-from whmcs_client.models.product_info_orderid import ProductInfoOrderid as ProductInfoOrderid
-from whmcs_client.models.product_info_pid import ProductInfoPid as ProductInfoPid
-from whmcs_client.models.product_info_promoid import ProductInfoPromoid as ProductInfoPromoid
-from whmcs_client.models.product_info_qty import ProductInfoQty as ProductInfoQty
-from whmcs_client.models.product_info_serverid import ProductInfoServerid as ProductInfoServerid
 from whmcs_client.models.update_client_response import UpdateClientResponse as UpdateClientResponse
-from whmcs_client.models.user_collection import UserCollection as UserCollection
-from whmcs_client.models.user_collection_user import UserCollectionUser as UserCollectionUser
-from whmcs_client.models.user_info import UserInfo as UserInfo
 from whmcs_client.models.whmcs_base_response import WHMCSBaseResponse as WHMCSBaseResponse
 from whmcs_client.models.whmcs_error_response import WHMCSErrorResponse as WHMCSErrorResponse
 from whmcs_client.models.whmcs_success_response import WHMCSSuccessResponse as WHMCSSuccessResponse

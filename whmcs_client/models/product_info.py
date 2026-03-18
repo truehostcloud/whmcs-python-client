@@ -17,16 +17,8 @@ import pprint
 import re  # noqa: F401
 import json
 
-from datetime import date
 from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
-from whmcs_client.models.product_info_clientid import ProductInfoClientid
-from whmcs_client.models.product_info_id import ProductInfoId
-from whmcs_client.models.product_info_orderid import ProductInfoOrderid
-from whmcs_client.models.product_info_pid import ProductInfoPid
-from whmcs_client.models.product_info_promoid import ProductInfoPromoid
-from whmcs_client.models.product_info_qty import ProductInfoQty
-from whmcs_client.models.product_info_serverid import ProductInfoServerid
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -34,20 +26,20 @@ class ProductInfo(BaseModel):
     """
     ProductInfo
     """ # noqa: E501
-    id: Optional[ProductInfoId] = None
-    qty: Optional[ProductInfoQty] = None
-    clientid: Optional[ProductInfoClientid] = None
-    orderid: Optional[ProductInfoOrderid] = None
+    id: Optional[StrictStr] = Field(default=None, description="The service ID")
+    qty: Optional[StrictStr] = Field(default=None, description="The service quantity")
+    clientid: Optional[StrictStr] = Field(default=None, description="The client ID")
+    orderid: Optional[StrictStr] = Field(default=None, description="The order ID")
     ordernumber: Optional[StrictStr] = Field(default=None, description="The order number")
-    pid: Optional[ProductInfoPid] = None
-    regdate: Optional[date] = Field(default=None, description="The registration date")
+    pid: Optional[StrictStr] = Field(default=None, description="The product ID")
+    regdate: Optional[StrictStr] = Field(default=None, description="The registration date (YYYY-MM-DD, may be 0000-00-00)")
     name: Optional[StrictStr] = Field(default=None, description="The product name")
     translated_name: Optional[StrictStr] = Field(default=None, description="The translated product name")
     groupname: Optional[StrictStr] = Field(default=None, description="The product group name")
     translated_groupname: Optional[StrictStr] = Field(default=None, description="The translated product group name")
     domain: Optional[StrictStr] = Field(default=None, description="The associated domain name")
     dedicatedip: Optional[StrictStr] = Field(default=None, description="The dedicated IP address")
-    serverid: Optional[ProductInfoServerid] = None
+    serverid: Optional[StrictStr] = Field(default=None, description="The server ID")
     servername: Optional[StrictStr] = Field(default=None, description="The server name")
     serverip: Optional[StrictStr] = Field(default=None, description="The server IP")
     serverhostname: Optional[StrictStr] = Field(default=None, description="The server hostname")
@@ -57,12 +49,12 @@ class ProductInfo(BaseModel):
     paymentmethod: Optional[StrictStr] = Field(default=None, description="The payment method")
     paymentmethodname: Optional[StrictStr] = Field(default=None, description="The human-readable payment method name")
     billingcycle: Optional[StrictStr] = Field(default=None, description="The billing cycle")
-    nextduedate: Optional[date] = Field(default=None, description="The next due date")
+    nextduedate: Optional[StrictStr] = Field(default=None, description="The next due date (YYYY-MM-DD, may be 0000-00-00)")
     status: Optional[StrictStr] = Field(default=None, description="The service status")
     username: Optional[StrictStr] = Field(default=None, description="The service username")
     password: Optional[StrictStr] = Field(default=None, description="The service password placeholder")
     subscriptionid: Optional[StrictStr] = Field(default=None, description="The subscription ID")
-    promoid: Optional[ProductInfoPromoid] = None
+    promoid: Optional[StrictStr] = Field(default=None, description="The promotion ID")
     overideautosuspend: Optional[StrictStr] = Field(default=None, description="Whether autosuspend is overridden")
     overidesuspenduntil: Optional[StrictStr] = Field(default=None, description="Suspend override until date")
     ns1: Optional[StrictStr] = Field(default=None, description="Nameserver 1")
@@ -121,27 +113,6 @@ class ProductInfo(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
-        # override the default output from pydantic by calling `to_dict()` of id
-        if self.id:
-            _dict['id'] = self.id.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of qty
-        if self.qty:
-            _dict['qty'] = self.qty.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of clientid
-        if self.clientid:
-            _dict['clientid'] = self.clientid.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of orderid
-        if self.orderid:
-            _dict['orderid'] = self.orderid.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of pid
-        if self.pid:
-            _dict['pid'] = self.pid.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of serverid
-        if self.serverid:
-            _dict['serverid'] = self.serverid.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of promoid
-        if self.promoid:
-            _dict['promoid'] = self.promoid.to_dict()
         # puts key-value pairs in additional_properties in the top level
         if self.additional_properties is not None:
             for _key, _value in self.additional_properties.items():
@@ -159,12 +130,12 @@ class ProductInfo(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "id": ProductInfoId.from_dict(obj["id"]) if obj.get("id") is not None else None,
-            "qty": ProductInfoQty.from_dict(obj["qty"]) if obj.get("qty") is not None else None,
-            "clientid": ProductInfoClientid.from_dict(obj["clientid"]) if obj.get("clientid") is not None else None,
-            "orderid": ProductInfoOrderid.from_dict(obj["orderid"]) if obj.get("orderid") is not None else None,
+            "id": obj.get("id"),
+            "qty": obj.get("qty"),
+            "clientid": obj.get("clientid"),
+            "orderid": obj.get("orderid"),
             "ordernumber": obj.get("ordernumber"),
-            "pid": ProductInfoPid.from_dict(obj["pid"]) if obj.get("pid") is not None else None,
+            "pid": obj.get("pid"),
             "regdate": obj.get("regdate"),
             "name": obj.get("name"),
             "translated_name": obj.get("translated_name"),
@@ -172,7 +143,7 @@ class ProductInfo(BaseModel):
             "translated_groupname": obj.get("translated_groupname"),
             "domain": obj.get("domain"),
             "dedicatedip": obj.get("dedicatedip"),
-            "serverid": ProductInfoServerid.from_dict(obj["serverid"]) if obj.get("serverid") is not None else None,
+            "serverid": obj.get("serverid"),
             "servername": obj.get("servername"),
             "serverip": obj.get("serverip"),
             "serverhostname": obj.get("serverhostname"),
@@ -187,7 +158,7 @@ class ProductInfo(BaseModel):
             "username": obj.get("username"),
             "password": obj.get("password"),
             "subscriptionid": obj.get("subscriptionid"),
-            "promoid": ProductInfoPromoid.from_dict(obj["promoid"]) if obj.get("promoid") is not None else None,
+            "promoid": obj.get("promoid"),
             "overideautosuspend": obj.get("overideautosuspend"),
             "overidesuspenduntil": obj.get("overidesuspenduntil"),
             "ns1": obj.get("ns1"),

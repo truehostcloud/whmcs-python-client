@@ -19,9 +19,6 @@ import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr, field_validator
 from typing import Any, ClassVar, Dict, List, Optional
-from whmcs_client.models.get_clients_products_response_all_of_clientid import GetClientsProductsResponseAllOfClientid
-from whmcs_client.models.get_clients_products_response_all_of_pid import GetClientsProductsResponseAllOfPid
-from whmcs_client.models.get_clients_products_response_all_of_serviceid import GetClientsProductsResponseAllOfServiceid
 from whmcs_client.models.product_collection import ProductCollection
 from typing import Optional, Set
 from typing_extensions import Self
@@ -32,11 +29,11 @@ class GetClientsProductsResponse(BaseModel):
     """ # noqa: E501
     result: Optional[StrictStr] = None
     message: Optional[StrictStr] = Field(default=None, description="Response message")
-    clientid: Optional[GetClientsProductsResponseAllOfClientid] = None
-    serviceid: Optional[GetClientsProductsResponseAllOfServiceid] = None
-    pid: Optional[GetClientsProductsResponseAllOfPid] = None
-    domain: Optional[StrictStr] = None
-    totalresults: Optional[StrictInt] = Field(default=None, description="The total number of results available")
+    clientid: Optional[StrictStr] = Field(default=None, description="The specific client id searched for")
+    serviceid: Optional[StrictStr] = Field(default=None, description="The specific service id searched for")
+    pid: Optional[StrictStr] = Field(default=None, description="The specific product id searched for")
+    domain: Optional[StrictStr] = Field(default=None, description="The specific domain searched for")
+    totalresults: Optional[StrictStr] = Field(default=None, description="The total number of results available")
     startnumber: Optional[StrictInt] = Field(default=None, description="The starting number for the returned results")
     numreturned: Optional[StrictInt] = Field(default=None, description="The number of results returned")
     products: Optional[ProductCollection] = None
@@ -92,15 +89,6 @@ class GetClientsProductsResponse(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
-        # override the default output from pydantic by calling `to_dict()` of clientid
-        if self.clientid:
-            _dict['clientid'] = self.clientid.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of serviceid
-        if self.serviceid:
-            _dict['serviceid'] = self.serviceid.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of pid
-        if self.pid:
-            _dict['pid'] = self.pid.to_dict()
         # override the default output from pydantic by calling `to_dict()` of products
         if self.products:
             _dict['products'] = self.products.to_dict()
@@ -133,9 +121,9 @@ class GetClientsProductsResponse(BaseModel):
         _obj = cls.model_validate({
             "result": obj.get("result"),
             "message": obj.get("message"),
-            "clientid": GetClientsProductsResponseAllOfClientid.from_dict(obj["clientid"]) if obj.get("clientid") is not None else None,
-            "serviceid": GetClientsProductsResponseAllOfServiceid.from_dict(obj["serviceid"]) if obj.get("serviceid") is not None else None,
-            "pid": GetClientsProductsResponseAllOfPid.from_dict(obj["pid"]) if obj.get("pid") is not None else None,
+            "clientid": obj.get("clientid"),
+            "serviceid": obj.get("serviceid"),
+            "pid": obj.get("pid"),
             "domain": obj.get("domain"),
             "totalresults": obj.get("totalresults"),
             "startnumber": obj.get("startnumber"),

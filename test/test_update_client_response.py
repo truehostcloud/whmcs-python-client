@@ -37,7 +37,7 @@ class TestUpdateClientResponse(unittest.TestCase):
             return UpdateClientResponse(
                 result = 'success',
                 message = '',
-                clientid = 56
+                clientid = ''
             )
         else:
             return UpdateClientResponse(

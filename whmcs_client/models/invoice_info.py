@@ -17,10 +17,8 @@ import pprint
 import re  # noqa: F401
 import json
 
-from datetime import date
 from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
-from whmcs_client.models.invoice_info_paymethodid import InvoiceInfoPaymethodid
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -30,33 +28,33 @@ class InvoiceInfo(BaseModel):
     """ # noqa: E501
     id: Optional[StrictInt] = Field(default=None, description="The invoice ID")
     userid: Optional[StrictInt] = Field(default=None, description="The client ID linked to the invoice")
-    firstname: Optional[StrictStr] = Field(default=None, description="The client first name")
-    lastname: Optional[StrictStr] = Field(default=None, description="The client last name")
-    companyname: Optional[StrictStr] = Field(default=None, description="The client company name")
-    invoicenum: Optional[StrictStr] = Field(default=None, description="The invoice number")
-    var_date: Optional[date] = Field(default=None, description="The invoice date", alias="date")
-    duedate: Optional[date] = Field(default=None, description="The invoice due date")
-    datepaid: Optional[StrictStr] = Field(default=None, description="The invoice paid timestamp")
-    last_capture_attempt: Optional[StrictStr] = Field(default=None, description="The last payment capture attempt timestamp")
-    date_refunded: Optional[StrictStr] = Field(default=None, description="The invoice refund timestamp")
-    date_cancelled: Optional[StrictStr] = Field(default=None, description="The invoice cancellation timestamp")
-    subtotal: Optional[StrictStr] = Field(default=None, description="The invoice subtotal amount")
-    credit: Optional[StrictStr] = Field(default=None, description="The invoice credit amount")
-    tax: Optional[StrictStr] = Field(default=None, description="The invoice tax amount")
-    tax2: Optional[StrictStr] = Field(default=None, description="The invoice secondary tax amount")
-    total: Optional[StrictStr] = Field(default=None, description="The invoice total amount")
-    taxrate: Optional[StrictStr] = Field(default=None, description="The invoice tax rate")
-    taxrate2: Optional[StrictStr] = Field(default=None, description="The invoice secondary tax rate")
-    status: Optional[StrictStr] = Field(default=None, description="The invoice status")
-    paymentmethod: Optional[StrictStr] = Field(default=None, description="The invoice payment method")
-    paymethodid: Optional[InvoiceInfoPaymethodid] = None
-    notes: Optional[StrictStr] = Field(default=None, description="Invoice notes")
-    created_at: Optional[StrictStr] = Field(default=None, description="The invoice creation timestamp")
-    updated_at: Optional[StrictStr] = Field(default=None, description="The invoice update timestamp")
-    currencycode: Optional[StrictStr] = Field(default=None, description="The invoice currency code")
-    currencyprefix: Optional[StrictStr] = Field(default=None, description="The invoice currency prefix")
-    currencysuffix: Optional[StrictStr] = Field(default=None, description="The invoice currency suffix")
-    __properties: ClassVar[List[str]] = ["id", "userid", "firstname", "lastname", "companyname", "invoicenum", "date", "duedate", "datepaid", "last_capture_attempt", "date_refunded", "date_cancelled", "subtotal", "credit", "tax", "tax2", "total", "taxrate", "taxrate2", "status", "paymentmethod", "paymethodid", "notes", "created_at", "updated_at", "currencycode", "currencyprefix", "currencysuffix"]
+    firstname: Optional[StrictStr] = None
+    lastname: Optional[StrictStr] = None
+    companyname: Optional[StrictStr] = None
+    invoicenum: Optional[StrictStr] = None
+    var_date: Optional[StrictStr] = Field(default=None, description="The invoice date (YYYY-MM-DD, may be 0000-00-00)", alias="date")
+    duedate: Optional[StrictStr] = Field(default=None, description="The invoice due date (YYYY-MM-DD, may be 0000-00-00)")
+    datepaid: Optional[StrictStr] = None
+    last_capture_attempt: Optional[StrictStr] = None
+    date_refunded: Optional[StrictStr] = None
+    date_cancelled: Optional[StrictStr] = None
+    subtotal: Optional[StrictStr] = None
+    credit: Optional[StrictStr] = None
+    tax: Optional[StrictStr] = None
+    tax2: Optional[StrictStr] = None
+    total: Optional[StrictStr] = None
+    taxrate: Optional[StrictStr] = None
+    taxrate2: Optional[StrictStr] = None
+    status: Optional[StrictStr] = None
+    paymentmethod: Optional[StrictStr] = None
+    notes: Optional[StrictStr] = None
+    created_at: Optional[StrictStr] = None
+    updated_at: Optional[StrictStr] = None
+    currencycode: Optional[StrictStr] = None
+    currencyprefix: Optional[StrictStr] = None
+    currencysuffix: Optional[StrictStr] = None
+    additional_properties: Dict[str, Any] = {}
+    __properties: ClassVar[List[str]] = ["id", "userid", "firstname", "lastname", "companyname", "invoicenum", "date", "duedate", "datepaid", "last_capture_attempt", "date_refunded", "date_cancelled", "subtotal", "credit", "tax", "tax2", "total", "taxrate", "taxrate2", "status", "paymentmethod", "notes", "created_at", "updated_at", "currencycode", "currencyprefix", "currencysuffix"]
 
     model_config = ConfigDict(
         validate_by_name=True,
@@ -89,8 +87,10 @@ class InvoiceInfo(BaseModel):
         * `None` is only added to the output dict for nullable fields that
           were set at model initialization. Other fields with value `None`
           are ignored.
+        * Fields in `self.additional_properties` are added to the output dict.
         """
         excluded_fields: Set[str] = set([
+            "additional_properties",
         ])
 
         _dict = self.model_dump(
@@ -98,13 +98,10 @@ class InvoiceInfo(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
-        # override the default output from pydantic by calling `to_dict()` of paymethodid
-        if self.paymethodid:
-            _dict['paymethodid'] = self.paymethodid.to_dict()
-        # set to None if paymethodid (nullable) is None
-        # and model_fields_set contains the field
-        if self.paymethodid is None and "paymethodid" in self.model_fields_set:
-            _dict['paymethodid'] = None
+        # puts key-value pairs in additional_properties in the top level
+        if self.additional_properties is not None:
+            for _key, _value in self.additional_properties.items():
+                _dict[_key] = _value
 
         return _dict
 
@@ -139,7 +136,6 @@ class InvoiceInfo(BaseModel):
             "taxrate2": obj.get("taxrate2"),
             "status": obj.get("status"),
             "paymentmethod": obj.get("paymentmethod"),
-            "paymethodid": InvoiceInfoPaymethodid.from_dict(obj["paymethodid"]) if obj.get("paymethodid") is not None else None,
             "notes": obj.get("notes"),
             "created_at": obj.get("created_at"),
             "updated_at": obj.get("updated_at"),
@@ -147,6 +143,11 @@ class InvoiceInfo(BaseModel):
             "currencyprefix": obj.get("currencyprefix"),
             "currencysuffix": obj.get("currencysuffix")
         })
+        # store additional fields in additional_properties
+        for _key in obj.keys():
+            if _key not in cls.__properties:
+                _obj.additional_properties[_key] = obj.get(_key)
+
         return _obj
 
 

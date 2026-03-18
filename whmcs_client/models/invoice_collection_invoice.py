@@ -122,19 +122,16 @@ class InvoiceCollectionInvoice(BaseModel):
         else:
             return json.dumps(self.actual_instance)
 
-    def to_dict(self) -> Optional[Union[Dict[str, Any], List[Dict[str, Any]]]]:
+    def to_dict(self) -> Optional[Union[Dict[str, Any], InvoiceInfo, List[InvoiceInfo]]]:
         """Returns the dict representation of the actual instance"""
         if self.actual_instance is None:
             return None
 
         if hasattr(self.actual_instance, "to_dict") and callable(self.actual_instance.to_dict):
             return self.actual_instance.to_dict()
-        elif isinstance(self.actual_instance, list):
-            return [
-                item.to_dict() if hasattr(item, "to_dict") else item
-                for item in self.actual_instance
-            ]
-        return self.actual_instance
+        else:
+            # primitive type
+            return self.actual_instance
 
     def to_str(self) -> str:
         """Returns the string representation of the actual instance"""

@@ -20,7 +20,6 @@ import json
 from pydantic import BaseModel, ConfigDict, Field, StrictStr, field_validator
 from typing import Any, ClassVar, Dict, List, Optional
 from whmcs_client.models.client_details_info import ClientDetailsInfo
-from whmcs_client.models.client_details_stats import ClientDetailsStats
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -31,7 +30,7 @@ class GetClientsDetailsResponse(BaseModel):
     result: Optional[StrictStr] = None
     message: Optional[StrictStr] = Field(default=None, description="Response message")
     client: Optional[ClientDetailsInfo] = None
-    stats: Optional[ClientDetailsStats] = None
+    stats: Optional[Dict[str, Any]] = None
     __properties: ClassVar[List[str]] = ["result", "message", "client", "stats"]
 
     @field_validator('result')
@@ -87,9 +86,6 @@ class GetClientsDetailsResponse(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of client
         if self.client:
             _dict['client'] = self.client.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of stats
-        if self.stats:
-            _dict['stats'] = self.stats.to_dict()
         return _dict
 
     @classmethod
@@ -105,7 +101,7 @@ class GetClientsDetailsResponse(BaseModel):
             "result": obj.get("result"),
             "message": obj.get("message"),
             "client": ClientDetailsInfo.from_dict(obj["client"]) if obj.get("client") is not None else None,
-            "stats": ClientDetailsStats.from_dict(obj["stats"]) if obj.get("stats") is not None else None
+            "stats": obj.get("stats")
         })
         return _obj
 

@@ -40,6 +40,41 @@ class TestDefaultApi(unittest.TestCase):
         """
         pass
 
+    def test_get_clients(self) -> None:
+        """Test case for get_clients
+
+        Get clients
+        """
+        pass
+
+    def test_get_clients_details(self) -> None:
+        """Test case for get_clients_details
+
+        Get client details
+        """
+        pass
+
+    def test_get_clients_products(self) -> None:
+        """Test case for get_clients_products
+
+        Get client products
+        """
+        pass
+
+    def test_get_currencies(self) -> None:
+        """Test case for get_currencies
+
+        Get currencies
+        """
+        pass
+
+    def test_get_invoices(self) -> None:
+        """Test case for get_invoices
+
+        Get invoices
+        """
+        pass
+
     def test_update_client(self) -> None:
         """Test case for update_client
 

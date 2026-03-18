@@ -10,7 +10,7 @@ Name | Type | Description | Notes
 **lastname** | **str** | The client&#39;s last name | [optional] 
 **companyname** | **str** | The client&#39;s company name | [optional] 
 **email** | **str** | The client&#39;s email address | [optional] 
-**datecreated** | **date** | The date the client was created | [optional] 
+**datecreated** | **str** | The date the client was created (YYYY-MM-DD, may be 0000-00-00) | [optional] 
 **groupid** | **int** | The client&#39;s group ID | [optional] 
 **status** | **str** | The client&#39;s status (Active, Inactive, Closed) | [optional] 
 

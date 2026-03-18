@@ -17,7 +17,6 @@ import pprint
 import re  # noqa: F401
 import json
 
-from datetime import date
 from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
@@ -32,7 +31,7 @@ class ClientInfo(BaseModel):
     lastname: Optional[StrictStr] = Field(default=None, description="The client's last name")
     companyname: Optional[StrictStr] = Field(default=None, description="The client's company name")
     email: Optional[StrictStr] = Field(default=None, description="The client's email address")
-    datecreated: Optional[date] = Field(default=None, description="The date the client was created")
+    datecreated: Optional[StrictStr] = Field(default=None, description="The date the client was created (YYYY-MM-DD, may be 0000-00-00)")
     groupid: Optional[StrictInt] = Field(default=None, description="The client's group ID")
     status: Optional[StrictStr] = Field(default=None, description="The client's status (Active, Inactive, Closed)")
     __properties: ClassVar[List[str]] = ["id", "firstname", "lastname", "companyname", "email", "datecreated", "groupid", "status"]

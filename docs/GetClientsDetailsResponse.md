@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 **result** | **str** |  | [optional] 
 **message** | **str** | Response message | [optional] 
 **client** | [**ClientDetailsInfo**](ClientDetailsInfo.md) |  | [optional] 
-**stats** | [**ClientDetailsStats**](ClientDetailsStats.md) |  | [optional] 
+**stats** | **Dict[str, object]** |  | [optional] 
 
 ## Example
 
