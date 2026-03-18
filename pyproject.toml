@@ -1,5 +1,5 @@
 [project]
-name = "whmcs_client"
+name = "whmcs-api-client"
 version = "1.0.15"
 description = "WHMCS API"
 authors = [
