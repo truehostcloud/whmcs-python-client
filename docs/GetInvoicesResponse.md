@@ -10,7 +10,7 @@ Name | Type | Description | Notes
 **totalresults** | **int** | The total number of results available | [optional] 
 **startnumber** | **int** | The starting number for the returned results | [optional] 
 **numreturned** | **int** | The number of results returned | [optional] 
-**invoices** | [**InvoiceCollection**](InvoiceCollection.md) |  | [optional] 
+**invoices** | **object** | The invoices collection | [optional] 
 
 ## Example
 

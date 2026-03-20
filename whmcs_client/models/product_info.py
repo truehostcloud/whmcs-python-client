@@ -26,50 +26,13 @@ class ProductInfo(BaseModel):
     """
     ProductInfo
     """ # noqa: E501
-    id: Optional[StrictStr] = Field(default=None, description="The service ID")
-    qty: Optional[StrictStr] = Field(default=None, description="The service quantity")
-    clientid: Optional[StrictStr] = Field(default=None, description="The client ID")
-    orderid: Optional[StrictStr] = Field(default=None, description="The order ID")
-    ordernumber: Optional[StrictStr] = Field(default=None, description="The order number")
-    pid: Optional[StrictStr] = Field(default=None, description="The product ID")
-    regdate: Optional[StrictStr] = Field(default=None, description="The registration date (YYYY-MM-DD, may be 0000-00-00)")
     name: Optional[StrictStr] = Field(default=None, description="The product name")
-    translated_name: Optional[StrictStr] = Field(default=None, description="The translated product name")
-    groupname: Optional[StrictStr] = Field(default=None, description="The product group name")
-    translated_groupname: Optional[StrictStr] = Field(default=None, description="The translated product group name")
-    domain: Optional[StrictStr] = Field(default=None, description="The associated domain name")
-    dedicatedip: Optional[StrictStr] = Field(default=None, description="The dedicated IP address")
-    serverid: Optional[StrictStr] = Field(default=None, description="The server ID")
-    servername: Optional[StrictStr] = Field(default=None, description="The server name")
-    serverip: Optional[StrictStr] = Field(default=None, description="The server IP")
-    serverhostname: Optional[StrictStr] = Field(default=None, description="The server hostname")
-    suspensionreason: Optional[StrictStr] = Field(default=None, description="Suspension reason")
-    firstpaymentamount: Optional[StrictStr] = Field(default=None, description="The first payment amount")
     recurringamount: Optional[StrictStr] = Field(default=None, description="The recurring amount")
-    paymentmethod: Optional[StrictStr] = Field(default=None, description="The payment method")
-    paymentmethodname: Optional[StrictStr] = Field(default=None, description="The human-readable payment method name")
     billingcycle: Optional[StrictStr] = Field(default=None, description="The billing cycle")
     nextduedate: Optional[StrictStr] = Field(default=None, description="The next due date (YYYY-MM-DD, may be 0000-00-00)")
     status: Optional[StrictStr] = Field(default=None, description="The service status")
-    username: Optional[StrictStr] = Field(default=None, description="The service username")
-    password: Optional[StrictStr] = Field(default=None, description="The service password placeholder")
-    subscriptionid: Optional[StrictStr] = Field(default=None, description="The subscription ID")
-    promoid: Optional[StrictStr] = Field(default=None, description="The promotion ID")
-    overideautosuspend: Optional[StrictStr] = Field(default=None, description="Whether autosuspend is overridden")
-    overidesuspenduntil: Optional[StrictStr] = Field(default=None, description="Suspend override until date")
-    ns1: Optional[StrictStr] = Field(default=None, description="Nameserver 1")
-    ns2: Optional[StrictStr] = Field(default=None, description="Nameserver 2")
-    assignedips: Optional[StrictStr] = Field(default=None, description="Assigned IPs")
-    notes: Optional[StrictStr] = Field(default=None, description="Product notes")
-    diskusage: Optional[StrictStr] = Field(default=None, description="Disk usage")
-    disklimit: Optional[StrictStr] = Field(default=None, description="Disk limit")
-    bwusage: Optional[StrictStr] = Field(default=None, description="Bandwidth usage")
-    bwlimit: Optional[StrictStr] = Field(default=None, description="Bandwidth limit")
-    lastupdate: Optional[StrictStr] = Field(default=None, description="Last update timestamp")
-    customfields: Optional[Dict[str, Any]] = Field(default=None, description="Custom field values for the product")
-    configoptions: Optional[Dict[str, Any]] = Field(default=None, description="Configurable option values for the product")
     additional_properties: Dict[str, Any] = {}
-    __properties: ClassVar[List[str]] = ["id", "qty", "clientid", "orderid", "ordernumber", "pid", "regdate", "name", "translated_name", "groupname", "translated_groupname", "domain", "dedicatedip", "serverid", "servername", "serverip", "serverhostname", "suspensionreason", "firstpaymentamount", "recurringamount", "paymentmethod", "paymentmethodname", "billingcycle", "nextduedate", "status", "username", "password", "subscriptionid", "promoid", "overideautosuspend", "overidesuspenduntil", "ns1", "ns2", "assignedips", "notes", "diskusage", "disklimit", "bwusage", "bwlimit", "lastupdate", "customfields", "configoptions"]
+    __properties: ClassVar[List[str]] = ["name", "recurringamount", "billingcycle", "nextduedate", "status"]
 
     model_config = ConfigDict(
         validate_by_name=True,
@@ -130,48 +93,11 @@ class ProductInfo(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "id": obj.get("id"),
-            "qty": obj.get("qty"),
-            "clientid": obj.get("clientid"),
-            "orderid": obj.get("orderid"),
-            "ordernumber": obj.get("ordernumber"),
-            "pid": obj.get("pid"),
-            "regdate": obj.get("regdate"),
             "name": obj.get("name"),
-            "translated_name": obj.get("translated_name"),
-            "groupname": obj.get("groupname"),
-            "translated_groupname": obj.get("translated_groupname"),
-            "domain": obj.get("domain"),
-            "dedicatedip": obj.get("dedicatedip"),
-            "serverid": obj.get("serverid"),
-            "servername": obj.get("servername"),
-            "serverip": obj.get("serverip"),
-            "serverhostname": obj.get("serverhostname"),
-            "suspensionreason": obj.get("suspensionreason"),
-            "firstpaymentamount": obj.get("firstpaymentamount"),
             "recurringamount": obj.get("recurringamount"),
-            "paymentmethod": obj.get("paymentmethod"),
-            "paymentmethodname": obj.get("paymentmethodname"),
             "billingcycle": obj.get("billingcycle"),
             "nextduedate": obj.get("nextduedate"),
-            "status": obj.get("status"),
-            "username": obj.get("username"),
-            "password": obj.get("password"),
-            "subscriptionid": obj.get("subscriptionid"),
-            "promoid": obj.get("promoid"),
-            "overideautosuspend": obj.get("overideautosuspend"),
-            "overidesuspenduntil": obj.get("overidesuspenduntil"),
-            "ns1": obj.get("ns1"),
-            "ns2": obj.get("ns2"),
-            "assignedips": obj.get("assignedips"),
-            "notes": obj.get("notes"),
-            "diskusage": obj.get("diskusage"),
-            "disklimit": obj.get("disklimit"),
-            "bwusage": obj.get("bwusage"),
-            "bwlimit": obj.get("bwlimit"),
-            "lastupdate": obj.get("lastupdate"),
-            "customfields": obj.get("customfields"),
-            "configoptions": obj.get("configoptions")
+            "status": obj.get("status")
         })
         # store additional fields in additional_properties
         for _key in obj.keys():

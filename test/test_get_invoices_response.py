@@ -40,8 +40,7 @@ class TestGetInvoicesResponse(unittest.TestCase):
                 totalresults = 56,
                 startnumber = 56,
                 numreturned = 56,
-                invoices = whmcs_client.models.invoice_collection.InvoiceCollection(
-                    invoice = null, )
+                invoices = None
             )
         else:
             return GetInvoicesResponse(

@@ -37,15 +37,7 @@ class TestGetClientsProductsResponse(unittest.TestCase):
             return GetClientsProductsResponse(
                 result = 'success',
                 message = '',
-                clientid = '',
-                serviceid = '',
-                pid = '',
-                domain = '',
-                totalresults = '',
-                startnumber = 56,
-                numreturned = 56,
-                products = whmcs_client.models.product_collection.ProductCollection(
-                    product = null, )
+                products = None
             )
         else:
             return GetClientsProductsResponse(

@@ -37,31 +37,13 @@ class TestInvoiceInfo(unittest.TestCase):
             return InvoiceInfo(
                 id = 56,
                 userid = 56,
-                firstname = '',
-                lastname = '',
-                companyname = '',
-                invoicenum = '',
                 var_date = '',
                 duedate = '',
-                datepaid = '',
-                last_capture_attempt = '',
-                date_refunded = '',
-                date_cancelled = '',
-                subtotal = '',
-                credit = '',
-                tax = '',
-                tax2 = '',
-                total = '',
-                taxrate = '',
-                taxrate2 = '',
-                status = '',
-                paymentmethod = '',
-                notes = '',
+                var_date = '',
                 created_at = '',
-                updated_at = '',
-                currencycode = '',
-                currencyprefix = '',
-                currencysuffix = ''
+                total = '',
+                status = '',
+                currencycode = ''
             )
         else:
             return InvoiceInfo(

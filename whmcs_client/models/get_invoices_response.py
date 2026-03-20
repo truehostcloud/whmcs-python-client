@@ -19,7 +19,6 @@ import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr, field_validator
 from typing import Any, ClassVar, Dict, List, Optional
-from whmcs_client.models.invoice_collection import InvoiceCollection
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -32,7 +31,7 @@ class GetInvoicesResponse(BaseModel):
     totalresults: Optional[StrictInt] = Field(default=None, description="The total number of results available")
     startnumber: Optional[StrictInt] = Field(default=None, description="The starting number for the returned results")
     numreturned: Optional[StrictInt] = Field(default=None, description="The number of results returned")
-    invoices: Optional[InvoiceCollection] = None
+    invoices: Optional[Any] = Field(default=None, description="The invoices collection")
     __properties: ClassVar[List[str]] = ["result", "message", "totalresults", "startnumber", "numreturned", "invoices"]
 
     @field_validator('result')
@@ -85,9 +84,11 @@ class GetInvoicesResponse(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
-        # override the default output from pydantic by calling `to_dict()` of invoices
-        if self.invoices:
-            _dict['invoices'] = self.invoices.to_dict()
+        # set to None if invoices (nullable) is None
+        # and model_fields_set contains the field
+        if self.invoices is None and "invoices" in self.model_fields_set:
+            _dict['invoices'] = None
+
         return _dict
 
     @classmethod
@@ -105,7 +106,7 @@ class GetInvoicesResponse(BaseModel):
             "totalresults": obj.get("totalresults"),
             "startnumber": obj.get("startnumber"),
             "numreturned": obj.get("numreturned"),
-            "invoices": InvoiceCollection.from_dict(obj["invoices"]) if obj.get("invoices") is not None else None
+            "invoices": obj.get("invoices")
         })
         return _obj
 

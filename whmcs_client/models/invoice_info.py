@@ -28,33 +28,15 @@ class InvoiceInfo(BaseModel):
     """ # noqa: E501
     id: Optional[StrictInt] = Field(default=None, description="The invoice ID")
     userid: Optional[StrictInt] = Field(default=None, description="The client ID linked to the invoice")
-    firstname: Optional[StrictStr] = None
-    lastname: Optional[StrictStr] = None
-    companyname: Optional[StrictStr] = None
-    invoicenum: Optional[StrictStr] = None
-    var_date: Optional[StrictStr] = Field(default=None, description="The invoice date (YYYY-MM-DD, may be 0000-00-00)", alias="date")
+    var_date: Optional[StrictStr] = Field(default=None, description="The invoice date (YYYY-MM-DD)", alias="date")
     duedate: Optional[StrictStr] = Field(default=None, description="The invoice due date (YYYY-MM-DD, may be 0000-00-00)")
-    datepaid: Optional[StrictStr] = None
-    last_capture_attempt: Optional[StrictStr] = None
-    date_refunded: Optional[StrictStr] = None
-    date_cancelled: Optional[StrictStr] = None
-    subtotal: Optional[StrictStr] = None
-    credit: Optional[StrictStr] = None
-    tax: Optional[StrictStr] = None
-    tax2: Optional[StrictStr] = None
-    total: Optional[StrictStr] = None
-    taxrate: Optional[StrictStr] = None
-    taxrate2: Optional[StrictStr] = None
-    status: Optional[StrictStr] = None
-    paymentmethod: Optional[StrictStr] = None
-    notes: Optional[StrictStr] = None
-    created_at: Optional[StrictStr] = None
-    updated_at: Optional[StrictStr] = None
-    currencycode: Optional[StrictStr] = None
-    currencyprefix: Optional[StrictStr] = None
-    currencysuffix: Optional[StrictStr] = None
+    var_date: Optional[StrictStr] = Field(default=None, description="Fallback invoice date field")
+    created_at: Optional[StrictStr] = Field(default=None, description="Invoice creation timestamp")
+    total: Optional[StrictStr] = Field(default=None, description="The invoice total amount")
+    status: Optional[StrictStr] = Field(default=None, description="The invoice status")
+    currencycode: Optional[StrictStr] = Field(default=None, description="The invoice currency code")
     additional_properties: Dict[str, Any] = {}
-    __properties: ClassVar[List[str]] = ["id", "userid", "firstname", "lastname", "companyname", "invoicenum", "date", "duedate", "datepaid", "last_capture_attempt", "date_refunded", "date_cancelled", "subtotal", "credit", "tax", "tax2", "total", "taxrate", "taxrate2", "status", "paymentmethod", "notes", "created_at", "updated_at", "currencycode", "currencyprefix", "currencysuffix"]
+    __properties: ClassVar[List[str]] = ["id", "userid", "date", "duedate", "var_date", "created_at", "total", "status", "currencycode"]
 
     model_config = ConfigDict(
         validate_by_name=True,
@@ -117,31 +99,13 @@ class InvoiceInfo(BaseModel):
         _obj = cls.model_validate({
             "id": obj.get("id"),
             "userid": obj.get("userid"),
-            "firstname": obj.get("firstname"),
-            "lastname": obj.get("lastname"),
-            "companyname": obj.get("companyname"),
-            "invoicenum": obj.get("invoicenum"),
             "date": obj.get("date"),
             "duedate": obj.get("duedate"),
-            "datepaid": obj.get("datepaid"),
-            "last_capture_attempt": obj.get("last_capture_attempt"),
-            "date_refunded": obj.get("date_refunded"),
-            "date_cancelled": obj.get("date_cancelled"),
-            "subtotal": obj.get("subtotal"),
-            "credit": obj.get("credit"),
-            "tax": obj.get("tax"),
-            "tax2": obj.get("tax2"),
-            "total": obj.get("total"),
-            "taxrate": obj.get("taxrate"),
-            "taxrate2": obj.get("taxrate2"),
-            "status": obj.get("status"),
-            "paymentmethod": obj.get("paymentmethod"),
-            "notes": obj.get("notes"),
+            "var_date": obj.get("var_date"),
             "created_at": obj.get("created_at"),
-            "updated_at": obj.get("updated_at"),
-            "currencycode": obj.get("currencycode"),
-            "currencyprefix": obj.get("currencyprefix"),
-            "currencysuffix": obj.get("currencysuffix")
+            "total": obj.get("total"),
+            "status": obj.get("status"),
+            "currencycode": obj.get("currencycode")
         })
         # store additional fields in additional_properties
         for _key in obj.keys():

@@ -856,7 +856,8 @@ components:
               type: integer
               description: The number of results returned
             invoices:
-              $ref: '#/components/schemas/InvoiceCollection'
+              description: The invoices collection
+              nullable: true
 
     GetClientsDetailsResponse:
       allOf:
@@ -873,32 +874,9 @@ components:
         - $ref: '#/components/schemas/WHMCSSuccessResponse'
         - type: object
           properties:
-            clientid:
-              type: string
-              description: The specific client id searched for
-            serviceid:
-              type: string
-              nullable: true
-              description: The specific service id searched for
-            pid:
-              type: string
-              nullable: true
-              description: The specific product id searched for
-            domain:
-              type: string
-              nullable: true
-              description: The specific domain searched for
-            totalresults:
-              type: string
-              description: The total number of results available
-            startnumber:
-              type: integer
-              description: The starting number for the returned results
-            numreturned:
-              type: integer
-              description: The number of results returned
             products:
-              $ref: '#/components/schemas/ProductCollection'
+              description: The products collection
+              nullable: true
 
     ClientInfo:
       type: object
@@ -928,17 +906,6 @@ components:
           type: string
           description: The client's status (Active, Inactive, Closed)
 
-    InvoiceCollection:
-      type: object
-      properties:
-        invoice:
-          oneOf:
-            - type: array
-              items:
-                $ref: '#/components/schemas/InvoiceInfo'
-            - $ref: '#/components/schemas/InvoiceInfo'
-          description: Array of invoice information or a single invoice object
-
     InvoiceInfo:
       type: object
       additionalProperties: true
@@ -949,58 +916,27 @@ components:
         userid:
           type: integer
           description: The client ID linked to the invoice
-        firstname:
-          type: string
-        lastname:
-          type: string
-        companyname:
-          type: string
-        invoicenum:
-          type: string
         date:
           type: string
-          description: The invoice date (YYYY-MM-DD, may be 0000-00-00)
+          description: The invoice date (YYYY-MM-DD)
         duedate:
           type: string
           description: The invoice due date (YYYY-MM-DD, may be 0000-00-00)
-        datepaid:
+        var_date:
           type: string
-        last_capture_attempt:
-          type: string
-        date_refunded:
-          type: string
-        date_cancelled:
-          type: string
-        subtotal:
-          type: string
-        credit:
-          type: string
-        tax:
-          type: string
-        tax2:
-          type: string
-        total:
-          type: string
-        taxrate:
-          type: string
-        taxrate2:
-          type: string
-        status:
-          type: string
-        paymentmethod:
-          type: string
-        notes:
-          type: string
+          description: Fallback invoice date field
         created_at:
           type: string
-        updated_at:
+          description: Invoice creation timestamp
+        total:
           type: string
+          description: The invoice total amount
+        status:
+          type: string
+          description: The invoice status
         currencycode:
           type: string
-        currencyprefix:
-          type: string
-        currencysuffix:
-          type: string
+          description: The invoice currency code
 
     ClientDetailsInfo:
       type: object
@@ -1017,87 +953,16 @@ components:
       type: object
       additionalProperties: true
 
-    ProductCollection:
-      type: object
-      properties:
-        product:
-          oneOf:
-            - type: array
-              items:
-                $ref: '#/components/schemas/ProductInfo'
-            - $ref: '#/components/schemas/ProductInfo'
-          description: Array of product information or a single product object
-
     ProductInfo:
       type: object
       additionalProperties: true
       properties:
-        id:
-          type: string
-          description: The service ID
-        qty:
-          type: string
-          description: The service quantity
-        clientid:
-          type: string
-          description: The client ID
-        orderid:
-          type: string
-          description: The order ID
-        ordernumber:
-          type: string
-          description: The order number
-        pid:
-          type: string
-          description: The product ID
-        regdate:
-          type: string
-          description: The registration date (YYYY-MM-DD, may be 0000-00-00)
         name:
           type: string
           description: The product name
-        translated_name:
-          type: string
-          description: The translated product name
-        groupname:
-          type: string
-          description: The product group name
-        translated_groupname:
-          type: string
-          description: The translated product group name
-        domain:
-          type: string
-          description: The associated domain name
-        dedicatedip:
-          type: string
-          description: The dedicated IP address
-        serverid:
-          type: string
-          description: The server ID
-        servername:
-          type: string
-          description: The server name
-        serverip:
-          type: string
-          description: The server IP
-        serverhostname:
-          type: string
-          description: The server hostname
-        suspensionreason:
-          type: string
-          description: Suspension reason
-        firstpaymentamount:
-          type: string
-          description: The first payment amount
         recurringamount:
           type: string
           description: The recurring amount
-        paymentmethod:
-          type: string
-          description: The payment method
-        paymentmethodname:
-          type: string
-          description: The human-readable payment method name
         billingcycle:
           type: string
           description: The billing cycle
@@ -1107,59 +972,6 @@ components:
         status:
           type: string
           description: The service status
-        username:
-          type: string
-          description: The service username
-        password:
-          type: string
-          description: The service password placeholder
-        subscriptionid:
-          type: string
-          description: The subscription ID
-        promoid:
-          type: string
-          description: The promotion ID
-        overideautosuspend:
-          type: string
-          description: Whether autosuspend is overridden
-        overidesuspenduntil:
-          type: string
-          description: Suspend override until date
-        ns1:
-          type: string
-          description: Nameserver 1
-        ns2:
-          type: string
-          description: Nameserver 2
-        assignedips:
-          type: string
-          description: Assigned IPs
-        notes:
-          type: string
-          description: Product notes
-        diskusage:
-          type: string
-          description: Disk usage
-        disklimit:
-          type: string
-          description: Disk limit
-        bwusage:
-          type: string
-          description: Bandwidth usage
-        bwlimit:
-          type: string
-          description: Bandwidth limit
-        lastupdate:
-          type: string
-          description: Last update timestamp
-        customfields:
-          type: object
-          additionalProperties: true
-          description: Custom field values for the product
-        configoptions:
-          type: object
-          additionalProperties: true
-          description: Configurable option values for the product
 
     CurrencyInfo:
       type: object

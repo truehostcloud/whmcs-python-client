@@ -17,9 +17,8 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr, field_validator
+from pydantic import BaseModel, ConfigDict, Field, StrictStr, field_validator
 from typing import Any, ClassVar, Dict, List, Optional
-from whmcs_client.models.product_collection import ProductCollection
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -29,15 +28,8 @@ class GetClientsProductsResponse(BaseModel):
     """ # noqa: E501
     result: Optional[StrictStr] = None
     message: Optional[StrictStr] = Field(default=None, description="Response message")
-    clientid: Optional[StrictStr] = Field(default=None, description="The specific client id searched for")
-    serviceid: Optional[StrictStr] = Field(default=None, description="The specific service id searched for")
-    pid: Optional[StrictStr] = Field(default=None, description="The specific product id searched for")
-    domain: Optional[StrictStr] = Field(default=None, description="The specific domain searched for")
-    totalresults: Optional[StrictStr] = Field(default=None, description="The total number of results available")
-    startnumber: Optional[StrictInt] = Field(default=None, description="The starting number for the returned results")
-    numreturned: Optional[StrictInt] = Field(default=None, description="The number of results returned")
-    products: Optional[ProductCollection] = None
-    __properties: ClassVar[List[str]] = ["result", "message", "clientid", "serviceid", "pid", "domain", "totalresults", "startnumber", "numreturned", "products"]
+    products: Optional[Any] = Field(default=None, description="The products collection")
+    __properties: ClassVar[List[str]] = ["result", "message", "products"]
 
     @field_validator('result')
     def result_validate_enum(cls, value):
@@ -89,23 +81,10 @@ class GetClientsProductsResponse(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
-        # override the default output from pydantic by calling `to_dict()` of products
-        if self.products:
-            _dict['products'] = self.products.to_dict()
-        # set to None if serviceid (nullable) is None
+        # set to None if products (nullable) is None
         # and model_fields_set contains the field
-        if self.serviceid is None and "serviceid" in self.model_fields_set:
-            _dict['serviceid'] = None
-
-        # set to None if pid (nullable) is None
-        # and model_fields_set contains the field
-        if self.pid is None and "pid" in self.model_fields_set:
-            _dict['pid'] = None
-
-        # set to None if domain (nullable) is None
-        # and model_fields_set contains the field
-        if self.domain is None and "domain" in self.model_fields_set:
-            _dict['domain'] = None
+        if self.products is None and "products" in self.model_fields_set:
+            _dict['products'] = None
 
         return _dict
 
@@ -121,14 +100,7 @@ class GetClientsProductsResponse(BaseModel):
         _obj = cls.model_validate({
             "result": obj.get("result"),
             "message": obj.get("message"),
-            "clientid": obj.get("clientid"),
-            "serviceid": obj.get("serviceid"),
-            "pid": obj.get("pid"),
-            "domain": obj.get("domain"),
-            "totalresults": obj.get("totalresults"),
-            "startnumber": obj.get("startnumber"),
-            "numreturned": obj.get("numreturned"),
-            "products": ProductCollection.from_dict(obj["products"]) if obj.get("products") is not None else None
+            "products": obj.get("products")
         })
         return _obj
 

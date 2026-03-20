@@ -7,14 +7,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **result** | **str** |  | [optional] 
 **message** | **str** | Response message | [optional] 
-**clientid** | **str** | The specific client id searched for | [optional] 
-**serviceid** | **str** | The specific service id searched for | [optional] 
-**pid** | **str** | The specific product id searched for | [optional] 
-**domain** | **str** | The specific domain searched for | [optional] 
-**totalresults** | **str** | The total number of results available | [optional] 
-**startnumber** | **int** | The starting number for the returned results | [optional] 
-**numreturned** | **int** | The number of results returned | [optional] 
-**products** | [**ProductCollection**](ProductCollection.md) |  | [optional] 
+**products** | **object** | The products collection | [optional] 
 
 ## Example
 

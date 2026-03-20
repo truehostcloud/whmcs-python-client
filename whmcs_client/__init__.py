@@ -40,11 +40,7 @@ __all__ = [
     "GetCurrenciesResponse",
     "GetCurrenciesResponseAllOfCurrencies",
     "GetInvoicesResponse",
-    "InvoiceCollection",
-    "InvoiceCollectionInvoice",
     "InvoiceInfo",
-    "ProductCollection",
-    "ProductCollectionProduct",
     "ProductInfo",
     "UpdateClientResponse",
     "WHMCSBaseResponse",
@@ -79,11 +75,7 @@ from whmcs_client.models.get_clients_response_all_of_clients import GetClientsRe
 from whmcs_client.models.get_currencies_response import GetCurrenciesResponse as GetCurrenciesResponse
 from whmcs_client.models.get_currencies_response_all_of_currencies import GetCurrenciesResponseAllOfCurrencies as GetCurrenciesResponseAllOfCurrencies
 from whmcs_client.models.get_invoices_response import GetInvoicesResponse as GetInvoicesResponse
-from whmcs_client.models.invoice_collection import InvoiceCollection as InvoiceCollection
-from whmcs_client.models.invoice_collection_invoice import InvoiceCollectionInvoice as InvoiceCollectionInvoice
 from whmcs_client.models.invoice_info import InvoiceInfo as InvoiceInfo
-from whmcs_client.models.product_collection import ProductCollection as ProductCollection
-from whmcs_client.models.product_collection_product import ProductCollectionProduct as ProductCollectionProduct
 from whmcs_client.models.product_info import ProductInfo as ProductInfo
 from whmcs_client.models.update_client_response import UpdateClientResponse as UpdateClientResponse
 from whmcs_client.models.whmcs_base_response import WHMCSBaseResponse as WHMCSBaseResponse
