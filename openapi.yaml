@@ -196,6 +196,29 @@ paths:
         default:
           $ref: '#/components/responses/Error'
 
+  /api.php?action=GetInvoicesDetails:
+    post:
+      summary: Get invoices with line item details
+      description: Custom action returning invoices in GetInvoice format with embedded line items
+      operationId: getInvoicesDetails
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              allOf:
+                - $ref: '#/components/schemas/WHMCSBaseRequest'
+                - $ref: '#/components/schemas/GetInvoicesDetailsRequest'
+      responses:
+        '200':
+          description: Invoices with line items retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetInvoicesDetailsResponse'
+        default:
+          $ref: '#/components/responses/Error'
+
 components:
   schemas:
     WHMCSBaseRequest:
@@ -725,6 +748,32 @@ components:
           type: string
           description: The specific username to obtain the details for
 
+    GetInvoicesDetailsRequest:
+      type: object
+      properties:
+        limitstart:
+          type: integer
+          description: The offset for the returned invoice data
+          default: 0
+        limitnum:
+          type: integer
+          description: The number of records to return
+          default: 25
+        userid:
+          type: integer
+          description: Find invoices for a specific client id
+        status:
+          type: string
+          description: Find invoices for a specific status, including Overdue
+        orderby:
+          type: string
+          enum: [id, invoicenumber, date, duedate, total, status]
+          description: The field to sort results by
+        order:
+          type: string
+          enum: [asc, desc]
+          description: Sort direction for the invoice results
+
     WHMCSBaseResponse:
       type: object
       properties:
@@ -859,6 +908,24 @@ components:
               description: The invoices collection
               nullable: true
 
+    GetInvoicesDetailsResponse:
+      allOf:
+        - $ref: '#/components/schemas/WHMCSSuccessResponse'
+        - type: object
+          properties:
+            totalresults:
+              type: integer
+              description: The total number of results available
+            startnumber:
+              type: integer
+              description: The starting number for the returned results
+            numreturned:
+              type: integer
+              description: The number of results returned
+            invoices:
+              description: The invoices collection with embedded line items
+              nullable: true
+
     GetClientsDetailsResponse:
       allOf:
         - $ref: '#/components/schemas/WHMCSSuccessResponse'
@@ -937,6 +1004,39 @@ components:
         currencycode:
           type: string
           description: The invoice currency code
+
+    InvoiceItem:
+      type: object
+      additionalProperties: true
+      properties:
+        id:
+          type: integer
+          description: The line item ID
+        type:
+          type: string
+          description: The line item type (e.g., Hosting, Domain)
+        relid:
+          type: integer
+          description: The related service or domain ID
+        description:
+          type: string
+          description: Human-readable description including billing period
+        amount:
+          type: string
+          description: The line item amount
+        taxed:
+          type: integer
+          description: Whether the item is taxed (0 or 1)
+
+    InvoiceDetailInfo:
+      allOf:
+        - $ref: '#/components/schemas/InvoiceInfo'
+        - type: object
+          additionalProperties: true
+          properties:
+            items:
+              description: The invoice line items collection
+              nullable: true
 
     ClientDetailsInfo:
       type: object

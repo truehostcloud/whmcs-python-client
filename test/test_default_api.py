@@ -75,6 +75,13 @@ class TestDefaultApi(unittest.TestCase):
         """
         pass
 
+    def test_get_invoices_details(self) -> None:
+        """Test case for get_invoices_details
+
+        Get invoices with line item details
+        """
+        pass
+
     def test_update_client(self) -> None:
         """Test case for update_client
 

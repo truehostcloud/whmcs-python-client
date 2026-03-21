@@ -11,6 +11,7 @@ Method | HTTP request | Description
 [**get_clients_products**](DefaultApi.md#get_clients_products) | **POST** /api.php?action&#x3D;GetClientsProducts | Get client products
 [**get_currencies**](DefaultApi.md#get_currencies) | **POST** /api.php?action&#x3D;GetCurrencies | Get currencies
 [**get_invoices**](DefaultApi.md#get_invoices) | **POST** /api.php?action&#x3D;GetInvoices | Get invoices
+[**get_invoices_details**](DefaultApi.md#get_invoices_details) | **POST** /api.php?action&#x3D;GetInvoicesDetails | Get invoices with line item details
 [**update_client**](DefaultApi.md#update_client) | **POST** /api.php?action&#x3D;UpdateClient | Update client details
 
 
@@ -719,6 +720,93 @@ No authorization required
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Invoices retrieved successfully |  -  |
+**0** | Error response |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **get_invoices_details**
+> GetInvoicesDetailsResponse get_invoices_details(username, password, accesskey=accesskey, responsetype=responsetype, limitstart=limitstart, limitnum=limitnum, userid=userid, status=status, orderby=orderby, order=order)
+
+Get invoices with line item details
+
+Custom action returning invoices in GetInvoice format with embedded line items
+
+### Example
+
+
+```python
+import whmcs_client
+from whmcs_client.models.get_invoices_details_response import GetInvoicesDetailsResponse
+from whmcs_client.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://your-whmcs-instance.com/includes
+# See configuration.py for a list of all supported configuration parameters.
+configuration = whmcs_client.Configuration(
+    host = "https://your-whmcs-instance.com/includes"
+)
+
+
+# Enter a context with an instance of the API client
+with whmcs_client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = whmcs_client.DefaultApi(api_client)
+    username = 'username_example' # str | Admin username/API identifier
+    password = 'password_example' # str | Admin password/API secret
+    accesskey = 'accesskey_example' # str | Optional API access key (optional)
+    responsetype = json # str | Response format (optional) (default to json)
+    limitstart = 0 # int | The offset for the returned invoice data (optional) (default to 0)
+    limitnum = 25 # int | The number of records to return (optional) (default to 25)
+    userid = 56 # int | Find invoices for a specific client id (optional)
+    status = 'status_example' # str | Find invoices for a specific status, including Overdue (optional)
+    orderby = 'orderby_example' # str | The field to sort results by (optional)
+    order = 'order_example' # str | Sort direction for the invoice results (optional)
+
+    try:
+        # Get invoices with line item details
+        api_response = api_instance.get_invoices_details(username, password, accesskey=accesskey, responsetype=responsetype, limitstart=limitstart, limitnum=limitnum, userid=userid, status=status, orderby=orderby, order=order)
+        print("The response of DefaultApi->get_invoices_details:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling DefaultApi->get_invoices_details: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **username** | **str**| Admin username/API identifier | 
+ **password** | **str**| Admin password/API secret | 
+ **accesskey** | **str**| Optional API access key | [optional] 
+ **responsetype** | **str**| Response format | [optional] [default to json]
+ **limitstart** | **int**| The offset for the returned invoice data | [optional] [default to 0]
+ **limitnum** | **int**| The number of records to return | [optional] [default to 25]
+ **userid** | **int**| Find invoices for a specific client id | [optional] 
+ **status** | **str**| Find invoices for a specific status, including Overdue | [optional] 
+ **orderby** | **str**| The field to sort results by | [optional] 
+ **order** | **str**| Sort direction for the invoice results | [optional] 
+
+### Return type
+
+[**GetInvoicesDetailsResponse**](GetInvoicesDetailsResponse.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: application/x-www-form-urlencoded
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Invoices with line items retrieved successfully |  -  |
 **0** | Error response |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
