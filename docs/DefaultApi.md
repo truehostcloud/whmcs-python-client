@@ -12,6 +12,7 @@ Method | HTTP request | Description
 [**get_currencies**](DefaultApi.md#get_currencies) | **POST** /api.php?action&#x3D;GetCurrencies | Get currencies
 [**get_invoices**](DefaultApi.md#get_invoices) | **POST** /api.php?action&#x3D;GetInvoices | Get invoices
 [**get_invoices_details**](DefaultApi.md#get_invoices_details) | **POST** /api.php?action&#x3D;GetInvoicesDetails | Get invoices with line item details
+[**get_orders**](DefaultApi.md#get_orders) | **POST** /api.php?action&#x3D;GetOrders | Get orders
 [**update_client**](DefaultApi.md#update_client) | **POST** /api.php?action&#x3D;UpdateClient | Update client details
 
 
@@ -807,6 +808,93 @@ No authorization required
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Invoices with line items retrieved successfully |  -  |
+**0** | Error response |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **get_orders**
+> GetOrdersResponse get_orders(username, password, accesskey=accesskey, responsetype=responsetype, limitstart=limitstart, limitnum=limitnum, id=id, userid=userid, requestor_id=requestor_id, status=status)
+
+Get orders
+
+Obtain orders matching the passed criteria
+
+### Example
+
+
+```python
+import whmcs_client
+from whmcs_client.models.get_orders_response import GetOrdersResponse
+from whmcs_client.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://your-whmcs-instance.com/includes
+# See configuration.py for a list of all supported configuration parameters.
+configuration = whmcs_client.Configuration(
+    host = "https://your-whmcs-instance.com/includes"
+)
+
+
+# Enter a context with an instance of the API client
+with whmcs_client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = whmcs_client.DefaultApi(api_client)
+    username = 'username_example' # str | Admin username/API identifier
+    password = 'password_example' # str | Admin password/API secret
+    accesskey = 'accesskey_example' # str | Optional API access key (optional)
+    responsetype = json # str | Response format (optional) (default to json)
+    limitstart = 0 # int | The offset for the returned order data (optional) (default to 0)
+    limitnum = 25 # int | The number of records to return (optional) (default to 25)
+    id = 56 # int | Find orders for a specific order id (optional)
+    userid = 56 # int | Find orders for a specific client id (optional)
+    requestor_id = 56 # int | Find orders for a specific requestor id (optional)
+    status = 'status_example' # str | Find orders for a specific status (Active, Pending, Fraud, Cancelled) (optional)
+
+    try:
+        # Get orders
+        api_response = api_instance.get_orders(username, password, accesskey=accesskey, responsetype=responsetype, limitstart=limitstart, limitnum=limitnum, id=id, userid=userid, requestor_id=requestor_id, status=status)
+        print("The response of DefaultApi->get_orders:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling DefaultApi->get_orders: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **username** | **str**| Admin username/API identifier | 
+ **password** | **str**| Admin password/API secret | 
+ **accesskey** | **str**| Optional API access key | [optional] 
+ **responsetype** | **str**| Response format | [optional] [default to json]
+ **limitstart** | **int**| The offset for the returned order data | [optional] [default to 0]
+ **limitnum** | **int**| The number of records to return | [optional] [default to 25]
+ **id** | **int**| Find orders for a specific order id | [optional] 
+ **userid** | **int**| Find orders for a specific client id | [optional] 
+ **requestor_id** | **int**| Find orders for a specific requestor id | [optional] 
+ **status** | **str**| Find orders for a specific status (Active, Pending, Fraud, Cancelled) | [optional] 
+
+### Return type
+
+[**GetOrdersResponse**](GetOrdersResponse.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: application/x-www-form-urlencoded
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Orders retrieved successfully |  -  |
 **0** | Error response |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)

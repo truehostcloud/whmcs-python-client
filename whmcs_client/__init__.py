@@ -14,7 +14,7 @@
 """  # noqa: E501
 
 
-__version__ = "1.0.17"
+__version__ = "1.0.18"
 
 # Define package exports
 __all__ = [
@@ -41,9 +41,12 @@ __all__ = [
     "GetCurrenciesResponseAllOfCurrencies",
     "GetInvoicesDetailsResponse",
     "GetInvoicesResponse",
+    "GetOrdersResponse",
     "InvoiceDetailInfo",
     "InvoiceInfo",
     "InvoiceItem",
+    "OrderInfo",
+    "OrderLineItem",
     "ProductInfo",
     "UpdateClientResponse",
     "WHMCSBaseResponse",
@@ -79,9 +82,12 @@ from whmcs_client.models.get_currencies_response import GetCurrenciesResponse as
 from whmcs_client.models.get_currencies_response_all_of_currencies import GetCurrenciesResponseAllOfCurrencies as GetCurrenciesResponseAllOfCurrencies
 from whmcs_client.models.get_invoices_details_response import GetInvoicesDetailsResponse as GetInvoicesDetailsResponse
 from whmcs_client.models.get_invoices_response import GetInvoicesResponse as GetInvoicesResponse
+from whmcs_client.models.get_orders_response import GetOrdersResponse as GetOrdersResponse
 from whmcs_client.models.invoice_detail_info import InvoiceDetailInfo as InvoiceDetailInfo
 from whmcs_client.models.invoice_info import InvoiceInfo as InvoiceInfo
 from whmcs_client.models.invoice_item import InvoiceItem as InvoiceItem
+from whmcs_client.models.order_info import OrderInfo as OrderInfo
+from whmcs_client.models.order_line_item import OrderLineItem as OrderLineItem
 from whmcs_client.models.product_info import ProductInfo as ProductInfo
 from whmcs_client.models.update_client_response import UpdateClientResponse as UpdateClientResponse
 from whmcs_client.models.whmcs_base_response import WHMCSBaseResponse as WHMCSBaseResponse

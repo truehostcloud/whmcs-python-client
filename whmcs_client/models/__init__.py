@@ -26,9 +26,12 @@ from whmcs_client.models.get_currencies_response import GetCurrenciesResponse
 from whmcs_client.models.get_currencies_response_all_of_currencies import GetCurrenciesResponseAllOfCurrencies
 from whmcs_client.models.get_invoices_details_response import GetInvoicesDetailsResponse
 from whmcs_client.models.get_invoices_response import GetInvoicesResponse
+from whmcs_client.models.get_orders_response import GetOrdersResponse
 from whmcs_client.models.invoice_detail_info import InvoiceDetailInfo
 from whmcs_client.models.invoice_info import InvoiceInfo
 from whmcs_client.models.invoice_item import InvoiceItem
+from whmcs_client.models.order_info import OrderInfo
+from whmcs_client.models.order_line_item import OrderLineItem
 from whmcs_client.models.product_info import ProductInfo
 from whmcs_client.models.update_client_response import UpdateClientResponse
 from whmcs_client.models.whmcs_base_response import WHMCSBaseResponse

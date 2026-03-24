@@ -83,6 +83,29 @@ paths:
         default:
           $ref: '#/components/responses/Error'
 
+  /api.php?action=GetOrders:
+    post:
+      summary: Get orders
+      description: Obtain orders matching the passed criteria
+      operationId: getOrders
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              allOf:
+                - $ref: '#/components/schemas/WHMCSBaseRequest'
+                - $ref: '#/components/schemas/GetOrdersRequest'
+      responses:
+        '200':
+          description: Orders retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetOrdersResponse'
+        default:
+          $ref: '#/components/responses/Error'
+
   /api.php?action=GetClients:
     post:
       summary: Get clients
@@ -708,6 +731,30 @@ components:
           enum: [asc, desc]
           description: Sort direction for the invoice results
 
+    GetOrdersRequest:
+      type: object
+      properties:
+        limitstart:
+          type: integer
+          description: The offset for the returned order data
+          default: 0
+        limitnum:
+          type: integer
+          description: The number of records to return
+          default: 25
+        id:
+          type: integer
+          description: Find orders for a specific order id
+        userid:
+          type: integer
+          description: Find orders for a specific client id
+        requestor_id:
+          type: integer
+          description: Find orders for a specific requestor id
+        status:
+          type: string
+          description: Find orders for a specific status (Active, Pending, Fraud, Cancelled)
+
     GetClientsDetailsRequest:
       type: object
       properties:
@@ -908,6 +955,24 @@ components:
               description: The invoices collection
               nullable: true
 
+    GetOrdersResponse:
+      allOf:
+        - $ref: '#/components/schemas/WHMCSSuccessResponse'
+        - type: object
+          properties:
+            totalresults:
+              type: integer
+              description: The total number of results available
+            startnumber:
+              type: integer
+              description: The starting number for the returned results
+            numreturned:
+              type: integer
+              description: The number of results returned
+            orders:
+              description: The orders collection
+              nullable: true
+
     GetInvoicesDetailsResponse:
       allOf:
         - $ref: '#/components/schemas/WHMCSSuccessResponse'
@@ -1052,6 +1117,61 @@ components:
     ClientDetailsStats:
       type: object
       additionalProperties: true
+
+    OrderInfo:
+      type: object
+      additionalProperties: true
+      properties:
+        id:
+          type: integer
+          description: The order ID
+        ordernum:
+          type: string
+          description: The order number
+        date:
+          type: string
+          description: The order date (YYYY-MM-DD HH:MM:SS)
+        amount:
+          type: string
+          description: The order total amount
+        paymentmethod:
+          type: string
+          description: The payment method identifier
+        invoiceid:
+          type: integer
+          description: The linked invoice ID
+        status:
+          type: string
+          description: The order status (Active, Pending, Fraud, Cancelled)
+        name:
+          type: string
+          description: The client name on the order
+        lineitems:
+          description: The order line items collection
+          nullable: true
+
+    OrderLineItem:
+      type: object
+      additionalProperties: true
+      properties:
+        type:
+          type: string
+          description: The line item type (product, domain, addon)
+        product:
+          type: string
+          description: The product name
+        domain:
+          type: string
+          description: The associated domain
+        billingcycle:
+          type: string
+          description: The billing cycle
+        amount:
+          type: string
+          description: The line item amount
+        status:
+          type: string
+          description: The line item status
 
     ProductInfo:
       type: object
