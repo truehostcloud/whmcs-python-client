@@ -21,9 +21,22 @@ from typing import Dict, List, Optional, Union
 from typing_extensions import Annotated
 from whmcs_client.models.add_client_response import AddClientResponse
 from whmcs_client.models.add_order_response import AddOrderResponse
+from whmcs_client.models.domain_get_nameservers_response import DomainGetNameserversResponse
+from whmcs_client.models.domain_whois_response import DomainWhoisResponse
+from whmcs_client.models.get_affiliates_response import GetAffiliatesResponse
+from whmcs_client.models.get_clients_details_response import GetClientsDetailsResponse
+from whmcs_client.models.get_clients_domains_response import GetClientsDomainsResponse
+from whmcs_client.models.get_clients_products_response import GetClientsProductsResponse
 from whmcs_client.models.get_clients_response import GetClientsResponse
 from whmcs_client.models.get_currencies_response import GetCurrenciesResponse
+from whmcs_client.models.get_invoices_details_response import GetInvoicesDetailsResponse
+from whmcs_client.models.get_invoices_response import GetInvoicesResponse
+from whmcs_client.models.get_orders_response import GetOrdersResponse
+from whmcs_client.models.get_payment_methods_response import GetPaymentMethodsResponse
+from whmcs_client.models.get_tld_pricing_response import GetTLDPricingResponse
+from whmcs_client.models.get_transactions_response import GetTransactionsResponse
 from whmcs_client.models.update_client_response import UpdateClientResponse
+from whmcs_client.models.whmcs_success_response import WHMCSSuccessResponse
 
 from whmcs_client.api_client import ApiClient, RequestSerialized
 from whmcs_client.api_response import ApiResponse
@@ -1757,6 +1770,2577 @@ class DefaultApi:
 
 
     @validate_call
+    def affiliate_activate(
+        self,
+        username: Annotated[StrictStr, Field(description="Admin username/API identifier")],
+        password: Annotated[StrictStr, Field(description="Admin password/API secret")],
+        userid: Annotated[StrictInt, Field(description="The client ID to activate affiliate status for")],
+        accesskey: Annotated[Optional[StrictStr], Field(description="Optional API access key")] = None,
+        responsetype: Annotated[Optional[StrictStr], Field(description="Response format")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> WHMCSSuccessResponse:
+        """Activate affiliate status
+
+        Activate affiliate referrals for a client
+
+        :param username: Admin username/API identifier (required)
+        :type username: str
+        :param password: Admin password/API secret (required)
+        :type password: str
+        :param userid: The client ID to activate affiliate status for (required)
+        :type userid: int
+        :param accesskey: Optional API access key
+        :type accesskey: str
+        :param responsetype: Response format
+        :type responsetype: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._affiliate_activate_serialize(
+            username=username,
+            password=password,
+            userid=userid,
+            accesskey=accesskey,
+            responsetype=responsetype,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "WHMCSSuccessResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+
+    @validate_call
+    def affiliate_activate_with_http_info(
+        self,
+        username: Annotated[StrictStr, Field(description="Admin username/API identifier")],
+        password: Annotated[StrictStr, Field(description="Admin password/API secret")],
+        userid: Annotated[StrictInt, Field(description="The client ID to activate affiliate status for")],
+        accesskey: Annotated[Optional[StrictStr], Field(description="Optional API access key")] = None,
+        responsetype: Annotated[Optional[StrictStr], Field(description="Response format")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[WHMCSSuccessResponse]:
+        """Activate affiliate status
+
+        Activate affiliate referrals for a client
+
+        :param username: Admin username/API identifier (required)
+        :type username: str
+        :param password: Admin password/API secret (required)
+        :type password: str
+        :param userid: The client ID to activate affiliate status for (required)
+        :type userid: int
+        :param accesskey: Optional API access key
+        :type accesskey: str
+        :param responsetype: Response format
+        :type responsetype: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._affiliate_activate_serialize(
+            username=username,
+            password=password,
+            userid=userid,
+            accesskey=accesskey,
+            responsetype=responsetype,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "WHMCSSuccessResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+
+    @validate_call
+    def affiliate_activate_without_preload_content(
+        self,
+        username: Annotated[StrictStr, Field(description="Admin username/API identifier")],
+        password: Annotated[StrictStr, Field(description="Admin password/API secret")],
+        userid: Annotated[StrictInt, Field(description="The client ID to activate affiliate status for")],
+        accesskey: Annotated[Optional[StrictStr], Field(description="Optional API access key")] = None,
+        responsetype: Annotated[Optional[StrictStr], Field(description="Response format")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> RESTResponseType:
+        """Activate affiliate status
+
+        Activate affiliate referrals for a client
+
+        :param username: Admin username/API identifier (required)
+        :type username: str
+        :param password: Admin password/API secret (required)
+        :type password: str
+        :param userid: The client ID to activate affiliate status for (required)
+        :type userid: int
+        :param accesskey: Optional API access key
+        :type accesskey: str
+        :param responsetype: Response format
+        :type responsetype: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._affiliate_activate_serialize(
+            username=username,
+            password=password,
+            userid=userid,
+            accesskey=accesskey,
+            responsetype=responsetype,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "WHMCSSuccessResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+
+    def _affiliate_activate_serialize(
+        self,
+        username,
+        password,
+        userid,
+        accesskey,
+        responsetype,
+        _request_auth,
+        _content_type,
+        _headers,
+        _host_index,
+    ) -> RequestSerialized:
+
+        _host = None
+
+        _collection_formats: Dict[str, str] = {
+        }
+
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[
+            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
+        ] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        # process the query parameters
+        # process the header parameters
+        # process the form parameters
+        if username is not None:
+            _form_params.append(('username', username))
+        if password is not None:
+            _form_params.append(('password', password))
+        if accesskey is not None:
+            _form_params.append(('accesskey', accesskey))
+        if responsetype is not None:
+            _form_params.append(('responsetype', responsetype))
+        if userid is not None:
+            _form_params.append(('userid', userid))
+        # process the body parameter
+
+
+        # set the HTTP header `Accept`
+        if 'Accept' not in _header_params:
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
+
+        # set the HTTP header `Content-Type`
+        if _content_type:
+            _header_params['Content-Type'] = _content_type
+        else:
+            _default_content_type = (
+                self.api_client.select_header_content_type(
+                    [
+                        'application/x-www-form-urlencoded'
+                    ]
+                )
+            )
+            if _default_content_type is not None:
+                _header_params['Content-Type'] = _default_content_type
+
+        # authentication setting
+        _auth_settings: List[str] = [
+        ]
+
+        return self.api_client.param_serialize(
+            method='POST',
+            resource_path='/api.php?action=AffiliateActivate',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            auth_settings=_auth_settings,
+            collection_formats=_collection_formats,
+            _host=_host,
+            _request_auth=_request_auth
+        )
+
+
+
+
+    @validate_call
+    def cancel_order(
+        self,
+        username: Annotated[StrictStr, Field(description="Admin username/API identifier")],
+        password: Annotated[StrictStr, Field(description="Admin password/API secret")],
+        orderid: Annotated[StrictInt, Field(description="The ID of the pending order")],
+        accesskey: Annotated[Optional[StrictStr], Field(description="Optional API access key")] = None,
+        responsetype: Annotated[Optional[StrictStr], Field(description="Response format")] = None,
+        cancelsub: Annotated[Optional[StrictBool], Field(description="Attempt to cancel the subscription associated with the products")] = None,
+        noemail: Annotated[Optional[StrictBool], Field(description="Set to true to stop the invoice payment email being sent if the invoice becomes paid")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> WHMCSSuccessResponse:
+        """Cancel a pending order
+
+        Cancels an order that is still pending
+
+        :param username: Admin username/API identifier (required)
+        :type username: str
+        :param password: Admin password/API secret (required)
+        :type password: str
+        :param orderid: The ID of the pending order (required)
+        :type orderid: int
+        :param accesskey: Optional API access key
+        :type accesskey: str
+        :param responsetype: Response format
+        :type responsetype: str
+        :param cancelsub: Attempt to cancel the subscription associated with the products
+        :type cancelsub: bool
+        :param noemail: Set to true to stop the invoice payment email being sent if the invoice becomes paid
+        :type noemail: bool
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._cancel_order_serialize(
+            username=username,
+            password=password,
+            orderid=orderid,
+            accesskey=accesskey,
+            responsetype=responsetype,
+            cancelsub=cancelsub,
+            noemail=noemail,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "WHMCSSuccessResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+
+    @validate_call
+    def cancel_order_with_http_info(
+        self,
+        username: Annotated[StrictStr, Field(description="Admin username/API identifier")],
+        password: Annotated[StrictStr, Field(description="Admin password/API secret")],
+        orderid: Annotated[StrictInt, Field(description="The ID of the pending order")],
+        accesskey: Annotated[Optional[StrictStr], Field(description="Optional API access key")] = None,
+        responsetype: Annotated[Optional[StrictStr], Field(description="Response format")] = None,
+        cancelsub: Annotated[Optional[StrictBool], Field(description="Attempt to cancel the subscription associated with the products")] = None,
+        noemail: Annotated[Optional[StrictBool], Field(description="Set to true to stop the invoice payment email being sent if the invoice becomes paid")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[WHMCSSuccessResponse]:
+        """Cancel a pending order
+
+        Cancels an order that is still pending
+
+        :param username: Admin username/API identifier (required)
+        :type username: str
+        :param password: Admin password/API secret (required)
+        :type password: str
+        :param orderid: The ID of the pending order (required)
+        :type orderid: int
+        :param accesskey: Optional API access key
+        :type accesskey: str
+        :param responsetype: Response format
+        :type responsetype: str
+        :param cancelsub: Attempt to cancel the subscription associated with the products
+        :type cancelsub: bool
+        :param noemail: Set to true to stop the invoice payment email being sent if the invoice becomes paid
+        :type noemail: bool
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._cancel_order_serialize(
+            username=username,
+            password=password,
+            orderid=orderid,
+            accesskey=accesskey,
+            responsetype=responsetype,
+            cancelsub=cancelsub,
+            noemail=noemail,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "WHMCSSuccessResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+
+    @validate_call
+    def cancel_order_without_preload_content(
+        self,
+        username: Annotated[StrictStr, Field(description="Admin username/API identifier")],
+        password: Annotated[StrictStr, Field(description="Admin password/API secret")],
+        orderid: Annotated[StrictInt, Field(description="The ID of the pending order")],
+        accesskey: Annotated[Optional[StrictStr], Field(description="Optional API access key")] = None,
+        responsetype: Annotated[Optional[StrictStr], Field(description="Response format")] = None,
+        cancelsub: Annotated[Optional[StrictBool], Field(description="Attempt to cancel the subscription associated with the products")] = None,
+        noemail: Annotated[Optional[StrictBool], Field(description="Set to true to stop the invoice payment email being sent if the invoice becomes paid")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> RESTResponseType:
+        """Cancel a pending order
+
+        Cancels an order that is still pending
+
+        :param username: Admin username/API identifier (required)
+        :type username: str
+        :param password: Admin password/API secret (required)
+        :type password: str
+        :param orderid: The ID of the pending order (required)
+        :type orderid: int
+        :param accesskey: Optional API access key
+        :type accesskey: str
+        :param responsetype: Response format
+        :type responsetype: str
+        :param cancelsub: Attempt to cancel the subscription associated with the products
+        :type cancelsub: bool
+        :param noemail: Set to true to stop the invoice payment email being sent if the invoice becomes paid
+        :type noemail: bool
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._cancel_order_serialize(
+            username=username,
+            password=password,
+            orderid=orderid,
+            accesskey=accesskey,
+            responsetype=responsetype,
+            cancelsub=cancelsub,
+            noemail=noemail,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "WHMCSSuccessResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+
+    def _cancel_order_serialize(
+        self,
+        username,
+        password,
+        orderid,
+        accesskey,
+        responsetype,
+        cancelsub,
+        noemail,
+        _request_auth,
+        _content_type,
+        _headers,
+        _host_index,
+    ) -> RequestSerialized:
+
+        _host = None
+
+        _collection_formats: Dict[str, str] = {
+        }
+
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[
+            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
+        ] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        # process the query parameters
+        # process the header parameters
+        # process the form parameters
+        if username is not None:
+            _form_params.append(('username', username))
+        if password is not None:
+            _form_params.append(('password', password))
+        if accesskey is not None:
+            _form_params.append(('accesskey', accesskey))
+        if responsetype is not None:
+            _form_params.append(('responsetype', responsetype))
+        if orderid is not None:
+            _form_params.append(('orderid', orderid))
+        if cancelsub is not None:
+            _form_params.append(('cancelsub', cancelsub))
+        if noemail is not None:
+            _form_params.append(('noemail', noemail))
+        # process the body parameter
+
+
+        # set the HTTP header `Accept`
+        if 'Accept' not in _header_params:
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
+
+        # set the HTTP header `Content-Type`
+        if _content_type:
+            _header_params['Content-Type'] = _content_type
+        else:
+            _default_content_type = (
+                self.api_client.select_header_content_type(
+                    [
+                        'application/x-www-form-urlencoded'
+                    ]
+                )
+            )
+            if _default_content_type is not None:
+                _header_params['Content-Type'] = _default_content_type
+
+        # authentication setting
+        _auth_settings: List[str] = [
+        ]
+
+        return self.api_client.param_serialize(
+            method='POST',
+            resource_path='/api.php?action=CancelOrder',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            auth_settings=_auth_settings,
+            collection_formats=_collection_formats,
+            _host=_host,
+            _request_auth=_request_auth
+        )
+
+
+
+
+    @validate_call
+    def delete_order(
+        self,
+        username: Annotated[StrictStr, Field(description="Admin username/API identifier")],
+        password: Annotated[StrictStr, Field(description="Admin password/API secret")],
+        orderid: Annotated[StrictInt, Field(description="The order to be deleted")],
+        accesskey: Annotated[Optional[StrictStr], Field(description="Optional API access key")] = None,
+        responsetype: Annotated[Optional[StrictStr], Field(description="Response format")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> WHMCSSuccessResponse:
+        """Delete an order
+
+        Permanently deletes a cancelled or fraud order
+
+        :param username: Admin username/API identifier (required)
+        :type username: str
+        :param password: Admin password/API secret (required)
+        :type password: str
+        :param orderid: The order to be deleted (required)
+        :type orderid: int
+        :param accesskey: Optional API access key
+        :type accesskey: str
+        :param responsetype: Response format
+        :type responsetype: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._delete_order_serialize(
+            username=username,
+            password=password,
+            orderid=orderid,
+            accesskey=accesskey,
+            responsetype=responsetype,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "WHMCSSuccessResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+
+    @validate_call
+    def delete_order_with_http_info(
+        self,
+        username: Annotated[StrictStr, Field(description="Admin username/API identifier")],
+        password: Annotated[StrictStr, Field(description="Admin password/API secret")],
+        orderid: Annotated[StrictInt, Field(description="The order to be deleted")],
+        accesskey: Annotated[Optional[StrictStr], Field(description="Optional API access key")] = None,
+        responsetype: Annotated[Optional[StrictStr], Field(description="Response format")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[WHMCSSuccessResponse]:
+        """Delete an order
+
+        Permanently deletes a cancelled or fraud order
+
+        :param username: Admin username/API identifier (required)
+        :type username: str
+        :param password: Admin password/API secret (required)
+        :type password: str
+        :param orderid: The order to be deleted (required)
+        :type orderid: int
+        :param accesskey: Optional API access key
+        :type accesskey: str
+        :param responsetype: Response format
+        :type responsetype: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._delete_order_serialize(
+            username=username,
+            password=password,
+            orderid=orderid,
+            accesskey=accesskey,
+            responsetype=responsetype,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "WHMCSSuccessResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+
+    @validate_call
+    def delete_order_without_preload_content(
+        self,
+        username: Annotated[StrictStr, Field(description="Admin username/API identifier")],
+        password: Annotated[StrictStr, Field(description="Admin password/API secret")],
+        orderid: Annotated[StrictInt, Field(description="The order to be deleted")],
+        accesskey: Annotated[Optional[StrictStr], Field(description="Optional API access key")] = None,
+        responsetype: Annotated[Optional[StrictStr], Field(description="Response format")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> RESTResponseType:
+        """Delete an order
+
+        Permanently deletes a cancelled or fraud order
+
+        :param username: Admin username/API identifier (required)
+        :type username: str
+        :param password: Admin password/API secret (required)
+        :type password: str
+        :param orderid: The order to be deleted (required)
+        :type orderid: int
+        :param accesskey: Optional API access key
+        :type accesskey: str
+        :param responsetype: Response format
+        :type responsetype: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._delete_order_serialize(
+            username=username,
+            password=password,
+            orderid=orderid,
+            accesskey=accesskey,
+            responsetype=responsetype,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "WHMCSSuccessResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+
+    def _delete_order_serialize(
+        self,
+        username,
+        password,
+        orderid,
+        accesskey,
+        responsetype,
+        _request_auth,
+        _content_type,
+        _headers,
+        _host_index,
+    ) -> RequestSerialized:
+
+        _host = None
+
+        _collection_formats: Dict[str, str] = {
+        }
+
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[
+            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
+        ] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        # process the query parameters
+        # process the header parameters
+        # process the form parameters
+        if username is not None:
+            _form_params.append(('username', username))
+        if password is not None:
+            _form_params.append(('password', password))
+        if accesskey is not None:
+            _form_params.append(('accesskey', accesskey))
+        if responsetype is not None:
+            _form_params.append(('responsetype', responsetype))
+        if orderid is not None:
+            _form_params.append(('orderid', orderid))
+        # process the body parameter
+
+
+        # set the HTTP header `Accept`
+        if 'Accept' not in _header_params:
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
+
+        # set the HTTP header `Content-Type`
+        if _content_type:
+            _header_params['Content-Type'] = _content_type
+        else:
+            _default_content_type = (
+                self.api_client.select_header_content_type(
+                    [
+                        'application/x-www-form-urlencoded'
+                    ]
+                )
+            )
+            if _default_content_type is not None:
+                _header_params['Content-Type'] = _default_content_type
+
+        # authentication setting
+        _auth_settings: List[str] = [
+        ]
+
+        return self.api_client.param_serialize(
+            method='POST',
+            resource_path='/api.php?action=DeleteOrder',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            auth_settings=_auth_settings,
+            collection_formats=_collection_formats,
+            _host=_host,
+            _request_auth=_request_auth
+        )
+
+
+
+
+    @validate_call
+    def domain_get_nameservers(
+        self,
+        username: Annotated[StrictStr, Field(description="Admin username/API identifier")],
+        password: Annotated[StrictStr, Field(description="Admin password/API secret")],
+        domainid: Annotated[StrictInt, Field(description="The id of the domain to obtain the nameservers for")],
+        accesskey: Annotated[Optional[StrictStr], Field(description="Optional API access key")] = None,
+        responsetype: Annotated[Optional[StrictStr], Field(description="Response format")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> DomainGetNameserversResponse:
+        """Get domain nameservers
+
+        Obtain the current nameservers for a domain
+
+        :param username: Admin username/API identifier (required)
+        :type username: str
+        :param password: Admin password/API secret (required)
+        :type password: str
+        :param domainid: The id of the domain to obtain the nameservers for (required)
+        :type domainid: int
+        :param accesskey: Optional API access key
+        :type accesskey: str
+        :param responsetype: Response format
+        :type responsetype: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._domain_get_nameservers_serialize(
+            username=username,
+            password=password,
+            domainid=domainid,
+            accesskey=accesskey,
+            responsetype=responsetype,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "DomainGetNameserversResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+
+    @validate_call
+    def domain_get_nameservers_with_http_info(
+        self,
+        username: Annotated[StrictStr, Field(description="Admin username/API identifier")],
+        password: Annotated[StrictStr, Field(description="Admin password/API secret")],
+        domainid: Annotated[StrictInt, Field(description="The id of the domain to obtain the nameservers for")],
+        accesskey: Annotated[Optional[StrictStr], Field(description="Optional API access key")] = None,
+        responsetype: Annotated[Optional[StrictStr], Field(description="Response format")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[DomainGetNameserversResponse]:
+        """Get domain nameservers
+
+        Obtain the current nameservers for a domain
+
+        :param username: Admin username/API identifier (required)
+        :type username: str
+        :param password: Admin password/API secret (required)
+        :type password: str
+        :param domainid: The id of the domain to obtain the nameservers for (required)
+        :type domainid: int
+        :param accesskey: Optional API access key
+        :type accesskey: str
+        :param responsetype: Response format
+        :type responsetype: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._domain_get_nameservers_serialize(
+            username=username,
+            password=password,
+            domainid=domainid,
+            accesskey=accesskey,
+            responsetype=responsetype,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "DomainGetNameserversResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+
+    @validate_call
+    def domain_get_nameservers_without_preload_content(
+        self,
+        username: Annotated[StrictStr, Field(description="Admin username/API identifier")],
+        password: Annotated[StrictStr, Field(description="Admin password/API secret")],
+        domainid: Annotated[StrictInt, Field(description="The id of the domain to obtain the nameservers for")],
+        accesskey: Annotated[Optional[StrictStr], Field(description="Optional API access key")] = None,
+        responsetype: Annotated[Optional[StrictStr], Field(description="Response format")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> RESTResponseType:
+        """Get domain nameservers
+
+        Obtain the current nameservers for a domain
+
+        :param username: Admin username/API identifier (required)
+        :type username: str
+        :param password: Admin password/API secret (required)
+        :type password: str
+        :param domainid: The id of the domain to obtain the nameservers for (required)
+        :type domainid: int
+        :param accesskey: Optional API access key
+        :type accesskey: str
+        :param responsetype: Response format
+        :type responsetype: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._domain_get_nameservers_serialize(
+            username=username,
+            password=password,
+            domainid=domainid,
+            accesskey=accesskey,
+            responsetype=responsetype,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "DomainGetNameserversResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+
+    def _domain_get_nameservers_serialize(
+        self,
+        username,
+        password,
+        domainid,
+        accesskey,
+        responsetype,
+        _request_auth,
+        _content_type,
+        _headers,
+        _host_index,
+    ) -> RequestSerialized:
+
+        _host = None
+
+        _collection_formats: Dict[str, str] = {
+        }
+
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[
+            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
+        ] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        # process the query parameters
+        # process the header parameters
+        # process the form parameters
+        if username is not None:
+            _form_params.append(('username', username))
+        if password is not None:
+            _form_params.append(('password', password))
+        if accesskey is not None:
+            _form_params.append(('accesskey', accesskey))
+        if responsetype is not None:
+            _form_params.append(('responsetype', responsetype))
+        if domainid is not None:
+            _form_params.append(('domainid', domainid))
+        # process the body parameter
+
+
+        # set the HTTP header `Accept`
+        if 'Accept' not in _header_params:
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
+
+        # set the HTTP header `Content-Type`
+        if _content_type:
+            _header_params['Content-Type'] = _content_type
+        else:
+            _default_content_type = (
+                self.api_client.select_header_content_type(
+                    [
+                        'application/x-www-form-urlencoded'
+                    ]
+                )
+            )
+            if _default_content_type is not None:
+                _header_params['Content-Type'] = _default_content_type
+
+        # authentication setting
+        _auth_settings: List[str] = [
+        ]
+
+        return self.api_client.param_serialize(
+            method='POST',
+            resource_path='/api.php?action=DomainGetNameservers',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            auth_settings=_auth_settings,
+            collection_formats=_collection_formats,
+            _host=_host,
+            _request_auth=_request_auth
+        )
+
+
+
+
+    @validate_call
+    def domain_update_nameservers(
+        self,
+        username: Annotated[StrictStr, Field(description="Admin username/API identifier")],
+        password: Annotated[StrictStr, Field(description="Admin password/API secret")],
+        accesskey: Annotated[Optional[StrictStr], Field(description="Optional API access key")] = None,
+        responsetype: Annotated[Optional[StrictStr], Field(description="Response format")] = None,
+        domainid: Annotated[Optional[StrictInt], Field(description="The id of the domain to update the nameservers for")] = None,
+        domain: Annotated[Optional[StrictStr], Field(description="The domain name to update the nameservers for")] = None,
+        ns1: Annotated[Optional[StrictStr], Field(description="The first nameserver")] = None,
+        ns2: Annotated[Optional[StrictStr], Field(description="The second nameserver")] = None,
+        ns3: Annotated[Optional[StrictStr], Field(description="The third nameserver")] = None,
+        ns4: Annotated[Optional[StrictStr], Field(description="The fourth nameserver")] = None,
+        ns5: Annotated[Optional[StrictStr], Field(description="The fifth nameserver")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> WHMCSSuccessResponse:
+        """Update domain nameservers
+
+        Sends the save nameservers command to the registrar for the domain
+
+        :param username: Admin username/API identifier (required)
+        :type username: str
+        :param password: Admin password/API secret (required)
+        :type password: str
+        :param accesskey: Optional API access key
+        :type accesskey: str
+        :param responsetype: Response format
+        :type responsetype: str
+        :param domainid: The id of the domain to update the nameservers for
+        :type domainid: int
+        :param domain: The domain name to update the nameservers for
+        :type domain: str
+        :param ns1: The first nameserver
+        :type ns1: str
+        :param ns2: The second nameserver
+        :type ns2: str
+        :param ns3: The third nameserver
+        :type ns3: str
+        :param ns4: The fourth nameserver
+        :type ns4: str
+        :param ns5: The fifth nameserver
+        :type ns5: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._domain_update_nameservers_serialize(
+            username=username,
+            password=password,
+            accesskey=accesskey,
+            responsetype=responsetype,
+            domainid=domainid,
+            domain=domain,
+            ns1=ns1,
+            ns2=ns2,
+            ns3=ns3,
+            ns4=ns4,
+            ns5=ns5,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "WHMCSSuccessResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+
+    @validate_call
+    def domain_update_nameservers_with_http_info(
+        self,
+        username: Annotated[StrictStr, Field(description="Admin username/API identifier")],
+        password: Annotated[StrictStr, Field(description="Admin password/API secret")],
+        accesskey: Annotated[Optional[StrictStr], Field(description="Optional API access key")] = None,
+        responsetype: Annotated[Optional[StrictStr], Field(description="Response format")] = None,
+        domainid: Annotated[Optional[StrictInt], Field(description="The id of the domain to update the nameservers for")] = None,
+        domain: Annotated[Optional[StrictStr], Field(description="The domain name to update the nameservers for")] = None,
+        ns1: Annotated[Optional[StrictStr], Field(description="The first nameserver")] = None,
+        ns2: Annotated[Optional[StrictStr], Field(description="The second nameserver")] = None,
+        ns3: Annotated[Optional[StrictStr], Field(description="The third nameserver")] = None,
+        ns4: Annotated[Optional[StrictStr], Field(description="The fourth nameserver")] = None,
+        ns5: Annotated[Optional[StrictStr], Field(description="The fifth nameserver")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[WHMCSSuccessResponse]:
+        """Update domain nameservers
+
+        Sends the save nameservers command to the registrar for the domain
+
+        :param username: Admin username/API identifier (required)
+        :type username: str
+        :param password: Admin password/API secret (required)
+        :type password: str
+        :param accesskey: Optional API access key
+        :type accesskey: str
+        :param responsetype: Response format
+        :type responsetype: str
+        :param domainid: The id of the domain to update the nameservers for
+        :type domainid: int
+        :param domain: The domain name to update the nameservers for
+        :type domain: str
+        :param ns1: The first nameserver
+        :type ns1: str
+        :param ns2: The second nameserver
+        :type ns2: str
+        :param ns3: The third nameserver
+        :type ns3: str
+        :param ns4: The fourth nameserver
+        :type ns4: str
+        :param ns5: The fifth nameserver
+        :type ns5: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._domain_update_nameservers_serialize(
+            username=username,
+            password=password,
+            accesskey=accesskey,
+            responsetype=responsetype,
+            domainid=domainid,
+            domain=domain,
+            ns1=ns1,
+            ns2=ns2,
+            ns3=ns3,
+            ns4=ns4,
+            ns5=ns5,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "WHMCSSuccessResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+
+    @validate_call
+    def domain_update_nameservers_without_preload_content(
+        self,
+        username: Annotated[StrictStr, Field(description="Admin username/API identifier")],
+        password: Annotated[StrictStr, Field(description="Admin password/API secret")],
+        accesskey: Annotated[Optional[StrictStr], Field(description="Optional API access key")] = None,
+        responsetype: Annotated[Optional[StrictStr], Field(description="Response format")] = None,
+        domainid: Annotated[Optional[StrictInt], Field(description="The id of the domain to update the nameservers for")] = None,
+        domain: Annotated[Optional[StrictStr], Field(description="The domain name to update the nameservers for")] = None,
+        ns1: Annotated[Optional[StrictStr], Field(description="The first nameserver")] = None,
+        ns2: Annotated[Optional[StrictStr], Field(description="The second nameserver")] = None,
+        ns3: Annotated[Optional[StrictStr], Field(description="The third nameserver")] = None,
+        ns4: Annotated[Optional[StrictStr], Field(description="The fourth nameserver")] = None,
+        ns5: Annotated[Optional[StrictStr], Field(description="The fifth nameserver")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> RESTResponseType:
+        """Update domain nameservers
+
+        Sends the save nameservers command to the registrar for the domain
+
+        :param username: Admin username/API identifier (required)
+        :type username: str
+        :param password: Admin password/API secret (required)
+        :type password: str
+        :param accesskey: Optional API access key
+        :type accesskey: str
+        :param responsetype: Response format
+        :type responsetype: str
+        :param domainid: The id of the domain to update the nameservers for
+        :type domainid: int
+        :param domain: The domain name to update the nameservers for
+        :type domain: str
+        :param ns1: The first nameserver
+        :type ns1: str
+        :param ns2: The second nameserver
+        :type ns2: str
+        :param ns3: The third nameserver
+        :type ns3: str
+        :param ns4: The fourth nameserver
+        :type ns4: str
+        :param ns5: The fifth nameserver
+        :type ns5: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._domain_update_nameservers_serialize(
+            username=username,
+            password=password,
+            accesskey=accesskey,
+            responsetype=responsetype,
+            domainid=domainid,
+            domain=domain,
+            ns1=ns1,
+            ns2=ns2,
+            ns3=ns3,
+            ns4=ns4,
+            ns5=ns5,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "WHMCSSuccessResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+
+    def _domain_update_nameservers_serialize(
+        self,
+        username,
+        password,
+        accesskey,
+        responsetype,
+        domainid,
+        domain,
+        ns1,
+        ns2,
+        ns3,
+        ns4,
+        ns5,
+        _request_auth,
+        _content_type,
+        _headers,
+        _host_index,
+    ) -> RequestSerialized:
+
+        _host = None
+
+        _collection_formats: Dict[str, str] = {
+        }
+
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[
+            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
+        ] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        # process the query parameters
+        # process the header parameters
+        # process the form parameters
+        if username is not None:
+            _form_params.append(('username', username))
+        if password is not None:
+            _form_params.append(('password', password))
+        if accesskey is not None:
+            _form_params.append(('accesskey', accesskey))
+        if responsetype is not None:
+            _form_params.append(('responsetype', responsetype))
+        if domainid is not None:
+            _form_params.append(('domainid', domainid))
+        if domain is not None:
+            _form_params.append(('domain', domain))
+        if ns1 is not None:
+            _form_params.append(('ns1', ns1))
+        if ns2 is not None:
+            _form_params.append(('ns2', ns2))
+        if ns3 is not None:
+            _form_params.append(('ns3', ns3))
+        if ns4 is not None:
+            _form_params.append(('ns4', ns4))
+        if ns5 is not None:
+            _form_params.append(('ns5', ns5))
+        # process the body parameter
+
+
+        # set the HTTP header `Accept`
+        if 'Accept' not in _header_params:
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
+
+        # set the HTTP header `Content-Type`
+        if _content_type:
+            _header_params['Content-Type'] = _content_type
+        else:
+            _default_content_type = (
+                self.api_client.select_header_content_type(
+                    [
+                        'application/x-www-form-urlencoded'
+                    ]
+                )
+            )
+            if _default_content_type is not None:
+                _header_params['Content-Type'] = _default_content_type
+
+        # authentication setting
+        _auth_settings: List[str] = [
+        ]
+
+        return self.api_client.param_serialize(
+            method='POST',
+            resource_path='/api.php?action=DomainUpdateNameservers',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            auth_settings=_auth_settings,
+            collection_formats=_collection_formats,
+            _host=_host,
+            _request_auth=_request_auth
+        )
+
+
+
+
+    @validate_call
+    def domain_whois(
+        self,
+        username: Annotated[StrictStr, Field(description="Admin username/API identifier")],
+        password: Annotated[StrictStr, Field(description="Admin password/API secret")],
+        domain: Annotated[StrictStr, Field(description="The domain name to lookup")],
+        accesskey: Annotated[Optional[StrictStr], Field(description="Optional API access key")] = None,
+        responsetype: Annotated[Optional[StrictStr], Field(description="Response format")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> DomainWhoisResponse:
+        """Lookup domain WHOIS
+
+        Retrieve domain whois information
+
+        :param username: Admin username/API identifier (required)
+        :type username: str
+        :param password: Admin password/API secret (required)
+        :type password: str
+        :param domain: The domain name to lookup (required)
+        :type domain: str
+        :param accesskey: Optional API access key
+        :type accesskey: str
+        :param responsetype: Response format
+        :type responsetype: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._domain_whois_serialize(
+            username=username,
+            password=password,
+            domain=domain,
+            accesskey=accesskey,
+            responsetype=responsetype,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "DomainWhoisResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+
+    @validate_call
+    def domain_whois_with_http_info(
+        self,
+        username: Annotated[StrictStr, Field(description="Admin username/API identifier")],
+        password: Annotated[StrictStr, Field(description="Admin password/API secret")],
+        domain: Annotated[StrictStr, Field(description="The domain name to lookup")],
+        accesskey: Annotated[Optional[StrictStr], Field(description="Optional API access key")] = None,
+        responsetype: Annotated[Optional[StrictStr], Field(description="Response format")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[DomainWhoisResponse]:
+        """Lookup domain WHOIS
+
+        Retrieve domain whois information
+
+        :param username: Admin username/API identifier (required)
+        :type username: str
+        :param password: Admin password/API secret (required)
+        :type password: str
+        :param domain: The domain name to lookup (required)
+        :type domain: str
+        :param accesskey: Optional API access key
+        :type accesskey: str
+        :param responsetype: Response format
+        :type responsetype: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._domain_whois_serialize(
+            username=username,
+            password=password,
+            domain=domain,
+            accesskey=accesskey,
+            responsetype=responsetype,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "DomainWhoisResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+
+    @validate_call
+    def domain_whois_without_preload_content(
+        self,
+        username: Annotated[StrictStr, Field(description="Admin username/API identifier")],
+        password: Annotated[StrictStr, Field(description="Admin password/API secret")],
+        domain: Annotated[StrictStr, Field(description="The domain name to lookup")],
+        accesskey: Annotated[Optional[StrictStr], Field(description="Optional API access key")] = None,
+        responsetype: Annotated[Optional[StrictStr], Field(description="Response format")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> RESTResponseType:
+        """Lookup domain WHOIS
+
+        Retrieve domain whois information
+
+        :param username: Admin username/API identifier (required)
+        :type username: str
+        :param password: Admin password/API secret (required)
+        :type password: str
+        :param domain: The domain name to lookup (required)
+        :type domain: str
+        :param accesskey: Optional API access key
+        :type accesskey: str
+        :param responsetype: Response format
+        :type responsetype: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._domain_whois_serialize(
+            username=username,
+            password=password,
+            domain=domain,
+            accesskey=accesskey,
+            responsetype=responsetype,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "DomainWhoisResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+
+    def _domain_whois_serialize(
+        self,
+        username,
+        password,
+        domain,
+        accesskey,
+        responsetype,
+        _request_auth,
+        _content_type,
+        _headers,
+        _host_index,
+    ) -> RequestSerialized:
+
+        _host = None
+
+        _collection_formats: Dict[str, str] = {
+        }
+
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[
+            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
+        ] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        # process the query parameters
+        # process the header parameters
+        # process the form parameters
+        if username is not None:
+            _form_params.append(('username', username))
+        if password is not None:
+            _form_params.append(('password', password))
+        if accesskey is not None:
+            _form_params.append(('accesskey', accesskey))
+        if responsetype is not None:
+            _form_params.append(('responsetype', responsetype))
+        if domain is not None:
+            _form_params.append(('domain', domain))
+        # process the body parameter
+
+
+        # set the HTTP header `Accept`
+        if 'Accept' not in _header_params:
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
+
+        # set the HTTP header `Content-Type`
+        if _content_type:
+            _header_params['Content-Type'] = _content_type
+        else:
+            _default_content_type = (
+                self.api_client.select_header_content_type(
+                    [
+                        'application/x-www-form-urlencoded'
+                    ]
+                )
+            )
+            if _default_content_type is not None:
+                _header_params['Content-Type'] = _default_content_type
+
+        # authentication setting
+        _auth_settings: List[str] = [
+        ]
+
+        return self.api_client.param_serialize(
+            method='POST',
+            resource_path='/api.php?action=DomainWhois',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            auth_settings=_auth_settings,
+            collection_formats=_collection_formats,
+            _host=_host,
+            _request_auth=_request_auth
+        )
+
+
+
+
+    @validate_call
+    def get_affiliates(
+        self,
+        username: Annotated[StrictStr, Field(description="Admin username/API identifier")],
+        password: Annotated[StrictStr, Field(description="Admin password/API secret")],
+        accesskey: Annotated[Optional[StrictStr], Field(description="Optional API access key")] = None,
+        responsetype: Annotated[Optional[StrictStr], Field(description="Response format")] = None,
+        limitstart: Annotated[Optional[StrictInt], Field(description="The offset for the returned affiliate data")] = None,
+        limitnum: Annotated[Optional[StrictInt], Field(description="The number of records to return")] = None,
+        userid: Annotated[Optional[StrictInt], Field(description="Obtain affiliate data for a specific client account")] = None,
+        visitors: Annotated[Optional[StrictInt], Field(description="Provide affiliates that match a specific visitor count")] = None,
+        paytype: Annotated[Optional[StrictStr], Field(description="Provide affiliates matching the paytype provided")] = None,
+        payamount: Annotated[Optional[Union[StrictFloat, StrictInt]], Field(description="Provide affiliates matching a specific overridden payout amount")] = None,
+        onetime: Annotated[Optional[StrictInt], Field(description="Provide affiliates configured to receive one time affiliates")] = None,
+        balance: Annotated[Optional[Union[StrictFloat, StrictInt]], Field(description="Provide affiliates that have this balance")] = None,
+        withdrawn: Annotated[Optional[Union[StrictFloat, StrictInt]], Field(description="Provide affiliates that have withdrawn this amount")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> GetAffiliatesResponse:
+        """Get affiliates
+
+        Obtain an array of affiliates
+
+        :param username: Admin username/API identifier (required)
+        :type username: str
+        :param password: Admin password/API secret (required)
+        :type password: str
+        :param accesskey: Optional API access key
+        :type accesskey: str
+        :param responsetype: Response format
+        :type responsetype: str
+        :param limitstart: The offset for the returned affiliate data
+        :type limitstart: int
+        :param limitnum: The number of records to return
+        :type limitnum: int
+        :param userid: Obtain affiliate data for a specific client account
+        :type userid: int
+        :param visitors: Provide affiliates that match a specific visitor count
+        :type visitors: int
+        :param paytype: Provide affiliates matching the paytype provided
+        :type paytype: str
+        :param payamount: Provide affiliates matching a specific overridden payout amount
+        :type payamount: float
+        :param onetime: Provide affiliates configured to receive one time affiliates
+        :type onetime: int
+        :param balance: Provide affiliates that have this balance
+        :type balance: float
+        :param withdrawn: Provide affiliates that have withdrawn this amount
+        :type withdrawn: float
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._get_affiliates_serialize(
+            username=username,
+            password=password,
+            accesskey=accesskey,
+            responsetype=responsetype,
+            limitstart=limitstart,
+            limitnum=limitnum,
+            userid=userid,
+            visitors=visitors,
+            paytype=paytype,
+            payamount=payamount,
+            onetime=onetime,
+            balance=balance,
+            withdrawn=withdrawn,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "GetAffiliatesResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+
+    @validate_call
+    def get_affiliates_with_http_info(
+        self,
+        username: Annotated[StrictStr, Field(description="Admin username/API identifier")],
+        password: Annotated[StrictStr, Field(description="Admin password/API secret")],
+        accesskey: Annotated[Optional[StrictStr], Field(description="Optional API access key")] = None,
+        responsetype: Annotated[Optional[StrictStr], Field(description="Response format")] = None,
+        limitstart: Annotated[Optional[StrictInt], Field(description="The offset for the returned affiliate data")] = None,
+        limitnum: Annotated[Optional[StrictInt], Field(description="The number of records to return")] = None,
+        userid: Annotated[Optional[StrictInt], Field(description="Obtain affiliate data for a specific client account")] = None,
+        visitors: Annotated[Optional[StrictInt], Field(description="Provide affiliates that match a specific visitor count")] = None,
+        paytype: Annotated[Optional[StrictStr], Field(description="Provide affiliates matching the paytype provided")] = None,
+        payamount: Annotated[Optional[Union[StrictFloat, StrictInt]], Field(description="Provide affiliates matching a specific overridden payout amount")] = None,
+        onetime: Annotated[Optional[StrictInt], Field(description="Provide affiliates configured to receive one time affiliates")] = None,
+        balance: Annotated[Optional[Union[StrictFloat, StrictInt]], Field(description="Provide affiliates that have this balance")] = None,
+        withdrawn: Annotated[Optional[Union[StrictFloat, StrictInt]], Field(description="Provide affiliates that have withdrawn this amount")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[GetAffiliatesResponse]:
+        """Get affiliates
+
+        Obtain an array of affiliates
+
+        :param username: Admin username/API identifier (required)
+        :type username: str
+        :param password: Admin password/API secret (required)
+        :type password: str
+        :param accesskey: Optional API access key
+        :type accesskey: str
+        :param responsetype: Response format
+        :type responsetype: str
+        :param limitstart: The offset for the returned affiliate data
+        :type limitstart: int
+        :param limitnum: The number of records to return
+        :type limitnum: int
+        :param userid: Obtain affiliate data for a specific client account
+        :type userid: int
+        :param visitors: Provide affiliates that match a specific visitor count
+        :type visitors: int
+        :param paytype: Provide affiliates matching the paytype provided
+        :type paytype: str
+        :param payamount: Provide affiliates matching a specific overridden payout amount
+        :type payamount: float
+        :param onetime: Provide affiliates configured to receive one time affiliates
+        :type onetime: int
+        :param balance: Provide affiliates that have this balance
+        :type balance: float
+        :param withdrawn: Provide affiliates that have withdrawn this amount
+        :type withdrawn: float
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._get_affiliates_serialize(
+            username=username,
+            password=password,
+            accesskey=accesskey,
+            responsetype=responsetype,
+            limitstart=limitstart,
+            limitnum=limitnum,
+            userid=userid,
+            visitors=visitors,
+            paytype=paytype,
+            payamount=payamount,
+            onetime=onetime,
+            balance=balance,
+            withdrawn=withdrawn,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "GetAffiliatesResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+
+    @validate_call
+    def get_affiliates_without_preload_content(
+        self,
+        username: Annotated[StrictStr, Field(description="Admin username/API identifier")],
+        password: Annotated[StrictStr, Field(description="Admin password/API secret")],
+        accesskey: Annotated[Optional[StrictStr], Field(description="Optional API access key")] = None,
+        responsetype: Annotated[Optional[StrictStr], Field(description="Response format")] = None,
+        limitstart: Annotated[Optional[StrictInt], Field(description="The offset for the returned affiliate data")] = None,
+        limitnum: Annotated[Optional[StrictInt], Field(description="The number of records to return")] = None,
+        userid: Annotated[Optional[StrictInt], Field(description="Obtain affiliate data for a specific client account")] = None,
+        visitors: Annotated[Optional[StrictInt], Field(description="Provide affiliates that match a specific visitor count")] = None,
+        paytype: Annotated[Optional[StrictStr], Field(description="Provide affiliates matching the paytype provided")] = None,
+        payamount: Annotated[Optional[Union[StrictFloat, StrictInt]], Field(description="Provide affiliates matching a specific overridden payout amount")] = None,
+        onetime: Annotated[Optional[StrictInt], Field(description="Provide affiliates configured to receive one time affiliates")] = None,
+        balance: Annotated[Optional[Union[StrictFloat, StrictInt]], Field(description="Provide affiliates that have this balance")] = None,
+        withdrawn: Annotated[Optional[Union[StrictFloat, StrictInt]], Field(description="Provide affiliates that have withdrawn this amount")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> RESTResponseType:
+        """Get affiliates
+
+        Obtain an array of affiliates
+
+        :param username: Admin username/API identifier (required)
+        :type username: str
+        :param password: Admin password/API secret (required)
+        :type password: str
+        :param accesskey: Optional API access key
+        :type accesskey: str
+        :param responsetype: Response format
+        :type responsetype: str
+        :param limitstart: The offset for the returned affiliate data
+        :type limitstart: int
+        :param limitnum: The number of records to return
+        :type limitnum: int
+        :param userid: Obtain affiliate data for a specific client account
+        :type userid: int
+        :param visitors: Provide affiliates that match a specific visitor count
+        :type visitors: int
+        :param paytype: Provide affiliates matching the paytype provided
+        :type paytype: str
+        :param payamount: Provide affiliates matching a specific overridden payout amount
+        :type payamount: float
+        :param onetime: Provide affiliates configured to receive one time affiliates
+        :type onetime: int
+        :param balance: Provide affiliates that have this balance
+        :type balance: float
+        :param withdrawn: Provide affiliates that have withdrawn this amount
+        :type withdrawn: float
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._get_affiliates_serialize(
+            username=username,
+            password=password,
+            accesskey=accesskey,
+            responsetype=responsetype,
+            limitstart=limitstart,
+            limitnum=limitnum,
+            userid=userid,
+            visitors=visitors,
+            paytype=paytype,
+            payamount=payamount,
+            onetime=onetime,
+            balance=balance,
+            withdrawn=withdrawn,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "GetAffiliatesResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+
+    def _get_affiliates_serialize(
+        self,
+        username,
+        password,
+        accesskey,
+        responsetype,
+        limitstart,
+        limitnum,
+        userid,
+        visitors,
+        paytype,
+        payamount,
+        onetime,
+        balance,
+        withdrawn,
+        _request_auth,
+        _content_type,
+        _headers,
+        _host_index,
+    ) -> RequestSerialized:
+
+        _host = None
+
+        _collection_formats: Dict[str, str] = {
+        }
+
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[
+            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
+        ] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        # process the query parameters
+        # process the header parameters
+        # process the form parameters
+        if username is not None:
+            _form_params.append(('username', username))
+        if password is not None:
+            _form_params.append(('password', password))
+        if accesskey is not None:
+            _form_params.append(('accesskey', accesskey))
+        if responsetype is not None:
+            _form_params.append(('responsetype', responsetype))
+        if limitstart is not None:
+            _form_params.append(('limitstart', limitstart))
+        if limitnum is not None:
+            _form_params.append(('limitnum', limitnum))
+        if userid is not None:
+            _form_params.append(('userid', userid))
+        if visitors is not None:
+            _form_params.append(('visitors', visitors))
+        if paytype is not None:
+            _form_params.append(('paytype', paytype))
+        if payamount is not None:
+            _form_params.append(('payamount', payamount))
+        if onetime is not None:
+            _form_params.append(('onetime', onetime))
+        if balance is not None:
+            _form_params.append(('balance', balance))
+        if withdrawn is not None:
+            _form_params.append(('withdrawn', withdrawn))
+        # process the body parameter
+
+
+        # set the HTTP header `Accept`
+        if 'Accept' not in _header_params:
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
+
+        # set the HTTP header `Content-Type`
+        if _content_type:
+            _header_params['Content-Type'] = _content_type
+        else:
+            _default_content_type = (
+                self.api_client.select_header_content_type(
+                    [
+                        'application/x-www-form-urlencoded'
+                    ]
+                )
+            )
+            if _default_content_type is not None:
+                _header_params['Content-Type'] = _default_content_type
+
+        # authentication setting
+        _auth_settings: List[str] = [
+        ]
+
+        return self.api_client.param_serialize(
+            method='POST',
+            resource_path='/api.php?action=GetAffiliates',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            auth_settings=_auth_settings,
+            collection_formats=_collection_formats,
+            _host=_host,
+            _request_auth=_request_auth
+        )
+
+
+
+
+    @validate_call
     def get_clients(
         self,
         username: Annotated[StrictStr, Field(description="Admin username/API identifier")],
@@ -2165,6 +4749,1185 @@ class DefaultApi:
 
 
     @validate_call
+    def get_clients_details(
+        self,
+        username: Annotated[StrictStr, Field(description="Admin username/API identifier")],
+        password: Annotated[StrictStr, Field(description="Admin password/API secret")],
+        accesskey: Annotated[Optional[StrictStr], Field(description="Optional API access key")] = None,
+        responsetype: Annotated[Optional[StrictStr], Field(description="Response format")] = None,
+        clientid: Annotated[Optional[StrictInt], Field(description="The client id to obtain the details for")] = None,
+        email: Annotated[Optional[StrictStr], Field(description="The email address of the client to search for")] = None,
+        stats: Annotated[Optional[StrictBool], Field(description="Also return additional client statistics")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> GetClientsDetailsResponse:
+        """Get client details
+
+        Obtain detailed information for a specific client
+
+        :param username: Admin username/API identifier (required)
+        :type username: str
+        :param password: Admin password/API secret (required)
+        :type password: str
+        :param accesskey: Optional API access key
+        :type accesskey: str
+        :param responsetype: Response format
+        :type responsetype: str
+        :param clientid: The client id to obtain the details for
+        :type clientid: int
+        :param email: The email address of the client to search for
+        :type email: str
+        :param stats: Also return additional client statistics
+        :type stats: bool
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._get_clients_details_serialize(
+            username=username,
+            password=password,
+            accesskey=accesskey,
+            responsetype=responsetype,
+            clientid=clientid,
+            email=email,
+            stats=stats,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "GetClientsDetailsResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+
+    @validate_call
+    def get_clients_details_with_http_info(
+        self,
+        username: Annotated[StrictStr, Field(description="Admin username/API identifier")],
+        password: Annotated[StrictStr, Field(description="Admin password/API secret")],
+        accesskey: Annotated[Optional[StrictStr], Field(description="Optional API access key")] = None,
+        responsetype: Annotated[Optional[StrictStr], Field(description="Response format")] = None,
+        clientid: Annotated[Optional[StrictInt], Field(description="The client id to obtain the details for")] = None,
+        email: Annotated[Optional[StrictStr], Field(description="The email address of the client to search for")] = None,
+        stats: Annotated[Optional[StrictBool], Field(description="Also return additional client statistics")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[GetClientsDetailsResponse]:
+        """Get client details
+
+        Obtain detailed information for a specific client
+
+        :param username: Admin username/API identifier (required)
+        :type username: str
+        :param password: Admin password/API secret (required)
+        :type password: str
+        :param accesskey: Optional API access key
+        :type accesskey: str
+        :param responsetype: Response format
+        :type responsetype: str
+        :param clientid: The client id to obtain the details for
+        :type clientid: int
+        :param email: The email address of the client to search for
+        :type email: str
+        :param stats: Also return additional client statistics
+        :type stats: bool
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._get_clients_details_serialize(
+            username=username,
+            password=password,
+            accesskey=accesskey,
+            responsetype=responsetype,
+            clientid=clientid,
+            email=email,
+            stats=stats,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "GetClientsDetailsResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+
+    @validate_call
+    def get_clients_details_without_preload_content(
+        self,
+        username: Annotated[StrictStr, Field(description="Admin username/API identifier")],
+        password: Annotated[StrictStr, Field(description="Admin password/API secret")],
+        accesskey: Annotated[Optional[StrictStr], Field(description="Optional API access key")] = None,
+        responsetype: Annotated[Optional[StrictStr], Field(description="Response format")] = None,
+        clientid: Annotated[Optional[StrictInt], Field(description="The client id to obtain the details for")] = None,
+        email: Annotated[Optional[StrictStr], Field(description="The email address of the client to search for")] = None,
+        stats: Annotated[Optional[StrictBool], Field(description="Also return additional client statistics")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> RESTResponseType:
+        """Get client details
+
+        Obtain detailed information for a specific client
+
+        :param username: Admin username/API identifier (required)
+        :type username: str
+        :param password: Admin password/API secret (required)
+        :type password: str
+        :param accesskey: Optional API access key
+        :type accesskey: str
+        :param responsetype: Response format
+        :type responsetype: str
+        :param clientid: The client id to obtain the details for
+        :type clientid: int
+        :param email: The email address of the client to search for
+        :type email: str
+        :param stats: Also return additional client statistics
+        :type stats: bool
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._get_clients_details_serialize(
+            username=username,
+            password=password,
+            accesskey=accesskey,
+            responsetype=responsetype,
+            clientid=clientid,
+            email=email,
+            stats=stats,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "GetClientsDetailsResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+
+    def _get_clients_details_serialize(
+        self,
+        username,
+        password,
+        accesskey,
+        responsetype,
+        clientid,
+        email,
+        stats,
+        _request_auth,
+        _content_type,
+        _headers,
+        _host_index,
+    ) -> RequestSerialized:
+
+        _host = None
+
+        _collection_formats: Dict[str, str] = {
+        }
+
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[
+            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
+        ] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        # process the query parameters
+        # process the header parameters
+        # process the form parameters
+        if username is not None:
+            _form_params.append(('username', username))
+        if password is not None:
+            _form_params.append(('password', password))
+        if accesskey is not None:
+            _form_params.append(('accesskey', accesskey))
+        if responsetype is not None:
+            _form_params.append(('responsetype', responsetype))
+        if clientid is not None:
+            _form_params.append(('clientid', clientid))
+        if email is not None:
+            _form_params.append(('email', email))
+        if stats is not None:
+            _form_params.append(('stats', stats))
+        # process the body parameter
+
+
+        # set the HTTP header `Accept`
+        if 'Accept' not in _header_params:
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
+
+        # set the HTTP header `Content-Type`
+        if _content_type:
+            _header_params['Content-Type'] = _content_type
+        else:
+            _default_content_type = (
+                self.api_client.select_header_content_type(
+                    [
+                        'application/x-www-form-urlencoded'
+                    ]
+                )
+            )
+            if _default_content_type is not None:
+                _header_params['Content-Type'] = _default_content_type
+
+        # authentication setting
+        _auth_settings: List[str] = [
+        ]
+
+        return self.api_client.param_serialize(
+            method='POST',
+            resource_path='/api.php?action=GetClientsDetails',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            auth_settings=_auth_settings,
+            collection_formats=_collection_formats,
+            _host=_host,
+            _request_auth=_request_auth
+        )
+
+
+
+
+    @validate_call
+    def get_clients_domains(
+        self,
+        username: Annotated[StrictStr, Field(description="Admin username/API identifier")],
+        password: Annotated[StrictStr, Field(description="Admin password/API secret")],
+        accesskey: Annotated[Optional[StrictStr], Field(description="Optional API access key")] = None,
+        responsetype: Annotated[Optional[StrictStr], Field(description="Response format")] = None,
+        limitstart: Annotated[Optional[StrictInt], Field(description="The offset for the returned log data")] = None,
+        limitnum: Annotated[Optional[StrictInt], Field(description="The number of records to return")] = None,
+        clientid: Annotated[Optional[StrictInt], Field(description="The client id to obtain the details for")] = None,
+        domainid: Annotated[Optional[StrictInt], Field(description="The specific domain id to obtain the details for")] = None,
+        domain: Annotated[Optional[StrictStr], Field(description="The specific domain to obtain the details for")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> GetClientsDomainsResponse:
+        """Get client domains
+
+        Obtain the domains associated with a client
+
+        :param username: Admin username/API identifier (required)
+        :type username: str
+        :param password: Admin password/API secret (required)
+        :type password: str
+        :param accesskey: Optional API access key
+        :type accesskey: str
+        :param responsetype: Response format
+        :type responsetype: str
+        :param limitstart: The offset for the returned log data
+        :type limitstart: int
+        :param limitnum: The number of records to return
+        :type limitnum: int
+        :param clientid: The client id to obtain the details for
+        :type clientid: int
+        :param domainid: The specific domain id to obtain the details for
+        :type domainid: int
+        :param domain: The specific domain to obtain the details for
+        :type domain: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._get_clients_domains_serialize(
+            username=username,
+            password=password,
+            accesskey=accesskey,
+            responsetype=responsetype,
+            limitstart=limitstart,
+            limitnum=limitnum,
+            clientid=clientid,
+            domainid=domainid,
+            domain=domain,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "GetClientsDomainsResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+
+    @validate_call
+    def get_clients_domains_with_http_info(
+        self,
+        username: Annotated[StrictStr, Field(description="Admin username/API identifier")],
+        password: Annotated[StrictStr, Field(description="Admin password/API secret")],
+        accesskey: Annotated[Optional[StrictStr], Field(description="Optional API access key")] = None,
+        responsetype: Annotated[Optional[StrictStr], Field(description="Response format")] = None,
+        limitstart: Annotated[Optional[StrictInt], Field(description="The offset for the returned log data")] = None,
+        limitnum: Annotated[Optional[StrictInt], Field(description="The number of records to return")] = None,
+        clientid: Annotated[Optional[StrictInt], Field(description="The client id to obtain the details for")] = None,
+        domainid: Annotated[Optional[StrictInt], Field(description="The specific domain id to obtain the details for")] = None,
+        domain: Annotated[Optional[StrictStr], Field(description="The specific domain to obtain the details for")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[GetClientsDomainsResponse]:
+        """Get client domains
+
+        Obtain the domains associated with a client
+
+        :param username: Admin username/API identifier (required)
+        :type username: str
+        :param password: Admin password/API secret (required)
+        :type password: str
+        :param accesskey: Optional API access key
+        :type accesskey: str
+        :param responsetype: Response format
+        :type responsetype: str
+        :param limitstart: The offset for the returned log data
+        :type limitstart: int
+        :param limitnum: The number of records to return
+        :type limitnum: int
+        :param clientid: The client id to obtain the details for
+        :type clientid: int
+        :param domainid: The specific domain id to obtain the details for
+        :type domainid: int
+        :param domain: The specific domain to obtain the details for
+        :type domain: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._get_clients_domains_serialize(
+            username=username,
+            password=password,
+            accesskey=accesskey,
+            responsetype=responsetype,
+            limitstart=limitstart,
+            limitnum=limitnum,
+            clientid=clientid,
+            domainid=domainid,
+            domain=domain,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "GetClientsDomainsResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+
+    @validate_call
+    def get_clients_domains_without_preload_content(
+        self,
+        username: Annotated[StrictStr, Field(description="Admin username/API identifier")],
+        password: Annotated[StrictStr, Field(description="Admin password/API secret")],
+        accesskey: Annotated[Optional[StrictStr], Field(description="Optional API access key")] = None,
+        responsetype: Annotated[Optional[StrictStr], Field(description="Response format")] = None,
+        limitstart: Annotated[Optional[StrictInt], Field(description="The offset for the returned log data")] = None,
+        limitnum: Annotated[Optional[StrictInt], Field(description="The number of records to return")] = None,
+        clientid: Annotated[Optional[StrictInt], Field(description="The client id to obtain the details for")] = None,
+        domainid: Annotated[Optional[StrictInt], Field(description="The specific domain id to obtain the details for")] = None,
+        domain: Annotated[Optional[StrictStr], Field(description="The specific domain to obtain the details for")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> RESTResponseType:
+        """Get client domains
+
+        Obtain the domains associated with a client
+
+        :param username: Admin username/API identifier (required)
+        :type username: str
+        :param password: Admin password/API secret (required)
+        :type password: str
+        :param accesskey: Optional API access key
+        :type accesskey: str
+        :param responsetype: Response format
+        :type responsetype: str
+        :param limitstart: The offset for the returned log data
+        :type limitstart: int
+        :param limitnum: The number of records to return
+        :type limitnum: int
+        :param clientid: The client id to obtain the details for
+        :type clientid: int
+        :param domainid: The specific domain id to obtain the details for
+        :type domainid: int
+        :param domain: The specific domain to obtain the details for
+        :type domain: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._get_clients_domains_serialize(
+            username=username,
+            password=password,
+            accesskey=accesskey,
+            responsetype=responsetype,
+            limitstart=limitstart,
+            limitnum=limitnum,
+            clientid=clientid,
+            domainid=domainid,
+            domain=domain,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "GetClientsDomainsResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+
+    def _get_clients_domains_serialize(
+        self,
+        username,
+        password,
+        accesskey,
+        responsetype,
+        limitstart,
+        limitnum,
+        clientid,
+        domainid,
+        domain,
+        _request_auth,
+        _content_type,
+        _headers,
+        _host_index,
+    ) -> RequestSerialized:
+
+        _host = None
+
+        _collection_formats: Dict[str, str] = {
+        }
+
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[
+            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
+        ] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        # process the query parameters
+        # process the header parameters
+        # process the form parameters
+        if username is not None:
+            _form_params.append(('username', username))
+        if password is not None:
+            _form_params.append(('password', password))
+        if accesskey is not None:
+            _form_params.append(('accesskey', accesskey))
+        if responsetype is not None:
+            _form_params.append(('responsetype', responsetype))
+        if limitstart is not None:
+            _form_params.append(('limitstart', limitstart))
+        if limitnum is not None:
+            _form_params.append(('limitnum', limitnum))
+        if clientid is not None:
+            _form_params.append(('clientid', clientid))
+        if domainid is not None:
+            _form_params.append(('domainid', domainid))
+        if domain is not None:
+            _form_params.append(('domain', domain))
+        # process the body parameter
+
+
+        # set the HTTP header `Accept`
+        if 'Accept' not in _header_params:
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
+
+        # set the HTTP header `Content-Type`
+        if _content_type:
+            _header_params['Content-Type'] = _content_type
+        else:
+            _default_content_type = (
+                self.api_client.select_header_content_type(
+                    [
+                        'application/x-www-form-urlencoded'
+                    ]
+                )
+            )
+            if _default_content_type is not None:
+                _header_params['Content-Type'] = _default_content_type
+
+        # authentication setting
+        _auth_settings: List[str] = [
+        ]
+
+        return self.api_client.param_serialize(
+            method='POST',
+            resource_path='/api.php?action=GetClientsDomains',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            auth_settings=_auth_settings,
+            collection_formats=_collection_formats,
+            _host=_host,
+            _request_auth=_request_auth
+        )
+
+
+
+
+    @validate_call
+    def get_clients_products(
+        self,
+        username: Annotated[StrictStr, Field(description="Admin username/API identifier")],
+        password: Annotated[StrictStr, Field(description="Admin password/API secret")],
+        accesskey: Annotated[Optional[StrictStr], Field(description="Optional API access key")] = None,
+        responsetype: Annotated[Optional[StrictStr], Field(description="Response format")] = None,
+        limitstart: Annotated[Optional[StrictInt], Field(description="The offset for the returned product data")] = None,
+        limitnum: Annotated[Optional[StrictInt], Field(description="The number of records to return")] = None,
+        clientid: Annotated[Optional[StrictInt], Field(description="The client id to obtain the details for")] = None,
+        serviceid: Annotated[Optional[StrictInt], Field(description="The specific service id to obtain the details for")] = None,
+        pid: Annotated[Optional[StrictInt], Field(description="The specific product id to obtain the details for")] = None,
+        domain: Annotated[Optional[StrictStr], Field(description="The specific domain to obtain the service details for")] = None,
+        username2: Annotated[Optional[StrictStr], Field(description="The specific username to obtain the details for")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> GetClientsProductsResponse:
+        """Get client products
+
+        Obtain a list of client purchased products matching the criteria
+
+        :param username: Admin username/API identifier (required)
+        :type username: str
+        :param password: Admin password/API secret (required)
+        :type password: str
+        :param accesskey: Optional API access key
+        :type accesskey: str
+        :param responsetype: Response format
+        :type responsetype: str
+        :param limitstart: The offset for the returned product data
+        :type limitstart: int
+        :param limitnum: The number of records to return
+        :type limitnum: int
+        :param clientid: The client id to obtain the details for
+        :type clientid: int
+        :param serviceid: The specific service id to obtain the details for
+        :type serviceid: int
+        :param pid: The specific product id to obtain the details for
+        :type pid: int
+        :param domain: The specific domain to obtain the service details for
+        :type domain: str
+        :param username2: The specific username to obtain the details for
+        :type username2: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._get_clients_products_serialize(
+            username=username,
+            password=password,
+            accesskey=accesskey,
+            responsetype=responsetype,
+            limitstart=limitstart,
+            limitnum=limitnum,
+            clientid=clientid,
+            serviceid=serviceid,
+            pid=pid,
+            domain=domain,
+            username2=username2,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "GetClientsProductsResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+
+    @validate_call
+    def get_clients_products_with_http_info(
+        self,
+        username: Annotated[StrictStr, Field(description="Admin username/API identifier")],
+        password: Annotated[StrictStr, Field(description="Admin password/API secret")],
+        accesskey: Annotated[Optional[StrictStr], Field(description="Optional API access key")] = None,
+        responsetype: Annotated[Optional[StrictStr], Field(description="Response format")] = None,
+        limitstart: Annotated[Optional[StrictInt], Field(description="The offset for the returned product data")] = None,
+        limitnum: Annotated[Optional[StrictInt], Field(description="The number of records to return")] = None,
+        clientid: Annotated[Optional[StrictInt], Field(description="The client id to obtain the details for")] = None,
+        serviceid: Annotated[Optional[StrictInt], Field(description="The specific service id to obtain the details for")] = None,
+        pid: Annotated[Optional[StrictInt], Field(description="The specific product id to obtain the details for")] = None,
+        domain: Annotated[Optional[StrictStr], Field(description="The specific domain to obtain the service details for")] = None,
+        username2: Annotated[Optional[StrictStr], Field(description="The specific username to obtain the details for")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[GetClientsProductsResponse]:
+        """Get client products
+
+        Obtain a list of client purchased products matching the criteria
+
+        :param username: Admin username/API identifier (required)
+        :type username: str
+        :param password: Admin password/API secret (required)
+        :type password: str
+        :param accesskey: Optional API access key
+        :type accesskey: str
+        :param responsetype: Response format
+        :type responsetype: str
+        :param limitstart: The offset for the returned product data
+        :type limitstart: int
+        :param limitnum: The number of records to return
+        :type limitnum: int
+        :param clientid: The client id to obtain the details for
+        :type clientid: int
+        :param serviceid: The specific service id to obtain the details for
+        :type serviceid: int
+        :param pid: The specific product id to obtain the details for
+        :type pid: int
+        :param domain: The specific domain to obtain the service details for
+        :type domain: str
+        :param username2: The specific username to obtain the details for
+        :type username2: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._get_clients_products_serialize(
+            username=username,
+            password=password,
+            accesskey=accesskey,
+            responsetype=responsetype,
+            limitstart=limitstart,
+            limitnum=limitnum,
+            clientid=clientid,
+            serviceid=serviceid,
+            pid=pid,
+            domain=domain,
+            username2=username2,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "GetClientsProductsResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+
+    @validate_call
+    def get_clients_products_without_preload_content(
+        self,
+        username: Annotated[StrictStr, Field(description="Admin username/API identifier")],
+        password: Annotated[StrictStr, Field(description="Admin password/API secret")],
+        accesskey: Annotated[Optional[StrictStr], Field(description="Optional API access key")] = None,
+        responsetype: Annotated[Optional[StrictStr], Field(description="Response format")] = None,
+        limitstart: Annotated[Optional[StrictInt], Field(description="The offset for the returned product data")] = None,
+        limitnum: Annotated[Optional[StrictInt], Field(description="The number of records to return")] = None,
+        clientid: Annotated[Optional[StrictInt], Field(description="The client id to obtain the details for")] = None,
+        serviceid: Annotated[Optional[StrictInt], Field(description="The specific service id to obtain the details for")] = None,
+        pid: Annotated[Optional[StrictInt], Field(description="The specific product id to obtain the details for")] = None,
+        domain: Annotated[Optional[StrictStr], Field(description="The specific domain to obtain the service details for")] = None,
+        username2: Annotated[Optional[StrictStr], Field(description="The specific username to obtain the details for")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> RESTResponseType:
+        """Get client products
+
+        Obtain a list of client purchased products matching the criteria
+
+        :param username: Admin username/API identifier (required)
+        :type username: str
+        :param password: Admin password/API secret (required)
+        :type password: str
+        :param accesskey: Optional API access key
+        :type accesskey: str
+        :param responsetype: Response format
+        :type responsetype: str
+        :param limitstart: The offset for the returned product data
+        :type limitstart: int
+        :param limitnum: The number of records to return
+        :type limitnum: int
+        :param clientid: The client id to obtain the details for
+        :type clientid: int
+        :param serviceid: The specific service id to obtain the details for
+        :type serviceid: int
+        :param pid: The specific product id to obtain the details for
+        :type pid: int
+        :param domain: The specific domain to obtain the service details for
+        :type domain: str
+        :param username2: The specific username to obtain the details for
+        :type username2: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._get_clients_products_serialize(
+            username=username,
+            password=password,
+            accesskey=accesskey,
+            responsetype=responsetype,
+            limitstart=limitstart,
+            limitnum=limitnum,
+            clientid=clientid,
+            serviceid=serviceid,
+            pid=pid,
+            domain=domain,
+            username2=username2,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "GetClientsProductsResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+
+    def _get_clients_products_serialize(
+        self,
+        username,
+        password,
+        accesskey,
+        responsetype,
+        limitstart,
+        limitnum,
+        clientid,
+        serviceid,
+        pid,
+        domain,
+        username2,
+        _request_auth,
+        _content_type,
+        _headers,
+        _host_index,
+    ) -> RequestSerialized:
+
+        _host = None
+
+        _collection_formats: Dict[str, str] = {
+        }
+
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[
+            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
+        ] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        # process the query parameters
+        # process the header parameters
+        # process the form parameters
+        if username is not None:
+            _form_params.append(('username', username))
+        if password is not None:
+            _form_params.append(('password', password))
+        if accesskey is not None:
+            _form_params.append(('accesskey', accesskey))
+        if responsetype is not None:
+            _form_params.append(('responsetype', responsetype))
+        if limitstart is not None:
+            _form_params.append(('limitstart', limitstart))
+        if limitnum is not None:
+            _form_params.append(('limitnum', limitnum))
+        if clientid is not None:
+            _form_params.append(('clientid', clientid))
+        if serviceid is not None:
+            _form_params.append(('serviceid', serviceid))
+        if pid is not None:
+            _form_params.append(('pid', pid))
+        if domain is not None:
+            _form_params.append(('domain', domain))
+        if username2 is not None:
+            _form_params.append(('username2', username2))
+        # process the body parameter
+
+
+        # set the HTTP header `Accept`
+        if 'Accept' not in _header_params:
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
+
+        # set the HTTP header `Content-Type`
+        if _content_type:
+            _header_params['Content-Type'] = _content_type
+        else:
+            _default_content_type = (
+                self.api_client.select_header_content_type(
+                    [
+                        'application/x-www-form-urlencoded'
+                    ]
+                )
+            )
+            if _default_content_type is not None:
+                _header_params['Content-Type'] = _default_content_type
+
+        # authentication setting
+        _auth_settings: List[str] = [
+        ]
+
+        return self.api_client.param_serialize(
+            method='POST',
+            resource_path='/api.php?action=GetClientsProducts',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            auth_settings=_auth_settings,
+            collection_formats=_collection_formats,
+            _host=_host,
+            _request_auth=_request_auth
+        )
+
+
+
+
+    @validate_call
     def get_currencies(
         self,
         username: Annotated[StrictStr, Field(description="Admin username/API identifier")],
@@ -2467,6 +6230,2259 @@ class DefaultApi:
         return self.api_client.param_serialize(
             method='POST',
             resource_path='/api.php?action=GetCurrencies',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            auth_settings=_auth_settings,
+            collection_formats=_collection_formats,
+            _host=_host,
+            _request_auth=_request_auth
+        )
+
+
+
+
+    @validate_call
+    def get_invoices(
+        self,
+        username: Annotated[StrictStr, Field(description="Admin username/API identifier")],
+        password: Annotated[StrictStr, Field(description="Admin password/API secret")],
+        accesskey: Annotated[Optional[StrictStr], Field(description="Optional API access key")] = None,
+        responsetype: Annotated[Optional[StrictStr], Field(description="Response format")] = None,
+        limitstart: Annotated[Optional[StrictInt], Field(description="The offset for the returned invoice data")] = None,
+        limitnum: Annotated[Optional[StrictInt], Field(description="The number of records to return")] = None,
+        userid: Annotated[Optional[StrictInt], Field(description="Find invoices for a specific client id")] = None,
+        status: Annotated[Optional[StrictStr], Field(description="Find invoices for a specific status, including Overdue")] = None,
+        orderby: Annotated[Optional[StrictStr], Field(description="The field to sort results by")] = None,
+        order: Annotated[Optional[StrictStr], Field(description="Sort direction for the invoice results")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> GetInvoicesResponse:
+        """Get invoices
+
+        Retrieve a list of invoices matching the provided criteria
+
+        :param username: Admin username/API identifier (required)
+        :type username: str
+        :param password: Admin password/API secret (required)
+        :type password: str
+        :param accesskey: Optional API access key
+        :type accesskey: str
+        :param responsetype: Response format
+        :type responsetype: str
+        :param limitstart: The offset for the returned invoice data
+        :type limitstart: int
+        :param limitnum: The number of records to return
+        :type limitnum: int
+        :param userid: Find invoices for a specific client id
+        :type userid: int
+        :param status: Find invoices for a specific status, including Overdue
+        :type status: str
+        :param orderby: The field to sort results by
+        :type orderby: str
+        :param order: Sort direction for the invoice results
+        :type order: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._get_invoices_serialize(
+            username=username,
+            password=password,
+            accesskey=accesskey,
+            responsetype=responsetype,
+            limitstart=limitstart,
+            limitnum=limitnum,
+            userid=userid,
+            status=status,
+            orderby=orderby,
+            order=order,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "GetInvoicesResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+
+    @validate_call
+    def get_invoices_with_http_info(
+        self,
+        username: Annotated[StrictStr, Field(description="Admin username/API identifier")],
+        password: Annotated[StrictStr, Field(description="Admin password/API secret")],
+        accesskey: Annotated[Optional[StrictStr], Field(description="Optional API access key")] = None,
+        responsetype: Annotated[Optional[StrictStr], Field(description="Response format")] = None,
+        limitstart: Annotated[Optional[StrictInt], Field(description="The offset for the returned invoice data")] = None,
+        limitnum: Annotated[Optional[StrictInt], Field(description="The number of records to return")] = None,
+        userid: Annotated[Optional[StrictInt], Field(description="Find invoices for a specific client id")] = None,
+        status: Annotated[Optional[StrictStr], Field(description="Find invoices for a specific status, including Overdue")] = None,
+        orderby: Annotated[Optional[StrictStr], Field(description="The field to sort results by")] = None,
+        order: Annotated[Optional[StrictStr], Field(description="Sort direction for the invoice results")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[GetInvoicesResponse]:
+        """Get invoices
+
+        Retrieve a list of invoices matching the provided criteria
+
+        :param username: Admin username/API identifier (required)
+        :type username: str
+        :param password: Admin password/API secret (required)
+        :type password: str
+        :param accesskey: Optional API access key
+        :type accesskey: str
+        :param responsetype: Response format
+        :type responsetype: str
+        :param limitstart: The offset for the returned invoice data
+        :type limitstart: int
+        :param limitnum: The number of records to return
+        :type limitnum: int
+        :param userid: Find invoices for a specific client id
+        :type userid: int
+        :param status: Find invoices for a specific status, including Overdue
+        :type status: str
+        :param orderby: The field to sort results by
+        :type orderby: str
+        :param order: Sort direction for the invoice results
+        :type order: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._get_invoices_serialize(
+            username=username,
+            password=password,
+            accesskey=accesskey,
+            responsetype=responsetype,
+            limitstart=limitstart,
+            limitnum=limitnum,
+            userid=userid,
+            status=status,
+            orderby=orderby,
+            order=order,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "GetInvoicesResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+
+    @validate_call
+    def get_invoices_without_preload_content(
+        self,
+        username: Annotated[StrictStr, Field(description="Admin username/API identifier")],
+        password: Annotated[StrictStr, Field(description="Admin password/API secret")],
+        accesskey: Annotated[Optional[StrictStr], Field(description="Optional API access key")] = None,
+        responsetype: Annotated[Optional[StrictStr], Field(description="Response format")] = None,
+        limitstart: Annotated[Optional[StrictInt], Field(description="The offset for the returned invoice data")] = None,
+        limitnum: Annotated[Optional[StrictInt], Field(description="The number of records to return")] = None,
+        userid: Annotated[Optional[StrictInt], Field(description="Find invoices for a specific client id")] = None,
+        status: Annotated[Optional[StrictStr], Field(description="Find invoices for a specific status, including Overdue")] = None,
+        orderby: Annotated[Optional[StrictStr], Field(description="The field to sort results by")] = None,
+        order: Annotated[Optional[StrictStr], Field(description="Sort direction for the invoice results")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> RESTResponseType:
+        """Get invoices
+
+        Retrieve a list of invoices matching the provided criteria
+
+        :param username: Admin username/API identifier (required)
+        :type username: str
+        :param password: Admin password/API secret (required)
+        :type password: str
+        :param accesskey: Optional API access key
+        :type accesskey: str
+        :param responsetype: Response format
+        :type responsetype: str
+        :param limitstart: The offset for the returned invoice data
+        :type limitstart: int
+        :param limitnum: The number of records to return
+        :type limitnum: int
+        :param userid: Find invoices for a specific client id
+        :type userid: int
+        :param status: Find invoices for a specific status, including Overdue
+        :type status: str
+        :param orderby: The field to sort results by
+        :type orderby: str
+        :param order: Sort direction for the invoice results
+        :type order: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._get_invoices_serialize(
+            username=username,
+            password=password,
+            accesskey=accesskey,
+            responsetype=responsetype,
+            limitstart=limitstart,
+            limitnum=limitnum,
+            userid=userid,
+            status=status,
+            orderby=orderby,
+            order=order,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "GetInvoicesResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+
+    def _get_invoices_serialize(
+        self,
+        username,
+        password,
+        accesskey,
+        responsetype,
+        limitstart,
+        limitnum,
+        userid,
+        status,
+        orderby,
+        order,
+        _request_auth,
+        _content_type,
+        _headers,
+        _host_index,
+    ) -> RequestSerialized:
+
+        _host = None
+
+        _collection_formats: Dict[str, str] = {
+        }
+
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[
+            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
+        ] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        # process the query parameters
+        # process the header parameters
+        # process the form parameters
+        if username is not None:
+            _form_params.append(('username', username))
+        if password is not None:
+            _form_params.append(('password', password))
+        if accesskey is not None:
+            _form_params.append(('accesskey', accesskey))
+        if responsetype is not None:
+            _form_params.append(('responsetype', responsetype))
+        if limitstart is not None:
+            _form_params.append(('limitstart', limitstart))
+        if limitnum is not None:
+            _form_params.append(('limitnum', limitnum))
+        if userid is not None:
+            _form_params.append(('userid', userid))
+        if status is not None:
+            _form_params.append(('status', status))
+        if orderby is not None:
+            _form_params.append(('orderby', orderby))
+        if order is not None:
+            _form_params.append(('order', order))
+        # process the body parameter
+
+
+        # set the HTTP header `Accept`
+        if 'Accept' not in _header_params:
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
+
+        # set the HTTP header `Content-Type`
+        if _content_type:
+            _header_params['Content-Type'] = _content_type
+        else:
+            _default_content_type = (
+                self.api_client.select_header_content_type(
+                    [
+                        'application/x-www-form-urlencoded'
+                    ]
+                )
+            )
+            if _default_content_type is not None:
+                _header_params['Content-Type'] = _default_content_type
+
+        # authentication setting
+        _auth_settings: List[str] = [
+        ]
+
+        return self.api_client.param_serialize(
+            method='POST',
+            resource_path='/api.php?action=GetInvoices',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            auth_settings=_auth_settings,
+            collection_formats=_collection_formats,
+            _host=_host,
+            _request_auth=_request_auth
+        )
+
+
+
+
+    @validate_call
+    def get_invoices_details(
+        self,
+        username: Annotated[StrictStr, Field(description="Admin username/API identifier")],
+        password: Annotated[StrictStr, Field(description="Admin password/API secret")],
+        accesskey: Annotated[Optional[StrictStr], Field(description="Optional API access key")] = None,
+        responsetype: Annotated[Optional[StrictStr], Field(description="Response format")] = None,
+        limitstart: Annotated[Optional[StrictInt], Field(description="The offset for the returned invoice data")] = None,
+        limitnum: Annotated[Optional[StrictInt], Field(description="The number of records to return")] = None,
+        userid: Annotated[Optional[StrictInt], Field(description="Find invoices for a specific client id")] = None,
+        status: Annotated[Optional[StrictStr], Field(description="Find invoices for a specific status, including Overdue")] = None,
+        orderby: Annotated[Optional[StrictStr], Field(description="The field to sort results by")] = None,
+        order: Annotated[Optional[StrictStr], Field(description="Sort direction for the invoice results")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> GetInvoicesDetailsResponse:
+        """Get invoices with line item details
+
+        Custom action returning invoices in GetInvoice format with embedded line items
+
+        :param username: Admin username/API identifier (required)
+        :type username: str
+        :param password: Admin password/API secret (required)
+        :type password: str
+        :param accesskey: Optional API access key
+        :type accesskey: str
+        :param responsetype: Response format
+        :type responsetype: str
+        :param limitstart: The offset for the returned invoice data
+        :type limitstart: int
+        :param limitnum: The number of records to return
+        :type limitnum: int
+        :param userid: Find invoices for a specific client id
+        :type userid: int
+        :param status: Find invoices for a specific status, including Overdue
+        :type status: str
+        :param orderby: The field to sort results by
+        :type orderby: str
+        :param order: Sort direction for the invoice results
+        :type order: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._get_invoices_details_serialize(
+            username=username,
+            password=password,
+            accesskey=accesskey,
+            responsetype=responsetype,
+            limitstart=limitstart,
+            limitnum=limitnum,
+            userid=userid,
+            status=status,
+            orderby=orderby,
+            order=order,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "GetInvoicesDetailsResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+
+    @validate_call
+    def get_invoices_details_with_http_info(
+        self,
+        username: Annotated[StrictStr, Field(description="Admin username/API identifier")],
+        password: Annotated[StrictStr, Field(description="Admin password/API secret")],
+        accesskey: Annotated[Optional[StrictStr], Field(description="Optional API access key")] = None,
+        responsetype: Annotated[Optional[StrictStr], Field(description="Response format")] = None,
+        limitstart: Annotated[Optional[StrictInt], Field(description="The offset for the returned invoice data")] = None,
+        limitnum: Annotated[Optional[StrictInt], Field(description="The number of records to return")] = None,
+        userid: Annotated[Optional[StrictInt], Field(description="Find invoices for a specific client id")] = None,
+        status: Annotated[Optional[StrictStr], Field(description="Find invoices for a specific status, including Overdue")] = None,
+        orderby: Annotated[Optional[StrictStr], Field(description="The field to sort results by")] = None,
+        order: Annotated[Optional[StrictStr], Field(description="Sort direction for the invoice results")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[GetInvoicesDetailsResponse]:
+        """Get invoices with line item details
+
+        Custom action returning invoices in GetInvoice format with embedded line items
+
+        :param username: Admin username/API identifier (required)
+        :type username: str
+        :param password: Admin password/API secret (required)
+        :type password: str
+        :param accesskey: Optional API access key
+        :type accesskey: str
+        :param responsetype: Response format
+        :type responsetype: str
+        :param limitstart: The offset for the returned invoice data
+        :type limitstart: int
+        :param limitnum: The number of records to return
+        :type limitnum: int
+        :param userid: Find invoices for a specific client id
+        :type userid: int
+        :param status: Find invoices for a specific status, including Overdue
+        :type status: str
+        :param orderby: The field to sort results by
+        :type orderby: str
+        :param order: Sort direction for the invoice results
+        :type order: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._get_invoices_details_serialize(
+            username=username,
+            password=password,
+            accesskey=accesskey,
+            responsetype=responsetype,
+            limitstart=limitstart,
+            limitnum=limitnum,
+            userid=userid,
+            status=status,
+            orderby=orderby,
+            order=order,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "GetInvoicesDetailsResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+
+    @validate_call
+    def get_invoices_details_without_preload_content(
+        self,
+        username: Annotated[StrictStr, Field(description="Admin username/API identifier")],
+        password: Annotated[StrictStr, Field(description="Admin password/API secret")],
+        accesskey: Annotated[Optional[StrictStr], Field(description="Optional API access key")] = None,
+        responsetype: Annotated[Optional[StrictStr], Field(description="Response format")] = None,
+        limitstart: Annotated[Optional[StrictInt], Field(description="The offset for the returned invoice data")] = None,
+        limitnum: Annotated[Optional[StrictInt], Field(description="The number of records to return")] = None,
+        userid: Annotated[Optional[StrictInt], Field(description="Find invoices for a specific client id")] = None,
+        status: Annotated[Optional[StrictStr], Field(description="Find invoices for a specific status, including Overdue")] = None,
+        orderby: Annotated[Optional[StrictStr], Field(description="The field to sort results by")] = None,
+        order: Annotated[Optional[StrictStr], Field(description="Sort direction for the invoice results")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> RESTResponseType:
+        """Get invoices with line item details
+
+        Custom action returning invoices in GetInvoice format with embedded line items
+
+        :param username: Admin username/API identifier (required)
+        :type username: str
+        :param password: Admin password/API secret (required)
+        :type password: str
+        :param accesskey: Optional API access key
+        :type accesskey: str
+        :param responsetype: Response format
+        :type responsetype: str
+        :param limitstart: The offset for the returned invoice data
+        :type limitstart: int
+        :param limitnum: The number of records to return
+        :type limitnum: int
+        :param userid: Find invoices for a specific client id
+        :type userid: int
+        :param status: Find invoices for a specific status, including Overdue
+        :type status: str
+        :param orderby: The field to sort results by
+        :type orderby: str
+        :param order: Sort direction for the invoice results
+        :type order: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._get_invoices_details_serialize(
+            username=username,
+            password=password,
+            accesskey=accesskey,
+            responsetype=responsetype,
+            limitstart=limitstart,
+            limitnum=limitnum,
+            userid=userid,
+            status=status,
+            orderby=orderby,
+            order=order,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "GetInvoicesDetailsResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+
+    def _get_invoices_details_serialize(
+        self,
+        username,
+        password,
+        accesskey,
+        responsetype,
+        limitstart,
+        limitnum,
+        userid,
+        status,
+        orderby,
+        order,
+        _request_auth,
+        _content_type,
+        _headers,
+        _host_index,
+    ) -> RequestSerialized:
+
+        _host = None
+
+        _collection_formats: Dict[str, str] = {
+        }
+
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[
+            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
+        ] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        # process the query parameters
+        # process the header parameters
+        # process the form parameters
+        if username is not None:
+            _form_params.append(('username', username))
+        if password is not None:
+            _form_params.append(('password', password))
+        if accesskey is not None:
+            _form_params.append(('accesskey', accesskey))
+        if responsetype is not None:
+            _form_params.append(('responsetype', responsetype))
+        if limitstart is not None:
+            _form_params.append(('limitstart', limitstart))
+        if limitnum is not None:
+            _form_params.append(('limitnum', limitnum))
+        if userid is not None:
+            _form_params.append(('userid', userid))
+        if status is not None:
+            _form_params.append(('status', status))
+        if orderby is not None:
+            _form_params.append(('orderby', orderby))
+        if order is not None:
+            _form_params.append(('order', order))
+        # process the body parameter
+
+
+        # set the HTTP header `Accept`
+        if 'Accept' not in _header_params:
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
+
+        # set the HTTP header `Content-Type`
+        if _content_type:
+            _header_params['Content-Type'] = _content_type
+        else:
+            _default_content_type = (
+                self.api_client.select_header_content_type(
+                    [
+                        'application/x-www-form-urlencoded'
+                    ]
+                )
+            )
+            if _default_content_type is not None:
+                _header_params['Content-Type'] = _default_content_type
+
+        # authentication setting
+        _auth_settings: List[str] = [
+        ]
+
+        return self.api_client.param_serialize(
+            method='POST',
+            resource_path='/api.php?action=GetInvoicesDetails',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            auth_settings=_auth_settings,
+            collection_formats=_collection_formats,
+            _host=_host,
+            _request_auth=_request_auth
+        )
+
+
+
+
+    @validate_call
+    def get_orders(
+        self,
+        username: Annotated[StrictStr, Field(description="Admin username/API identifier")],
+        password: Annotated[StrictStr, Field(description="Admin password/API secret")],
+        accesskey: Annotated[Optional[StrictStr], Field(description="Optional API access key")] = None,
+        responsetype: Annotated[Optional[StrictStr], Field(description="Response format")] = None,
+        limitstart: Annotated[Optional[StrictInt], Field(description="The offset for the returned order data")] = None,
+        limitnum: Annotated[Optional[StrictInt], Field(description="The number of records to return")] = None,
+        id: Annotated[Optional[StrictInt], Field(description="Find orders for a specific order id")] = None,
+        userid: Annotated[Optional[StrictInt], Field(description="Find orders for a specific client id")] = None,
+        requestor_id: Annotated[Optional[StrictInt], Field(description="Find orders for a specific requestor id")] = None,
+        status: Annotated[Optional[StrictStr], Field(description="Find orders for a specific status (Active, Pending, Fraud, Cancelled)")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> GetOrdersResponse:
+        """Get orders
+
+        Obtain orders matching the passed criteria
+
+        :param username: Admin username/API identifier (required)
+        :type username: str
+        :param password: Admin password/API secret (required)
+        :type password: str
+        :param accesskey: Optional API access key
+        :type accesskey: str
+        :param responsetype: Response format
+        :type responsetype: str
+        :param limitstart: The offset for the returned order data
+        :type limitstart: int
+        :param limitnum: The number of records to return
+        :type limitnum: int
+        :param id: Find orders for a specific order id
+        :type id: int
+        :param userid: Find orders for a specific client id
+        :type userid: int
+        :param requestor_id: Find orders for a specific requestor id
+        :type requestor_id: int
+        :param status: Find orders for a specific status (Active, Pending, Fraud, Cancelled)
+        :type status: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._get_orders_serialize(
+            username=username,
+            password=password,
+            accesskey=accesskey,
+            responsetype=responsetype,
+            limitstart=limitstart,
+            limitnum=limitnum,
+            id=id,
+            userid=userid,
+            requestor_id=requestor_id,
+            status=status,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "GetOrdersResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+
+    @validate_call
+    def get_orders_with_http_info(
+        self,
+        username: Annotated[StrictStr, Field(description="Admin username/API identifier")],
+        password: Annotated[StrictStr, Field(description="Admin password/API secret")],
+        accesskey: Annotated[Optional[StrictStr], Field(description="Optional API access key")] = None,
+        responsetype: Annotated[Optional[StrictStr], Field(description="Response format")] = None,
+        limitstart: Annotated[Optional[StrictInt], Field(description="The offset for the returned order data")] = None,
+        limitnum: Annotated[Optional[StrictInt], Field(description="The number of records to return")] = None,
+        id: Annotated[Optional[StrictInt], Field(description="Find orders for a specific order id")] = None,
+        userid: Annotated[Optional[StrictInt], Field(description="Find orders for a specific client id")] = None,
+        requestor_id: Annotated[Optional[StrictInt], Field(description="Find orders for a specific requestor id")] = None,
+        status: Annotated[Optional[StrictStr], Field(description="Find orders for a specific status (Active, Pending, Fraud, Cancelled)")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[GetOrdersResponse]:
+        """Get orders
+
+        Obtain orders matching the passed criteria
+
+        :param username: Admin username/API identifier (required)
+        :type username: str
+        :param password: Admin password/API secret (required)
+        :type password: str
+        :param accesskey: Optional API access key
+        :type accesskey: str
+        :param responsetype: Response format
+        :type responsetype: str
+        :param limitstart: The offset for the returned order data
+        :type limitstart: int
+        :param limitnum: The number of records to return
+        :type limitnum: int
+        :param id: Find orders for a specific order id
+        :type id: int
+        :param userid: Find orders for a specific client id
+        :type userid: int
+        :param requestor_id: Find orders for a specific requestor id
+        :type requestor_id: int
+        :param status: Find orders for a specific status (Active, Pending, Fraud, Cancelled)
+        :type status: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._get_orders_serialize(
+            username=username,
+            password=password,
+            accesskey=accesskey,
+            responsetype=responsetype,
+            limitstart=limitstart,
+            limitnum=limitnum,
+            id=id,
+            userid=userid,
+            requestor_id=requestor_id,
+            status=status,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "GetOrdersResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+
+    @validate_call
+    def get_orders_without_preload_content(
+        self,
+        username: Annotated[StrictStr, Field(description="Admin username/API identifier")],
+        password: Annotated[StrictStr, Field(description="Admin password/API secret")],
+        accesskey: Annotated[Optional[StrictStr], Field(description="Optional API access key")] = None,
+        responsetype: Annotated[Optional[StrictStr], Field(description="Response format")] = None,
+        limitstart: Annotated[Optional[StrictInt], Field(description="The offset for the returned order data")] = None,
+        limitnum: Annotated[Optional[StrictInt], Field(description="The number of records to return")] = None,
+        id: Annotated[Optional[StrictInt], Field(description="Find orders for a specific order id")] = None,
+        userid: Annotated[Optional[StrictInt], Field(description="Find orders for a specific client id")] = None,
+        requestor_id: Annotated[Optional[StrictInt], Field(description="Find orders for a specific requestor id")] = None,
+        status: Annotated[Optional[StrictStr], Field(description="Find orders for a specific status (Active, Pending, Fraud, Cancelled)")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> RESTResponseType:
+        """Get orders
+
+        Obtain orders matching the passed criteria
+
+        :param username: Admin username/API identifier (required)
+        :type username: str
+        :param password: Admin password/API secret (required)
+        :type password: str
+        :param accesskey: Optional API access key
+        :type accesskey: str
+        :param responsetype: Response format
+        :type responsetype: str
+        :param limitstart: The offset for the returned order data
+        :type limitstart: int
+        :param limitnum: The number of records to return
+        :type limitnum: int
+        :param id: Find orders for a specific order id
+        :type id: int
+        :param userid: Find orders for a specific client id
+        :type userid: int
+        :param requestor_id: Find orders for a specific requestor id
+        :type requestor_id: int
+        :param status: Find orders for a specific status (Active, Pending, Fraud, Cancelled)
+        :type status: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._get_orders_serialize(
+            username=username,
+            password=password,
+            accesskey=accesskey,
+            responsetype=responsetype,
+            limitstart=limitstart,
+            limitnum=limitnum,
+            id=id,
+            userid=userid,
+            requestor_id=requestor_id,
+            status=status,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "GetOrdersResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+
+    def _get_orders_serialize(
+        self,
+        username,
+        password,
+        accesskey,
+        responsetype,
+        limitstart,
+        limitnum,
+        id,
+        userid,
+        requestor_id,
+        status,
+        _request_auth,
+        _content_type,
+        _headers,
+        _host_index,
+    ) -> RequestSerialized:
+
+        _host = None
+
+        _collection_formats: Dict[str, str] = {
+        }
+
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[
+            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
+        ] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        # process the query parameters
+        # process the header parameters
+        # process the form parameters
+        if username is not None:
+            _form_params.append(('username', username))
+        if password is not None:
+            _form_params.append(('password', password))
+        if accesskey is not None:
+            _form_params.append(('accesskey', accesskey))
+        if responsetype is not None:
+            _form_params.append(('responsetype', responsetype))
+        if limitstart is not None:
+            _form_params.append(('limitstart', limitstart))
+        if limitnum is not None:
+            _form_params.append(('limitnum', limitnum))
+        if id is not None:
+            _form_params.append(('id', id))
+        if userid is not None:
+            _form_params.append(('userid', userid))
+        if requestor_id is not None:
+            _form_params.append(('requestor_id', requestor_id))
+        if status is not None:
+            _form_params.append(('status', status))
+        # process the body parameter
+
+
+        # set the HTTP header `Accept`
+        if 'Accept' not in _header_params:
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
+
+        # set the HTTP header `Content-Type`
+        if _content_type:
+            _header_params['Content-Type'] = _content_type
+        else:
+            _default_content_type = (
+                self.api_client.select_header_content_type(
+                    [
+                        'application/x-www-form-urlencoded'
+                    ]
+                )
+            )
+            if _default_content_type is not None:
+                _header_params['Content-Type'] = _default_content_type
+
+        # authentication setting
+        _auth_settings: List[str] = [
+        ]
+
+        return self.api_client.param_serialize(
+            method='POST',
+            resource_path='/api.php?action=GetOrders',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            auth_settings=_auth_settings,
+            collection_formats=_collection_formats,
+            _host=_host,
+            _request_auth=_request_auth
+        )
+
+
+
+
+    @validate_call
+    def get_payment_methods(
+        self,
+        username: Annotated[StrictStr, Field(description="Admin username/API identifier")],
+        password: Annotated[StrictStr, Field(description="Admin password/API secret")],
+        accesskey: Annotated[Optional[StrictStr], Field(description="Optional API access key")] = None,
+        responsetype: Annotated[Optional[StrictStr], Field(description="Response format")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> GetPaymentMethodsResponse:
+        """Get payment methods
+
+        Retrieve activated payment methods
+
+        :param username: Admin username/API identifier (required)
+        :type username: str
+        :param password: Admin password/API secret (required)
+        :type password: str
+        :param accesskey: Optional API access key
+        :type accesskey: str
+        :param responsetype: Response format
+        :type responsetype: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._get_payment_methods_serialize(
+            username=username,
+            password=password,
+            accesskey=accesskey,
+            responsetype=responsetype,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "GetPaymentMethodsResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+
+    @validate_call
+    def get_payment_methods_with_http_info(
+        self,
+        username: Annotated[StrictStr, Field(description="Admin username/API identifier")],
+        password: Annotated[StrictStr, Field(description="Admin password/API secret")],
+        accesskey: Annotated[Optional[StrictStr], Field(description="Optional API access key")] = None,
+        responsetype: Annotated[Optional[StrictStr], Field(description="Response format")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[GetPaymentMethodsResponse]:
+        """Get payment methods
+
+        Retrieve activated payment methods
+
+        :param username: Admin username/API identifier (required)
+        :type username: str
+        :param password: Admin password/API secret (required)
+        :type password: str
+        :param accesskey: Optional API access key
+        :type accesskey: str
+        :param responsetype: Response format
+        :type responsetype: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._get_payment_methods_serialize(
+            username=username,
+            password=password,
+            accesskey=accesskey,
+            responsetype=responsetype,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "GetPaymentMethodsResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+
+    @validate_call
+    def get_payment_methods_without_preload_content(
+        self,
+        username: Annotated[StrictStr, Field(description="Admin username/API identifier")],
+        password: Annotated[StrictStr, Field(description="Admin password/API secret")],
+        accesskey: Annotated[Optional[StrictStr], Field(description="Optional API access key")] = None,
+        responsetype: Annotated[Optional[StrictStr], Field(description="Response format")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> RESTResponseType:
+        """Get payment methods
+
+        Retrieve activated payment methods
+
+        :param username: Admin username/API identifier (required)
+        :type username: str
+        :param password: Admin password/API secret (required)
+        :type password: str
+        :param accesskey: Optional API access key
+        :type accesskey: str
+        :param responsetype: Response format
+        :type responsetype: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._get_payment_methods_serialize(
+            username=username,
+            password=password,
+            accesskey=accesskey,
+            responsetype=responsetype,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "GetPaymentMethodsResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+
+    def _get_payment_methods_serialize(
+        self,
+        username,
+        password,
+        accesskey,
+        responsetype,
+        _request_auth,
+        _content_type,
+        _headers,
+        _host_index,
+    ) -> RequestSerialized:
+
+        _host = None
+
+        _collection_formats: Dict[str, str] = {
+        }
+
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[
+            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
+        ] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        # process the query parameters
+        # process the header parameters
+        # process the form parameters
+        if username is not None:
+            _form_params.append(('username', username))
+        if password is not None:
+            _form_params.append(('password', password))
+        if accesskey is not None:
+            _form_params.append(('accesskey', accesskey))
+        if responsetype is not None:
+            _form_params.append(('responsetype', responsetype))
+        # process the body parameter
+
+
+        # set the HTTP header `Accept`
+        if 'Accept' not in _header_params:
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
+
+        # set the HTTP header `Content-Type`
+        if _content_type:
+            _header_params['Content-Type'] = _content_type
+        else:
+            _default_content_type = (
+                self.api_client.select_header_content_type(
+                    [
+                        'application/x-www-form-urlencoded'
+                    ]
+                )
+            )
+            if _default_content_type is not None:
+                _header_params['Content-Type'] = _default_content_type
+
+        # authentication setting
+        _auth_settings: List[str] = [
+        ]
+
+        return self.api_client.param_serialize(
+            method='POST',
+            resource_path='/api.php?action=GetPaymentMethods',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            auth_settings=_auth_settings,
+            collection_formats=_collection_formats,
+            _host=_host,
+            _request_auth=_request_auth
+        )
+
+
+
+
+    @validate_call
+    def get_tld_pricing(
+        self,
+        username: Annotated[StrictStr, Field(description="Admin username/API identifier")],
+        password: Annotated[StrictStr, Field(description="Admin password/API secret")],
+        accesskey: Annotated[Optional[StrictStr], Field(description="Optional API access key")] = None,
+        responsetype: Annotated[Optional[StrictStr], Field(description="Response format")] = None,
+        currencyid: Annotated[Optional[StrictInt], Field(description="The currency ID to fetch pricing for")] = None,
+        clientid: Annotated[Optional[StrictInt], Field(description="The client ID to fetch pricing for")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> GetTLDPricingResponse:
+        """Get TLD pricing
+
+        Retrieve TLD pricing
+
+        :param username: Admin username/API identifier (required)
+        :type username: str
+        :param password: Admin password/API secret (required)
+        :type password: str
+        :param accesskey: Optional API access key
+        :type accesskey: str
+        :param responsetype: Response format
+        :type responsetype: str
+        :param currencyid: The currency ID to fetch pricing for
+        :type currencyid: int
+        :param clientid: The client ID to fetch pricing for
+        :type clientid: int
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._get_tld_pricing_serialize(
+            username=username,
+            password=password,
+            accesskey=accesskey,
+            responsetype=responsetype,
+            currencyid=currencyid,
+            clientid=clientid,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "GetTLDPricingResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+
+    @validate_call
+    def get_tld_pricing_with_http_info(
+        self,
+        username: Annotated[StrictStr, Field(description="Admin username/API identifier")],
+        password: Annotated[StrictStr, Field(description="Admin password/API secret")],
+        accesskey: Annotated[Optional[StrictStr], Field(description="Optional API access key")] = None,
+        responsetype: Annotated[Optional[StrictStr], Field(description="Response format")] = None,
+        currencyid: Annotated[Optional[StrictInt], Field(description="The currency ID to fetch pricing for")] = None,
+        clientid: Annotated[Optional[StrictInt], Field(description="The client ID to fetch pricing for")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[GetTLDPricingResponse]:
+        """Get TLD pricing
+
+        Retrieve TLD pricing
+
+        :param username: Admin username/API identifier (required)
+        :type username: str
+        :param password: Admin password/API secret (required)
+        :type password: str
+        :param accesskey: Optional API access key
+        :type accesskey: str
+        :param responsetype: Response format
+        :type responsetype: str
+        :param currencyid: The currency ID to fetch pricing for
+        :type currencyid: int
+        :param clientid: The client ID to fetch pricing for
+        :type clientid: int
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._get_tld_pricing_serialize(
+            username=username,
+            password=password,
+            accesskey=accesskey,
+            responsetype=responsetype,
+            currencyid=currencyid,
+            clientid=clientid,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "GetTLDPricingResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+
+    @validate_call
+    def get_tld_pricing_without_preload_content(
+        self,
+        username: Annotated[StrictStr, Field(description="Admin username/API identifier")],
+        password: Annotated[StrictStr, Field(description="Admin password/API secret")],
+        accesskey: Annotated[Optional[StrictStr], Field(description="Optional API access key")] = None,
+        responsetype: Annotated[Optional[StrictStr], Field(description="Response format")] = None,
+        currencyid: Annotated[Optional[StrictInt], Field(description="The currency ID to fetch pricing for")] = None,
+        clientid: Annotated[Optional[StrictInt], Field(description="The client ID to fetch pricing for")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> RESTResponseType:
+        """Get TLD pricing
+
+        Retrieve TLD pricing
+
+        :param username: Admin username/API identifier (required)
+        :type username: str
+        :param password: Admin password/API secret (required)
+        :type password: str
+        :param accesskey: Optional API access key
+        :type accesskey: str
+        :param responsetype: Response format
+        :type responsetype: str
+        :param currencyid: The currency ID to fetch pricing for
+        :type currencyid: int
+        :param clientid: The client ID to fetch pricing for
+        :type clientid: int
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._get_tld_pricing_serialize(
+            username=username,
+            password=password,
+            accesskey=accesskey,
+            responsetype=responsetype,
+            currencyid=currencyid,
+            clientid=clientid,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "GetTLDPricingResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+
+    def _get_tld_pricing_serialize(
+        self,
+        username,
+        password,
+        accesskey,
+        responsetype,
+        currencyid,
+        clientid,
+        _request_auth,
+        _content_type,
+        _headers,
+        _host_index,
+    ) -> RequestSerialized:
+
+        _host = None
+
+        _collection_formats: Dict[str, str] = {
+        }
+
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[
+            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
+        ] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        # process the query parameters
+        # process the header parameters
+        # process the form parameters
+        if username is not None:
+            _form_params.append(('username', username))
+        if password is not None:
+            _form_params.append(('password', password))
+        if accesskey is not None:
+            _form_params.append(('accesskey', accesskey))
+        if responsetype is not None:
+            _form_params.append(('responsetype', responsetype))
+        if currencyid is not None:
+            _form_params.append(('currencyid', currencyid))
+        if clientid is not None:
+            _form_params.append(('clientid', clientid))
+        # process the body parameter
+
+
+        # set the HTTP header `Accept`
+        if 'Accept' not in _header_params:
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
+
+        # set the HTTP header `Content-Type`
+        if _content_type:
+            _header_params['Content-Type'] = _content_type
+        else:
+            _default_content_type = (
+                self.api_client.select_header_content_type(
+                    [
+                        'application/x-www-form-urlencoded'
+                    ]
+                )
+            )
+            if _default_content_type is not None:
+                _header_params['Content-Type'] = _default_content_type
+
+        # authentication setting
+        _auth_settings: List[str] = [
+        ]
+
+        return self.api_client.param_serialize(
+            method='POST',
+            resource_path='/api.php?action=GetTLDPricing',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            auth_settings=_auth_settings,
+            collection_formats=_collection_formats,
+            _host=_host,
+            _request_auth=_request_auth
+        )
+
+
+
+
+    @validate_call
+    def get_transactions(
+        self,
+        username: Annotated[StrictStr, Field(description="Admin username/API identifier")],
+        password: Annotated[StrictStr, Field(description="Admin password/API secret")],
+        accesskey: Annotated[Optional[StrictStr], Field(description="Optional API access key")] = None,
+        responsetype: Annotated[Optional[StrictStr], Field(description="Response format")] = None,
+        invoiceid: Annotated[Optional[StrictInt], Field(description="Obtain transactions for a specific invoice id")] = None,
+        clientid: Annotated[Optional[StrictInt], Field(description="Find transactions for a specific client id")] = None,
+        transid: Annotated[Optional[StrictStr], Field(description="Find transactions for a specific transaction id")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> GetTransactionsResponse:
+        """Get transactions
+
+        Obtain transactions matching the passed criteria
+
+        :param username: Admin username/API identifier (required)
+        :type username: str
+        :param password: Admin password/API secret (required)
+        :type password: str
+        :param accesskey: Optional API access key
+        :type accesskey: str
+        :param responsetype: Response format
+        :type responsetype: str
+        :param invoiceid: Obtain transactions for a specific invoice id
+        :type invoiceid: int
+        :param clientid: Find transactions for a specific client id
+        :type clientid: int
+        :param transid: Find transactions for a specific transaction id
+        :type transid: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._get_transactions_serialize(
+            username=username,
+            password=password,
+            accesskey=accesskey,
+            responsetype=responsetype,
+            invoiceid=invoiceid,
+            clientid=clientid,
+            transid=transid,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "GetTransactionsResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+
+    @validate_call
+    def get_transactions_with_http_info(
+        self,
+        username: Annotated[StrictStr, Field(description="Admin username/API identifier")],
+        password: Annotated[StrictStr, Field(description="Admin password/API secret")],
+        accesskey: Annotated[Optional[StrictStr], Field(description="Optional API access key")] = None,
+        responsetype: Annotated[Optional[StrictStr], Field(description="Response format")] = None,
+        invoiceid: Annotated[Optional[StrictInt], Field(description="Obtain transactions for a specific invoice id")] = None,
+        clientid: Annotated[Optional[StrictInt], Field(description="Find transactions for a specific client id")] = None,
+        transid: Annotated[Optional[StrictStr], Field(description="Find transactions for a specific transaction id")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[GetTransactionsResponse]:
+        """Get transactions
+
+        Obtain transactions matching the passed criteria
+
+        :param username: Admin username/API identifier (required)
+        :type username: str
+        :param password: Admin password/API secret (required)
+        :type password: str
+        :param accesskey: Optional API access key
+        :type accesskey: str
+        :param responsetype: Response format
+        :type responsetype: str
+        :param invoiceid: Obtain transactions for a specific invoice id
+        :type invoiceid: int
+        :param clientid: Find transactions for a specific client id
+        :type clientid: int
+        :param transid: Find transactions for a specific transaction id
+        :type transid: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._get_transactions_serialize(
+            username=username,
+            password=password,
+            accesskey=accesskey,
+            responsetype=responsetype,
+            invoiceid=invoiceid,
+            clientid=clientid,
+            transid=transid,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "GetTransactionsResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+
+    @validate_call
+    def get_transactions_without_preload_content(
+        self,
+        username: Annotated[StrictStr, Field(description="Admin username/API identifier")],
+        password: Annotated[StrictStr, Field(description="Admin password/API secret")],
+        accesskey: Annotated[Optional[StrictStr], Field(description="Optional API access key")] = None,
+        responsetype: Annotated[Optional[StrictStr], Field(description="Response format")] = None,
+        invoiceid: Annotated[Optional[StrictInt], Field(description="Obtain transactions for a specific invoice id")] = None,
+        clientid: Annotated[Optional[StrictInt], Field(description="Find transactions for a specific client id")] = None,
+        transid: Annotated[Optional[StrictStr], Field(description="Find transactions for a specific transaction id")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> RESTResponseType:
+        """Get transactions
+
+        Obtain transactions matching the passed criteria
+
+        :param username: Admin username/API identifier (required)
+        :type username: str
+        :param password: Admin password/API secret (required)
+        :type password: str
+        :param accesskey: Optional API access key
+        :type accesskey: str
+        :param responsetype: Response format
+        :type responsetype: str
+        :param invoiceid: Obtain transactions for a specific invoice id
+        :type invoiceid: int
+        :param clientid: Find transactions for a specific client id
+        :type clientid: int
+        :param transid: Find transactions for a specific transaction id
+        :type transid: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._get_transactions_serialize(
+            username=username,
+            password=password,
+            accesskey=accesskey,
+            responsetype=responsetype,
+            invoiceid=invoiceid,
+            clientid=clientid,
+            transid=transid,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "GetTransactionsResponse",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+
+    def _get_transactions_serialize(
+        self,
+        username,
+        password,
+        accesskey,
+        responsetype,
+        invoiceid,
+        clientid,
+        transid,
+        _request_auth,
+        _content_type,
+        _headers,
+        _host_index,
+    ) -> RequestSerialized:
+
+        _host = None
+
+        _collection_formats: Dict[str, str] = {
+        }
+
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[
+            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
+        ] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        # process the query parameters
+        # process the header parameters
+        # process the form parameters
+        if username is not None:
+            _form_params.append(('username', username))
+        if password is not None:
+            _form_params.append(('password', password))
+        if accesskey is not None:
+            _form_params.append(('accesskey', accesskey))
+        if responsetype is not None:
+            _form_params.append(('responsetype', responsetype))
+        if invoiceid is not None:
+            _form_params.append(('invoiceid', invoiceid))
+        if clientid is not None:
+            _form_params.append(('clientid', clientid))
+        if transid is not None:
+            _form_params.append(('transid', transid))
+        # process the body parameter
+
+
+        # set the HTTP header `Accept`
+        if 'Accept' not in _header_params:
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
+
+        # set the HTTP header `Content-Type`
+        if _content_type:
+            _header_params['Content-Type'] = _content_type
+        else:
+            _default_content_type = (
+                self.api_client.select_header_content_type(
+                    [
+                        'application/x-www-form-urlencoded'
+                    ]
+                )
+            )
+            if _default_content_type is not None:
+                _header_params['Content-Type'] = _default_content_type
+
+        # authentication setting
+        _auth_settings: List[str] = [
+        ]
+
+        return self.api_client.param_serialize(
+            method='POST',
+            resource_path='/api.php?action=GetTransactions',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,

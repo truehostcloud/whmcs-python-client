@@ -4,7 +4,7 @@ info:
   version: 1.0.0
   description: |
     Python client for the WHMCS API.
-    
+
     WHMCS (Web Host Manager Complete Solution) provides a single API endpoint that handles
     multiple operations through different 'action' parameters. This specification presents
     each action as an independent path while routing all requests to the /api.php endpoint.
@@ -334,6 +334,29 @@ paths:
         default:
           $ref: '#/components/responses/Error'
 
+  /api.php?action=GetOrders:
+    post:
+      summary: Get orders
+      description: Obtain orders matching the passed criteria
+      operationId: getOrders
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              allOf:
+                - $ref: '#/components/schemas/WHMCSBaseRequest'
+                - $ref: '#/components/schemas/GetOrdersRequest'
+      responses:
+        '200':
+          description: Orders retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetOrdersResponse'
+        default:
+          $ref: '#/components/responses/Error'
+
   /api.php?action=GetClients:
     post:
       summary: Get clients
@@ -375,6 +398,98 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/GetCurrenciesResponse'
+        default:
+          $ref: '#/components/responses/Error'
+
+  /api.php?action=GetInvoices:
+    post:
+      summary: Get invoices
+      description: Retrieve a list of invoices matching the provided criteria
+      operationId: getInvoices
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              allOf:
+                - $ref: '#/components/schemas/WHMCSBaseRequest'
+                - $ref: '#/components/schemas/GetInvoicesRequest'
+      responses:
+        '200':
+          description: Invoices retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetInvoicesResponse'
+        default:
+          $ref: '#/components/responses/Error'
+
+  /api.php?action=GetClientsDetails:
+    post:
+      summary: Get client details
+      description: Obtain detailed information for a specific client
+      operationId: getClientsDetails
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              allOf:
+                - $ref: '#/components/schemas/WHMCSBaseRequest'
+                - $ref: '#/components/schemas/GetClientsDetailsRequest'
+      responses:
+        '200':
+          description: Client details retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetClientsDetailsResponse'
+        default:
+          $ref: '#/components/responses/Error'
+
+  /api.php?action=GetClientsProducts:
+    post:
+      summary: Get client products
+      description: Obtain a list of client purchased products matching the criteria
+      operationId: getClientsProducts
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              allOf:
+                - $ref: '#/components/schemas/WHMCSBaseRequest'
+                - $ref: '#/components/schemas/GetClientsProductsRequest'
+      responses:
+        '200':
+          description: Client products retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetClientsProductsResponse'
+        default:
+          $ref: '#/components/responses/Error'
+
+  /api.php?action=GetInvoicesDetails:
+    post:
+      summary: Get invoices with line item details
+      description: Custom action returning invoices in GetInvoice format with embedded line items
+      operationId: getInvoicesDetails
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              allOf:
+                - $ref: '#/components/schemas/WHMCSBaseRequest'
+                - $ref: '#/components/schemas/GetInvoicesDetailsRequest'
+      responses:
+        '200':
+          description: Invoices with line items retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetInvoicesDetailsResponse'
         default:
           $ref: '#/components/responses/Error'
 
@@ -997,6 +1112,122 @@ components:
           enum: [id, firstname, lastname, companyname, email, groupid, datecreated, status]
           description: The column to order by. id, firstname, lastname, companyname, email, groupid, datecreated, status
 
+    GetInvoicesRequest:
+      type: object
+      properties:
+        limitstart:
+          type: integer
+          description: The offset for the returned invoice data
+          default: 0
+        limitnum:
+          type: integer
+          description: The number of records to return
+          default: 25
+        userid:
+          type: integer
+          description: Find invoices for a specific client id
+        status:
+          type: string
+          description: Find invoices for a specific status, including Overdue
+        orderby:
+          type: string
+          enum: [id, invoicenumber, date, duedate, total, status]
+          description: The field to sort results by
+        order:
+          type: string
+          enum: [asc, desc]
+          description: Sort direction for the invoice results
+
+    GetOrdersRequest:
+      type: object
+      properties:
+        limitstart:
+          type: integer
+          description: The offset for the returned order data
+          default: 0
+        limitnum:
+          type: integer
+          description: The number of records to return
+          default: 25
+        id:
+          type: integer
+          description: Find orders for a specific order id
+        userid:
+          type: integer
+          description: Find orders for a specific client id
+        requestor_id:
+          type: integer
+          description: Find orders for a specific requestor id
+        status:
+          type: string
+          description: Find orders for a specific status (Active, Pending, Fraud, Cancelled)
+
+    GetClientsDetailsRequest:
+      type: object
+      properties:
+        clientid:
+          type: integer
+          description: The client id to obtain the details for
+        email:
+          type: string
+          description: The email address of the client to search for
+        stats:
+          type: boolean
+          description: Also return additional client statistics
+
+    GetClientsProductsRequest:
+      type: object
+      properties:
+        limitstart:
+          type: integer
+          description: The offset for the returned product data
+          default: 0
+        limitnum:
+          type: integer
+          description: The number of records to return
+          default: 25
+        clientid:
+          type: integer
+          description: The client id to obtain the details for
+        serviceid:
+          type: integer
+          description: The specific service id to obtain the details for
+        pid:
+          type: integer
+          description: The specific product id to obtain the details for
+        domain:
+          type: string
+          description: The specific domain to obtain the service details for
+        username2:
+          type: string
+          description: The specific username to obtain the details for
+
+    GetInvoicesDetailsRequest:
+      type: object
+      properties:
+        limitstart:
+          type: integer
+          description: The offset for the returned invoice data
+          default: 0
+        limitnum:
+          type: integer
+          description: The number of records to return
+          default: 25
+        userid:
+          type: integer
+          description: Find invoices for a specific client id
+        status:
+          type: string
+          description: Find invoices for a specific status, including Overdue
+        orderby:
+          type: string
+          enum: [id, invoicenumber, date, duedate, total, status]
+          description: The field to sort results by
+        order:
+          type: string
+          enum: [asc, desc]
+          description: Sort direction for the invoice results
+
     WHMCSBaseResponse:
       type: object
       properties:
@@ -1262,6 +1493,79 @@ components:
                     $ref: '#/components/schemas/TransactionInfo'
                   description: An array of transactions matching the criteria passed
 
+    GetInvoicesResponse:
+      allOf:
+        - $ref: '#/components/schemas/WHMCSSuccessResponse'
+        - type: object
+          properties:
+            totalresults:
+              type: integer
+              description: The total number of results available
+            startnumber:
+              type: integer
+              description: The starting number for the returned results
+            numreturned:
+              type: integer
+              description: The number of results returned
+            invoices:
+              description: The invoices collection
+              nullable: true
+
+    GetOrdersResponse:
+      allOf:
+        - $ref: '#/components/schemas/WHMCSSuccessResponse'
+        - type: object
+          properties:
+            totalresults:
+              type: integer
+              description: The total number of results available
+            startnumber:
+              type: integer
+              description: The starting number for the returned results
+            numreturned:
+              type: integer
+              description: The number of results returned
+            orders:
+              description: The orders collection
+              nullable: true
+
+    GetInvoicesDetailsResponse:
+      allOf:
+        - $ref: '#/components/schemas/WHMCSSuccessResponse'
+        - type: object
+          properties:
+            totalresults:
+              type: integer
+              description: The total number of results available
+            startnumber:
+              type: integer
+              description: The starting number for the returned results
+            numreturned:
+              type: integer
+              description: The number of results returned
+            invoices:
+              description: The invoices collection with embedded line items
+              nullable: true
+
+    GetClientsDetailsResponse:
+      allOf:
+        - $ref: '#/components/schemas/WHMCSSuccessResponse'
+        - type: object
+          properties:
+            client:
+              $ref: '#/components/schemas/ClientDetailsInfo'
+            stats:
+              $ref: '#/components/schemas/ClientDetailsStats'
+
+    GetClientsProductsResponse:
+      allOf:
+        - $ref: '#/components/schemas/WHMCSSuccessResponse'
+        - type: object
+          properties:
+            products:
+              description: The products collection
+              nullable: true
+
     DomainInfo:
       type: object
       properties:
@@ -1504,14 +1808,168 @@ components:
           description: The client's email address
         datecreated:
           type: string
-          format: date
-          description: The date the client was created
+          description: The date the client was created (YYYY-MM-DD, may be 0000-00-00)
         groupid:
           type: integer
           description: The client's group ID
         status:
           type: string
           description: The client's status (Active, Inactive, Closed)
+
+    InvoiceInfo:
+      type: object
+      additionalProperties: true
+      properties:
+        id:
+          type: integer
+          description: The invoice ID
+        userid:
+          type: integer
+          description: The client ID linked to the invoice
+        date:
+          type: string
+          description: The invoice date (YYYY-MM-DD)
+        duedate:
+          type: string
+          description: The invoice due date (YYYY-MM-DD, may be 0000-00-00)
+        var_date:
+          type: string
+          description: Fallback invoice date field
+        created_at:
+          type: string
+          description: Invoice creation timestamp
+        total:
+          type: string
+          description: The invoice total amount
+        status:
+          type: string
+          description: The invoice status
+        currencycode:
+          type: string
+          description: The invoice currency code
+
+    InvoiceItem:
+      type: object
+      additionalProperties: true
+      properties:
+        id:
+          type: integer
+          description: The line item ID
+        type:
+          type: string
+          description: The line item type (e.g., Hosting, Domain)
+        relid:
+          type: integer
+          description: The related service or domain ID
+        description:
+          type: string
+          description: Human-readable description including billing period
+        amount:
+          type: string
+          description: The line item amount
+        taxed:
+          type: integer
+          description: Whether the item is taxed (0 or 1)
+
+    InvoiceDetailInfo:
+      allOf:
+        - $ref: '#/components/schemas/InvoiceInfo'
+        - type: object
+          additionalProperties: true
+          properties:
+            items:
+              description: The invoice line items collection
+              nullable: true
+
+    ClientDetailsInfo:
+      type: object
+      additionalProperties: true
+      properties:
+        email:
+          type: string
+          description: The client email address
+        phonenumber:
+          type: string
+          description: Phone number
+
+    ClientDetailsStats:
+      type: object
+      additionalProperties: true
+
+    OrderInfo:
+      type: object
+      additionalProperties: true
+      properties:
+        id:
+          type: integer
+          description: The order ID
+        ordernum:
+          type: string
+          description: The order number
+        date:
+          type: string
+          description: The order date (YYYY-MM-DD HH:MM:SS)
+        amount:
+          type: string
+          description: The order total amount
+        paymentmethod:
+          type: string
+          description: The payment method identifier
+        invoiceid:
+          type: integer
+          description: The linked invoice ID
+        status:
+          type: string
+          description: The order status (Active, Pending, Fraud, Cancelled)
+        name:
+          type: string
+          description: The client name on the order
+        lineitems:
+          description: The order line items collection
+          nullable: true
+
+    OrderLineItem:
+      type: object
+      additionalProperties: true
+      properties:
+        type:
+          type: string
+          description: The line item type (product, domain, addon)
+        product:
+          type: string
+          description: The product name
+        domain:
+          type: string
+          description: The associated domain
+        billingcycle:
+          type: string
+          description: The billing cycle
+        amount:
+          type: string
+          description: The line item amount
+        status:
+          type: string
+          description: The line item status
+
+    ProductInfo:
+      type: object
+      additionalProperties: true
+      properties:
+        name:
+          type: string
+          description: The product name
+        recurringamount:
+          type: string
+          description: The recurring amount
+        billingcycle:
+          type: string
+          description: The billing cycle
+        nextduedate:
+          type: string
+          description: The next due date (YYYY-MM-DD, may be 0000-00-00)
+        status:
+          type: string
+          description: The service status
 
     CurrencyInfo:
       type: object

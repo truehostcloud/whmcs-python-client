@@ -6,8 +6,24 @@ Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**add_client**](DefaultApi.md#add_client) | **POST** /api.php?action&#x3D;AddClient | Add a new client
 [**add_order**](DefaultApi.md#add_order) | **POST** /api.php?action&#x3D;AddOrder | Create a new order
+[**affiliate_activate**](DefaultApi.md#affiliate_activate) | **POST** /api.php?action&#x3D;AffiliateActivate | Activate affiliate status
+[**cancel_order**](DefaultApi.md#cancel_order) | **POST** /api.php?action&#x3D;CancelOrder | Cancel a pending order
+[**delete_order**](DefaultApi.md#delete_order) | **POST** /api.php?action&#x3D;DeleteOrder | Delete an order
+[**domain_get_nameservers**](DefaultApi.md#domain_get_nameservers) | **POST** /api.php?action&#x3D;DomainGetNameservers | Get domain nameservers
+[**domain_update_nameservers**](DefaultApi.md#domain_update_nameservers) | **POST** /api.php?action&#x3D;DomainUpdateNameservers | Update domain nameservers
+[**domain_whois**](DefaultApi.md#domain_whois) | **POST** /api.php?action&#x3D;DomainWhois | Lookup domain WHOIS
+[**get_affiliates**](DefaultApi.md#get_affiliates) | **POST** /api.php?action&#x3D;GetAffiliates | Get affiliates
 [**get_clients**](DefaultApi.md#get_clients) | **POST** /api.php?action&#x3D;GetClients | Get clients
+[**get_clients_details**](DefaultApi.md#get_clients_details) | **POST** /api.php?action&#x3D;GetClientsDetails | Get client details
+[**get_clients_domains**](DefaultApi.md#get_clients_domains) | **POST** /api.php?action&#x3D;GetClientsDomains | Get client domains
+[**get_clients_products**](DefaultApi.md#get_clients_products) | **POST** /api.php?action&#x3D;GetClientsProducts | Get client products
 [**get_currencies**](DefaultApi.md#get_currencies) | **POST** /api.php?action&#x3D;GetCurrencies | Get currencies
+[**get_invoices**](DefaultApi.md#get_invoices) | **POST** /api.php?action&#x3D;GetInvoices | Get invoices
+[**get_invoices_details**](DefaultApi.md#get_invoices_details) | **POST** /api.php?action&#x3D;GetInvoicesDetails | Get invoices with line item details
+[**get_orders**](DefaultApi.md#get_orders) | **POST** /api.php?action&#x3D;GetOrders | Get orders
+[**get_payment_methods**](DefaultApi.md#get_payment_methods) | **POST** /api.php?action&#x3D;GetPaymentMethods | Get payment methods
+[**get_tld_pricing**](DefaultApi.md#get_tld_pricing) | **POST** /api.php?action&#x3D;GetTLDPricing | Get TLD pricing
+[**get_transactions**](DefaultApi.md#get_transactions) | **POST** /api.php?action&#x3D;GetTransactions | Get transactions
 [**update_client**](DefaultApi.md#update_client) | **POST** /api.php?action&#x3D;UpdateClient | Update client details
 
 
@@ -301,6 +317,577 @@ No authorization required
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
+# **affiliate_activate**
+> WHMCSSuccessResponse affiliate_activate(username, password, userid, accesskey=accesskey, responsetype=responsetype)
+
+Activate affiliate status
+
+Activate affiliate referrals for a client
+
+### Example
+
+
+```python
+import whmcs_client
+from whmcs_client.models.whmcs_success_response import WHMCSSuccessResponse
+from whmcs_client.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://your-whmcs-instance.com/includes
+# See configuration.py for a list of all supported configuration parameters.
+configuration = whmcs_client.Configuration(
+    host = "https://your-whmcs-instance.com/includes"
+)
+
+
+# Enter a context with an instance of the API client
+with whmcs_client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = whmcs_client.DefaultApi(api_client)
+    username = 'username_example' # str | Admin username/API identifier
+    password = 'password_example' # str | Admin password/API secret
+    userid = 56 # int | The client ID to activate affiliate status for
+    accesskey = 'accesskey_example' # str | Optional API access key (optional)
+    responsetype = json # str | Response format (optional) (default to json)
+
+    try:
+        # Activate affiliate status
+        api_response = api_instance.affiliate_activate(username, password, userid, accesskey=accesskey, responsetype=responsetype)
+        print("The response of DefaultApi->affiliate_activate:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling DefaultApi->affiliate_activate: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **username** | **str**| Admin username/API identifier | 
+ **password** | **str**| Admin password/API secret | 
+ **userid** | **int**| The client ID to activate affiliate status for | 
+ **accesskey** | **str**| Optional API access key | [optional] 
+ **responsetype** | **str**| Response format | [optional] [default to json]
+
+### Return type
+
+[**WHMCSSuccessResponse**](WHMCSSuccessResponse.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: application/x-www-form-urlencoded
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Affiliate activated successfully |  -  |
+**0** | Error response |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **cancel_order**
+> WHMCSSuccessResponse cancel_order(username, password, orderid, accesskey=accesskey, responsetype=responsetype, cancelsub=cancelsub, noemail=noemail)
+
+Cancel a pending order
+
+Cancels an order that is still pending
+
+### Example
+
+
+```python
+import whmcs_client
+from whmcs_client.models.whmcs_success_response import WHMCSSuccessResponse
+from whmcs_client.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://your-whmcs-instance.com/includes
+# See configuration.py for a list of all supported configuration parameters.
+configuration = whmcs_client.Configuration(
+    host = "https://your-whmcs-instance.com/includes"
+)
+
+
+# Enter a context with an instance of the API client
+with whmcs_client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = whmcs_client.DefaultApi(api_client)
+    username = 'username_example' # str | Admin username/API identifier
+    password = 'password_example' # str | Admin password/API secret
+    orderid = 56 # int | The ID of the pending order
+    accesskey = 'accesskey_example' # str | Optional API access key (optional)
+    responsetype = json # str | Response format (optional) (default to json)
+    cancelsub = True # bool | Attempt to cancel the subscription associated with the products (optional)
+    noemail = True # bool | Set to true to stop the invoice payment email being sent if the invoice becomes paid (optional)
+
+    try:
+        # Cancel a pending order
+        api_response = api_instance.cancel_order(username, password, orderid, accesskey=accesskey, responsetype=responsetype, cancelsub=cancelsub, noemail=noemail)
+        print("The response of DefaultApi->cancel_order:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling DefaultApi->cancel_order: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **username** | **str**| Admin username/API identifier | 
+ **password** | **str**| Admin password/API secret | 
+ **orderid** | **int**| The ID of the pending order | 
+ **accesskey** | **str**| Optional API access key | [optional] 
+ **responsetype** | **str**| Response format | [optional] [default to json]
+ **cancelsub** | **bool**| Attempt to cancel the subscription associated with the products | [optional] 
+ **noemail** | **bool**| Set to true to stop the invoice payment email being sent if the invoice becomes paid | [optional] 
+
+### Return type
+
+[**WHMCSSuccessResponse**](WHMCSSuccessResponse.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: application/x-www-form-urlencoded
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Order cancelled successfully |  -  |
+**0** | Error response |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **delete_order**
+> WHMCSSuccessResponse delete_order(username, password, orderid, accesskey=accesskey, responsetype=responsetype)
+
+Delete an order
+
+Permanently deletes a cancelled or fraud order
+
+### Example
+
+
+```python
+import whmcs_client
+from whmcs_client.models.whmcs_success_response import WHMCSSuccessResponse
+from whmcs_client.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://your-whmcs-instance.com/includes
+# See configuration.py for a list of all supported configuration parameters.
+configuration = whmcs_client.Configuration(
+    host = "https://your-whmcs-instance.com/includes"
+)
+
+
+# Enter a context with an instance of the API client
+with whmcs_client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = whmcs_client.DefaultApi(api_client)
+    username = 'username_example' # str | Admin username/API identifier
+    password = 'password_example' # str | Admin password/API secret
+    orderid = 56 # int | The order to be deleted
+    accesskey = 'accesskey_example' # str | Optional API access key (optional)
+    responsetype = json # str | Response format (optional) (default to json)
+
+    try:
+        # Delete an order
+        api_response = api_instance.delete_order(username, password, orderid, accesskey=accesskey, responsetype=responsetype)
+        print("The response of DefaultApi->delete_order:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling DefaultApi->delete_order: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **username** | **str**| Admin username/API identifier | 
+ **password** | **str**| Admin password/API secret | 
+ **orderid** | **int**| The order to be deleted | 
+ **accesskey** | **str**| Optional API access key | [optional] 
+ **responsetype** | **str**| Response format | [optional] [default to json]
+
+### Return type
+
+[**WHMCSSuccessResponse**](WHMCSSuccessResponse.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: application/x-www-form-urlencoded
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Order deleted successfully |  -  |
+**0** | Error response |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **domain_get_nameservers**
+> DomainGetNameserversResponse domain_get_nameservers(username, password, domainid, accesskey=accesskey, responsetype=responsetype)
+
+Get domain nameservers
+
+Obtain the current nameservers for a domain
+
+### Example
+
+
+```python
+import whmcs_client
+from whmcs_client.models.domain_get_nameservers_response import DomainGetNameserversResponse
+from whmcs_client.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://your-whmcs-instance.com/includes
+# See configuration.py for a list of all supported configuration parameters.
+configuration = whmcs_client.Configuration(
+    host = "https://your-whmcs-instance.com/includes"
+)
+
+
+# Enter a context with an instance of the API client
+with whmcs_client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = whmcs_client.DefaultApi(api_client)
+    username = 'username_example' # str | Admin username/API identifier
+    password = 'password_example' # str | Admin password/API secret
+    domainid = 56 # int | The id of the domain to obtain the nameservers for
+    accesskey = 'accesskey_example' # str | Optional API access key (optional)
+    responsetype = json # str | Response format (optional) (default to json)
+
+    try:
+        # Get domain nameservers
+        api_response = api_instance.domain_get_nameservers(username, password, domainid, accesskey=accesskey, responsetype=responsetype)
+        print("The response of DefaultApi->domain_get_nameservers:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling DefaultApi->domain_get_nameservers: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **username** | **str**| Admin username/API identifier | 
+ **password** | **str**| Admin password/API secret | 
+ **domainid** | **int**| The id of the domain to obtain the nameservers for | 
+ **accesskey** | **str**| Optional API access key | [optional] 
+ **responsetype** | **str**| Response format | [optional] [default to json]
+
+### Return type
+
+[**DomainGetNameserversResponse**](DomainGetNameserversResponse.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: application/x-www-form-urlencoded
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Nameservers retrieved successfully |  -  |
+**0** | Error response |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **domain_update_nameservers**
+> WHMCSSuccessResponse domain_update_nameservers(username, password, accesskey=accesskey, responsetype=responsetype, domainid=domainid, domain=domain, ns1=ns1, ns2=ns2, ns3=ns3, ns4=ns4, ns5=ns5)
+
+Update domain nameservers
+
+Sends the save nameservers command to the registrar for the domain
+
+### Example
+
+
+```python
+import whmcs_client
+from whmcs_client.models.whmcs_success_response import WHMCSSuccessResponse
+from whmcs_client.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://your-whmcs-instance.com/includes
+# See configuration.py for a list of all supported configuration parameters.
+configuration = whmcs_client.Configuration(
+    host = "https://your-whmcs-instance.com/includes"
+)
+
+
+# Enter a context with an instance of the API client
+with whmcs_client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = whmcs_client.DefaultApi(api_client)
+    username = 'username_example' # str | Admin username/API identifier
+    password = 'password_example' # str | Admin password/API secret
+    accesskey = 'accesskey_example' # str | Optional API access key (optional)
+    responsetype = json # str | Response format (optional) (default to json)
+    domainid = 56 # int | The id of the domain to update the nameservers for (optional)
+    domain = 'domain_example' # str | The domain name to update the nameservers for (optional)
+    ns1 = 'ns1_example' # str | The first nameserver (optional)
+    ns2 = 'ns2_example' # str | The second nameserver (optional)
+    ns3 = 'ns3_example' # str | The third nameserver (optional)
+    ns4 = 'ns4_example' # str | The fourth nameserver (optional)
+    ns5 = 'ns5_example' # str | The fifth nameserver (optional)
+
+    try:
+        # Update domain nameservers
+        api_response = api_instance.domain_update_nameservers(username, password, accesskey=accesskey, responsetype=responsetype, domainid=domainid, domain=domain, ns1=ns1, ns2=ns2, ns3=ns3, ns4=ns4, ns5=ns5)
+        print("The response of DefaultApi->domain_update_nameservers:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling DefaultApi->domain_update_nameservers: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **username** | **str**| Admin username/API identifier | 
+ **password** | **str**| Admin password/API secret | 
+ **accesskey** | **str**| Optional API access key | [optional] 
+ **responsetype** | **str**| Response format | [optional] [default to json]
+ **domainid** | **int**| The id of the domain to update the nameservers for | [optional] 
+ **domain** | **str**| The domain name to update the nameservers for | [optional] 
+ **ns1** | **str**| The first nameserver | [optional] 
+ **ns2** | **str**| The second nameserver | [optional] 
+ **ns3** | **str**| The third nameserver | [optional] 
+ **ns4** | **str**| The fourth nameserver | [optional] 
+ **ns5** | **str**| The fifth nameserver | [optional] 
+
+### Return type
+
+[**WHMCSSuccessResponse**](WHMCSSuccessResponse.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: application/x-www-form-urlencoded
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Nameservers updated successfully |  -  |
+**0** | Error response |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **domain_whois**
+> DomainWhoisResponse domain_whois(username, password, domain, accesskey=accesskey, responsetype=responsetype)
+
+Lookup domain WHOIS
+
+Retrieve domain whois information
+
+### Example
+
+
+```python
+import whmcs_client
+from whmcs_client.models.domain_whois_response import DomainWhoisResponse
+from whmcs_client.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://your-whmcs-instance.com/includes
+# See configuration.py for a list of all supported configuration parameters.
+configuration = whmcs_client.Configuration(
+    host = "https://your-whmcs-instance.com/includes"
+)
+
+
+# Enter a context with an instance of the API client
+with whmcs_client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = whmcs_client.DefaultApi(api_client)
+    username = 'username_example' # str | Admin username/API identifier
+    password = 'password_example' # str | Admin password/API secret
+    domain = 'domain_example' # str | The domain name to lookup
+    accesskey = 'accesskey_example' # str | Optional API access key (optional)
+    responsetype = json # str | Response format (optional) (default to json)
+
+    try:
+        # Lookup domain WHOIS
+        api_response = api_instance.domain_whois(username, password, domain, accesskey=accesskey, responsetype=responsetype)
+        print("The response of DefaultApi->domain_whois:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling DefaultApi->domain_whois: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **username** | **str**| Admin username/API identifier | 
+ **password** | **str**| Admin password/API secret | 
+ **domain** | **str**| The domain name to lookup | 
+ **accesskey** | **str**| Optional API access key | [optional] 
+ **responsetype** | **str**| Response format | [optional] [default to json]
+
+### Return type
+
+[**DomainWhoisResponse**](DomainWhoisResponse.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: application/x-www-form-urlencoded
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | WHOIS lookup completed successfully |  -  |
+**0** | Error response |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **get_affiliates**
+> GetAffiliatesResponse get_affiliates(username, password, accesskey=accesskey, responsetype=responsetype, limitstart=limitstart, limitnum=limitnum, userid=userid, visitors=visitors, paytype=paytype, payamount=payamount, onetime=onetime, balance=balance, withdrawn=withdrawn)
+
+Get affiliates
+
+Obtain an array of affiliates
+
+### Example
+
+
+```python
+import whmcs_client
+from whmcs_client.models.get_affiliates_response import GetAffiliatesResponse
+from whmcs_client.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://your-whmcs-instance.com/includes
+# See configuration.py for a list of all supported configuration parameters.
+configuration = whmcs_client.Configuration(
+    host = "https://your-whmcs-instance.com/includes"
+)
+
+
+# Enter a context with an instance of the API client
+with whmcs_client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = whmcs_client.DefaultApi(api_client)
+    username = 'username_example' # str | Admin username/API identifier
+    password = 'password_example' # str | Admin password/API secret
+    accesskey = 'accesskey_example' # str | Optional API access key (optional)
+    responsetype = json # str | Response format (optional) (default to json)
+    limitstart = 0 # int | The offset for the returned affiliate data (optional) (default to 0)
+    limitnum = 25 # int | The number of records to return (optional) (default to 25)
+    userid = 56 # int | Obtain affiliate data for a specific client account (optional)
+    visitors = 56 # int | Provide affiliates that match a specific visitor count (optional)
+    paytype = 'paytype_example' # str | Provide affiliates matching the paytype provided (optional)
+    payamount = 3.4 # float | Provide affiliates matching a specific overridden payout amount (optional)
+    onetime = 56 # int | Provide affiliates configured to receive one time affiliates (optional)
+    balance = 3.4 # float | Provide affiliates that have this balance (optional)
+    withdrawn = 3.4 # float | Provide affiliates that have withdrawn this amount (optional)
+
+    try:
+        # Get affiliates
+        api_response = api_instance.get_affiliates(username, password, accesskey=accesskey, responsetype=responsetype, limitstart=limitstart, limitnum=limitnum, userid=userid, visitors=visitors, paytype=paytype, payamount=payamount, onetime=onetime, balance=balance, withdrawn=withdrawn)
+        print("The response of DefaultApi->get_affiliates:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling DefaultApi->get_affiliates: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **username** | **str**| Admin username/API identifier | 
+ **password** | **str**| Admin password/API secret | 
+ **accesskey** | **str**| Optional API access key | [optional] 
+ **responsetype** | **str**| Response format | [optional] [default to json]
+ **limitstart** | **int**| The offset for the returned affiliate data | [optional] [default to 0]
+ **limitnum** | **int**| The number of records to return | [optional] [default to 25]
+ **userid** | **int**| Obtain affiliate data for a specific client account | [optional] 
+ **visitors** | **int**| Provide affiliates that match a specific visitor count | [optional] 
+ **paytype** | **str**| Provide affiliates matching the paytype provided | [optional] 
+ **payamount** | **float**| Provide affiliates matching a specific overridden payout amount | [optional] 
+ **onetime** | **int**| Provide affiliates configured to receive one time affiliates | [optional] 
+ **balance** | **float**| Provide affiliates that have this balance | [optional] 
+ **withdrawn** | **float**| Provide affiliates that have withdrawn this amount | [optional] 
+
+### Return type
+
+[**GetAffiliatesResponse**](GetAffiliatesResponse.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: application/x-www-form-urlencoded
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Affiliates retrieved successfully |  -  |
+**0** | Error response |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
 # **get_clients**
 > GetClientsResponse get_clients(username, password, accesskey=accesskey, responsetype=responsetype, limitstart=limitstart, limitnum=limitnum, sorting=sorting, status=status, search=search, orderby=orderby)
 
@@ -388,6 +975,261 @@ No authorization required
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
+# **get_clients_details**
+> GetClientsDetailsResponse get_clients_details(username, password, accesskey=accesskey, responsetype=responsetype, clientid=clientid, email=email, stats=stats)
+
+Get client details
+
+Obtain detailed information for a specific client
+
+### Example
+
+
+```python
+import whmcs_client
+from whmcs_client.models.get_clients_details_response import GetClientsDetailsResponse
+from whmcs_client.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://your-whmcs-instance.com/includes
+# See configuration.py for a list of all supported configuration parameters.
+configuration = whmcs_client.Configuration(
+    host = "https://your-whmcs-instance.com/includes"
+)
+
+
+# Enter a context with an instance of the API client
+with whmcs_client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = whmcs_client.DefaultApi(api_client)
+    username = 'username_example' # str | Admin username/API identifier
+    password = 'password_example' # str | Admin password/API secret
+    accesskey = 'accesskey_example' # str | Optional API access key (optional)
+    responsetype = json # str | Response format (optional) (default to json)
+    clientid = 56 # int | The client id to obtain the details for (optional)
+    email = 'email_example' # str | The email address of the client to search for (optional)
+    stats = True # bool | Also return additional client statistics (optional)
+
+    try:
+        # Get client details
+        api_response = api_instance.get_clients_details(username, password, accesskey=accesskey, responsetype=responsetype, clientid=clientid, email=email, stats=stats)
+        print("The response of DefaultApi->get_clients_details:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling DefaultApi->get_clients_details: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **username** | **str**| Admin username/API identifier | 
+ **password** | **str**| Admin password/API secret | 
+ **accesskey** | **str**| Optional API access key | [optional] 
+ **responsetype** | **str**| Response format | [optional] [default to json]
+ **clientid** | **int**| The client id to obtain the details for | [optional] 
+ **email** | **str**| The email address of the client to search for | [optional] 
+ **stats** | **bool**| Also return additional client statistics | [optional] 
+
+### Return type
+
+[**GetClientsDetailsResponse**](GetClientsDetailsResponse.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: application/x-www-form-urlencoded
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Client details retrieved successfully |  -  |
+**0** | Error response |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **get_clients_domains**
+> GetClientsDomainsResponse get_clients_domains(username, password, accesskey=accesskey, responsetype=responsetype, limitstart=limitstart, limitnum=limitnum, clientid=clientid, domainid=domainid, domain=domain)
+
+Get client domains
+
+Obtain the domains associated with a client
+
+### Example
+
+
+```python
+import whmcs_client
+from whmcs_client.models.get_clients_domains_response import GetClientsDomainsResponse
+from whmcs_client.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://your-whmcs-instance.com/includes
+# See configuration.py for a list of all supported configuration parameters.
+configuration = whmcs_client.Configuration(
+    host = "https://your-whmcs-instance.com/includes"
+)
+
+
+# Enter a context with an instance of the API client
+with whmcs_client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = whmcs_client.DefaultApi(api_client)
+    username = 'username_example' # str | Admin username/API identifier
+    password = 'password_example' # str | Admin password/API secret
+    accesskey = 'accesskey_example' # str | Optional API access key (optional)
+    responsetype = json # str | Response format (optional) (default to json)
+    limitstart = 0 # int | The offset for the returned log data (optional) (default to 0)
+    limitnum = 25 # int | The number of records to return (optional) (default to 25)
+    clientid = 56 # int | The client id to obtain the details for (optional)
+    domainid = 56 # int | The specific domain id to obtain the details for (optional)
+    domain = 'domain_example' # str | The specific domain to obtain the details for (optional)
+
+    try:
+        # Get client domains
+        api_response = api_instance.get_clients_domains(username, password, accesskey=accesskey, responsetype=responsetype, limitstart=limitstart, limitnum=limitnum, clientid=clientid, domainid=domainid, domain=domain)
+        print("The response of DefaultApi->get_clients_domains:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling DefaultApi->get_clients_domains: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **username** | **str**| Admin username/API identifier | 
+ **password** | **str**| Admin password/API secret | 
+ **accesskey** | **str**| Optional API access key | [optional] 
+ **responsetype** | **str**| Response format | [optional] [default to json]
+ **limitstart** | **int**| The offset for the returned log data | [optional] [default to 0]
+ **limitnum** | **int**| The number of records to return | [optional] [default to 25]
+ **clientid** | **int**| The client id to obtain the details for | [optional] 
+ **domainid** | **int**| The specific domain id to obtain the details for | [optional] 
+ **domain** | **str**| The specific domain to obtain the details for | [optional] 
+
+### Return type
+
+[**GetClientsDomainsResponse**](GetClientsDomainsResponse.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: application/x-www-form-urlencoded
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Domains retrieved successfully |  -  |
+**0** | Error response |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **get_clients_products**
+> GetClientsProductsResponse get_clients_products(username, password, accesskey=accesskey, responsetype=responsetype, limitstart=limitstart, limitnum=limitnum, clientid=clientid, serviceid=serviceid, pid=pid, domain=domain, username2=username2)
+
+Get client products
+
+Obtain a list of client purchased products matching the criteria
+
+### Example
+
+
+```python
+import whmcs_client
+from whmcs_client.models.get_clients_products_response import GetClientsProductsResponse
+from whmcs_client.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://your-whmcs-instance.com/includes
+# See configuration.py for a list of all supported configuration parameters.
+configuration = whmcs_client.Configuration(
+    host = "https://your-whmcs-instance.com/includes"
+)
+
+
+# Enter a context with an instance of the API client
+with whmcs_client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = whmcs_client.DefaultApi(api_client)
+    username = 'username_example' # str | Admin username/API identifier
+    password = 'password_example' # str | Admin password/API secret
+    accesskey = 'accesskey_example' # str | Optional API access key (optional)
+    responsetype = json # str | Response format (optional) (default to json)
+    limitstart = 0 # int | The offset for the returned product data (optional) (default to 0)
+    limitnum = 25 # int | The number of records to return (optional) (default to 25)
+    clientid = 56 # int | The client id to obtain the details for (optional)
+    serviceid = 56 # int | The specific service id to obtain the details for (optional)
+    pid = 56 # int | The specific product id to obtain the details for (optional)
+    domain = 'domain_example' # str | The specific domain to obtain the service details for (optional)
+    username2 = 'username2_example' # str | The specific username to obtain the details for (optional)
+
+    try:
+        # Get client products
+        api_response = api_instance.get_clients_products(username, password, accesskey=accesskey, responsetype=responsetype, limitstart=limitstart, limitnum=limitnum, clientid=clientid, serviceid=serviceid, pid=pid, domain=domain, username2=username2)
+        print("The response of DefaultApi->get_clients_products:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling DefaultApi->get_clients_products: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **username** | **str**| Admin username/API identifier | 
+ **password** | **str**| Admin password/API secret | 
+ **accesskey** | **str**| Optional API access key | [optional] 
+ **responsetype** | **str**| Response format | [optional] [default to json]
+ **limitstart** | **int**| The offset for the returned product data | [optional] [default to 0]
+ **limitnum** | **int**| The number of records to return | [optional] [default to 25]
+ **clientid** | **int**| The client id to obtain the details for | [optional] 
+ **serviceid** | **int**| The specific service id to obtain the details for | [optional] 
+ **pid** | **int**| The specific product id to obtain the details for | [optional] 
+ **domain** | **str**| The specific domain to obtain the service details for | [optional] 
+ **username2** | **str**| The specific username to obtain the details for | [optional] 
+
+### Return type
+
+[**GetClientsProductsResponse**](GetClientsProductsResponse.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: application/x-www-form-urlencoded
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Client products retrieved successfully |  -  |
+**0** | Error response |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
 # **get_currencies**
 > GetCurrenciesResponse get_currencies(username, password, accesskey=accesskey, responsetype=responsetype)
 
@@ -459,6 +1301,502 @@ No authorization required
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Currencies retrieved successfully |  -  |
+**0** | Error response |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **get_invoices**
+> GetInvoicesResponse get_invoices(username, password, accesskey=accesskey, responsetype=responsetype, limitstart=limitstart, limitnum=limitnum, userid=userid, status=status, orderby=orderby, order=order)
+
+Get invoices
+
+Retrieve a list of invoices matching the provided criteria
+
+### Example
+
+
+```python
+import whmcs_client
+from whmcs_client.models.get_invoices_response import GetInvoicesResponse
+from whmcs_client.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://your-whmcs-instance.com/includes
+# See configuration.py for a list of all supported configuration parameters.
+configuration = whmcs_client.Configuration(
+    host = "https://your-whmcs-instance.com/includes"
+)
+
+
+# Enter a context with an instance of the API client
+with whmcs_client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = whmcs_client.DefaultApi(api_client)
+    username = 'username_example' # str | Admin username/API identifier
+    password = 'password_example' # str | Admin password/API secret
+    accesskey = 'accesskey_example' # str | Optional API access key (optional)
+    responsetype = json # str | Response format (optional) (default to json)
+    limitstart = 0 # int | The offset for the returned invoice data (optional) (default to 0)
+    limitnum = 25 # int | The number of records to return (optional) (default to 25)
+    userid = 56 # int | Find invoices for a specific client id (optional)
+    status = 'status_example' # str | Find invoices for a specific status, including Overdue (optional)
+    orderby = 'orderby_example' # str | The field to sort results by (optional)
+    order = 'order_example' # str | Sort direction for the invoice results (optional)
+
+    try:
+        # Get invoices
+        api_response = api_instance.get_invoices(username, password, accesskey=accesskey, responsetype=responsetype, limitstart=limitstart, limitnum=limitnum, userid=userid, status=status, orderby=orderby, order=order)
+        print("The response of DefaultApi->get_invoices:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling DefaultApi->get_invoices: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **username** | **str**| Admin username/API identifier | 
+ **password** | **str**| Admin password/API secret | 
+ **accesskey** | **str**| Optional API access key | [optional] 
+ **responsetype** | **str**| Response format | [optional] [default to json]
+ **limitstart** | **int**| The offset for the returned invoice data | [optional] [default to 0]
+ **limitnum** | **int**| The number of records to return | [optional] [default to 25]
+ **userid** | **int**| Find invoices for a specific client id | [optional] 
+ **status** | **str**| Find invoices for a specific status, including Overdue | [optional] 
+ **orderby** | **str**| The field to sort results by | [optional] 
+ **order** | **str**| Sort direction for the invoice results | [optional] 
+
+### Return type
+
+[**GetInvoicesResponse**](GetInvoicesResponse.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: application/x-www-form-urlencoded
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Invoices retrieved successfully |  -  |
+**0** | Error response |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **get_invoices_details**
+> GetInvoicesDetailsResponse get_invoices_details(username, password, accesskey=accesskey, responsetype=responsetype, limitstart=limitstart, limitnum=limitnum, userid=userid, status=status, orderby=orderby, order=order)
+
+Get invoices with line item details
+
+Custom action returning invoices in GetInvoice format with embedded line items
+
+### Example
+
+
+```python
+import whmcs_client
+from whmcs_client.models.get_invoices_details_response import GetInvoicesDetailsResponse
+from whmcs_client.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://your-whmcs-instance.com/includes
+# See configuration.py for a list of all supported configuration parameters.
+configuration = whmcs_client.Configuration(
+    host = "https://your-whmcs-instance.com/includes"
+)
+
+
+# Enter a context with an instance of the API client
+with whmcs_client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = whmcs_client.DefaultApi(api_client)
+    username = 'username_example' # str | Admin username/API identifier
+    password = 'password_example' # str | Admin password/API secret
+    accesskey = 'accesskey_example' # str | Optional API access key (optional)
+    responsetype = json # str | Response format (optional) (default to json)
+    limitstart = 0 # int | The offset for the returned invoice data (optional) (default to 0)
+    limitnum = 25 # int | The number of records to return (optional) (default to 25)
+    userid = 56 # int | Find invoices for a specific client id (optional)
+    status = 'status_example' # str | Find invoices for a specific status, including Overdue (optional)
+    orderby = 'orderby_example' # str | The field to sort results by (optional)
+    order = 'order_example' # str | Sort direction for the invoice results (optional)
+
+    try:
+        # Get invoices with line item details
+        api_response = api_instance.get_invoices_details(username, password, accesskey=accesskey, responsetype=responsetype, limitstart=limitstart, limitnum=limitnum, userid=userid, status=status, orderby=orderby, order=order)
+        print("The response of DefaultApi->get_invoices_details:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling DefaultApi->get_invoices_details: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **username** | **str**| Admin username/API identifier | 
+ **password** | **str**| Admin password/API secret | 
+ **accesskey** | **str**| Optional API access key | [optional] 
+ **responsetype** | **str**| Response format | [optional] [default to json]
+ **limitstart** | **int**| The offset for the returned invoice data | [optional] [default to 0]
+ **limitnum** | **int**| The number of records to return | [optional] [default to 25]
+ **userid** | **int**| Find invoices for a specific client id | [optional] 
+ **status** | **str**| Find invoices for a specific status, including Overdue | [optional] 
+ **orderby** | **str**| The field to sort results by | [optional] 
+ **order** | **str**| Sort direction for the invoice results | [optional] 
+
+### Return type
+
+[**GetInvoicesDetailsResponse**](GetInvoicesDetailsResponse.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: application/x-www-form-urlencoded
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Invoices with line items retrieved successfully |  -  |
+**0** | Error response |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **get_orders**
+> GetOrdersResponse get_orders(username, password, accesskey=accesskey, responsetype=responsetype, limitstart=limitstart, limitnum=limitnum, id=id, userid=userid, requestor_id=requestor_id, status=status)
+
+Get orders
+
+Obtain orders matching the passed criteria
+
+### Example
+
+
+```python
+import whmcs_client
+from whmcs_client.models.get_orders_response import GetOrdersResponse
+from whmcs_client.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://your-whmcs-instance.com/includes
+# See configuration.py for a list of all supported configuration parameters.
+configuration = whmcs_client.Configuration(
+    host = "https://your-whmcs-instance.com/includes"
+)
+
+
+# Enter a context with an instance of the API client
+with whmcs_client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = whmcs_client.DefaultApi(api_client)
+    username = 'username_example' # str | Admin username/API identifier
+    password = 'password_example' # str | Admin password/API secret
+    accesskey = 'accesskey_example' # str | Optional API access key (optional)
+    responsetype = json # str | Response format (optional) (default to json)
+    limitstart = 0 # int | The offset for the returned order data (optional) (default to 0)
+    limitnum = 25 # int | The number of records to return (optional) (default to 25)
+    id = 56 # int | Find orders for a specific order id (optional)
+    userid = 56 # int | Find orders for a specific client id (optional)
+    requestor_id = 56 # int | Find orders for a specific requestor id (optional)
+    status = 'status_example' # str | Find orders for a specific status (Active, Pending, Fraud, Cancelled) (optional)
+
+    try:
+        # Get orders
+        api_response = api_instance.get_orders(username, password, accesskey=accesskey, responsetype=responsetype, limitstart=limitstart, limitnum=limitnum, id=id, userid=userid, requestor_id=requestor_id, status=status)
+        print("The response of DefaultApi->get_orders:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling DefaultApi->get_orders: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **username** | **str**| Admin username/API identifier | 
+ **password** | **str**| Admin password/API secret | 
+ **accesskey** | **str**| Optional API access key | [optional] 
+ **responsetype** | **str**| Response format | [optional] [default to json]
+ **limitstart** | **int**| The offset for the returned order data | [optional] [default to 0]
+ **limitnum** | **int**| The number of records to return | [optional] [default to 25]
+ **id** | **int**| Find orders for a specific order id | [optional] 
+ **userid** | **int**| Find orders for a specific client id | [optional] 
+ **requestor_id** | **int**| Find orders for a specific requestor id | [optional] 
+ **status** | **str**| Find orders for a specific status (Active, Pending, Fraud, Cancelled) | [optional] 
+
+### Return type
+
+[**GetOrdersResponse**](GetOrdersResponse.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: application/x-www-form-urlencoded
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Orders retrieved successfully |  -  |
+**0** | Error response |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **get_payment_methods**
+> GetPaymentMethodsResponse get_payment_methods(username, password, accesskey=accesskey, responsetype=responsetype)
+
+Get payment methods
+
+Retrieve activated payment methods
+
+### Example
+
+
+```python
+import whmcs_client
+from whmcs_client.models.get_payment_methods_response import GetPaymentMethodsResponse
+from whmcs_client.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://your-whmcs-instance.com/includes
+# See configuration.py for a list of all supported configuration parameters.
+configuration = whmcs_client.Configuration(
+    host = "https://your-whmcs-instance.com/includes"
+)
+
+
+# Enter a context with an instance of the API client
+with whmcs_client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = whmcs_client.DefaultApi(api_client)
+    username = 'username_example' # str | Admin username/API identifier
+    password = 'password_example' # str | Admin password/API secret
+    accesskey = 'accesskey_example' # str | Optional API access key (optional)
+    responsetype = json # str | Response format (optional) (default to json)
+
+    try:
+        # Get payment methods
+        api_response = api_instance.get_payment_methods(username, password, accesskey=accesskey, responsetype=responsetype)
+        print("The response of DefaultApi->get_payment_methods:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling DefaultApi->get_payment_methods: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **username** | **str**| Admin username/API identifier | 
+ **password** | **str**| Admin password/API secret | 
+ **accesskey** | **str**| Optional API access key | [optional] 
+ **responsetype** | **str**| Response format | [optional] [default to json]
+
+### Return type
+
+[**GetPaymentMethodsResponse**](GetPaymentMethodsResponse.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: application/x-www-form-urlencoded
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Payment methods retrieved successfully |  -  |
+**0** | Error response |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **get_tld_pricing**
+> GetTLDPricingResponse get_tld_pricing(username, password, accesskey=accesskey, responsetype=responsetype, currencyid=currencyid, clientid=clientid)
+
+Get TLD pricing
+
+Retrieve TLD pricing
+
+### Example
+
+
+```python
+import whmcs_client
+from whmcs_client.models.get_tld_pricing_response import GetTLDPricingResponse
+from whmcs_client.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://your-whmcs-instance.com/includes
+# See configuration.py for a list of all supported configuration parameters.
+configuration = whmcs_client.Configuration(
+    host = "https://your-whmcs-instance.com/includes"
+)
+
+
+# Enter a context with an instance of the API client
+with whmcs_client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = whmcs_client.DefaultApi(api_client)
+    username = 'username_example' # str | Admin username/API identifier
+    password = 'password_example' # str | Admin password/API secret
+    accesskey = 'accesskey_example' # str | Optional API access key (optional)
+    responsetype = json # str | Response format (optional) (default to json)
+    currencyid = 56 # int | The currency ID to fetch pricing for (optional)
+    clientid = 56 # int | The client ID to fetch pricing for (optional)
+
+    try:
+        # Get TLD pricing
+        api_response = api_instance.get_tld_pricing(username, password, accesskey=accesskey, responsetype=responsetype, currencyid=currencyid, clientid=clientid)
+        print("The response of DefaultApi->get_tld_pricing:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling DefaultApi->get_tld_pricing: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **username** | **str**| Admin username/API identifier | 
+ **password** | **str**| Admin password/API secret | 
+ **accesskey** | **str**| Optional API access key | [optional] 
+ **responsetype** | **str**| Response format | [optional] [default to json]
+ **currencyid** | **int**| The currency ID to fetch pricing for | [optional] 
+ **clientid** | **int**| The client ID to fetch pricing for | [optional] 
+
+### Return type
+
+[**GetTLDPricingResponse**](GetTLDPricingResponse.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: application/x-www-form-urlencoded
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | TLD pricing retrieved successfully |  -  |
+**0** | Error response |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **get_transactions**
+> GetTransactionsResponse get_transactions(username, password, accesskey=accesskey, responsetype=responsetype, invoiceid=invoiceid, clientid=clientid, transid=transid)
+
+Get transactions
+
+Obtain transactions matching the passed criteria
+
+### Example
+
+
+```python
+import whmcs_client
+from whmcs_client.models.get_transactions_response import GetTransactionsResponse
+from whmcs_client.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://your-whmcs-instance.com/includes
+# See configuration.py for a list of all supported configuration parameters.
+configuration = whmcs_client.Configuration(
+    host = "https://your-whmcs-instance.com/includes"
+)
+
+
+# Enter a context with an instance of the API client
+with whmcs_client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = whmcs_client.DefaultApi(api_client)
+    username = 'username_example' # str | Admin username/API identifier
+    password = 'password_example' # str | Admin password/API secret
+    accesskey = 'accesskey_example' # str | Optional API access key (optional)
+    responsetype = json # str | Response format (optional) (default to json)
+    invoiceid = 56 # int | Obtain transactions for a specific invoice id (optional)
+    clientid = 56 # int | Find transactions for a specific client id (optional)
+    transid = 'transid_example' # str | Find transactions for a specific transaction id (optional)
+
+    try:
+        # Get transactions
+        api_response = api_instance.get_transactions(username, password, accesskey=accesskey, responsetype=responsetype, invoiceid=invoiceid, clientid=clientid, transid=transid)
+        print("The response of DefaultApi->get_transactions:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling DefaultApi->get_transactions: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **username** | **str**| Admin username/API identifier | 
+ **password** | **str**| Admin password/API secret | 
+ **accesskey** | **str**| Optional API access key | [optional] 
+ **responsetype** | **str**| Response format | [optional] [default to json]
+ **invoiceid** | **int**| Obtain transactions for a specific invoice id | [optional] 
+ **clientid** | **int**| Find transactions for a specific client id | [optional] 
+ **transid** | **str**| Find transactions for a specific transaction id | [optional] 
+
+### Return type
+
+[**GetTransactionsResponse**](GetTransactionsResponse.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: application/x-www-form-urlencoded
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Transactions retrieved successfully |  -  |
 **0** | Error response |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)

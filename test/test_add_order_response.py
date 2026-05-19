@@ -37,17 +37,17 @@ class TestAddOrderResponse(unittest.TestCase):
             return AddOrderResponse(
                 result = 'success',
                 message = '',
-                orderid = 56,
+                orderid = '',
                 productids = [
-                    56
+                    ''
                     ],
                 addonids = [
-                    56
+                    ''
                     ],
                 domainids = [
-                    56
+                    ''
                     ],
-                invoiceid = 56
+                invoiceid = ''
             )
         else:
             return AddOrderResponse(

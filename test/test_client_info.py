@@ -40,7 +40,7 @@ class TestClientInfo(unittest.TestCase):
                 lastname = '',
                 companyname = '',
                 email = '',
-                datecreated = datetime.datetime.strptime('1975-12-30', '%Y-%m-%d').date(),
+                datecreated = '',
                 groupid = 56,
                 status = ''
             )
