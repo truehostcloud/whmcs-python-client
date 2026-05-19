@@ -83,6 +83,257 @@ paths:
         default:
           $ref: '#/components/responses/Error'
 
+  /api.php?action=CancelOrder:
+    post:
+      summary: Cancel a pending order
+      description: Cancels an order that is still pending
+      operationId: cancelOrder
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              allOf:
+                - $ref: '#/components/schemas/WHMCSBaseRequest'
+                - $ref: '#/components/schemas/CancelOrderRequest'
+      responses:
+        '200':
+          description: Order cancelled successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CancelOrderResponse'
+        default:
+          $ref: '#/components/responses/Error'
+
+  /api.php?action=DeleteOrder:
+    post:
+      summary: Delete an order
+      description: Permanently deletes a cancelled or fraud order
+      operationId: deleteOrder
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              allOf:
+                - $ref: '#/components/schemas/WHMCSBaseRequest'
+                - $ref: '#/components/schemas/DeleteOrderRequest'
+      responses:
+        '200':
+          description: Order deleted successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteOrderResponse'
+        default:
+          $ref: '#/components/responses/Error'
+
+  /api.php?action=GetClientsDomains:
+    post:
+      summary: Get client domains
+      description: Obtain the domains associated with a client
+      operationId: getClientsDomains
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              allOf:
+                - $ref: '#/components/schemas/WHMCSBaseRequest'
+                - $ref: '#/components/schemas/GetClientsDomainsRequest'
+      responses:
+        '200':
+          description: Domains retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetClientsDomainsResponse'
+        default:
+          $ref: '#/components/responses/Error'
+
+  /api.php?action=DomainGetNameservers:
+    post:
+      summary: Get domain nameservers
+      description: Obtain the current nameservers for a domain
+      operationId: domainGetNameservers
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              allOf:
+                - $ref: '#/components/schemas/WHMCSBaseRequest'
+                - $ref: '#/components/schemas/DomainGetNameserversRequest'
+      responses:
+        '200':
+          description: Nameservers retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DomainGetNameserversResponse'
+        default:
+          $ref: '#/components/responses/Error'
+
+  /api.php?action=DomainUpdateNameservers:
+    post:
+      summary: Update domain nameservers
+      description: Sends the save nameservers command to the registrar for the domain
+      operationId: domainUpdateNameservers
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              allOf:
+                - $ref: '#/components/schemas/WHMCSBaseRequest'
+                - $ref: '#/components/schemas/DomainUpdateNameserversRequest'
+      responses:
+        '200':
+          description: Nameservers updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DomainUpdateNameserversResponse'
+        default:
+          $ref: '#/components/responses/Error'
+
+  /api.php?action=DomainWhois:
+    post:
+      summary: Lookup domain WHOIS
+      description: Retrieve domain whois information
+      operationId: domainWhois
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              allOf:
+                - $ref: '#/components/schemas/WHMCSBaseRequest'
+                - $ref: '#/components/schemas/DomainWhoisRequest'
+      responses:
+        '200':
+          description: WHOIS lookup completed successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DomainWhoisResponse'
+        default:
+          $ref: '#/components/responses/Error'
+
+  /api.php?action=AffiliateActivate:
+    post:
+      summary: Activate affiliate status
+      description: Activate affiliate referrals for a client
+      operationId: affiliateActivate
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              allOf:
+                - $ref: '#/components/schemas/WHMCSBaseRequest'
+                - $ref: '#/components/schemas/AffiliateActivateRequest'
+      responses:
+        '200':
+          description: Affiliate activated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AffiliateActivateResponse'
+        default:
+          $ref: '#/components/responses/Error'
+
+  /api.php?action=GetAffiliates:
+    post:
+      summary: Get affiliates
+      description: Obtain an array of affiliates
+      operationId: getAffiliates
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              allOf:
+                - $ref: '#/components/schemas/WHMCSBaseRequest'
+                - $ref: '#/components/schemas/GetAffiliatesRequest'
+      responses:
+        '200':
+          description: Affiliates retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetAffiliatesResponse'
+        default:
+          $ref: '#/components/responses/Error'
+
+  /api.php?action=GetPaymentMethods:
+    post:
+      summary: Get payment methods
+      description: Retrieve activated payment methods
+      operationId: getPaymentMethods
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/WHMCSBaseRequest'
+      responses:
+        '200':
+          description: Payment methods retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetPaymentMethodsResponse'
+        default:
+          $ref: '#/components/responses/Error'
+
+  /api.php?action=GetTLDPricing:
+    post:
+      summary: Get TLD pricing
+      description: Retrieve TLD pricing
+      operationId: getTldPricing
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              allOf:
+                - $ref: '#/components/schemas/WHMCSBaseRequest'
+                - $ref: '#/components/schemas/GetTLDPricingRequest'
+      responses:
+        '200':
+          description: TLD pricing retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetTLDPricingResponse'
+        default:
+          $ref: '#/components/responses/Error'
+
+  /api.php?action=GetTransactions:
+    post:
+      summary: Get transactions
+      description: Obtain transactions matching the passed criteria
+      operationId: getTransactions
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              allOf:
+                - $ref: '#/components/schemas/WHMCSBaseRequest'
+                - $ref: '#/components/schemas/GetTransactionsRequest'
+      responses:
+        '200':
+          description: Transactions retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetTransactionsResponse'
+        default:
+          $ref: '#/components/responses/Error'
+
   /api.php?action=GetClients:
     post:
       summary: Get clients
@@ -562,6 +813,162 @@ components:
             type: integer
           description: Array of service addon IDs to be on-demand renewed
 
+    CancelOrderRequest:
+      type: object
+      required:
+        - orderid
+      properties:
+        orderid:
+          type: integer
+          description: The ID of the pending order
+        cancelsub:
+          type: boolean
+          description: Attempt to cancel the subscription associated with the products
+        noemail:
+          type: boolean
+          description: Set to true to stop the invoice payment email being sent if the invoice becomes paid
+
+    DeleteOrderRequest:
+      type: object
+      required:
+        - orderid
+      properties:
+        orderid:
+          type: integer
+          description: The order to be deleted
+
+    GetClientsDomainsRequest:
+      type: object
+      properties:
+        limitstart:
+          type: integer
+          description: The offset for the returned log data
+          default: 0
+        limitnum:
+          type: integer
+          description: The number of records to return
+          default: 25
+        clientid:
+          type: integer
+          description: The client id to obtain the details for
+        domainid:
+          type: integer
+          description: The specific domain id to obtain the details for
+        domain:
+          type: string
+          description: The specific domain to obtain the details for
+
+    DomainGetNameserversRequest:
+      type: object
+      required:
+        - domainid
+      properties:
+        domainid:
+          type: integer
+          description: The id of the domain to obtain the nameservers for
+
+    DomainUpdateNameserversRequest:
+      type: object
+      properties:
+        domainid:
+          type: integer
+          description: The id of the domain to update the nameservers for
+        domain:
+          type: string
+          description: The domain name to update the nameservers for
+        ns1:
+          type: string
+          description: The first nameserver
+        ns2:
+          type: string
+          description: The second nameserver
+        ns3:
+          type: string
+          description: The third nameserver
+        ns4:
+          type: string
+          description: The fourth nameserver
+        ns5:
+          type: string
+          description: The fifth nameserver
+
+    DomainWhoisRequest:
+      type: object
+      required:
+        - domain
+      properties:
+        domain:
+          type: string
+          description: The domain name to lookup
+
+    AffiliateActivateRequest:
+      type: object
+      required:
+        - userid
+      properties:
+        userid:
+          type: integer
+          description: The client ID to activate affiliate status for
+
+    GetAffiliatesRequest:
+      type: object
+      properties:
+        limitstart:
+          type: integer
+          description: The offset for the returned affiliate data
+          default: 0
+        limitnum:
+          type: integer
+          description: The number of records to return
+          default: 25
+        userid:
+          type: integer
+          description: Obtain affiliate data for a specific client account
+        visitors:
+          type: integer
+          description: Provide affiliates that match a specific visitor count
+        paytype:
+          type: string
+          description: Provide affiliates matching the paytype provided
+        payamount:
+          type: number
+          format: float
+          description: Provide affiliates matching a specific overridden payout amount
+        onetime:
+          type: integer
+          description: Provide affiliates configured to receive one time affiliates
+        balance:
+          type: number
+          format: float
+          description: Provide affiliates that have this balance
+        withdrawn:
+          type: number
+          format: float
+          description: Provide affiliates that have withdrawn this amount
+
+    GetTLDPricingRequest:
+      type: object
+      properties:
+        currencyid:
+          type: integer
+          description: The currency ID to fetch pricing for
+        clientid:
+          type: integer
+          description: The client ID to fetch pricing for
+
+    GetTransactionsRequest:
+      type: object
+      properties:
+        invoiceid:
+          type: integer
+          description: Obtain transactions for a specific invoice id
+        clientid:
+          type: integer
+          description: Find transactions for a specific client id
+        transid:
+          type: string
+          description: Find transactions for a specific transaction id
+
     GetClientsRequest:
       type: object
       properties:
@@ -666,6 +1073,41 @@ components:
               type: string
               description: The invoice ID if an invoice was generated
 
+    CancelOrderResponse:
+      $ref: '#/components/schemas/WHMCSSuccessResponse'
+
+    DeleteOrderResponse:
+      $ref: '#/components/schemas/WHMCSSuccessResponse'
+
+    GetClientsDomainsResponse:
+      allOf:
+        - $ref: '#/components/schemas/WHMCSSuccessResponse'
+        - type: object
+          properties:
+            clientid:
+              type: integer
+              description: The specific client id searched for
+            domainid:
+              type: integer
+              description: The specific domain id searched for
+            totalresults:
+              type: integer
+              description: The total number of results available
+            startnumber:
+              type: integer
+              description: The starting number for the returned results
+            numreturned:
+              type: integer
+              description: The total number of results returned
+            domains:
+              type: object
+              properties:
+                domain:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/DomainInfo'
+                  description: Array of domains that match the criteria passed
+
     GetClientsResponse:
       allOf:
         - $ref: '#/components/schemas/WHMCSSuccessResponse'
@@ -705,6 +1147,342 @@ components:
                   items:
                     $ref: '#/components/schemas/CurrencyInfo'
                   description: Array of currency information
+
+    DomainGetNameserversResponse:
+      allOf:
+        - $ref: '#/components/schemas/WHMCSSuccessResponse'
+        - type: object
+          properties:
+            ns1:
+              type: string
+              description: The first nameserver on the domain
+            ns2:
+              type: string
+              description: The second nameserver on the domain
+            ns3:
+              type: string
+              description: The third nameserver on the domain
+            ns4:
+              type: string
+              description: The fourth nameserver on the domain
+            ns5:
+              type: string
+              description: The fifth nameserver on the domain
+
+    DomainUpdateNameserversResponse:
+      $ref: '#/components/schemas/WHMCSSuccessResponse'
+
+    DomainWhoisResponse:
+      allOf:
+        - $ref: '#/components/schemas/WHMCSSuccessResponse'
+        - type: object
+          properties:
+            status:
+              type: string
+              description: The registration status
+            whois:
+              type: string
+              description: Whois server response
+
+    AffiliateActivateResponse:
+      $ref: '#/components/schemas/WHMCSSuccessResponse'
+
+    GetAffiliatesResponse:
+      allOf:
+        - $ref: '#/components/schemas/WHMCSSuccessResponse'
+        - type: object
+          properties:
+            totalresults:
+              type: integer
+              description: The total number of results available
+            startnumber:
+              type: integer
+              description: The starting number for the returned results
+            numreturned:
+              type: integer
+              description: The number of results returned
+            affiliates:
+              type: object
+              properties:
+                affiliate:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/AffiliateInfo'
+                  description: The affiliates entries returned
+
+    GetPaymentMethodsResponse:
+      allOf:
+        - $ref: '#/components/schemas/WHMCSSuccessResponse'
+        - type: object
+          properties:
+            totalresults:
+              type: integer
+              description: The total number of results available
+            paymentmethods:
+              type: object
+              properties:
+                paymentmethod:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/PaymentMethodInfo'
+                  description: An array of available payment methods
+
+    GetTLDPricingResponse:
+      allOf:
+        - $ref: '#/components/schemas/WHMCSSuccessResponse'
+        - type: object
+          properties:
+            currency:
+              $ref: '#/components/schemas/CurrencyInfo'
+            pricing:
+              type: object
+              additionalProperties:
+                $ref: '#/components/schemas/TldPricingInfo'
+
+    GetTransactionsResponse:
+      allOf:
+        - $ref: '#/components/schemas/WHMCSSuccessResponse'
+        - type: object
+          properties:
+            totalresults:
+              type: integer
+              description: The total number of results available
+            startnumber:
+              type: integer
+              description: The starting number for the returned results
+            numreturned:
+              type: integer
+              description: The number of results returned
+            transactions:
+              type: object
+              properties:
+                transaction:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/TransactionInfo'
+                  description: An array of transactions matching the criteria passed
+
+    DomainInfo:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: The domain ID
+        userid:
+          type: integer
+          description: The client ID that owns the domain
+        orderid:
+          type: integer
+          description: The order ID associated with the domain
+        regtype:
+          type: string
+          description: The registration type, such as Register or Transfer
+        domainname:
+          type: string
+          description: The domain name
+        registrar:
+          type: string
+          description: The registrar module name
+        regperiod:
+          type: integer
+          description: The registration period
+        firstpaymentamount:
+          type: number
+          format: float
+          description: The first payment amount
+        recurringamount:
+          type: number
+          format: float
+          description: The recurring amount
+        paymentmethod:
+          type: string
+          description: The payment method code
+        paymentmethodname:
+          type: string
+          description: The payment method name
+        regdate:
+          type: string
+          format: date
+          description: The registration date
+        expirydate:
+          type: string
+          format: date
+          description: The expiration date
+        nextduedate:
+          type: string
+          format: date
+          description: The next due date
+        status:
+          type: string
+          description: The domain status
+        subscriptionid:
+          type: string
+          description: The subscription identifier
+        promoid:
+          type: integer
+          description: The promotion ID
+        dnsmanagement:
+          type: boolean
+          description: Whether DNS management is enabled
+        emailforwarding:
+          type: boolean
+          description: Whether email forwarding is enabled
+        idprotection:
+          type: boolean
+          description: Whether ID protection is enabled
+        donotrenew:
+          type: boolean
+          description: Whether the domain should not renew
+        notes:
+          type: string
+          description: Internal notes for the domain
+
+    AffiliateInfo:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: The affiliate ID
+        date:
+          type: string
+          format: date
+          description: The affiliate date
+        clientid:
+          type: integer
+          description: The client ID
+        visitors:
+          type: integer
+          description: The visitor count
+        paytype:
+          type: string
+          description: The affiliate pay type
+        payamount:
+          type: number
+          format: float
+          description: The payout amount
+        onetime:
+          type: integer
+          description: Whether the affiliate is one time
+        balance:
+          type: number
+          format: float
+          description: The current balance
+        withdrawn:
+          type: number
+          format: float
+          description: The withdrawn amount
+        created_at:
+          type: string
+          description: The creation timestamp
+        updated_at:
+          type: string
+          description: The last update timestamp
+
+    PaymentMethodInfo:
+      type: object
+      properties:
+        module:
+          type: string
+          description: The payment method module name
+        displayname:
+          type: string
+          description: The payment method display name
+
+    TldPricingInfo:
+      type: object
+      properties:
+        tld:
+          type: string
+          description: The TLD
+        categories:
+          type: array
+          items:
+            type: string
+          description: The TLD categories
+        addons:
+          type: object
+          properties:
+            dns:
+              type: boolean
+              description: Whether DNS addon pricing is available
+            email:
+              type: boolean
+              description: Whether email addon pricing is available
+            idprotect:
+              type: boolean
+              description: Whether ID protection addon pricing is available
+        group:
+          type: string
+          description: The TLD group
+        register:
+          type: object
+          additionalProperties:
+            type: string
+          description: Registration pricing keyed by term
+        transfer:
+          type: object
+          additionalProperties:
+            type: string
+          description: Transfer pricing keyed by term
+        renew:
+          type: object
+          additionalProperties:
+            type: string
+          description: Renewal pricing keyed by term
+        grace_period:
+          type: string
+          nullable: true
+          description: The grace period, when configured
+        redemption_period:
+          type: string
+          nullable: true
+          description: The redemption period, when configured
+
+    TransactionInfo:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: The transaction ID
+        userid:
+          type: integer
+          description: The client ID
+        currency:
+          type: integer
+          description: The currency ID
+        gateway:
+          type: string
+          description: The payment gateway
+        date:
+          type: string
+          description: The transaction date and time
+        description:
+          type: string
+          description: The transaction description
+        amountin:
+          type: number
+          format: float
+          description: The amount in
+        fees:
+          type: number
+          format: float
+          description: The transaction fees
+        amountout:
+          type: number
+          format: float
+          description: The amount out
+        rate:
+          type: string
+          description: The exchange rate
+        transid:
+          type: string
+          description: The transaction identifier
+        invoiceid:
+          type: integer
+          description: The invoice ID
+        refundid:
+          type: integer
+          description: The refund ID
 
     ClientInfo:
       type: object
