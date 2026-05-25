@@ -3,7 +3,8 @@
 #
 # ref: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-python
 
-name: whmcs_client Python package
+name: {{packageName}} Python package
+{{=<% %>=}}
 
 on: [push, pull_request]
 
@@ -31,4 +32,4 @@ jobs:
           pip install -r test-requirements.txt
       - name: Test with pytest
         run: |
-          pytest --cov=whmcs_client
+          pytest --cov=<%packageName%>
