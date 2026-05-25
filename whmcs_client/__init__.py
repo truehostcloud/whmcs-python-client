@@ -15,7 +15,7 @@
 
 
 
-__version__ = "1.0.19"
+__version__ = "1.0.20"
 
 # Define package exports
 __all__ = [
