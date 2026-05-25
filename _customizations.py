@@ -1,15 +1,121 @@
 # coding: utf-8
 
+"""Runtime customizations for generated WHMCS models."""
+
 from __future__ import annotations
 
 import warnings
 from collections.abc import Mapping
-from typing import Any, Optional
+import re
+from types import NoneType, UnionType
+from typing import Annotated, Any, Optional, Union, get_args, get_origin
 
 warnings.filterwarnings(
     "ignore",
     message='Field name "register" in "TldPricingInfo" shadows an attribute in parent "BaseModel"',
 )
+
+
+_INT_PATTERN = re.compile(r"^[+-]?\d+$")
+
+
+def _unwrap_annotation(annotation: Any) -> Any:
+    origin = get_origin(annotation)
+    if origin is Annotated:
+        return _unwrap_annotation(get_args(annotation)[0])
+
+    if origin in (Union, UnionType):
+        args = [arg for arg in get_args(annotation) if arg is not NoneType]
+        if len(args) == 1:
+            return _unwrap_annotation(args[0])
+
+    return annotation
+
+
+def _normalize_value(annotation: Any, value: Any) -> Any:
+    if value is None:
+        return None
+
+    annotation = _unwrap_annotation(annotation)
+    origin = get_origin(annotation)
+
+    if isinstance(annotation, type) and hasattr(annotation, "model_fields"):
+        if isinstance(value, Mapping):
+            return _normalize_model_payload(annotation, value)
+        return value
+
+    if origin is list:
+        item_annotation = get_args(annotation)[0] if get_args(annotation) else Any
+        if isinstance(value, list):
+            return [_normalize_value(item_annotation, item) for item in value]
+        return value
+
+    if origin is dict:
+        value_args = get_args(annotation)
+        item_annotation = value_args[1] if len(value_args) > 1 else Any
+        if isinstance(value, Mapping):
+            return {
+                key: _normalize_value(item_annotation, item)
+                for key, item in value.items()
+            }
+        return value
+
+    if annotation is int and isinstance(value, str):
+        stripped = value.strip()
+        if stripped == "":
+            return None
+
+        if _INT_PATTERN.fullmatch(stripped):
+            return int(stripped)
+
+    return value
+
+
+def _normalize_model_payload(model_cls: Any, payload: Mapping[str, Any]) -> dict[str, Any]:
+    normalized = dict(payload)
+    field_map: dict[str, Any] = {}
+
+    for field_name, field in model_cls.model_fields.items():
+        field_map[field_name] = field
+        field_alias = getattr(field, "alias", None)
+        if field_alias:
+            field_map[field_alias] = field
+
+    for key, value in list(normalized.items()):
+        field = field_map.get(key)
+        if field is None:
+            continue
+
+        normalized[key] = _normalize_value(field.annotation, value)
+
+    return normalized
+
+
+def _patch_from_dict(model_cls: Any) -> None:
+    def _from_dict(cls, obj):
+        if obj is None:
+            return None
+
+        if not isinstance(obj, Mapping):
+            return cls.model_validate(obj)
+
+        return cls.model_validate(_normalize_model_payload(cls, obj))
+
+    model_cls.from_dict = classmethod(_from_dict)
+
+
+def _should_patch_model(model_cls: Any) -> bool:
+    if not isinstance(model_cls, type) or not hasattr(model_cls, "model_fields"):
+        return False
+
+    model_fields = getattr(model_cls, "model_fields", {})
+    if "actual_instance" in model_fields:
+        return False
+
+    if "additional_properties" in model_fields:
+        return False
+
+    return True
 
 
 def _coerce_bool(value: Any) -> Any:
@@ -53,6 +159,7 @@ def _normalize_domain_row(raw_domain: Mapping[str, Any]) -> dict[str, Any]:
 
     return normalized
 
+
 def _normalize_domains(raw_domains: Any) -> Optional[list[Any]]:
     if raw_domains is None:
         return None
@@ -87,14 +194,16 @@ def _get_clients_domains_response_from_dict(cls, obj):
     if not isinstance(obj, dict):
         return cls.model_validate(obj)
 
+    normalized = _normalize_model_payload(cls, obj)
+
     return cls.model_construct(
-        result=obj.get("result"),
-        message=obj.get("message"),
-        clientid=obj.get("clientid"),
-        domainid=obj.get("domainid"),
-        totalresults=obj.get("totalresults"),
-        startnumber=obj.get("startnumber"),
-        numreturned=obj.get("numreturned"),
+        result=normalized.get("result"),
+        message=normalized.get("message"),
+        clientid=normalized.get("clientid"),
+        domainid=normalized.get("domainid"),
+        totalresults=normalized.get("totalresults"),
+        startnumber=normalized.get("startnumber"),
+        numreturned=normalized.get("numreturned"),
         domains=_normalize_domains(obj.get("domains")),
     )
 
@@ -136,8 +245,13 @@ def apply_customizations():
     """Apply runtime customizations to generated models."""
 
     # pylint: disable=import-outside-toplevel
-    from whmcs_client.models.domain_info import DomainInfo
+    import whmcs_client.models as models_package
     from whmcs_client.models.get_clients_domains_response import GetClientsDomainsResponse
+
+    for model_name in dir(models_package):
+        model_cls = getattr(models_package, model_name)
+        if _should_patch_model(model_cls):
+            _patch_from_dict(model_cls)
 
     GetClientsDomainsResponse.from_dict = classmethod(_get_clients_domains_response_from_dict)
     GetClientsDomainsResponse.to_dict = _get_clients_domains_response_to_dict
