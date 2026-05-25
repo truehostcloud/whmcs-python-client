@@ -157,6 +157,7 @@ Class | Method | HTTP request | Description
  - [GetClientsDetailsResponse](docs/GetClientsDetailsResponse.md)
  - [GetClientsDomainsResponse](docs/GetClientsDomainsResponse.md)
  - [GetClientsDomainsResponseAllOfDomains](docs/GetClientsDomainsResponseAllOfDomains.md)
+ - [GetClientsDomainsResponseAllOfDomainsOneOf](docs/GetClientsDomainsResponseAllOfDomainsOneOf.md)
  - [GetClientsProductsResponse](docs/GetClientsProductsResponse.md)
  - [GetClientsResponse](docs/GetClientsResponse.md)
  - [GetClientsResponseAllOfClients](docs/GetClientsResponseAllOfClients.md)

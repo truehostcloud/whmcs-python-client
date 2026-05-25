@@ -3,6 +3,7 @@
 .gitlab-ci.yml
 .travis.yml
 README.md
+_customizations.py
 docs/AddClientResponse.md
 docs/AddOrderResponse.md
 docs/AffiliateInfo.md
@@ -18,6 +19,7 @@ docs/GetAffiliatesResponseAllOfAffiliates.md
 docs/GetClientsDetailsResponse.md
 docs/GetClientsDomainsResponse.md
 docs/GetClientsDomainsResponseAllOfDomains.md
+docs/GetClientsDomainsResponseAllOfDomainsOneOf.md
 docs/GetClientsProductsResponse.md
 docs/GetClientsResponse.md
 docs/GetClientsResponseAllOfClients.md
@@ -52,23 +54,6 @@ setup.cfg
 setup.py
 test-requirements.txt
 test/__init__.py
-test/test_affiliate_info.py
-test/test_domain_get_nameservers_response.py
-test/test_domain_info.py
-test/test_domain_whois_response.py
-test/test_get_affiliates_response.py
-test/test_get_affiliates_response_all_of_affiliates.py
-test/test_get_clients_domains_response.py
-test/test_get_clients_domains_response_all_of_domains.py
-test/test_get_payment_methods_response.py
-test/test_get_payment_methods_response_all_of_paymentmethods.py
-test/test_get_tld_pricing_response.py
-test/test_get_transactions_response.py
-test/test_get_transactions_response_all_of_transactions.py
-test/test_payment_method_info.py
-test/test_tld_pricing_info.py
-test/test_tld_pricing_info_addons.py
-test/test_transaction_info.py
 tox.ini
 whmcs_client/__init__.py
 whmcs_client/api/__init__.py
@@ -92,6 +77,7 @@ whmcs_client/models/get_affiliates_response_all_of_affiliates.py
 whmcs_client/models/get_clients_details_response.py
 whmcs_client/models/get_clients_domains_response.py
 whmcs_client/models/get_clients_domains_response_all_of_domains.py
+whmcs_client/models/get_clients_domains_response_all_of_domains_one_of.py
 whmcs_client/models/get_clients_products_response.py
 whmcs_client/models/get_clients_response.py
 whmcs_client/models/get_clients_response_all_of_clients.py

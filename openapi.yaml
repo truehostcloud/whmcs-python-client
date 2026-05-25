@@ -1331,13 +1331,17 @@ components:
               type: integer
               description: The total number of results returned
             domains:
-              type: object
-              properties:
-                domain:
-                  type: array
-                  items:
-                    $ref: '#/components/schemas/DomainInfo'
-                  description: Array of domains that match the criteria passed
+              oneOf:
+                - type: object
+                  properties:
+                    domain:
+                      type: array
+                      items:
+                        $ref: '#/components/schemas/DomainInfo'
+                      description: Array of domains that match the criteria passed
+                - type: string
+                  enum: [""]
+                  description: WHMCS returns an empty string when no domains match the query
 
     GetClientsResponse:
       allOf:

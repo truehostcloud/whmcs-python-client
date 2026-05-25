@@ -1,13 +1,19 @@
 {
   "packageName": "whmcs_client",
   "projectName": "whmcs-api-client",
-  "packageVersion": "1.0.19",
+  "packageVersion": "1.0.20",
   "packageUrl": "https://github.com/truehostcloud/whmcs-python-client",
   "packageCompany": "Truehost",
   "packageAuthor": "William Mwai",
   "packageEmail": "william@cloudoon.com",
   "packageDescription": "Python client for WHMCS API",
   "generateSourceCodeOnly": false,
+  "templateDir": "D:/truehost/whmcs-python-client/openapi-generator-templates",
   "packageKeywords": ["whmcs", "api", "client", "billing", "hosting"],
-  "skipFormModel": false
+  "skipFormModel": false,
+  "files": {
+    "python-pydantic-v1/_customizations.mustache": {
+      "destinationFilename": "_customizations.py"
+    }
+  }
 }
