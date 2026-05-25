@@ -12,7 +12,6 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-
 # import models into model package
 from whmcs_client.models.add_client_response import AddClientResponse
 from whmcs_client.models.add_order_response import AddOrderResponse
@@ -56,3 +55,4 @@ from whmcs_client.models.update_client_response import UpdateClientResponse
 from whmcs_client.models.whmcs_base_response import WHMCSBaseResponse
 from whmcs_client.models.whmcs_error_response import WHMCSErrorResponse
 from whmcs_client.models.whmcs_success_response import WHMCSSuccessResponse
+
