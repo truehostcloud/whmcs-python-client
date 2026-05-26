@@ -10,7 +10,10 @@
 """  # noqa: E501
 
 
+from pathlib import Path
+
 from setuptools import setup, find_packages  # noqa: H301
+from setuptools.command.build_py import build_py as _build_py
 
 # To install the library, run the following
 #
@@ -19,7 +22,7 @@ from setuptools import setup, find_packages  # noqa: H301
 # prerequisite: setuptools
 # http://pypi.python.org/pypi/setuptools
 NAME = "whmcs-api-client"
-VERSION = "1.0.24"
+VERSION = "1.0.25"
 PYTHON_REQUIRES = ">= 3.10"
 REQUIRES = [
     "urllib3 >= 2.1.0, < 3.0.0",
@@ -27,6 +30,18 @@ REQUIRES = [
     "pydantic >= 2.11",
     "typing-extensions >= 4.7.1",
 ]
+
+
+class build_py(_build_py):
+    def run(self):
+        super().run()
+        source_path = Path(__file__).with_name("_customizations.py")
+        if not source_path.exists():
+            return
+
+        target_path = Path(self.build_lib) / "whmcs_client" / "_customizations.py"
+        target_path.parent.mkdir(parents=True, exist_ok=True)
+        target_path.write_text(source_path.read_text(encoding="utf-8"), encoding="utf-8")
 
 setup(
     name=NAME,
@@ -39,6 +54,7 @@ setup(
     install_requires=REQUIRES,
     packages=find_packages(exclude=["test", "tests"]),
     include_package_data=True,
+    cmdclass={"build_py": build_py},
     long_description_content_type='text/markdown',
     long_description="""\
     Python client for the WHMCS API.  WHMCS (Web Host Manager Complete Solution) provides a single API endpoint that handles multiple operations through different &#39;action&#39; parameters. This specification presents each action as an independent path while routing all requests to the /api.php endpoint. 

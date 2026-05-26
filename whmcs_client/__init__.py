@@ -14,7 +14,7 @@
 """  # noqa: E501
 
 
-__version__ = "1.0.24"
+__version__ = "1.0.25"
 
 # Define package exports
 __all__ = [
@@ -72,7 +72,10 @@ __all__ = [
     "WHMCSSuccessResponse",
 ]
 
-from _customizations import apply_customizations as _apply_customizations
+try:
+    from . import _customizations
+except ImportError:
+    import _customizations
 
 # import apis into sdk package
 from whmcs_client.api.default_api import DefaultApi as DefaultApi
@@ -132,5 +135,5 @@ from whmcs_client.models.whmcs_base_response import WHMCSBaseResponse as WHMCSBa
 from whmcs_client.models.whmcs_error_response import WHMCSErrorResponse as WHMCSErrorResponse
 from whmcs_client.models.whmcs_success_response import WHMCSSuccessResponse as WHMCSSuccessResponse
 
-_apply_customizations()
+_customizations.apply_customizations()
 

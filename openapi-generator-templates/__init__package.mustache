@@ -24,7 +24,10 @@ __all__ = [
     {{/-last}}{{#-last}},{{/-last}}{{/model}}{{/models}}
 ]
 
-from _customizations import apply_customizations as _apply_customizations
+try:
+    from . import _customizations
+except ImportError:
+    import _customizations
 
 # import apis into sdk package
 {{#apiInfo}}{{#apis}}from {{apiPackage}}.{{classFilename}} import {{classname}} as {{classname}}
@@ -50,7 +53,7 @@ from {{modelPackage}}.{{classFilename}} import {{classname}} as {{classname}}
 {{/model}}
 {{/models}}
 
-_apply_customizations()
+_customizations.apply_customizations()
 
 {{#recursionLimit}}
 __import__('sys').setrecursionlimit({{{.}}})

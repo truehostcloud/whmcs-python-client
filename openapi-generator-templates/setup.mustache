@@ -1,6 +1,9 @@
 {{>partial_header}}
 
+from pathlib import Path
+
 from setuptools import setup, find_packages  # noqa: H301
+from setuptools.command.build_py import build_py as _build_py
 
 # To install the library, run the following
 #
@@ -37,6 +40,18 @@ REQUIRES = [
 {{/lazyImports}}
 ]
 
+
+class build_py(_build_py):
+    def run(self):
+        super().run()
+        source_path = Path(__file__).with_name("_customizations.py")
+        if not source_path.exists():
+            return
+
+        target_path = Path(self.build_lib) / "{{{packageName}}}" / "_customizations.py"
+        target_path.parent.mkdir(parents=True, exist_ok=True)
+        target_path.write_text(source_path.read_text(encoding="utf-8"), encoding="utf-8")
+
 setup(
     name=NAME,
     version=VERSION,
@@ -48,6 +63,7 @@ setup(
     install_requires=REQUIRES,
     packages=find_packages(exclude=["test", "tests"]),
     include_package_data=True,
+    cmdclass={"build_py": build_py},
     {{#licenseInfo}}license="{{.}}",
     {{/licenseInfo}}long_description_content_type='text/markdown',
     long_description="""\
