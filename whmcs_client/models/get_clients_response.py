@@ -42,8 +42,8 @@ class GetClientsResponse(BaseModel):
         if value is None:
             return value
 
-        if value not in set(['success']):
-            raise ValueError("must be one of enum values ('success')")
+        if value not in set(['success', 'error']):
+            raise ValueError("must be one of enum values ('success', 'error')")
         return value
 
     model_config = ConfigDict(

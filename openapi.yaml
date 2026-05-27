@@ -1245,7 +1245,7 @@ components:
           properties:
             result:
               type: string
-              enum: [success]
+              enum: [success, error]
 
     WHMCSErrorResponse:
       allOf:
