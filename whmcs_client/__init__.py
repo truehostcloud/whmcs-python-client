@@ -14,7 +14,7 @@
 """  # noqa: E501
 
 
-__version__ = "1.0.26"
+__version__ = "1.0.27"
 
 # Define package exports
 __all__ = [
@@ -53,6 +53,7 @@ __all__ = [
     "GetOrdersResponse",
     "GetPaymentMethodsResponse",
     "GetPaymentMethodsResponseAllOfPaymentmethods",
+    "GetProductsResponse",
     "GetTLDPricingResponse",
     "GetTransactionsResponse",
     "GetTransactionsResponseAllOfTransactions",
@@ -65,6 +66,7 @@ __all__ = [
     "ProductInfo",
     "TldPricingInfo",
     "TldPricingInfoAddons",
+    "TldPricingPeriodInfo",
     "TransactionInfo",
     "UpdateClientResponse",
     "WHMCSBaseResponse",
@@ -117,6 +119,7 @@ from whmcs_client.models.get_invoices_response import GetInvoicesResponse as Get
 from whmcs_client.models.get_orders_response import GetOrdersResponse as GetOrdersResponse
 from whmcs_client.models.get_payment_methods_response import GetPaymentMethodsResponse as GetPaymentMethodsResponse
 from whmcs_client.models.get_payment_methods_response_all_of_paymentmethods import GetPaymentMethodsResponseAllOfPaymentmethods as GetPaymentMethodsResponseAllOfPaymentmethods
+from whmcs_client.models.get_products_response import GetProductsResponse as GetProductsResponse
 from whmcs_client.models.get_tld_pricing_response import GetTLDPricingResponse as GetTLDPricingResponse
 from whmcs_client.models.get_transactions_response import GetTransactionsResponse as GetTransactionsResponse
 from whmcs_client.models.get_transactions_response_all_of_transactions import GetTransactionsResponseAllOfTransactions as GetTransactionsResponseAllOfTransactions
@@ -129,6 +132,7 @@ from whmcs_client.models.payment_method_info import PaymentMethodInfo as Payment
 from whmcs_client.models.product_info import ProductInfo as ProductInfo
 from whmcs_client.models.tld_pricing_info import TldPricingInfo as TldPricingInfo
 from whmcs_client.models.tld_pricing_info_addons import TldPricingInfoAddons as TldPricingInfoAddons
+from whmcs_client.models.tld_pricing_period_info import TldPricingPeriodInfo as TldPricingPeriodInfo
 from whmcs_client.models.transaction_info import TransactionInfo as TransactionInfo
 from whmcs_client.models.update_client_response import UpdateClientResponse as UpdateClientResponse
 from whmcs_client.models.whmcs_base_response import WHMCSBaseResponse as WHMCSBaseResponse

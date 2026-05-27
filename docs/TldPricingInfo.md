@@ -12,8 +12,8 @@ Name | Type | Description | Notes
 **register** | **Dict[str, str]** | Registration pricing keyed by term | [optional] 
 **transfer** | **Dict[str, str]** | Transfer pricing keyed by term | [optional] 
 **renew** | **Dict[str, str]** | Renewal pricing keyed by term | [optional] 
-**grace_period** | **str** | The grace period, when configured | [optional] 
-**redemption_period** | **str** | The redemption period, when configured | [optional] 
+**grace_period** | [**TldPricingPeriodInfo**](TldPricingPeriodInfo.md) |  | [optional] 
+**redemption_period** | [**TldPricingPeriodInfo**](TldPricingPeriodInfo.md) |  | [optional] 
 
 ## Example
 

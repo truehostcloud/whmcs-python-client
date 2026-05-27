@@ -288,6 +288,29 @@ paths:
         default:
           $ref: '#/components/responses/Error'
 
+  /api.php?action=GetProducts:
+    post:
+      summary: Get products
+      description: Retrieve configured products matching provided criteria
+      operationId: getProducts
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              allOf:
+                - $ref: '#/components/schemas/WHMCSBaseRequest'
+                - $ref: '#/components/schemas/GetProductsRequest'
+      responses:
+        '200':
+          description: Products retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetProductsResponse'
+        default:
+          $ref: '#/components/responses/Error'
+
   /api.php?action=GetTLDPricing:
     post:
       summary: Get TLD pricing
@@ -1462,6 +1485,37 @@ components:
                     $ref: '#/components/schemas/PaymentMethodInfo'
                   description: An array of available payment methods
 
+    GetProductsRequest:
+      type: object
+      properties:
+        pid:
+          type: string
+          description: Obtain a specific product id configuration. Can be a comma-separated list of ids.
+        gid:
+          type: integer
+          description: Retrieve products in a specific group id
+        module:
+          type: string
+          description: Retrieve products utilising a specific module
+
+    GetProductsResponse:
+      allOf:
+        - $ref: '#/components/schemas/WHMCSSuccessResponse'
+        - type: object
+          properties:
+            totalresults:
+              type: integer
+              description: The total number of results available
+            startnumber:
+              type: integer
+              description: The starting number for the returned results
+            numreturned:
+              type: integer
+              description: The number of results returned
+            products:
+              description: The products collection
+              nullable: true
+
     GetTLDPricingResponse:
       allOf:
         - $ref: '#/components/schemas/WHMCSSuccessResponse'
@@ -1738,13 +1792,23 @@ components:
             type: string
           description: Renewal pricing keyed by term
         grace_period:
-          type: string
+          $ref: '#/components/schemas/TldPricingPeriodInfo'
           nullable: true
           description: The grace period, when configured
         redemption_period:
-          type: string
+          $ref: '#/components/schemas/TldPricingPeriodInfo'
           nullable: true
           description: The redemption period, when configured
+
+    TldPricingPeriodInfo:
+      type: object
+      properties:
+        days:
+          type: integer
+          description: The number of days in the period
+        price:
+          type: string
+          description: The price for the period
 
     TransactionInfo:
       type: object

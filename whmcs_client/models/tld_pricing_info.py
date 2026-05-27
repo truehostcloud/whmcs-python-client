@@ -20,6 +20,7 @@ import json
 from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from whmcs_client.models.tld_pricing_info_addons import TldPricingInfoAddons
+from whmcs_client.models.tld_pricing_period_info import TldPricingPeriodInfo
 from typing import Optional, Set
 from typing_extensions import Self
 from pydantic_core import to_jsonable_python
@@ -35,8 +36,8 @@ class TldPricingInfo(BaseModel):
     register: Optional[Dict[str, StrictStr]] = Field(default=None, description="Registration pricing keyed by term")
     transfer: Optional[Dict[str, StrictStr]] = Field(default=None, description="Transfer pricing keyed by term")
     renew: Optional[Dict[str, StrictStr]] = Field(default=None, description="Renewal pricing keyed by term")
-    grace_period: Optional[StrictStr] = Field(default=None, description="The grace period, when configured")
-    redemption_period: Optional[StrictStr] = Field(default=None, description="The redemption period, when configured")
+    grace_period: Optional[TldPricingPeriodInfo] = None
+    redemption_period: Optional[TldPricingPeriodInfo] = None
     __properties: ClassVar[List[str]] = ["tld", "categories", "addons", "group", "register", "transfer", "renew", "grace_period", "redemption_period"]
 
     model_config = ConfigDict(
@@ -81,16 +82,12 @@ class TldPricingInfo(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of addons
         if self.addons:
             _dict['addons'] = self.addons.to_dict()
-        # set to None if grace_period (nullable) is None
-        # and model_fields_set contains the field
-        if self.grace_period is None and "grace_period" in self.model_fields_set:
-            _dict['grace_period'] = None
-
-        # set to None if redemption_period (nullable) is None
-        # and model_fields_set contains the field
-        if self.redemption_period is None and "redemption_period" in self.model_fields_set:
-            _dict['redemption_period'] = None
-
+        # override the default output from pydantic by calling `to_dict()` of grace_period
+        if self.grace_period:
+            _dict['grace_period'] = self.grace_period.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of redemption_period
+        if self.redemption_period:
+            _dict['redemption_period'] = self.redemption_period.to_dict()
         return _dict
 
     @classmethod
@@ -110,8 +107,8 @@ class TldPricingInfo(BaseModel):
             "register": obj.get("register"),
             "transfer": obj.get("transfer"),
             "renew": obj.get("renew"),
-            "grace_period": obj.get("grace_period"),
-            "redemption_period": obj.get("redemption_period")
+            "grace_period": TldPricingPeriodInfo.from_dict(obj["grace_period"]) if obj.get("grace_period") is not None else None,
+            "redemption_period": TldPricingPeriodInfo.from_dict(obj["redemption_period"]) if obj.get("redemption_period") is not None else None
         })
         return _obj
 

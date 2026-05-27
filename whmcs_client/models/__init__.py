@@ -38,6 +38,7 @@ from whmcs_client.models.get_invoices_response import GetInvoicesResponse
 from whmcs_client.models.get_orders_response import GetOrdersResponse
 from whmcs_client.models.get_payment_methods_response import GetPaymentMethodsResponse
 from whmcs_client.models.get_payment_methods_response_all_of_paymentmethods import GetPaymentMethodsResponseAllOfPaymentmethods
+from whmcs_client.models.get_products_response import GetProductsResponse
 from whmcs_client.models.get_tld_pricing_response import GetTLDPricingResponse
 from whmcs_client.models.get_transactions_response import GetTransactionsResponse
 from whmcs_client.models.get_transactions_response_all_of_transactions import GetTransactionsResponseAllOfTransactions
@@ -50,6 +51,7 @@ from whmcs_client.models.payment_method_info import PaymentMethodInfo
 from whmcs_client.models.product_info import ProductInfo
 from whmcs_client.models.tld_pricing_info import TldPricingInfo
 from whmcs_client.models.tld_pricing_info_addons import TldPricingInfoAddons
+from whmcs_client.models.tld_pricing_period_info import TldPricingPeriodInfo
 from whmcs_client.models.transaction_info import TransactionInfo
 from whmcs_client.models.update_client_response import UpdateClientResponse
 from whmcs_client.models.whmcs_base_response import WHMCSBaseResponse

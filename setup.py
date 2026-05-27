@@ -22,7 +22,7 @@ from setuptools.command.build_py import build_py as _build_py
 # prerequisite: setuptools
 # http://pypi.python.org/pypi/setuptools
 NAME = "whmcs-api-client"
-VERSION = "1.0.26"
+VERSION = "1.0.27"
 PYTHON_REQUIRES = ">= 3.10"
 REQUIRES = [
     "urllib3 >= 2.1.0, < 3.0.0",

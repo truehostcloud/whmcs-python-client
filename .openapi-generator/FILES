@@ -30,6 +30,7 @@ docs/GetInvoicesResponse.md
 docs/GetOrdersResponse.md
 docs/GetPaymentMethodsResponse.md
 docs/GetPaymentMethodsResponseAllOfPaymentmethods.md
+docs/GetProductsResponse.md
 docs/GetTLDPricingResponse.md
 docs/GetTransactionsResponse.md
 docs/GetTransactionsResponseAllOfTransactions.md
@@ -42,6 +43,7 @@ docs/PaymentMethodInfo.md
 docs/ProductInfo.md
 docs/TldPricingInfo.md
 docs/TldPricingInfoAddons.md
+docs/TldPricingPeriodInfo.md
 docs/TransactionInfo.md
 docs/UpdateClientResponse.md
 docs/WHMCSBaseResponse.md
@@ -88,6 +90,7 @@ whmcs_client/models/get_invoices_response.py
 whmcs_client/models/get_orders_response.py
 whmcs_client/models/get_payment_methods_response.py
 whmcs_client/models/get_payment_methods_response_all_of_paymentmethods.py
+whmcs_client/models/get_products_response.py
 whmcs_client/models/get_tld_pricing_response.py
 whmcs_client/models/get_transactions_response.py
 whmcs_client/models/get_transactions_response_all_of_transactions.py
@@ -100,6 +103,7 @@ whmcs_client/models/payment_method_info.py
 whmcs_client/models/product_info.py
 whmcs_client/models/tld_pricing_info.py
 whmcs_client/models/tld_pricing_info_addons.py
+whmcs_client/models/tld_pricing_period_info.py
 whmcs_client/models/transaction_info.py
 whmcs_client/models/update_client_response.py
 whmcs_client/models/whmcs_base_response.py

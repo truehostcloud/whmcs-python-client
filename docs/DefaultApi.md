@@ -22,6 +22,7 @@ Method | HTTP request | Description
 [**get_invoices_details**](DefaultApi.md#get_invoices_details) | **POST** /api.php?action&#x3D;GetInvoicesDetails | Get invoices with line item details
 [**get_orders**](DefaultApi.md#get_orders) | **POST** /api.php?action&#x3D;GetOrders | Get orders
 [**get_payment_methods**](DefaultApi.md#get_payment_methods) | **POST** /api.php?action&#x3D;GetPaymentMethods | Get payment methods
+[**get_products**](DefaultApi.md#get_products) | **POST** /api.php?action&#x3D;GetProducts | Get products
 [**get_tld_pricing**](DefaultApi.md#get_tld_pricing) | **POST** /api.php?action&#x3D;GetTLDPricing | Get TLD pricing
 [**get_transactions**](DefaultApi.md#get_transactions) | **POST** /api.php?action&#x3D;GetTransactions | Get transactions
 [**update_client**](DefaultApi.md#update_client) | **POST** /api.php?action&#x3D;UpdateClient | Update client details
@@ -1637,6 +1638,87 @@ No authorization required
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Payment methods retrieved successfully |  -  |
+**0** | Error response |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **get_products**
+> GetProductsResponse get_products(username, password, accesskey=accesskey, responsetype=responsetype, pid=pid, gid=gid, module=module)
+
+Get products
+
+Retrieve configured products matching provided criteria
+
+### Example
+
+
+```python
+import whmcs_client
+from whmcs_client.models.get_products_response import GetProductsResponse
+from whmcs_client.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://your-whmcs-instance.com/includes
+# See configuration.py for a list of all supported configuration parameters.
+configuration = whmcs_client.Configuration(
+    host = "https://your-whmcs-instance.com/includes"
+)
+
+
+# Enter a context with an instance of the API client
+with whmcs_client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = whmcs_client.DefaultApi(api_client)
+    username = 'username_example' # str | Admin username/API identifier
+    password = 'password_example' # str | Admin password/API secret
+    accesskey = 'accesskey_example' # str | Optional API access key (optional)
+    responsetype = json # str | Response format (optional) (default to json)
+    pid = 'pid_example' # str | Obtain a specific product id configuration. Can be a comma-separated list of ids. (optional)
+    gid = 56 # int | Retrieve products in a specific group id (optional)
+    module = 'module_example' # str | Retrieve products utilising a specific module (optional)
+
+    try:
+        # Get products
+        api_response = api_instance.get_products(username, password, accesskey=accesskey, responsetype=responsetype, pid=pid, gid=gid, module=module)
+        print("The response of DefaultApi->get_products:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling DefaultApi->get_products: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **username** | **str**| Admin username/API identifier | 
+ **password** | **str**| Admin password/API secret | 
+ **accesskey** | **str**| Optional API access key | [optional] 
+ **responsetype** | **str**| Response format | [optional] [default to json]
+ **pid** | **str**| Obtain a specific product id configuration. Can be a comma-separated list of ids. | [optional] 
+ **gid** | **int**| Retrieve products in a specific group id | [optional] 
+ **module** | **str**| Retrieve products utilising a specific module | [optional] 
+
+### Return type
+
+[**GetProductsResponse**](GetProductsResponse.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: application/x-www-form-urlencoded
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Products retrieved successfully |  -  |
 **0** | Error response |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
