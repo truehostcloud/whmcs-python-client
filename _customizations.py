@@ -241,11 +241,57 @@ def _get_clients_domains_response_to_dict(self):
     return output
 
 
+def _coerce_string_list(value: Any) -> Any:
+    if value is None:
+        return None
+
+    if value == "":
+        return []
+
+    if isinstance(value, list):
+        return value
+
+    if isinstance(value, str):
+        parts = [item.strip() for item in value.split(",") if item.strip()]
+        return parts if parts else []
+
+    return [value]
+
+
+def _add_order_response_from_dict(cls, obj):
+    if obj is None:
+        return None
+
+    if not isinstance(obj, dict):
+        return cls.model_validate(obj)
+
+    normalized = _normalize_model_payload(cls, obj)
+
+    orderid = normalized.get("orderid")
+    if isinstance(orderid, int):
+        orderid = str(orderid)
+
+    invoiceid = normalized.get("invoiceid")
+    if isinstance(invoiceid, int):
+        invoiceid = str(invoiceid)
+
+    return cls.model_construct(
+        result=normalized.get("result"),
+        message=normalized.get("message"),
+        orderid=orderid,
+        productids=_coerce_string_list(obj.get("productids")),
+        addonids=_coerce_string_list(obj.get("addonids")),
+        domainids=_coerce_string_list(obj.get("domainids")),
+        invoiceid=invoiceid,
+    )
+
+
 def apply_customizations():
     """Apply runtime customizations to generated models."""
 
     # pylint: disable=import-outside-toplevel
     import whmcs_client.models as models_package
+    from whmcs_client.models.add_order_response import AddOrderResponse
     from whmcs_client.models.get_clients_domains_response import GetClientsDomainsResponse
 
     for model_name in dir(models_package):
@@ -255,3 +301,4 @@ def apply_customizations():
 
     GetClientsDomainsResponse.from_dict = classmethod(_get_clients_domains_response_from_dict)
     GetClientsDomainsResponse.to_dict = _get_clients_domains_response_to_dict
+    AddOrderResponse.from_dict = classmethod(_add_order_response_from_dict)
