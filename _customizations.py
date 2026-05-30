@@ -341,7 +341,7 @@ def _patch_param_serialize(api_client: Any) -> None:
                 if field_name in collection_formats:
                     collection_formats[field_name] = "multi"
 
-        return original_param_serialize(
+        serialized = original_param_serialize(
             self,
             method,
             resource_path,
@@ -356,6 +356,17 @@ def _patch_param_serialize(api_client: Any) -> None:
             _host=_host,
             _request_auth=_request_auth,
         )
+
+        if resource_path == "/api.php?action=AddOrder":
+            method, url, header_params, body, post_params = serialized
+            if post_params:
+                post_params = [
+                    (f"{key}[]" if key in _ADD_ORDER_MULTI_COLLECTION_FIELDS else key, value)
+                    for key, value in post_params
+                ]
+            return method, url, header_params, body, post_params
+
+        return serialized
 
     api_client.param_serialize = _param_serialize
 
