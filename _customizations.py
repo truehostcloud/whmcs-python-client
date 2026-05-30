@@ -286,11 +286,86 @@ def _add_order_response_from_dict(cls, obj):
     )
 
 
+_ADD_ORDER_MULTI_COLLECTION_FIELDS = {
+    "pid",
+    "qty",
+    "domain",
+    "billingcycle",
+    "domaintype",
+    "regperiod",
+    "idnlanguage",
+    "eppcode",
+    "configoptions",
+    "priceoverride",
+    "addons",
+    "addonsqty",
+    "hostname",
+    "ns1prefix",
+    "ns2prefix",
+    "rootpw",
+    "dnsmanagement",
+    "domainfields",
+    "emailforwarding",
+    "idprotection",
+    "domainpriceoverride",
+    "domainrenewoverride",
+    "addonids",
+    "addonidsqty",
+    "serviceids",
+    "servicerenewals",
+    "addonrenewals",
+}
+
+
+def _patch_param_serialize(api_client: Any) -> None:
+    original_param_serialize = api_client.param_serialize
+
+    def _param_serialize(
+        self,
+        method,
+        resource_path,
+        path_params=None,
+        query_params=None,
+        header_params=None,
+        body=None,
+        post_params=None,
+        files=None,
+        auth_settings=None,
+        collection_formats=None,
+        _host=None,
+        _request_auth=None,
+    ):
+        if resource_path == "/api.php?action=AddOrder" and collection_formats:
+            collection_formats = dict(collection_formats)
+            for field_name in _ADD_ORDER_MULTI_COLLECTION_FIELDS:
+                if field_name in collection_formats:
+                    collection_formats[field_name] = "multi"
+
+        return original_param_serialize(
+            self,
+            method,
+            resource_path,
+            path_params=path_params,
+            query_params=query_params,
+            header_params=header_params,
+            body=body,
+            post_params=post_params,
+            files=files,
+            auth_settings=auth_settings,
+            collection_formats=collection_formats,
+            _host=_host,
+            _request_auth=_request_auth,
+        )
+
+    api_client.param_serialize = _param_serialize
+
+
 def apply_customizations():
     """Apply runtime customizations to generated models."""
 
     # pylint: disable=import-outside-toplevel
     import whmcs_client.models as models_package
+    from whmcs_client.api_client import ApiClient
     from whmcs_client.models.add_order_response import AddOrderResponse
     from whmcs_client.models.get_clients_domains_response import GetClientsDomainsResponse
 
@@ -302,3 +377,4 @@ def apply_customizations():
     GetClientsDomainsResponse.from_dict = classmethod(_get_clients_domains_response_from_dict)
     GetClientsDomainsResponse.to_dict = _get_clients_domains_response_to_dict
     AddOrderResponse.from_dict = classmethod(_add_order_response_from_dict)
+    _patch_param_serialize(ApiClient)
